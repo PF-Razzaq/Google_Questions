@@ -1,0 +1,110 @@
+.main-form {
+  width: 780px;
+  margin: 10px auto;
+}
+/* .dYYAhb {
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  margin-bottom: 12px ;
+}
+
+.KHCwJ.M0FGwd {
+  max-height: 25vw;
+  max-width: 100vw;
+  height: 192.5px;
+  width: 770px;
+} */
+
+.KHCwJ {
+  background-image: url(https://lh6.googleusercontent.com/UM1U0yf7GKHGyr4Y8YDWr-bcavE7jelX0VIiAJ6hH6wlDGPlw9VchxkthsgSOOwWSs0lZIhfp6JsWN_0pS-iraSX5HoQkbeXATfjPFg0VIhzsL1XL00TdksSaO57mXnADBz8fvmvC53cCoOReq8hXpiyiDLDJA);
+  background-size: cover;
+  background-position: center;
+}
+
+.form-sections {
+  width: 95%;
+  margin: 2%;
+  background: white;
+  border-radius: 5px;
+  text-align: left;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+#name-text {
+  border: none;
+  border-bottom: 1px dotted;
+  outline: none;
+}
+
+.submit-btn {
+  background: #fec106;
+  outline: none;
+  border: none;
+  padding: 7px 19px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+.submit-btn:hover {
+  background: #d1a112;
+}
+div label input {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+label.file-input-button-upload {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 15px 5px 11px;
+  color: rgba(0, 0, 0, 0.38);
+  border-radius: 6px;
+}
+
+input.form-description {
+  border: none;
+  border-bottom: 1px dotted black;
+  width: 500px;
+}
+
+.radioOption {
+  color: #202124;
+  font-size: 20px;
+}
+.field-sections {
+  margin-bottom: 1rem;
+}
+
+.supplier-heading {
+  margin: 1rem 0;
+}
+
+.downloadFile {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 15px 5px 11px;
+  color: rgba(0, 0, 0, 0.38);
+  border-radius: 6px;
+  background: white;
+}
+
+.phoneNumberInput {
+  width: 11rem;
+}
+
+.form-select {
+  width: 14%;
+  margin-top: 10px;
+}
+
+.form-group .countryCode {
+  width: 5% !important;
+}
