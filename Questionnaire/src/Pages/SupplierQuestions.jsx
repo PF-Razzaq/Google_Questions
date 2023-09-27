@@ -4,35 +4,52 @@ import countryCode from "./CountryCodes.json";
 import { FiDownload } from "react-icons/fi";
 import "./CompanyInformationForm.css";
 import { useNavigate } from "react-router-dom";
-const CompanyInformationForm = () => {
+import axios from "axios";
+let otherCountry;
+let recordId = 0;
+const SupplierQuestions = () => {
+  const handleDownload = () => {
+    console.log("handleDownload");
+    // Replace 'file_url' with the actual URL of the file you want to download.
+    const fileUrl =
+      "https://images.pascalinesoft.com/pdf/OnlineQuestionnairePhase1.pdf";
+    // Create a temporary link element.
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.target = "_blank"; // Open the link in a new tab.
+    link.download = "your_file_name.pdf"; // Specify the desired file name for the user.
+
+    // Trigger a click event on the link to start the download.
+    link.click();
+
+    // Clean up: remove the temporary link.
+    // document.body.removeChild(link);
+  };
   console.log("countryCode4", countryCode);
+  const [file, setFile] = useState();
+  const [dilligenceFile, setDilligenceFile] = useState();
   const navigate = useNavigate();
-  const [companyData, setCompanyData] = useState({});
-  const [showRoom, setShowRoom] = useState("");
-  const [LkSG, setLkSG] = useState("");
-  const [inspectionAudits, setInspectionAudits] = useState("");
-  const [controlAudits, setControlAudits] = useState("");
-  const [companyEmploy, setCompanyEmploy] = useState("");
-  const [regulationUI, setRegulationUI] = useState("");
+  const [supplierData, setSupplierData] = useState({ Qs8_Country: "" });
   const [selectedOption, setSelectedOption] = useState("");
   const [customOption, setCustomOption] = useState("");
   const [options, setOptions] = useState([]);
-  const [year, setYear] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [selectedCompany, setSelectedCompany] = useState(null);
-  const handleShowRoom = (event) => {
-    setShowRoom(event.target.value); // Update the selected option in the state
-  };
+
   const handleSaveCustomOption = () => {
     if (customOption.trim() !== "") {
       setOptions([...options, customOption]);
       setSelectedOption(customOption);
       setCustomOption("");
+      setSupplierData({ ...supplierData, Qs8_Country: customOption });
     }
   };
-  const handleOptionChange = (event) => {
-    const value = event.target.value;
+  const handleOptionChange = (e) => {
+    const value = e.target.value;
+
     setSelectedOption(value);
+    setSupplierData({
+      ...supplierData,
+      Qs8_Country: e.target.value,
+    });
 
     // If the selected option is "other," clear the custom option input
     if (value === "other") {
@@ -40,58 +57,128 @@ const CompanyInformationForm = () => {
     }
   };
 
+  const connectToDatabase = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/sessions`,
+        {},
+        {
+          auth: {
+            username: "apiuser",
+            password: "TomJerry88",
+          },
+        }
+      );
+      localStorage.setItem("filemakerToken", response.data.response.token);
+      console.log("token", response.data.response.token);
+      postDataWithToken();
+    } catch (error) {
+      console.error("Error occurred while connecting", error);
+    }
+  };
+  const postDataWithToken = async (token) => {
+    if (localStorage.getItem("filemakerToken")) {
+      try {
+        const response = await axios.post(
+          "https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records",
+
+          { fieldData: supplierData },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`, // Add the Bearer token here
+            },
+          }
+        );
+
+        // Handle the response data as needed
+        const data = response.data;
+        console.log("postDataWithToken", data.response.recordId);
+        recordId = Number(data.response.recordId);
+        console.log(
+          "postDataWithToken",
+          data.response.recordId,
+          data,
+          recordId
+        );
+        uploadSignedDocument();
+        uploadDueDilligenceDocument();
+      } catch (error) {
+        // Handle errors here
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const uploadSignedDocument = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", file);
+    console.log("formData contents:", upload);
+    if (localStorage.getItem("filemakerToken")) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs38b_SignatureUpload/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`, // Add the Bearer token here
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        // Handle the response data as needed
+        const data = response.data;
+        console.log("postDataWithToken", data);
+      } catch (error) {
+        // Handle errors here
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const uploadDueDilligenceDocument = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", dilligenceFile);
+    console.log("uploadDueDilligenceDocument contents:", upload);
+    if (localStorage.getItem("filemakerToken")) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs39b_HumanRightsViolations/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`, // Add the Bearer token here
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        // Handle the response data as needed
+        const data = response.data;
+        console.log("postDataWithToken", data);
+      } catch (error) {
+        // Handle errors here
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
   const handleCustomOptionChange = (event) => {
     setCustomOption(event.target.value);
   };
-  const handleRegulationUI = (event) => {
-    setRegulationUI(event.target.value); // Update the selected option in the state
-  };
-  const handleLKSG = (event) => {
-    setLkSG(event.target.value); // Update the selected option in the state
-  };
-
-  const handleCompanyChange = (event) => {
-    setSelectedCompany(event.target.value);
-  };
-
-  const handleInspectionAudits = (event) => {
-    setInspectionAudits(event.target.value);
-  };
-  const handleControlAudits = (event) => {
-    setControlAudits(event.target.value);
-  };
-  const handleCompanyEmploy = (event) => {
-    setCompanyEmploy(event.target.value);
-  };
-
-  const handleFileUpload = (event) => {
-    const uploadedFile = event.target.files[0];
-    if (uploadedFile && uploadedFile.size <= 10 * 1024 * 1024) {
-      setFile(uploadedFile);
-    }
-  };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCompanyData({
-      ...companyData,
+    setSupplierData({
+      ...supplierData,
       [name]: value,
     });
-    const inputValue = e.target.value;
-    setYear(inputValue);
-    if (inputValue.length !== 4) {
-      setErrorMessage("Please enter a four-digit year.");
-    } else {
-      setErrorMessage("");
-    }
   };
-
+  console.log("supplierData3", supplierData);
   return (
     <>
       <div className="container">
         <div className="row justify-content-center">
           <div className="form-sections p-5">
             <div className="form-field">
-              <form action="">
+              <form onSubmit={connectToDatabase}>
                 {/* Question 1 */}
                 <div className="field-sections">
                   <span>Q.1:&nbsp;&nbsp;</span>
@@ -112,7 +199,7 @@ const CompanyInformationForm = () => {
                 <div className="field-sections">
                   <span>Q.2:&nbsp;&nbsp;</span>
                   <span>
-                    Supplier Business License Number{" "}
+                    Supplier Business License Number
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -258,7 +345,7 @@ const CompanyInformationForm = () => {
                     aria-label="Default select example"
                     name="Qs8_Country"
                   >
-                    <option disabled selected>
+                    <option selected disabled>
                       Choose Country
                     </option>
                     <option value="china">China</option>
@@ -311,7 +398,9 @@ const CompanyInformationForm = () => {
                     >
                       {countryCode.map((country) => (
                         <option key={country.code} value={country.dial_code}>
-                          {country.dial_code} - {country.name}
+                          {country.dial_code + "    " + " "} &nbsp; &nbsp;&nbsp;
+                          &nbsp;&nbsp; &nbsp;
+                          {" " + country.name}
                         </option>
                       ))}
                     </select>
@@ -338,7 +427,9 @@ const CompanyInformationForm = () => {
                     >
                       {countryCode.map((country) => (
                         <option key={country.code} value={country.dial_code}>
-                          {country.dial_code} - {country.name}
+                          {country.dial_code + "    " + "   "}&nbsp;
+                          &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                          {" " + country.name}
                         </option>
                       ))}
                     </select>
@@ -385,8 +476,26 @@ const CompanyInformationForm = () => {
                 </div>
                 <h3 className="supplier-heading">Contact Person</h3>
                 {/* Question  12*/}
+                <div>
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs12a_salutation: e.target.value,
+                      });
+                    }}
+                    name="Qs12a_salutation"
+                  >
+                    <option disabled selected>
+                      Salutation
+                    </option>
+                    <option value="mr">Mr.</option>
+                    <option value="ms">Ms.</option>
+                  </select>
+                </div>
                 <div className="field-sections">
-                  <span>Q.12:&nbsp;&nbsp;</span>
                   <span>
                     First Name <span style={{ color: "red" }}>*</span>
                   </span>
@@ -446,17 +555,14 @@ const CompanyInformationForm = () => {
                     name="Qs14_YearOfEstablishment" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    minLength="4"
-                    maxLength="4"
-                    value={year}
+                    maxLength={4}
+                    min={4}
+                    required
                     onInput={(e) => {
                       e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                     }}
-                    required
                   />
                 </div>
-                <div style={{ color: "red" }}>{errorMessage}</div>
-
                 {/* Question  26*/}
                 <div className="field-sections">
                   <span>Q.26:&nbsp;&nbsp;</span>
@@ -470,8 +576,8 @@ const CompanyInformationForm = () => {
                       name="Qs26_ShowRoom"
                       type="radio"
                       value="yes"
-                      checked={showRoom === "yes"}
-                      onChange={handleShowRoom}
+                      checked={supplierData.Qs26_ShowRoom === "yes"}
+                      onChange={handleChange}
                     />
                     Yes
                   </label>
@@ -481,8 +587,8 @@ const CompanyInformationForm = () => {
                       type="radio"
                       value="no"
                       name="Qs26_ShowRoom"
-                      checked={showRoom === "no"}
-                      onChange={handleShowRoom}
+                      checked={supplierData.Qs26_ShowRoom === "no"}
+                      onChange={handleChange}
                     />
                     No
                   </label>
@@ -502,8 +608,10 @@ const CompanyInformationForm = () => {
                       type="radio"
                       name="Qs38a_HCompanyPCompany"
                       value="H Company"
-                      checked={selectedCompany === "H Company"}
-                      onChange={handleCompanyChange}
+                      checked={
+                        supplierData.Qs38a_HCompanyPCompany === "H Company"
+                      }
+                      onChange={handleChange}
                     />
                     H Company
                   </label>
@@ -512,8 +620,10 @@ const CompanyInformationForm = () => {
                       type="radio"
                       name="Qs38a_HCompanyPCompany"
                       value="P Company"
-                      checked={selectedCompany === "P Company"}
-                      onChange={handleCompanyChange}
+                      checked={
+                        supplierData.Qs38a_HCompanyPCompany === "P Company"
+                      }
+                      onChange={handleChange}
                     />
                     P Company
                   </label>
@@ -521,7 +631,7 @@ const CompanyInformationForm = () => {
                   <br />
 
                   <div>
-                    {selectedCompany === "H Company" && (
+                    {supplierData.Qs38a_HCompanyPCompany === "H Company" && (
                       <div className="field-sections">
                         <span>
                           Code of Conduct Signature and Upload{" "}
@@ -529,23 +639,28 @@ const CompanyInformationForm = () => {
                         </span>
                         <br />
                         <br />
-                        <a href="#" download>
-                          <button className="downloadFile">
-                            <FiDownload
-                              style={{
-                                margin: "0 5px 3px 0",
-                                fontSize: "16px",
-                              }}
-                            />
-                            DOWNLOAD FILE
-                          </button>
-                        </a>
+
+                        <button
+                          onClick={handleDownload}
+                          className="downloadFile"
+                        >
+                          <FiDownload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                            }}
+                          />
+                          DOWNLOAD FILE
+                        </button>
+
                         <br />
                         <label className="file-input-button-upload">
                           <input
                             type="file"
                             style={{ display: "none" }}
-                            onChange={handleFileUpload}
+                            onChange={(e) => {
+                              setFile(e.target.files[0]);
+                            }}
                           />
                           <HiOutlineUpload
                             style={{
@@ -573,11 +688,13 @@ const CompanyInformationForm = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs39_HumanRightsViolations"
+                      name="Qs39a_HumanRightsViolations"
                       type="radio"
                       value="yes"
-                      checked={LkSG === "yes"}
-                      onChange={handleLKSG}
+                      checked={
+                        supplierData.Qs39a_HumanRightsViolations === "yes"
+                      }
+                      onChange={handleChange}
                     />
                     Yes
                   </label>
@@ -586,9 +703,11 @@ const CompanyInformationForm = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs39_HumanRightsViolations"
-                      checked={LkSG === "no"}
-                      onChange={handleLKSG}
+                      name="Qs39a_HumanRightsViolations"
+                      checked={
+                        supplierData.Qs39a_HumanRightsViolations === "no"
+                      }
+                      onChange={handleChange}
                     />
                     No
                   </label>
@@ -596,14 +715,16 @@ const CompanyInformationForm = () => {
                   <br />
 
                   <div>
-                    {LkSG === "yes" && (
+                    {supplierData.Qs39a_HumanRightsViolations === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
                             type="file"
                             style={{ display: "none" }}
-                            onChange={handleFileUpload}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
                           />
                           <HiOutlineUpload
                             style={{
@@ -630,11 +751,14 @@ const CompanyInformationForm = () => {
                   <br />
                   <label>
                     <input
-                      name=""
+                      name="Qs63_ConductStandardOnSiteInspections"
                       type="radio"
                       value="yes"
-                      checked={inspectionAudits === "yes"}
-                      onChange={handleInspectionAudits}
+                      checked={
+                        supplierData.Qs63_ConductStandardOnSiteInspections ===
+                        "yes"
+                      }
+                      onChange={handleChange}
                     />
                     Yes
                   </label>
@@ -642,16 +766,20 @@ const CompanyInformationForm = () => {
                     <input
                       type="radio"
                       value="no"
-                      name=""
-                      checked={inspectionAudits === "no"}
-                      onChange={handleInspectionAudits}
+                      name="Qs63_ConductStandardOnSiteInspections"
+                      checked={
+                        supplierData.Qs63_ConductStandardOnSiteInspections ===
+                        "no"
+                      }
+                      onChange={handleChange}
                     />
                     No
                   </label>
                   {/* This Question is Dependent on Question 26. */}
                   {/* Question 64 */}
                   <div>
-                    {inspectionAudits === "yes" && (
+                    {supplierData.Qs63_ConductStandardOnSiteInspections ===
+                      "yes" && (
                       <div className="field-sections">
                         <br />
                         <span>Q.64:&nbsp;&nbsp;</span>
@@ -661,28 +789,15 @@ const CompanyInformationForm = () => {
                           <span style={{ color: "red" }}>*</span>
                         </span>
                         <br />
-                        <br />
-                        <label>
-                          <input
-                            name="Qs64_TopicControlAudits"
-                            type="radio"
-                            value="yes"
-                            checked={controlAudits === "yes"}
-                            onChange={handleControlAudits}
-                          />
-                          Yes
-                        </label>
-
-                        <label style={{ marginLeft: "1rem" }}>
-                          <input
-                            type="radio"
-                            value="no"
-                            name="Qs64_TopicControlAudits"
-                            checked={controlAudits === "no"}
-                            onChange={handleControlAudits}
-                          />
-                          No
-                        </label>
+                        <input
+                          onChange={handleChange}
+                          placeholder="Enter your answer"
+                          type="text"
+                          name="Qs64_TopicControlAudits" // Add name attribute
+                          className="mt-3 outline-none w-100"
+                          id="name-text"
+                          required
+                        />
                       </div>
                     )}
                   </div>
@@ -701,8 +816,10 @@ const CompanyInformationForm = () => {
                       name="Qs85_EmpRequiredByStateYESNO"
                       type="radio"
                       value="yes"
-                      checked={companyEmploy === "yes"}
-                      onChange={handleCompanyEmploy}
+                      checked={
+                        supplierData.Qs85_EmpRequiredByStateYESNO === "yes"
+                      }
+                      onChange={handleChange}
                     />
                     Yes
                   </label>
@@ -711,16 +828,18 @@ const CompanyInformationForm = () => {
                     <input
                       type="radio"
                       value="no"
-                      name=""
-                      checked={companyEmploy === "no"}
-                      onChange={handleCompanyEmploy}
+                      name="Qs85_EmpRequiredByStateYESNO"
+                      checked={
+                        supplierData.Qs85_EmpRequiredByStateYESNO === "no"
+                      }
+                      onChange={handleChange}
                     />
                     No
                   </label>
                 </div>
                 {/* Question 123 */}
                 <div className="field-sections">
-                  <span>Q.123:&nbsp;&nbsp;</span>
+                  <span>Q.122:&nbsp;&nbsp;</span>
                   <span>
                     Can you confirm that you do not use or manufacture
                     substances listed in Annex I of Regulation (EU) 2019/1021?{" "}
@@ -730,11 +849,14 @@ const CompanyInformationForm = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs123_SubstancesListedYESNO"
+                      name="Qs122_NotUseManufactureSubstancesListedAnnexI"
                       type="radio"
                       value="yes"
-                      checked={regulationUI === "yes"}
-                      onChange={handleRegulationUI}
+                      checked={
+                        supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
+                        "yes"
+                      }
+                      onChange={handleChange}
                     />
                     Yes
                   </label>
@@ -743,9 +865,12 @@ const CompanyInformationForm = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs123_SubstancesListedYESNO"
-                      checked={regulationUI === "no"}
-                      onChange={handleRegulationUI}
+                      name="Qs122_NotUseManufactureSubstancesListedAnnexI"
+                      checked={
+                        supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
+                        "no"
+                      }
+                      onChange={handleChange}
                     />
                     No
                   </label>
@@ -754,9 +879,10 @@ const CompanyInformationForm = () => {
                   <br />
                   {/* This Question is Dependent on Question 84. */}
                   <div>
-                    {regulationUI === "no" && (
+                    {supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
+                      "no" && (
                       <div className="field-sections">
-                        <span>Q.19:&nbsp;&nbsp;</span>
+                        <span>Q.123:&nbsp;&nbsp;</span>
                         <span>
                           Which of the substances listed in Annex I of
                           Regulation (EU) 2019/1021 or in Annex A of the
@@ -766,7 +892,7 @@ const CompanyInformationForm = () => {
                           onChange={handleChange}
                           placeholder="Enter your answer"
                           type="text"
-                          name="Name" // Add name attribute
+                          name="Qs123_SubstancesListedYESNO" // Add name attribute
                           className="mt-3 outline-none w-100"
                           id="name-text"
                           required
@@ -775,20 +901,11 @@ const CompanyInformationForm = () => {
                     )}
                   </div>
                 </div>
+                <button type="submit" className="submit-btn">
+                  Next
+                </button>
               </form>
             </div>{" "}
-            <button
-              onClick={() => {
-                localStorage.setItem(
-                  "companyData",
-                  JSON.stringify(companyData)
-                );
-                navigate("/questions");
-              }}
-              className="submit-btn"
-            >
-              Next
-            </button>
           </div>
         </div>
       </div>
@@ -796,4 +913,4 @@ const CompanyInformationForm = () => {
   );
 };
 
-export default CompanyInformationForm;
+export default SupplierQuestions;
