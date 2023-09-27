@@ -5,6 +5,8 @@ import { FiDownload } from "react-icons/fi";
 import "./CompanyInformationForm.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 let otherCountry;
 let recordId = 0;
 const SupplierQuestions = () => {
@@ -29,7 +31,8 @@ const SupplierQuestions = () => {
   const [file, setFile] = useState();
   const [dilligenceFile, setDilligenceFile] = useState();
   const navigate = useNavigate();
-  const [supplierData, setSupplierData] = useState({ Qs8_Country: "" });
+  const [supplierData, setSupplierData] = useState({});
+
   const [selectedOption, setSelectedOption] = useState("");
   const [customOption, setCustomOption] = useState("");
   const [options, setOptions] = useState([]);
@@ -46,10 +49,6 @@ const SupplierQuestions = () => {
     const value = e.target.value;
 
     setSelectedOption(value);
-    setSupplierData({
-      ...supplierData,
-      Qs8_Country: e.target.value,
-    });
 
     // If the selected option is "other," clear the custom option input
     if (value === "other") {
@@ -58,6 +57,7 @@ const SupplierQuestions = () => {
   };
 
   const connectToDatabase = async (e) => {
+    document.getElementById("submitBTN").style.visibility = "hidden";
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -73,8 +73,16 @@ const SupplierQuestions = () => {
       localStorage.setItem("filemakerToken", response.data.response.token);
       console.log("token", response.data.response.token);
       postDataWithToken();
+      toast.success("Customized success message", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000, // Automatically close after 3 seconds
+      });
     } catch (error) {
       console.error("Error occurred while connecting", error);
+      toast.error("Customized error message", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000, // Automatically close after 3 seconds
+      });
     }
   };
   const postDataWithToken = async (token) => {
@@ -94,6 +102,8 @@ const SupplierQuestions = () => {
         // Handle the response data as needed
         const data = response.data;
         console.log("postDataWithToken", data.response.recordId);
+        // alert("record inserted.files(if any) will also upload shortly");
+
         recordId = Number(data.response.recordId);
         console.log(
           "postDataWithToken",
@@ -164,6 +174,7 @@ const SupplierQuestions = () => {
   const handleCustomOptionChange = (event) => {
     setCustomOption(event.target.value);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSupplierData({
@@ -172,6 +183,7 @@ const SupplierQuestions = () => {
     });
   };
   console.log("supplierData3", supplierData);
+  const handleSubmitButton = () => {};
   return (
     <>
       <div className="container">
@@ -339,13 +351,13 @@ const SupplierQuestions = () => {
                   <span>Q.8:&nbsp;&nbsp;</span>
                   <span>Country</span>
                   <select
-                    value={selectedOption}
+                    value={supplierData.Qs8_Country}
                     onChange={handleOptionChange}
                     className="form-select"
                     aria-label="Default select example"
                     name="Qs8_Country"
                   >
-                    <option selected disabled>
+                    <option disabled selected>
                       Choose Country
                     </option>
                     <option value="china">China</option>
@@ -657,6 +669,7 @@ const SupplierQuestions = () => {
                         <label className="file-input-button-upload">
                           <input
                             type="file"
+                            accept="application/pdf,image/jpeg"
                             style={{ display: "none" }}
                             onChange={(e) => {
                               setFile(e.target.files[0]);
@@ -666,10 +679,13 @@ const SupplierQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
+                              display: file ? "none" : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            UPLOAD SIGNED FILE
+                            {file
+                              ? `Uploaded file: ${file.name}`
+                              : "UPLOAD SIGNED FILE"}
                           </span>
                         </label>
                       </div>
@@ -721,6 +737,7 @@ const SupplierQuestions = () => {
                         <label className="file-input-button-upload">
                           <input
                             type="file"
+                            accept="application/pdf,image/jpeg"
                             style={{ display: "none" }}
                             onChange={(e) => {
                               setDilligenceFile(e.target.files[0]);
@@ -730,10 +747,13 @@ const SupplierQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            UPLOAD DOCUMENT
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
                       </div>
@@ -901,8 +921,13 @@ const SupplierQuestions = () => {
                     )}
                   </div>
                 </div>
-                <button type="submit" className="submit-btn">
-                  Next
+                <button
+                  id="submitBTN"
+                  onClick={handleSubmitButton}
+                  type="submit"
+                  className="submit-btn"
+                >
+                  Submit
                 </button>
               </form>
             </div>{" "}

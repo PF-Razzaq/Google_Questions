@@ -7,19 +7,66 @@ import { useNavigate } from "react-router-dom";
 const AskNewOrOld = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("New");
+  console.log("env4", process.env.REACT_APP_BACKEND_URL);
+  // useEffect(() => {
+  //   const connectToDatabase = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/sessions`
+  //       );
+  //       console.log("response21", response);
+  //     } catch (error) {
+  //       console.error("Error occured while connecting", error);
+  //     }
+  //   };
+  //   connectToDatabase();
+  // }, []);
   useEffect(() => {
     const connectToDatabase = async () => {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}fmi/data/v2/databases/Registration/sessions`
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/sessions`,
+          {},
+          {
+            auth: {
+              username: "apiuser",
+              password: "TomJerry88",
+            },
+          }
         );
-        console.log("response21", response);
+        localStorage.setItem("filemakerToken", response.data.response.token);
+        console.log("token", response.data.response.token);
+        fetchDataWithToken();
       } catch (error) {
-        console.error("Error occured while connecting", error);
+        console.error("Error occurred while connecting", error);
       }
     };
+
     connectToDatabase();
   }, []);
+
+  const fetchDataWithToken = async (token) => {
+    if (localStorage.getItem("filemakerToken")) {
+      try {
+        const response = await axios.get(
+          "https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`, // Add the Bearer token here
+            },
+          }
+        );
+
+        // Handle the response data as needed
+        const data = response.data;
+        console.log("data43", data.response.data);
+      } catch (error) {
+        // Handle errors here
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+
   return (
     <>
       <div className="container">
