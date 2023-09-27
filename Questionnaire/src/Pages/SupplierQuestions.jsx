@@ -73,10 +73,6 @@ const SupplierQuestions = () => {
       localStorage.setItem("filemakerToken", response.data.response.token);
       console.log("token", response.data.response.token);
       postDataWithToken();
-      toast.success("Customized success message", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000, // Automatically close after 3 seconds
-      });
     } catch (error) {
       console.error("Error occurred while connecting", error);
       toast.error("Customized error message", {
@@ -103,7 +99,10 @@ const SupplierQuestions = () => {
         const data = response.data;
         console.log("postDataWithToken", data.response.recordId);
         // alert("record inserted.files(if any) will also upload shortly");
-
+        toast.success(`Record Added: Record id is: ${data.response.recordId}`, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
         recordId = Number(data.response.recordId);
         console.log(
           "postDataWithToken",
@@ -218,6 +217,7 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="number"
+                    pattern="[0-9]*"
                     name="Qs2_SuppBusinessLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -235,6 +235,7 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="number"
+                    pattern="[0-9]*"
                     name="Qs3_SuppExportLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -251,6 +252,7 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="number"
+                    pattern="[0-9]*"
                     name="Qs4_SuppVATNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -420,6 +422,7 @@ const SupplierQuestions = () => {
                     <input
                       name="Qs9a_Phone"
                       type="number"
+                      pattern="[0-9]*"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
                       id="exampleInputEmail1"
@@ -448,6 +451,7 @@ const SupplierQuestions = () => {
                     -
                     <input
                       type="number"
+                      pattern="[0-9]*"
                       name="Qs9b_Cellphone"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
@@ -575,6 +579,238 @@ const SupplierQuestions = () => {
                     }}
                   />
                 </div>
+                {/* Question  15*/}
+                <div className="field-sections">
+                  <span>Q.15:&nbsp;&nbsp;</span>
+                  <span>
+                    Total Number of Employees{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="number"
+                    pattern="[0-9]*"
+                    name="Qs15_TotalNoOfEmployees" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  16*/}
+                <div className="field-sections">
+                  <span>Q.16:&nbsp;&nbsp;</span>
+                  <span>Ownership</span>
+                  <select
+                    value={supplierData.Qs16_Ownership}
+                    onChange={handleOptionChange}
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qs16_Ownership"
+                    required
+                  >
+                    <option disabled selected>
+                      Ownership
+                    </option>
+                    <option value="private">Private</option>
+                    <option value="public">Public</option>
+                    <option value="state">State</option>
+                    <option value="jointVenture">Joint Venture</option>
+                    <option value="belongsToGroup">Belongs to Group </option>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                {/* Question  17*/}
+                <div className="field-sections">
+                  <span>Q.8:&nbsp;&nbsp;</span>
+                  <span>Business Category</span>
+                  <select
+                    value={supplierData.Qs17_BusinessCategory}
+                    onChange={handleOptionChange}
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qs17_BusinessCategory"
+                  >
+                    <option disabled selected>
+                      Business Category
+                    </option>
+                    <option value="trader">Trader</option>
+                    <option value="manufacturerTrader">
+                      Manufacturer / Trader
+                    </option>
+                  </select>
+                </div>
+                {/* Question  18*/}
+                <div className="field-sections">
+                  <span>Q.18:&nbsp;&nbsp;</span>
+                  <span>
+                    Main Products(Please separate by "/" incl. space, e.g.,
+                    product 1 / product 2){" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs18_MainProducts" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  19*/}
+                <div className="field-sections">
+                  <span>Q.19:&nbsp;&nbsp;</span>
+                  <span>
+                    Sales per Year / Domestic / (Mio USD){" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="number"
+                    pattern="[0-9]*"
+                    name="Qs19_SalesPerYearDomestic" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  20*/}
+                <div className="field-sections">
+                  <span>Q.20:&nbsp;&nbsp;</span>
+                  <span>
+                    Sales per Year / Export / (Mio USD)
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="number"
+                    pattern="[0-9]*"
+                    name="Qs20_SalesPerYearExport" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  21*/}
+                <div className="field-sections">
+                  <span>Q.21:&nbsp;&nbsp;</span>
+                  <span>
+                    Main Customers and Country(Please separate by "/" incl.
+                    space, e.g., Company 1 - Country 1 / Company 2 - Country 2)
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs21_MainCustomerAndCountry" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  22*/}
+                <div className="field-sections">
+                  <span>Q.22:&nbsp;&nbsp;</span>
+                  <span>
+                    Main Customer Products(Please separate by "/" incl. space,
+                    e.g., product 1 / product 2)
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs22_MainCustomerProducts" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  23*/}
+                <div className="field-sections">
+                  <span>Q.23:&nbsp;&nbsp;</span>
+                  <span>Main Export Markets</span>
+                  <select
+                    value={supplierData.Qs23_MainExportMarkets}
+                    onChange={handleOptionChange}
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qs23_MainExportMarkets"
+                    required
+                  >
+                    <option disabled selected>
+                      Main Export Markets
+                    </option>
+                    <option value="private">Western Europe</option>
+                    <option value="public">Eastern</option>
+                    <option value="state">North America</option>
+                    <option value="jointVenture">South America</option>
+                    <option value="belongsToGroup">Asia Pacific </option>
+                    <option value="belongsToGroup">Africa </option>
+                    <option value="belongsToGroup">Middle East </option>
+                    <option value="belongsToGroup">Worldwide</option>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                {/* Question 24 */}
+                <div className="field-sections">
+                  <span>Q.24:&nbsp;&nbsp;</span>
+                  <span>Trade Fair</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs24_TradeFair"
+                      type="radio"
+                      value="yes"
+                      checked={supplierData.Qs24_TradeFair === "yes"}
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs24_TradeFair"
+                      checked={supplierData.Qs24_TradeFair === "no"}
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question  25*/}
+                <div className="field-sections">
+                  <span>Q.21:&nbsp;&nbsp;</span>
+                  <span>
+                    Trade Fair Participation(Please separate by "/" incl. space,
+                    e.g., Trade Fair 1 / Trade Fair 2)
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs25_TradeFairParticipation" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                  />
+                </div>
                 {/* Question  26*/}
                 <div className="field-sections">
                   <span>Q.26:&nbsp;&nbsp;</span>
@@ -669,7 +905,7 @@ const SupplierQuestions = () => {
                         <label className="file-input-button-upload">
                           <input
                             type="file"
-                            accept="application/pdf,image/jpeg"
+                            accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
                               setFile(e.target.files[0]);
@@ -737,7 +973,7 @@ const SupplierQuestions = () => {
                         <label className="file-input-button-upload">
                           <input
                             type="file"
-                            accept="application/pdf,image/jpeg"
+                            accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
                               setDilligenceFile(e.target.files[0]);
@@ -915,7 +1151,6 @@ const SupplierQuestions = () => {
                           name="Qs123_SubstancesListedYESNO" // Add name attribute
                           className="mt-3 outline-none w-100"
                           id="name-text"
-                          required
                         />
                       </div>
                     )}
