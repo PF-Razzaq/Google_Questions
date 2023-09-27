@@ -811,6 +811,7 @@ const SupplierQuestions = () => {
                     id="name-text"
                   />
                 </div>
+
                 {/* Question  26*/}
                 <div className="field-sections">
                   <span>Q.26:&nbsp;&nbsp;</span>
@@ -841,7 +842,92 @@ const SupplierQuestions = () => {
                     No
                   </label>
                 </div>
+                {/* Question  27*/}
+                <div className="field-sections">
+                  <span>Q.27:&nbsp;&nbsp;</span>
+                  <span>
+                    Delivery lead time for initial order (in working days){" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="number"
+                    pattern="[0-9]*"
+                    name="Qs27_DeliveryLeadTimeInitialOrder" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  28*/}
+                <div className="field-sections">
+                  <span>Q.28:&nbsp;&nbsp;</span>
+                  <span>
+                    Delivery lead time for repeat orders (in working days)
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="number"
+                    pattern="[0-9]*"
+                    name="Qs28_DeliveryLeadTimeRepeatOrder" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+
                 <h3 className="supplier-heading">Bank Information</h3>
+                {/* Question  29*/}
+                <div className="field-sections">
+                  <span>Q.29:&nbsp;&nbsp;</span>
+                  <span>
+                    Beneficiary Name<span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs29_BeneficiaryName" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  30*/}
+                <div className="field-sections">
+                  <span>Q.30:&nbsp;&nbsp;</span>
+                  <span>
+                    Bank Name<span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs30_BankName" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  31*/}
+                <div className="field-sections">
+                  <span>Q.31:&nbsp;&nbsp;</span>
+                  <span>
+                    Bank Address<span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs31_BankAddress" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
                 {/* Question  38*/}
                 <div className="field-sections">
                   <span>Q.38:&nbsp;&nbsp;</span>
