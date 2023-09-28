@@ -42,7 +42,10 @@ const SupplierQuestions = () => {
       setOptions([...options, customOption]);
       setSelectedOption(customOption);
       setCustomOption("");
-      setSupplierData({ ...supplierData, Qs8_Country: customOption });
+      setSupplierData({
+        ...supplierData,
+        Qs8_Country: customOption,
+      });
     }
   };
   const handleOptionChange = (e) => {
@@ -217,7 +220,10 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="number"
-                    pattern="[0-9]*"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    // pattern="[0-9]*"
                     name="Qs2_SuppBusinessLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -235,6 +241,9 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs3_SuppExportLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -252,6 +261,9 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs4_SuppVATNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -354,7 +366,12 @@ const SupplierQuestions = () => {
                   <span>Country</span>
                   <select
                     value={supplierData.Qs8_Country}
-                    onChange={handleOptionChange}
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs8_Country: e.target.value,
+                      });
+                    }}
                     className="form-select"
                     aria-label="Default select example"
                     name="Qs8_Country"
@@ -375,7 +392,7 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {selectedOption === "other" && (
+                  {supplierData.Qs8_Country === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
                         value={customOption}
@@ -422,6 +439,9 @@ const SupplierQuestions = () => {
                     <input
                       name="Qs9a_Phone"
                       type="number"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      }}
                       pattern="[0-9]*"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
@@ -451,6 +471,9 @@ const SupplierQuestions = () => {
                     -
                     <input
                       type="number"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      }}
                       pattern="[0-9]*"
                       name="Qs9b_Cellphone"
                       onChange={handleChange}
@@ -572,7 +595,7 @@ const SupplierQuestions = () => {
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     maxLength={4}
-                    min={4}
+                    minLength={4}
                     required
                     onInput={(e) => {
                       e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
@@ -589,7 +612,9 @@ const SupplierQuestions = () => {
                   <input
                     onChange={handleChange}
                     placeholder="This value must be a number"
-                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs15_TotalNoOfEmployees" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -603,7 +628,12 @@ const SupplierQuestions = () => {
                   <span>Ownership</span>
                   <select
                     value={supplierData.Qs16_Ownership}
-                    onChange={handleOptionChange}
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs16_Ownership: e.target.value,
+                      });
+                    }}
                     className="form-select"
                     aria-label="Default select example"
                     name="Qs16_Ownership"
@@ -624,7 +654,7 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {selectedOption === "other" && (
+                  {supplierData.Qs16_Ownership === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
                         value={customOption}
@@ -651,11 +681,16 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  17*/}
                 <div className="field-sections">
-                  <span>Q.8:&nbsp;&nbsp;</span>
+                  <span>Q.17:&nbsp;&nbsp;</span>
                   <span>Business Category</span>
                   <select
                     value={supplierData.Qs17_BusinessCategory}
-                    onChange={handleOptionChange}
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs17_BusinessCategory: e.target.value,
+                      });
+                    }}
                     className="form-select"
                     aria-label="Default select example"
                     name="Qs17_BusinessCategory"
@@ -698,6 +733,9 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs19_SalesPerYearDomestic" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -716,6 +754,9 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs20_SalesPerYearExport" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -767,7 +808,12 @@ const SupplierQuestions = () => {
 
                   <select
                     value={supplierData.Qs23_MainExportMarkets}
-                    onChange={handleOptionChange}
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs23_MainExportMarkets: e.target.value,
+                      });
+                    }}
                     className="form-select"
                     aria-label="Default select example"
                     name="Qs23_MainExportMarkets"
@@ -776,14 +822,14 @@ const SupplierQuestions = () => {
                     <option disabled selected>
                       Main Export Markets
                     </option>
-                    <option value="private">Western Europe</option>
-                    <option value="public">Eastern</option>
-                    <option value="state">North America</option>
-                    <option value="jointVenture">South America</option>
-                    <option value="belongsToGroup">Asia Pacific </option>
-                    <option value="belongsToGroup">Africa </option>
-                    <option value="belongsToGroup">Middle East </option>
-                    <option value="belongsToGroup">Worldwide</option>
+                    <option value="westernEurope">Western Europe</option>
+                    <option value="easternEurope">Eastern Europe</option>
+                    <option value="northAmerica">North America</option>
+                    <option value="southAmerica">South America</option>
+                    <option value="asiaPacific">Asia Pacific</option>
+                    <option value="africa">Africa </option>
+                    <option value="middleEast">Middle East</option>
+                    <option value="worldwide">Worldwide</option>
                     {options.map((option) => (
                       <option key={option} value={option}>
                         {option}
@@ -791,7 +837,7 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {selectedOption === "other" && (
+                  {supplierData.Qs23_MainExportMarkets === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
                         value={customOption}
@@ -906,6 +952,9 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs27_DeliveryLeadTimeInitialOrder" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -924,6 +973,9 @@ const SupplierQuestions = () => {
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
                     pattern="[0-9]*"
                     name="Qs28_DeliveryLeadTimeRepeatOrder" // Add name attribute
                     className="mt-3 outline-none w-100"
@@ -987,7 +1039,12 @@ const SupplierQuestions = () => {
                   <span style={{ color: "red" }}>*</span>
                   <select
                     value={supplierData.Qs32_CountryOfBankAC}
-                    onChange={handleOptionChange}
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs32_CountryOfBankAC: e.target.value,
+                      });
+                    }}
                     className="form-select"
                     aria-label="Default select example"
                     name="Qs32_CountryOfBankAC"
@@ -1009,7 +1066,7 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {selectedOption === "other" && (
+                  {supplierData.Qs32_CountryOfBankAC === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
                         value={customOption}
@@ -1056,6 +1113,9 @@ const SupplierQuestions = () => {
                       name="Qs33_BankPhone"
                       placeholder="This value must be a number"
                       type="number"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      }}
                       pattern="[0-9]*"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
