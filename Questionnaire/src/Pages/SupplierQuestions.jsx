@@ -624,6 +624,30 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
+                  {selectedOption === "other" && (
+                    <div className="input-group w-25 mt-2">
+                      <input
+                        value={customOption}
+                        onChange={handleCustomOptionChange}
+                        type="text"
+                        className="form-control w-25 rounded"
+                        placeholder="Enter Custom Option"
+                        aria-label="Enter text..."
+                        aria-describedby="basic-addon2"
+                        name="Qs16_Ownership"
+                        required
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-primary ms-2"
+                          type="button"
+                          onClick={handleSaveCustomOption}
+                        >
+                          Add Country
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {/* Question  17*/}
                 <div className="field-sections">
@@ -739,6 +763,8 @@ const SupplierQuestions = () => {
                 <div className="field-sections">
                   <span>Q.23:&nbsp;&nbsp;</span>
                   <span>Main Export Markets</span>
+                  <span style={{ color: "red" }}>*</span>
+
                   <select
                     value={supplierData.Qs23_MainExportMarkets}
                     onChange={handleOptionChange}
@@ -765,11 +791,36 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
+                  {selectedOption === "other" && (
+                    <div className="input-group w-25 mt-2">
+                      <input
+                        value={customOption}
+                        onChange={handleCustomOptionChange}
+                        type="text"
+                        className="form-control w-25 rounded"
+                        placeholder="Enter Custom Option"
+                        aria-label="Enter text..."
+                        aria-describedby="basic-addon2"
+                        name="Qs23_MainExportMarkets"
+                        required
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-primary ms-2"
+                          type="button"
+                          onClick={handleSaveCustomOption}
+                        >
+                          Add Country
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {/* Question 24 */}
                 <div className="field-sections">
                   <span>Q.24:&nbsp;&nbsp;</span>
                   <span>Trade Fair</span>
+                  <span style={{ color: "red" }}>*</span>
                   <br />
                   <br />
                   <label>
@@ -779,6 +830,7 @@ const SupplierQuestions = () => {
                       value="yes"
                       checked={supplierData.Qs24_TradeFair === "yes"}
                       onChange={handleChange}
+                      required
                     />
                     Yes
                   </label>
@@ -790,17 +842,17 @@ const SupplierQuestions = () => {
                       name="Qs24_TradeFair"
                       checked={supplierData.Qs24_TradeFair === "no"}
                       onChange={handleChange}
+                      required
                     />
                     No
                   </label>
                 </div>
                 {/* Question  25*/}
                 <div className="field-sections">
-                  <span>Q.21:&nbsp;&nbsp;</span>
+                  <span>Q.25:&nbsp;&nbsp;</span>
                   <span>
                     Trade Fair Participation(Please separate by "/" incl. space,
                     e.g., Trade Fair 1 / Trade Fair 2)
-                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -811,7 +863,6 @@ const SupplierQuestions = () => {
                     id="name-text"
                   />
                 </div>
-
                 {/* Question  26*/}
                 <div className="field-sections">
                   <span>Q.26:&nbsp;&nbsp;</span>
@@ -827,6 +878,7 @@ const SupplierQuestions = () => {
                       value="yes"
                       checked={supplierData.Qs26_ShowRoom === "yes"}
                       onChange={handleChange}
+                      required
                     />
                     Yes
                   </label>
@@ -838,6 +890,7 @@ const SupplierQuestions = () => {
                       name="Qs26_ShowRoom"
                       checked={supplierData.Qs26_ShowRoom === "no"}
                       onChange={handleChange}
+                      required
                     />
                     No
                   </label>
@@ -878,7 +931,6 @@ const SupplierQuestions = () => {
                     required
                   />
                 </div>
-
                 <h3 className="supplier-heading">Bank Information</h3>
                 {/* Question  29*/}
                 <div className="field-sections">
@@ -923,6 +975,149 @@ const SupplierQuestions = () => {
                     placeholder="Enter your answer"
                     type="text"
                     name="Qs31_BankAddress" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  32*/}
+                <div className="field-sections">
+                  <span>Q.32:&nbsp;&nbsp;</span>
+                  <span>Country of Bank A/C</span>
+                  <span style={{ color: "red" }}>*</span>
+                  <select
+                    value={supplierData.Qs32_CountryOfBankAC}
+                    onChange={handleOptionChange}
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qs32_CountryOfBankAC"
+                    required
+                  >
+                    <option disabled selected>
+                      Country of Bank Account
+                    </option>
+                    <option value="china">China</option>
+                    <option value="germany">Germany</option>
+                    <option value="hongkong">Hong Kong</option>
+                    <option value="india">India</option>
+                    <option value="taiwan">Taiwan</option>
+                    <option value="vietnam">Vietnam</option>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                    <option value="other">Other</option>
+                  </select>
+                  {selectedOption === "other" && (
+                    <div className="input-group w-25 mt-2">
+                      <input
+                        value={customOption}
+                        onChange={handleCustomOptionChange}
+                        type="text"
+                        className="form-control w-25 rounded"
+                        placeholder="Enter Custom Option"
+                        aria-label="Enter text..."
+                        name="Qs32_CountryOfBankAC"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-primary ms-2"
+                          type="button"
+                          onClick={handleSaveCustomOption}
+                        >
+                          Add Country Bank Account
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {/* Question  33*/}
+                <div className="field-sections">
+                  <span>Q.33:&nbsp;&nbsp;</span>
+                  <span>Bank Phone</span>
+                  <div className="form-group d-flex">
+                    <select
+                      className="form-control countryCode me-1"
+                      id="countrySelect"
+                      name="Qs33_BankPhone"
+                    >
+                      {countryCode.map((country) => (
+                        <option key={country.code} value={country.dial_code}>
+                          {country.dial_code + "    " + " "} &nbsp; &nbsp;&nbsp;
+                          &nbsp;&nbsp; &nbsp;
+                          {" " + country.name}
+                        </option>
+                      ))}
+                    </select>
+                    -
+                    <input
+                      name="Qs33_BankPhone"
+                      placeholder="This value must be a number"
+                      type="number"
+                      pattern="[0-9]*"
+                      onChange={handleChange}
+                      class="form-control ms-1 phoneNumberInput"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    ></input>
+                  </div>
+                </div>
+                {/* Question  34*/}
+                <div className="field-sections">
+                  <span>Q.34:&nbsp;&nbsp;</span>
+                  <span>Bank Regional Number</span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_BankRegionalNumber" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                  />
+                </div>
+                {/* Question  35*/}
+                <div className="field-sections">
+                  <span>Q.35:&nbsp;&nbsp;</span>
+                  <span>
+                    SWIFT<span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs35_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  36*/}
+                <div className="field-sections">
+                  <span>Q.36:&nbsp;&nbsp;</span>
+                  <span>IBAN</span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs36_IBAN" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                  />
+                </div>
+                {/* Question  37*/}
+                <div className="field-sections">
+                  <span>Q.37:&nbsp;&nbsp;</span>
+                  <span>
+                    Beneficiary Bank A/C Number
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs37_BeneficiaryBankACNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -1014,7 +1209,7 @@ const SupplierQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  39*/}
+                {/* Question  39  Choose radio button show 40 question*/}
                 <div className="field-sections">
                   <span>Q.39:&nbsp;&nbsp;</span>
                   <span>
@@ -1078,9 +1273,1185 @@ const SupplierQuestions = () => {
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
+                        <br />
+                        {/* Question 40 */}
+                        <div className="field-sections">
+                          <span>Q.40:&nbsp;&nbsp;</span>
+                          <span>
+                            Can you confirm that your company fulfils the due
+                            diligence obligations contained in § 3 paragraph 1
+                            sentence 2 LkSG?
+                          </span>
+                          <br />
+                          <br />
+                          <label>
+                            <input
+                              name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
+                              type="radio"
+                              value="yes"
+                              checked={
+                                supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
+                                "yes"
+                              }
+                              onChange={handleChange}
+                            />
+                            Yes
+                          </label>
+
+                          <label style={{ marginLeft: "1rem" }}>
+                            <input
+                              type="radio"
+                              value="no"
+                              name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
+                              checked={
+                                supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
+                                "no"
+                              }
+                              onChange={handleChange}
+                            />
+                            No
+                          </label>
+                        </div>
                       </div>
                     )}
                   </div>
+                </div>
+                {/* Question  45*/}
+                <div className="field-sections">
+                  <span>Q.45:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "Fair Labor Accreditation"
+                    evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs45a_IssuedFairLaborEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs45a_IssuedFairLaborEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs45a_IssuedFairLaborEvidence"
+                      checked={
+                        supplierData.Qs45a_IssuedFairLaborEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs45a_IssuedFairLaborEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs45a_IssuedFairLaborEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  46*/}
+                <div className="field-sections">
+                  <span>Q.46:&nbsp;&nbsp;</span>
+                  <span>Have you been issued the "Fair Stone" evidence?</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs46a_IssuedFairStoneEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs46a_IssuedFairStoneEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs46a_IssuedFairStoneEvidence"
+                      checked={
+                        supplierData.Qs46a_IssuedFairStoneEvidenceons === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs46a_IssuedFairStoneEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs46b_IssuedFairStoneEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  47*/}
+                <div className="field-sections">
+                  <span>Q.47:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "Global Organic Textile Standard"
+                    evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs47a_IssuedGlobalOrganicTextileEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs47a_IssuedGlobalOrganicTextileEvidence ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs47a_IssuedGlobalOrganicTextileEvidence"
+                      checked={
+                        supplierData.Qs47a_IssuedGlobalOrganicTextileEvidence ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs47a_IssuedGlobalOrganicTextileEvidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs47b_IssuedGlobalOrganicTextileEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  48*/}
+                <div className="field-sections">
+                  <span>Q.48:&nbsp;&nbsp;</span>
+                  <span>Have you been issued the "Grüner Knopf" evidence?</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs48a_IssuedGrunerKnopfEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs48a_IssuedGrunerKnopfEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs48a_IssuedGrunerKnopfEvidence"
+                      checked={
+                        supplierData.Qs48a_IssuedGrunerKnopfEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs48a_IssuedGrunerKnopfEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs48b_IssuedGrunerKnopfEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  49*/}
+                <div className="field-sections">
+                  <span>Q.49:&nbsp;&nbsp;</span>
+                  <span>Have you been issued the "IGEP" evidence?</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs49a_IssuedIGEPEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={supplierData.Qs49a_IssuedIGEPEvidence === "yes"}
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs49a_IssuedIGEPEvidence"
+                      checked={supplierData.Qs49a_IssuedIGEPEvidence === "no"}
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs49a_IssuedIGEPEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs49b_IssuedIGEPEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  50*/}
+                <div className="field-sections">
+                  <span>Q.50:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "OEKO-TEX® MADE IN GREEN" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs50a_IssuedOEKOTEXGreenEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs50a_IssuedOEKOTEXGreenEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs50a_IssuedOEKOTEXGreenEvidence"
+                      checked={
+                        supplierData.Qs50a_IssuedOEKOTEXGreenEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs50a_IssuedOEKOTEXGreenEvidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs50b_IssuedOEKOTEXGreenEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  51*/}
+                <div className="field-sections">
+                  <span>Q.51:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "SMETA (Sedex)" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs51a_IssuedSMETASedexEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs51a_IssuedSMETASedexEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs51a_IssuedSMETASedexEvidence"
+                      checked={
+                        supplierData.Qs51a_IssuedSMETASedexEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs51a_IssuedSMETASedexEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs51b_IssuedSMETASedexEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  52*/}
+                <div className="field-sections">
+                  <span>Q.52:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "Social Accountability
+                    International - SA8000" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs52a_IssuedSocialAccountabilitySA8000"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs52a_IssuedSocialAccountabilitySA8000 ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs52a_IssuedSocialAccountabilitySA8000"
+                      checked={
+                        supplierData.Qs52a_IssuedSocialAccountabilitySA8000 ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs52a_IssuedSocialAccountabilitySA8000 ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs52b_IssuedSocialAccountabilitySA8000"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  53*/}
+                <div className="field-sections">
+                  <span>Q.53:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "XertifiX Standard" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs53a_IssuedXertifixStandardEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs53a_IssuedXertifixStandardEvidence ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs53a_IssuedXertifixStandardEvidence"
+                      checked={
+                        supplierData.Qs53a_IssuedXertifixStandardEvidence ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs53a_IssuedXertifixStandardEvidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs53_IssuedXertifixStandardEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  54*/}
+                <div className="field-sections">
+                  <span>Q.54:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "XertifiX PLUS" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs54a_IssuedXertifixPlusEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs54a_IssuedXertifixPlusEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs54a_IssuedXertifixPlusEvidence"
+                      checked={
+                        supplierData.Qs54a_IssuedXertifixPlusEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs54a_IssuedXertifixPlusEvidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs54b_IssuedXertifixPlusEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  55*/}
+                <div className="field-sections">
+                  <span>Q.55:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "AMFORI BEPI (Level 1, 2, 3)"
+                    evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs55a_IssuedAMFORIBEPIEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs55a_IssuedAMFORIBEPIEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs55a_IssuedAMFORIBEPIEvidence"
+                      checked={
+                        supplierData.Qs55a_IssuedAMFORIBEPIEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs55a_IssuedAMFORIBEPIEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs55b_IssuedAMFORIBEPIEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  56*/}
+                <div className="field-sections">
+                  <span>Q.56:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "DIN EN ISO 14001" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs56a_IssuedDINENISO14001Evidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs56a_IssuedDINENISO14001Evidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs56a_IssuedDINENISO14001Evidence"
+                      checked={
+                        supplierData.Qs56a_IssuedDINENISO14001Evidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs56a_IssuedDINENISO14001Evidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs56b_IssuedDINENISO14001Evidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  57*/}
+                <div className="field-sections">
+                  <span>Q.57:&nbsp;&nbsp;</span>
+                  <span>Have you been issued the "Grüner Knopf" evidence?</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs57a_IssuedGrunerKnopfEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs57a_IssuedGrunerKnopfEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs57a_IssuedGrunerKnopfEvidence"
+                      checked={
+                        supplierData.Qs57a_IssuedGrunerKnopfEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs57a_IssuedGrunerKnopfEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs57b_IssuedGrunerKnopfEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  58*/}
+                <div className="field-sections">
+                  <span>Q.58:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "IGEP (ISES 2020 Audit)" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs58a_IssuedIGEP2020AuditEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs58a_IssuedIGEP2020AuditEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs58a_IssuedIGEP2020AuditEvidence"
+                      checked={
+                        supplierData.Qs58a_IssuedIGEP2020AuditEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs58a_IssuedIGEP2020AuditEvidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs58b_IssuedIGEP2020AuditEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  59*/}
+                <div className="field-sections">
+                  <span>Q.59:&nbsp;&nbsp;</span>
+                  <span>
+                    Have you been issued the "DIN EN ISO 45001" evidence?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs59a_IssuedDINENISO45001Evidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs59a_IssuedDINENISO45001Evidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs59a_IssuedDINENISO45001Evidence"
+                      checked={
+                        supplierData.Qs59a_IssuedDINENISO45001Evidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {supplierData.Qs59a_IssuedDINENISO45001Evidence ===
+                      "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qs59b_IssuedDINENISO45001Evidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setDilligenceFile(e.target.files[0]);
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: dilligenceFile ? "none" : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {dilligenceFile
+                              ? `Uploaded file: ${dilligenceFile.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question 60 */}
+                <div className="field-sections">
+                  <span>Q.60:&nbsp;&nbsp;</span>
+                  <span>
+                    Do you contractually obligate your direct suppliers to
+                    comply with national environmental laws?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs60_ContractuallyObligateDirectSuppliersNational"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs60_ContractuallyObligateDirectSuppliersNational ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs60_ContractuallyObligateDirectSuppliersNational"
+                      checked={
+                        supplierData.Qs60_ContractuallyObligateDirectSuppliersNational ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 61 */}
+                <div className="field-sections">
+                  <span>Q.61:&nbsp;&nbsp;</span>
+                  <span>
+                    Do you require your direct suppliers to respect human
+                    rights?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs61_RequireDirectSuppliersHumanRights"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs61_RequireDirectSuppliersHumanRights ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs61_RequireDirectSuppliersHumanRights"
+                      checked={
+                        supplierData.Qs61_RequireDirectSuppliersHumanRights ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 62 */}
+                <div className="field-sections">
+                  <span>Q.62:&nbsp;&nbsp;</span>
+                  <span>
+                    Do you carry out an annual or event-related risk analysis in
+                    your company?
+                  </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs62_CarryOutAnnualEventRiskAnalysis"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs62_CarryOutAnnualEventRiskAnalysis ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs62_CarryOutAnnualEventRiskAnalysis"
+                      checked={
+                        supplierData.Qs62_CarryOutAnnualEventRiskAnalysis ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
                 </div>
                 {/* Question 63 */}
                 <div className="field-sections">
@@ -1202,7 +2573,6 @@ const SupplierQuestions = () => {
                     />
                     Yes
                   </label>
-
                   <label style={{ marginLeft: "1rem" }}>
                     <input
                       type="radio"
@@ -1216,10 +2586,9 @@ const SupplierQuestions = () => {
                     />
                     No
                   </label>
-
                   <br />
                   <br />
-                  {/* This Question is Dependent on Question 84. */}
+                  {/* This Question is Dependent on Question 123. */}
                   <div>
                     {supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
                       "no" && (
@@ -1241,7 +2610,2129 @@ const SupplierQuestions = () => {
                       </div>
                     )}
                   </div>
-                </div>
+                  {/* Question 65 */}
+                  <div className="field-sections">
+                    <span>Q.65:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you check the age of your workers as part of the hiring
+                      process?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs65_CheckAgeWorkerAtHiring"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs65_CheckAgeWorkerAtHiring === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs65_CheckAgeWorkerAtHiring"
+                        checked={
+                          supplierData.Qs65_CheckAgeWorkerAtHiring === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 66 */}
+                  <div className="field-sections">
+                    <span>Q.66:&nbsp;&nbsp;</span>
+                    <span>
+                      Is the age of your workers also verified when the hiring
+                      process is conducted by placement agencies?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs66_AgeWorkersVerifiedHiringConducted"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs66_AgeWorkersVerifiedHiringConducted"
+                        checked={
+                          supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 67 */}
+                  <div className="field-sections">
+                    <span>Q.67:&nbsp;&nbsp;</span>
+                    <span>Do you employ persons under the age of 18?</span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs67_EmployPersonUnderAge18"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs67_EmployPersonUnderAge18 === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs67_EmployPersonUnderAge18"
+                        checked={
+                          supplierData.Qs67_EmployPersonUnderAge18 === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 68 */}
+                  <div className="field-sections">
+                    <span>Q.68:&nbsp;&nbsp;</span>
+                    <span>Do you employ persons under the age of 15?</span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs68_EmployPersonUnderAge15"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs68_EmployPersonUnderAge15 === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs68_EmployPersonUnderAge15"
+                        checked={
+                          supplierData.Qs68_EmployPersonUnderAge15 === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 69 */}
+                  <div className="field-sections">
+                    <span>Q.69:&nbsp;&nbsp;</span>
+                    <span>
+                      Are there work instructions for which work persons under
+                      18 are not allowed to be employed?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs69_WorkInstructionsUnder18NotAllowed"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs69_WorkInstructionsUnder18NotAllowed"
+                        checked={
+                          supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 70 */}
+                  <div className="field-sections">
+                    <span>Q.70:&nbsp;&nbsp;</span>
+                    <span>
+                      Do persons under the age of 18 perform work for you under
+                      water or underground?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs70_PersonAge18performUnderWaterUnderGround"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs70_PersonAge18performUnderWaterUnderGround"
+                        checked={
+                          supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 71 */}
+                  <div className="field-sections">
+                    <span>Q.71:&nbsp;&nbsp;</span>
+                    <span>
+                      Do persons under the age of 18 perform work for you at
+                      dangerous heights or in confined spaces?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs71_PersonAge18performDangerousHeights"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs71_PersonAge18performDangerousHeights ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs71_PersonAge18performDangerousHeights"
+                        checked={
+                          supplierData.Qs71_PersonAge18performDangerousHeights ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 72 */}
+                  <div className="field-sections">
+                    <span>Q.72:&nbsp;&nbsp;</span>
+                    <span>
+                      Do persons under the age of 18 work with dangerous
+                      machinery, equipment or tools?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
+                        checked={
+                          supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 73 */}
+                  <div className="field-sections">
+                    <span>Q.73:&nbsp;&nbsp;</span>
+                    <span>
+                      Do people under 18 handle or transport heavy loads in your
+                      business?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs73_PersonAge18HandleHeavyLoads"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs73_PersonAge18HandleHeavyLoads ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs73_PersonAge18HandleHeavyLoads"
+                        checked={
+                          supplierData.Qs73_PersonAge18HandleHeavyLoads === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 74 */}
+                  <div className="field-sections">
+                    <span>Q.74:&nbsp;&nbsp;</span>
+                    <span>
+                      Do persons under the age of 18 work with hazardous
+                      substances, agents or processes?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
+                        checked={
+                          supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 75 */}
+                  <div className="field-sections">
+                    <span>Q.75:&nbsp;&nbsp;</span>
+                    <span>
+                      Do persons under the age of 18 work in areas with harmful
+                      temperatures, noise levels or vibrations?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
+                        checked={
+                          supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 76 */}
+                  <div className="field-sections">
+                    <span>Q.76:&nbsp;&nbsp;</span>
+                    <span>
+                      Do persons under the age of 18 work in your company at
+                      night time?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs76_PersonAge18WorkInNight"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs76_PersonAge18WorkInNight === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs76_PersonAge18WorkInNight"
+                        checked={
+                          supplierData.Qs76_PersonAge18WorkInNight === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 77 */}
+                  <div className="field-sections">
+                    <span>Q.77:&nbsp;&nbsp;</span>
+                    <span>
+                      Is there a predefined procedure if you suspect that one of
+                      your suppliers is unlawfully employing children?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
+                        checked={
+                          supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 78 */}
+                  <div className="field-sections">
+                    <span>Q.78:&nbsp;&nbsp;</span>
+                    <span>
+                      Are persons under the age of 18 in your company in debt
+                      bondage, serfdom or forced or compulsory labor?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
+                        checked={
+                          supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 79 */}
+                  <div className="field-sections">
+                    <span>Q.79:&nbsp;&nbsp;</span>
+                    <span>
+                      Is there any work in your company that is only performed
+                      when a penalty is threatened (e.g. withholding wages)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs79_AnyWorkPerformedPenaltyThreatened"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs79_AnyWorkPerformedPenaltyThreatened"
+                        checked={
+                          supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 80 */}
+                  <div className="field-sections">
+                    <span>Q.80:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you retain the identification documents of your
+                      employees?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="QsS80_RetainIdentificationDocuments"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.QsS80_RetainIdentificationDocuments ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="QsS80_RetainIdentificationDocuments"
+                        checked={
+                          supplierData.QsS80_RetainIdentificationDocuments ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 81 */}
+                  <div className="field-sections">
+                    <span>Q.81:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you retain originals or copies of identification
+                      documents?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs81_RetainOriginalsCopiesDocuments"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs81_RetainOriginalsCopiesDocuments ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs81_RetainOriginalsCopiesDocuments"
+                        checked={
+                          supplierData.Qs81_RetainOriginalsCopiesDocuments ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 82 */}
+                  <div className="field-sections">
+                    <span>Q.82:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you impose penalties on your employees (e.g.
+                      withholding of wages, restriction of movement, withholding
+                      of identification documents, special work)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs82_ImposePenaltiesEmployees"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs82_ImposePenaltiesEmployees === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs82_ImposePenaltiesEmployees"
+                        checked={
+                          supplierData.Qs82_ImposePenaltiesEmployees === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 83 */}
+                  <div className="field-sections">
+                    <span>Q.83:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you have employees who are so deep in debt to you that
+                      it takes them several years to pay off with their wages?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
+                        checked={
+                          supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 84 */}
+                  <div className="field-sections">
+                    <span>Q.84:&nbsp;&nbsp;</span>
+                    <span>
+                      Is the weekly working time (including overtime) more than
+                      60 hours or more than 10 hours per day?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
+                        checked={
+                          supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 86 */}
+                  <div className="field-sections">
+                    <span>Q.86:&nbsp;&nbsp;</span>
+                    <span>
+                      Is there a predefined procedure if you suspect that forced
+                      or slave labor exists at one of your suppliers?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
+                        checked={
+                          supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 87 */}
+                  <div className="field-sections">
+                    <span>Q.87:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your company document the working hours and
+                      wages/remuneration of its employees?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs87_CompanyDocumentWorkingHourseWages"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs87_CompanyDocumentWorkingHourseWages"
+                        checked={
+                          supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 88 */}
+                  <div className="field-sections">
+                    <span>Q.88:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your company have a health and safety policy that is
+                      appropriate for your company?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs88_CompanyHaveHealthAndSafety"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs88_CompanyHaveHealthAndSafety === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs88_CompanyHaveHealthAndSafety"
+                        checked={
+                          supplierData.Qs88_CompanyHaveHealthAndSafety === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 89 */}
+                  <div className="field-sections">
+                    <span>Q.89:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your organization have procedures in place to capture
+                      and assess security risks and to correct identified
+                      vulnerabilities?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs89_OrganizationHaveProceduresSecurityRisks"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs89_OrganizationHaveProceduresSecurityRisks"
+                        checked={
+                          supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 90 */}
+                  <div className="field-sections">
+                    <span>Q.90:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your operation work at high altitudes, in confined
+                      spaces, or involve very high or low temperatures?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs90_OperationHighAltitudesConfinedSpaces"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs90_OperationHighAltitudesConfinedSpaces"
+                        checked={
+                          supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 91 */}
+                  <div className="field-sections">
+                    <span>Q.91:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you work with hazardous chemical and biological
+                      substances?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs91_WorkHazardousChemicalBiologicalSubstances"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs91_WorkHazardousChemicalBiologicalSubstances"
+                        checked={
+                          supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 92 */}
+                  <div className="field-sections">
+                    <span>Q.92:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your company have instructions on the use of special
+                      safety equipment (e.g. protective clothing)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs92_InstructionUseSafetyEquipments"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs92_InstructionUseSafetyEquipments ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs92_InstructionUseSafetyEquipments"
+                        checked={
+                          supplierData.Qs92_InstructionUseSafetyEquipments ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 93 */}
+                  <div className="field-sections">
+                    <span>Q.93:&nbsp;&nbsp;</span>
+                    <span>
+                      Is there a person responsible in your company for the safe
+                      storage, distribution and instruction regarding the safe
+                      handling of these substances?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs93_PersonalResponsibleSafeStorageDistribution"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs93_PersonalResponsibleSafeStorageDistribution"
+                        checked={
+                          supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 94 */}
+                  <div className="field-sections">
+                    <span>Q.94:&nbsp;&nbsp;</span>
+                    <span>
+                      Is there technical equipment for emergencies in your
+                      company and is it regularly checked and maintained (e.g.
+                      fire extinguishing system)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
+                        checked={
+                          supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 95 */}
+                  <div className="field-sections">
+                    <span>Q.95:&nbsp;&nbsp;</span>
+                    <span>
+                      Are there persons in your company who are specially
+                      trained to act in emergencies (e.g. first aid training)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs95_PersonsSpeciallyTrainedActEmergencies"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs95_PersonsSpeciallyTrainedActEmergencies"
+                        checked={
+                          supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 96 */}
+                  <div className="field-sections">
+                    <span>Q.96:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your company offer its employees the opportunity to
+                      provide feedback and complaints to management?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs96_OfferOpportunityProvideFeedbackComplaints"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs96_OfferOpportunityProvideFeedbackComplaints"
+                        checked={
+                          supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 97 */}
+                  <div className="field-sections">
+                    <span>Q.97:&nbsp;&nbsp;</span>
+                    <span>
+                      Are your employees regularly trained on the subject of
+                      occupational safety, especially when they are hired?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
+                        checked={
+                          supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 98 */}
+                  <div className="field-sections">
+                    <span>Q.98:&nbsp;&nbsp;</span>
+                    <span>Are your employees organized in a union?</span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs98_EmpOrganizedAUnion"
+                        type="radio"
+                        value="yes"
+                        checked={supplierData.Qs98_EmpOrganizedAUnion === "yes"}
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs98_EmpOrganizedAUnion"
+                        checked={supplierData.Qs98_EmpOrganizedAUnion === "no"}
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 99 */}
+                  <div className="field-sections">
+                    <span>Q.99:&nbsp;&nbsp;</span>
+                    <span>
+                      Are there bonuses or other benefits, if employees are not
+                      members of a union or leave a union?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs99_BonusesBenefitsNotMembersUnion"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs99_BonusesBenefitsNotMembersUnion"
+                        checked={
+                          supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 100 */}
+                  <div className="field-sections">
+                    <span>Q.100:&nbsp;&nbsp;</span>
+                    <span>
+                      Are employees hired or assigned to specific tasks based on
+                      national or ethnic origin, social origin, health status,
+                      disability, sexual orientation, age, gender, political
+                      opinion, religion or belief?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
+                        checked={
+                          supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 101 */}
+                  <div className="field-sections">
+                    <span>Q.101:&nbsp;&nbsp;</span>
+                    <span>
+                      Are workers unfairly paid differently for the same work
+                      for the reasons mentioned above?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs101_WorkersUnfairlyPaidSameWork"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs101_WorkersUnfairlyPaidSameWork ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs101_WorkersUnfairlyPaidSameWork"
+                        checked={
+                          supplierData.Qs101_WorkersUnfairlyPaidSameWork ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 102 */}
+                  <div className="field-sections">
+                    <span>Q.102:&nbsp;&nbsp;</span>
+                    <span>
+                      Is there a statutory minimum wage in the country/countries
+                      where you work?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs102_StatutoryMinimumWageInCountry"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs102_StatutoryMinimumWageInCountry ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs102_StatutoryMinimumWageInCountry"
+                        checked={
+                          supplierData.Qs102_StatutoryMinimumWageInCountry ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 103 */}
+                  <div className="field-sections">
+                    <span>Q.103:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you pay the respective statutory minimum wage or more?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs103_PayRespectiveStatutory"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs103_PayRespectiveStatutory === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs103_PayRespectiveStatutory"
+                        checked={
+                          supplierData.Qs103_PayRespectiveStatutory === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 104 */}
+                  <div className="field-sections">
+                    <span>Q.104:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you pay at least a wage that is in line with the
+                      general wage level in your industry?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs104_PayAtleastWageInLineGeneralWage"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs104_PayAtleastWageInLineGeneralWage"
+                        checked={
+                          supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 105 */}
+                  <div className="field-sections">
+                    <span>Q.105:&nbsp;&nbsp;</span>
+                    <span>
+                      Is the wage reduced for benefits provided by your company
+                      to the employee (e.g. for work clothing, meals,
+                      accommodation)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs105_WageReducedBenefitsProvidedCompany"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs105_WageReducedBenefitsProvidedCompany"
+                        checked={
+                          supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 106 */}
+                  <div className="field-sections">
+                    <span>Q.106:&nbsp;&nbsp;</span>
+                    <span>
+                      Within the last 20 years, has your company acquired land
+                      that was occupied immediately prior to acquisition?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs106_Last20YearsCompanyAcquiredLand"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs106_Last20YearsCompanyAcquiredLand"
+                        checked={
+                          supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 107 */}
+                  <div className="field-sections">
+                    <span>Q.107:&nbsp;&nbsp;</span>
+                    <span>
+                      Can you confirm that the land owned or held by your
+                      company has not been misappropriated?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs107_ConfirmLandOwnedOrHeld"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs107_ConfirmLandOwnedOrHeld === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs107_ConfirmLandOwnedOrHeld"
+                        checked={
+                          supplierData.Qs107_ConfirmLandOwnedOrHeld === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 108 */}
+                  <div className="field-sections">
+                    <span>Q.108:&nbsp;&nbsp;</span>
+                    <span>
+                      Have you acquired any forest land or water bodies in the
+                      last 20 years that were not previously used for commercial
+                      purposes?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
+                        checked={
+                          supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 109 */}
+                  <div className="field-sections">
+                    <span>Q.109:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you employ security personnel in your company?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs109_EmpSecurityPersonnel"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs109_EmpSecurityPersonnel === "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs109_EmpSecurityPersonnel"
+                        checked={
+                          supplierData.Qs109_EmpSecurityPersonnel === "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 110 */}
+                  <div className="field-sections">
+                    <span>Q.110:&nbsp;&nbsp;</span>
+                    <span>
+                      Are security personnel tasked with monitoring their
+                      workers beyond entry and exit checks?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
+                        checked={
+                          supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>{" "}
+                  {/* Question 111 */}
+                  <div className="field-sections">
+                    <span>Q.111:&nbsp;&nbsp;</span>
+                    <span>
+                      Has your company defined characteristics/criteria against
+                      which relevant environmental impacts can be monitored?
+                      (e.g. measurement and monitoring of CO₂ emissions; water
+                      consumption)
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
+                        checked={
+                          supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 112 */}
+                  <div className="field-sections">
+                    <span>Q.112:&nbsp;&nbsp;</span>
+                    <span>
+                      Have there been any legal proceedings against your company
+                      for environmental pollution or similar in the last 5
+                      years?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs112_LegalProceedingsAgainstEnvPollution"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs112_LegalProceedingsAgainstEnvPollution"
+                        checked={
+                          supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 113 */}
+                  <div className="field-sections">
+                    <span>Q.113:&nbsp;&nbsp;</span>
+                    <span>
+                      Are there work instructions and organizational precautions
+                      to minimize emissions to air, soil and water?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
+                        checked={
+                          supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 114 */}
+                  <div className="field-sections">
+                    <span>Q.114:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your company have instructions and procedures on how
+                      to proceed in case of violation of environmental
+                      regulations?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs114_CompanyHowProceedCaseViolation"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs114_CompanyHowProceedCaseViolation ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs114_CompanyHowProceedCaseViolation"
+                        checked={
+                          supplierData.Qs114_CompanyHowProceedCaseViolation ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 115 */}
+                  <div className="field-sections">
+                    <span>Q.115:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your company publish a report on environmental goals
+                      and progress?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs115_CompanyPublishReportOnGoalsProgress"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs115_CompanyPublishReportOnGoalsProgress"
+                        checked={
+                          supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 116 */}
+                  <div className="field-sections">
+                    <span>Q.116:&nbsp;&nbsp;</span>
+                    <span>
+                      Does your business generate hazardous waste or does your
+                      company work with radioactive substances?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
+                        checked={
+                          supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 117 */}
+                  <div className="field-sections">
+                    <span>Q.117:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you work with an external disposal service provider?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs117_WorkWithExternalDisposalServiceProvider"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs117_WorkWithExternalDisposalServiceProvider"
+                        checked={
+                          supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 118 */}
+                  <div className="field-sections">
+                    <span>Q.118:&nbsp;&nbsp;</span>
+                    <span>
+                      Is the export of hazardous waste documented in your
+                      company?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs118_ExportHazardousWasteDocumented"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs118_ExportHazardousWasteDocumented ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs118_ExportHazardousWasteDocumented"
+                        checked={
+                          supplierData.Qs118_ExportHazardousWasteDocumented ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 119 */}
+                  <div className="field-sections">
+                    <span>Q.119:&nbsp;&nbsp;</span>
+                    <span>
+                      Can you confirm that your company acts in accordance with
+                      the Basel Convention on the Control of Transboundary
+                      Movements of Hazardous Wastes and their Disposal?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs119_ConfirmCompActsWithBaselConvention"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs119_ConfirmCompActsWithBaselConvention"
+                        checked={
+                          supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 120 */}
+                  <div className="field-sections">
+                    <span>Q.120:&nbsp;&nbsp;</span>
+                    <span>Do you use persistent organic pollutants?</span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs120_UsePersistentOrganicPollutants"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs120_UsePersistentOrganicPollutants ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs120_UsePersistentOrganicPollutants"
+                        checked={
+                          supplierData.Qs120_UsePersistentOrganicPollutants ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 121 */}
+                  <div className="field-sections">
+                    <span>Q.121:&nbsp;&nbsp;</span>
+                    <span>
+                      Can you confirm that your company acts in accordance with
+                      the Stockholm Convention on Persistent Organic Pollutants
+                      (POPs)?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs121_ConfirmCompActsWithStockholmConvention"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs121_ConfirmCompActsWithStockholmConvention"
+                        checked={
+                          supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 124 */}
+                  <div className="field-sections">
+                    <span>Q.124:&nbsp;&nbsp;</span>
+                    <span>
+                      Do you produce mercury in your company or do you use
+                      mercury or products containing mercury or do you treat
+                      mercury waste?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs124_ProduceMercuryUseMercuryContainingMercury"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs124_ProduceMercuryUseMercuryContainingMercury ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs124_ProduceMercuryUseMercuryContainingMercury"
+                        checked={
+                          supplierData.Qs124_ProduceMercuryUseMercuryContainingMercury ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                  {/* Question 125 */}
+                  <div className="field-sections">
+                    <span>Q.125:&nbsp;&nbsp;</span>
+                    <span>
+                      Can you assure that your company operates in accordance
+                      with the Minamata Convention on the Control of Emissions
+                      and Releases of the Heavy Metal Mercury?
+                    </span>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qs125_AssureCompOperatesWithMinamataConvention"
+                        type="radio"
+                        value="yes"
+                        checked={
+                          supplierData.Qs125_AssureCompOperatesWithMinamataConvention ===
+                          "yes"
+                        }
+                        onChange={handleChange}
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qs125_AssureCompOperatesWithMinamataConvention"
+                        checked={
+                          supplierData.Qs125_AssureCompOperatesWithMinamataConvention ===
+                          "no"
+                        }
+                        onChange={handleChange}
+                      />
+                      No
+                    </label>
+                  </div>
+                </div>{" "}
                 <button
                   id="submitBTN"
                   onClick={handleSubmitButton}
