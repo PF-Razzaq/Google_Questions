@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
-import countryCode from "./CountryCodes.json";
+import countryCode from "../Json/CountryCodes.json";
 import { FiDownload } from "react-icons/fi";
 import "./CompanyInformationForm.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import supplierJson from "../Json/supplierData.json";
 let otherCountry;
 let recordId = 0;
 const SupplierQuestions = () => {
+  console.log("supplierJson", supplierJson);
+  console.log(process.env.REACT_APP_DOWNLOAD_FILE);
   const handleDownload = () => {
     console.log("handleDownload");
     // Replace 'file_url' with the actual URL of the file you want to download.
@@ -96,12 +99,13 @@ const SupplierQuestions = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/sessions`,
+        `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/sessions`,
+
         {},
         {
           auth: {
-            username: "apiuser",
-            password: "TomJerry88",
+            username: process.env.REACT_APP_USERNAME,
+            password: process.env.REACT_APP_PASSWORD,
           },
         }
       );
@@ -120,7 +124,7 @@ const SupplierQuestions = () => {
     if (localStorage.getItem("filemakerToken")) {
       try {
         const response = await axios.post(
-          "https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records",
+          "${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records",
 
           { fieldData: supplierData },
           {
@@ -160,7 +164,7 @@ const SupplierQuestions = () => {
     if (localStorage.getItem("filemakerToken")) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs38b_SignatureUpload/1`,
+          `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs38b_SignatureUpload/1`,
           upload,
           {
             headers: {
@@ -1530,7 +1534,7 @@ const SupplierQuestions = () => {
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs45a_IssuedFairLaborEvidence"
+                            name="Qs45b_IssuedFairLaborEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -1599,7 +1603,7 @@ const SupplierQuestions = () => {
                       value="no"
                       name="Qs46a_IssuedFairStoneEvidence"
                       checked={
-                        supplierData.Qs46a_IssuedFairStoneEvidenceons === "no"
+                        supplierData.Qs46a_IssuedFairStoneEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -2226,7 +2230,7 @@ const SupplierQuestions = () => {
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs53_IssuedXertifixStandardEvidence"
+                            name="Qs53b_IssuedXertifixStandardEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}

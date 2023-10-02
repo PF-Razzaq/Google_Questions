@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "q": "Supplier Name"
+  },
+  {
+    "id": 2,
+    "q": "Supplier Business License Number"
+  },
+  {
+    "id": 3,
+    "q": "Supplier Export License Number"
+  },
+  {
+    "id": 4,
+    "q": "Supplier VAT Number"
+  },
+  {
+    "id": 5,
+    "q": "Building"
+  },
+  {
+    "id": 6,
+    "q": "Street"
+  },
+  {
+    "id": 7,
+    "q": "Town"
+  },
+  {
+    "id": 8,
+    "q": "City"
+  },
+  {
+    "id": 9,
+    "q": "Province"
+  },
+  {
+    "id": 10,
+    "q": "Post Code"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  },
+  {
+    "id": 11,
+    "q": "Country"
+  }
+]
