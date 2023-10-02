@@ -30,12 +30,44 @@ const SupplierQuestions = () => {
   console.log("countryCode4", countryCode);
   const [file, setFile] = useState();
   const [dilligenceFile, setDilligenceFile] = useState();
+  const [issuedFairLaborEvidence, setIssuedFairLaborEvidence] = useState();
+  const [issuedFairStoneEvidence, setIssuedFairStoneEvidence] = useState();
+  const [
+    issuedGlobalOrganicTextileEvidence,
+    setIssuedGlobalOrganicTextileEvidence,
+  ] = useState();
+  const [issuedGrunerKnopfEvidence, setIssuedGrunerKnopfEvidence] = useState();
+
+  const [issuedIGEPEvidence, setIssuedIGEPEvidence] = useState();
+  const [issuedOEKOTEXGreenEvidence, setIssuedOEKOTEXGreenEvidence] =
+    useState();
+  const [issuedSMETASedexEvidence, setIssuedSMETASedexEvidence] = useState();
+  const [
+    issuedSocialAccountabilitySA8000,
+    setIssuedSocialAccountabilitySA8000,
+  ] = useState();
+  const [issuedXertifixStandardEvidence, setIssuedXertifixStandardEvidence] =
+    useState();
+  const [issuedXertifixPlusEvidence, setIssuedXertifixPlusEvidence] =
+    useState();
+  const [issuedAMFORIBEPIEvidence, setIssuedAMFORIBEPIEvidence] = useState();
+  const [issuedDINENISO14001Evidence, setIssuedDINENISO14001Evidence] =
+    useState();
+  const [issuedGrunerKnopfEvidence1, setIssuedGrunerKnopfEvidence1] =
+    useState();
+  const [issuedIGEP2020AuditEvidence, setIssuedIGEP2020AuditEvidence] =
+    useState();
+  const [issuedDINENISO45001Evidence, setIssuedDINENISO45001Evidence] =
+    useState();
   const navigate = useNavigate();
   const [supplierData, setSupplierData] = useState({});
 
   const [selectedOption, setSelectedOption] = useState("");
   const [customOption, setCustomOption] = useState("");
   const [options, setOptions] = useState([]);
+  const [ownerships, setOwnerships] = useState([]);
+  const [exports, setExports] = useState([]);
+  const [options32, setOptions32] = useState([]);
 
   const handleSaveCustomOption = () => {
     if (customOption.trim() !== "") {
@@ -370,6 +402,7 @@ const SupplierQuestions = () => {
                       setSupplierData({
                         ...supplierData,
                         Qs8_Country: e.target.value,
+                        q8Other: e.target.value,
                       });
                     }}
                     className="form-select"
@@ -392,11 +425,15 @@ const SupplierQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {supplierData.Qs8_Country === "other" && (
+                  {supplierData.q8Other === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
-                        value={customOption}
-                        onChange={handleCustomOptionChange}
+                        onChange={(e) => {
+                          setSupplierData({
+                            ...supplierData,
+                            Qs8_Country: e.target.value,
+                          });
+                        }}
                         type="text"
                         className="form-control w-25 rounded"
                         placeholder="Enter Custom Option"
@@ -407,7 +444,13 @@ const SupplierQuestions = () => {
                         <button
                           className="btn btn-primary ms-2"
                           type="button"
-                          onClick={handleSaveCustomOption}
+                          onClick={() => {
+                            if (
+                              supplierData.Qs8_Country.toLowerCase() !== "other"
+                            ) {
+                              setOptions([supplierData.Qs8_Country]);
+                            }
+                          }}
                         >
                           Add Country
                         </button>
@@ -632,6 +675,7 @@ const SupplierQuestions = () => {
                       setSupplierData({
                         ...supplierData,
                         Qs16_Ownership: e.target.value,
+                        Q16Other: e.target.value,
                       });
                     }}
                     className="form-select"
@@ -647,18 +691,22 @@ const SupplierQuestions = () => {
                     <option value="state">State</option>
                     <option value="jointVenture">Joint Venture</option>
                     <option value="belongsToGroup">Belongs to Group </option>
-                    {options.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                    {ownerships.map((ownership) => (
+                      <option key={ownership} value={ownership}>
+                        {ownership}
                       </option>
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {supplierData.Qs16_Ownership === "other" && (
+                  {supplierData.Q16Other === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
-                        value={customOption}
-                        onChange={handleCustomOptionChange}
+                        onChange={(e) => {
+                          setSupplierData({
+                            ...supplierData,
+                            Qs16_Ownership: e.target.value,
+                          });
+                        }}
                         type="text"
                         className="form-control w-25 rounded"
                         placeholder="Enter Custom Option"
@@ -671,7 +719,14 @@ const SupplierQuestions = () => {
                         <button
                           className="btn btn-primary ms-2"
                           type="button"
-                          onClick={handleSaveCustomOption}
+                          onClick={() => {
+                            if (
+                              supplierData.Qs16_Ownership.toLowerCase() !==
+                              "other"
+                            ) {
+                              setOwnerships([supplierData.Qs16_Ownership]);
+                            }
+                          }}
                         >
                           Add Country
                         </button>
@@ -812,6 +867,7 @@ const SupplierQuestions = () => {
                       setSupplierData({
                         ...supplierData,
                         Qs23_MainExportMarkets: e.target.value,
+                        Q23Other: e.target.value,
                       });
                     }}
                     className="form-select"
@@ -830,18 +886,22 @@ const SupplierQuestions = () => {
                     <option value="africa">Africa </option>
                     <option value="middleEast">Middle East</option>
                     <option value="worldwide">Worldwide</option>
-                    {options.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                    {exports.map((exp) => (
+                      <option key={exp} value={exp}>
+                        {exp}
                       </option>
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {supplierData.Qs23_MainExportMarkets === "other" && (
+                  {supplierData.Q23Other === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
-                        value={customOption}
-                        onChange={handleCustomOptionChange}
+                        onChange={(e) => {
+                          setSupplierData({
+                            ...supplierData,
+                            Qs23_MainExportMarkets: e.target.value,
+                          });
+                        }}
                         type="text"
                         className="form-control w-25 rounded"
                         placeholder="Enter Custom Option"
@@ -854,7 +914,14 @@ const SupplierQuestions = () => {
                         <button
                           className="btn btn-primary ms-2"
                           type="button"
-                          onClick={handleSaveCustomOption}
+                          onClick={() => {
+                            if (
+                              supplierData.Qs23_MainExportMarkets.toLowerCase() !==
+                              "other"
+                            ) {
+                              setExports([supplierData.Qs23_MainExportMarkets]);
+                            }
+                          }}
                         >
                           Add Country
                         </button>
@@ -1043,6 +1110,7 @@ const SupplierQuestions = () => {
                       setSupplierData({
                         ...supplierData,
                         Qs32_CountryOfBankAC: e.target.value,
+                        Q32Other: e.target.value,
                       });
                     }}
                     className="form-select"
@@ -1059,18 +1127,22 @@ const SupplierQuestions = () => {
                     <option value="india">India</option>
                     <option value="taiwan">Taiwan</option>
                     <option value="vietnam">Vietnam</option>
-                    {options.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                    {options32.map((option32) => (
+                      <option key={option32} value={option32}>
+                        {option32}
                       </option>
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {supplierData.Qs32_CountryOfBankAC === "other" && (
+                  {supplierData.Q32Other === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
-                        value={customOption}
-                        onChange={handleCustomOptionChange}
+                        onChange={(e) => {
+                          setSupplierData({
+                            ...supplierData,
+                            Qs32_CountryOfBankAC: e.target.value,
+                          });
+                        }}
                         type="text"
                         className="form-control w-25 rounded"
                         placeholder="Enter Custom Option"
@@ -1082,7 +1154,14 @@ const SupplierQuestions = () => {
                         <button
                           className="btn btn-primary ms-2"
                           type="button"
-                          onClick={handleSaveCustomOption}
+                          onClick={() => {
+                            if (
+                              supplierData.Qs32_CountryOfBankAC.toLowerCase() !==
+                              "other"
+                            ) {
+                              setOptions32([supplierData.Qs32_CountryOfBankAC]);
+                            }
+                          }}
                         >
                           Add Country Bank Account
                         </button>
@@ -1424,19 +1503,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedFairLaborEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedFairLaborEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedFairLaborEvidence
+                              ? `Uploaded file: ${issuedFairLaborEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1490,19 +1571,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedFairStoneEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedFairStoneEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedFairStoneEvidence
+                              ? `Uploaded file: ${issuedFairStoneEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1562,19 +1645,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedGlobalOrganicTextileEvidence(
+                                e.target.files[0]
+                              );
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedGlobalOrganicTextileEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedGlobalOrganicTextileEvidence
+                              ? `Uploaded file: ${issuedGlobalOrganicTextileEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1628,19 +1715,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedGrunerKnopfEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedGrunerKnopfEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedGrunerKnopfEvidence
+                              ? `Uploaded file: ${issuedGrunerKnopfEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1690,19 +1779,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedIGEPEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedIGEPEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedIGEPEvidence
+                              ? `Uploaded file: ${issuedIGEPEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1759,19 +1850,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedOEKOTEXGreenEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedOEKOTEXGreenEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedOEKOTEXGreenEvidence
+                              ? `Uploaded file: ${issuedOEKOTEXGreenEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1827,19 +1920,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedSMETASedexEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedSMETASedexEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedSMETASedexEvidence
+                              ? `Uploaded file: ${issuedSMETASedexEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1899,19 +1994,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedSocialAccountabilitySA8000(
+                                e.target.files[0]
+                              );
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedSocialAccountabilitySA8000
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedSocialAccountabilitySA8000
+                              ? `Uploaded file: ${issuedSocialAccountabilitySA8000.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -1970,19 +2069,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedXertifixStandardEvidence(
+                                e.target.files[0]
+                              );
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedXertifixStandardEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedXertifixStandardEvidence
+                              ? `Uploaded file: ${issuedXertifixStandardEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2039,19 +2142,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedXertifixPlusEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedXertifixPlusEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedXertifixPlusEvidence
+                              ? `Uploaded file: ${issuedXertifixPlusEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2108,19 +2213,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedAMFORIBEPIEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedAMFORIBEPIEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedAMFORIBEPIEvidence
+                              ? `Uploaded file: ${issuedAMFORIBEPIEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2177,19 +2284,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedDINENISO14001Evidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedDINENISO14001Evidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedDINENISO14001Evidence
+                              ? `Uploaded file: ${issuedDINENISO14001Evidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2243,19 +2352,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedGrunerKnopfEvidence1(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedGrunerKnopfEvidence1
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedGrunerKnopfEvidence1
+                              ? `Uploaded file: ${issuedGrunerKnopfEvidence1.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2312,19 +2423,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedIGEP2020AuditEvidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedIGEP2020AuditEvidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedIGEP2020AuditEvidence
+                              ? `Uploaded file: ${issuedIGEP2020AuditEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2381,19 +2494,21 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              setIssuedDINENISO45001Evidence(e.target.files[0]);
                             }}
                           />
                           <HiOutlineUpload
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: issuedDINENISO45001Evidence
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {issuedDINENISO45001Evidence
+                              ? `Uploaded file: ${issuedDINENISO45001Evidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
