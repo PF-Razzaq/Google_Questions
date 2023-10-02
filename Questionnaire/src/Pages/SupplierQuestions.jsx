@@ -1328,7 +1328,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setFile(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setFile(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1396,7 +1412,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setDilligenceFile(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setDilligenceFile(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1503,7 +1535,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedFairLaborEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedFairLaborEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1571,7 +1619,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedFairStoneEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedFairStoneEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1645,9 +1709,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedGlobalOrganicTextileEvidence(
-                                e.target.files[0]
-                              );
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedGlobalOrganicTextileEvidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1715,7 +1795,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedGrunerKnopfEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedGrunerKnopfEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1779,7 +1875,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedIGEPEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedIGEPEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1850,7 +1962,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedOEKOTEXGreenEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedOEKOTEXGreenEvidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1920,7 +2050,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedSMETASedexEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedSMETASedexEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -1994,9 +2140,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedSocialAccountabilitySA8000(
-                                e.target.files[0]
-                              );
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedSocialAccountabilitySA8000(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2069,9 +2231,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedXertifixStandardEvidence(
-                                e.target.files[0]
-                              );
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedXertifixStandardEvidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2142,7 +2320,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedXertifixPlusEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedXertifixPlusEvidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2213,7 +2409,23 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedAMFORIBEPIEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedAMFORIBEPIEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2284,7 +2496,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedDINENISO14001Evidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedDINENISO14001Evidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2352,7 +2582,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedGrunerKnopfEvidence1(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedGrunerKnopfEvidence1(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2423,7 +2671,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedIGEP2020AuditEvidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedIGEP2020AuditEvidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
@@ -2494,7 +2760,25 @@ const SupplierQuestions = () => {
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
-                              setIssuedDINENISO45001Evidence(e.target.files[0]);
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedDINENISO45001Evidence(
+                                  e.target.files[0]
+                                );
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
                             }}
                           />
                           <HiOutlineUpload
