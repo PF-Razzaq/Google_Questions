@@ -3,21 +3,712 @@ import React from "react";
 const Supplier2 = () => {
   return (
     <div>
-      {/* Question 65 */}
+      {/* Question 1 */}
       <div className="field-sections">
-        <span>Q.65:&nbsp;&nbsp;</span>
+        <span>Q.{supplierJson.find((f) => f.id === "1").id}:&nbsp;&nbsp;</span>
         <span>
-          Do you check the age of your workers as part of the hiring process?
+          {supplierJson.find((f) => f.id === "1").q}{" "}
+          <span style={{ color: "red" }}>*</span>
         </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs1_SupplierName" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question 2 */}
+      <div className="field-sections">
+        <span>Q.{supplierJson.find((f) => f.id === "2").id}:&nbsp;&nbsp;</span>
+        <span>
+          {supplierJson.find((f) => f.id === "2").q}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          // pattern="[0-9]*"
+          name="Qs2_SuppBusinessLicenseNumber" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question 3 */}
+      <div className="field-sections">
+        <span>Q.{supplierJson.find((f) => f.id === "3").id}:&nbsp;&nbsp;</span>
+        <span>
+          {supplierJson.find((f) => f.id === "3").q}{" "}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs3_SuppExportLicenseNumber" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question 4 */}
+      <div className="field-sections">
+        <span>Q.{supplierJson.find((f) => f.id === "4").id}:&nbsp;&nbsp;</span>
+        <span>
+          {supplierJson.find((f) => f.id === "4").q}{" "}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs4_SuppVATNumber" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <h4 className="supplier-heading">Supplier Address</h4>
+      {/* Question  5*/}
+      <div className="field-sections">
+        <span>Q.5:&nbsp;&nbsp;</span>
+        <span>
+          {supplierJson.find((f) => f.id === "5a").q}{" "}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs5a_Building" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <div className="field-sections">
+        <span>
+          {supplierJson.find((f) => f.id === "5b").q}{" "}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs5b_Street" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  6*/}
+      <div className="field-sections">
+        <span>Q.6:&nbsp;&nbsp;</span>
+        <span>
+          Town <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs6a_Town" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <div className="field-sections">
+        <span>
+          City <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs6b_City" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <div className="field-sections">
+        <span>
+          Province <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs6c_Province" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  7*/}
+      <div className="field-sections">
+        <span>Q.7:&nbsp;&nbsp;</span>
+        <span>Post Code</span>
+
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs7_PostCode" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+        />
+      </div>
+      {/* Question  8*/}
+      <div className="field-sections">
+        <span>Q.8:&nbsp;&nbsp;</span>
+        <span>Country</span>
+        <select
+          value={supplierData.Qs8_Country}
+          onChange={(e) => {
+            setSupplierData({
+              ...supplierData,
+              Qs8_Country: e.target.value,
+              q8Other: e.target.value,
+            });
+          }}
+          className="form-select"
+          aria-label="Default select example"
+          name="Qs8_Country"
+        >
+          <option disabled selected>
+            Choose Country
+          </option>
+          <option value="china">China</option>
+          <option value="germany">Germany</option>
+          <option value="hongkong">Hong Kong</option>
+          <option value="india">India</option>
+          <option value="taiwan">Taiwan</option>
+          <option value="vietnam">Vietnam</option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+          <option value="other">Other</option>
+        </select>
+        {supplierData.q8Other === "other" && (
+          <div className="input-group w-25 mt-2">
+            <input
+              onChange={(e) => {
+                setSupplierData({
+                  ...supplierData,
+                  Qs8_Country: e.target.value,
+                });
+              }}
+              type="text"
+              className="form-control w-25 rounded"
+              placeholder="Enter Custom Option"
+              aria-label="Enter text..."
+              aria-describedby="basic-addon2"
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-primary ms-2"
+                type="button"
+                onClick={() => {
+                  if (supplierData.Qs8_Country.toLowerCase() !== "other") {
+                    setOptions([supplierData.Qs8_Country]);
+                  }
+                }}
+              >
+                Add Country
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      <h4 className="supplier-heading">Supplier Contact Details</h4>
+      {/* Question  9*/}
+      <div className="field-sections">
+        <span>Q.9:&nbsp;&nbsp;</span>
+        <span>
+          Phone <span style={{ color: "red" }}>*</span>
+        </span>
+        <div className="form-group d-flex">
+          <select className="form-control countryCode me-1" id="countrySelect">
+            {countryCode.map((country) => (
+              <option key={country.code} value={country.dial_code}>
+                {country.dial_code + "    " + " "} &nbsp; &nbsp;&nbsp;
+                &nbsp;&nbsp; &nbsp;
+                {" " + country.name}
+              </option>
+            ))}
+          </select>
+          -
+          <input
+            name="Qs9a_Phone"
+            type="number"
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+            }}
+            pattern="[0-9]*"
+            onChange={handleChange}
+            class="form-control ms-1 phoneNumberInput"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            required
+          ></input>
+        </div>
+      </div>
+      <div className="field-sections">
+        <span>
+          Cell Phone <span style={{ color: "red" }}>*</span>
+        </span>
+        <div className="form-group d-flex">
+          <select className="form-control countryCode me-1" id="countrySelect">
+            {countryCode.map((country) => (
+              <option key={country.code} value={country.dial_code}>
+                {country.dial_code + "    " + "   "}&nbsp; &nbsp;&nbsp;
+                &nbsp;&nbsp; &nbsp;
+                {" " + country.name}
+              </option>
+            ))}
+          </select>
+          -
+          <input
+            type="number"
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+            }}
+            pattern="[0-9]*"
+            name="Qs9b_Cellphone"
+            onChange={handleChange}
+            class="form-control ms-1 phoneNumberInput"
+            id="exampleInputEmail2"
+            aria-describedby="emailHelp"
+            required
+          ></input>
+        </div>
+      </div>
+      {/* Question  10*/}
+      <div className="field-sections">
+        <span>Q.10:&nbsp;&nbsp;</span>
+        <span>
+          Email <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="email"
+          name="Qs10_Email" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  11*/}
+      <div className="field-sections">
+        <span>Q.11:&nbsp;&nbsp;</span>
+        <span>Website</span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs11_Website" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+        />
+      </div>
+      <h3 className="supplier-heading">Contact Person</h3>
+      {/* Question  12*/}
+      <div>
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={(e) => {
+            setSupplierData({
+              ...supplierData,
+              Qs12a_salutation: e.target.value,
+            });
+          }}
+          name="Qs12a_salutation"
+        >
+          <option disabled selected>
+            Salutation
+          </option>
+          <option value="mr">Mr.</option>
+          <option value="ms">Ms.</option>
+        </select>
+      </div>
+      <div className="field-sections">
+        <span>
+          First Name <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs12b_FirstName" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <div className="field-sections">
+        <span>
+          Last Name <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs12c_LastName" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  13*/}
+      <div className="field-sections">
+        <span>Q.13:&nbsp;&nbsp;</span>
+        <span>
+          Contact Person Position <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs13_ContactPersonPosition" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <h3 className="supplier-heading">Supplier Information</h3>
+      {/* Question  14*/}
+      <div className="field-sections">
+        <span>Q.14:&nbsp;&nbsp;</span>
+        <span>
+          Year of Establishment <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="This value must be a number"
+          type="text"
+          name="Qs14_YearOfEstablishment" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          maxLength={4}
+          minLength={4}
+          required
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+        />
+      </div>
+      {/* Question  15*/}
+      <div className="field-sections">
+        <span>Q.15:&nbsp;&nbsp;</span>
+        <span>
+          Total Number of Employees <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="This value must be a number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs15_TotalNoOfEmployees" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  16*/}
+      <div className="field-sections">
+        <span>Q.16:&nbsp;&nbsp;</span>
+        <span>Ownership</span>
+        <select
+          value={supplierData.Qs16_Ownership}
+          onChange={(e) => {
+            setSupplierData({
+              ...supplierData,
+              Qs16_Ownership: e.target.value,
+              Q16Other: e.target.value,
+            });
+          }}
+          className="form-select"
+          aria-label="Default select example"
+          name="Qs16_Ownership"
+          required
+        >
+          <option disabled selected>
+            Ownership
+          </option>
+          <option value="private">Private</option>
+          <option value="public">Public</option>
+          <option value="state">State</option>
+          <option value="jointVenture">Joint Venture</option>
+          <option value="belongsToGroup">Belongs to Group </option>
+          {ownerships.map((ownership) => (
+            <option key={ownership} value={ownership}>
+              {ownership}
+            </option>
+          ))}
+          <option value="other">Other</option>
+        </select>
+        {supplierData.Q16Other === "other" && (
+          <div className="input-group w-25 mt-2">
+            <input
+              onChange={(e) => {
+                setSupplierData({
+                  ...supplierData,
+                  Qs16_Ownership: e.target.value,
+                });
+              }}
+              type="text"
+              className="form-control w-25 rounded"
+              placeholder="Enter Custom Option"
+              aria-label="Enter text..."
+              aria-describedby="basic-addon2"
+              name="Qs16_Ownership"
+              required
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-primary ms-2"
+                type="button"
+                onClick={() => {
+                  if (supplierData.Qs16_Ownership.toLowerCase() !== "other") {
+                    setOwnerships([supplierData.Qs16_Ownership]);
+                  }
+                }}
+              >
+                Add Country
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* Question  17*/}
+      <div className="field-sections">
+        <span>Q.17:&nbsp;&nbsp;</span>
+        <span>Business Category</span>
+        <select
+          value={supplierData.Qs17_BusinessCategory}
+          onChange={(e) => {
+            setSupplierData({
+              ...supplierData,
+              Qs17_BusinessCategory: e.target.value,
+            });
+          }}
+          className="form-select"
+          aria-label="Default select example"
+          name="Qs17_BusinessCategory"
+        >
+          <option disabled selected>
+            Business Category
+          </option>
+          <option value="trader">Trader</option>
+          <option value="manufacturerTrader">Manufacturer / Trader</option>
+        </select>
+      </div>
+      {/* Question  18*/}
+      <div className="field-sections">
+        <span>Q.18:&nbsp;&nbsp;</span>
+        <span>
+          Main Products(Please separate by "/" incl. space, e.g., product 1 /
+          product 2) <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs18_MainProducts" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  19*/}
+      <div className="field-sections">
+        <span>Q.19:&nbsp;&nbsp;</span>
+        <span>
+          Sales per Year / Domestic / (Mio USD){" "}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="This value must be a number"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs19_SalesPerYearDomestic" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  20*/}
+      <div className="field-sections">
+        <span>Q.20:&nbsp;&nbsp;</span>
+        <span>
+          Sales per Year / Export / (Mio USD)
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="This value must be a number"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs20_SalesPerYearExport" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  21*/}
+      <div className="field-sections">
+        <span>Q.21:&nbsp;&nbsp;</span>
+        <span>
+          Main Customers and Country(Please separate by "/" incl. space, e.g.,
+          Company 1 - Country 1 / Company 2 - Country 2)
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs21_MainCustomerAndCountry" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  22*/}
+      <div className="field-sections">
+        <span>Q.22:&nbsp;&nbsp;</span>
+        <span>
+          Main Customer Products(Please separate by "/" incl. space, e.g.,
+          product 1 / product 2)
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs22_MainCustomerProducts" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  23*/}
+      <div className="field-sections">
+        <span>Q.23:&nbsp;&nbsp;</span>
+        <span>Main Export Markets</span>
+        <span style={{ color: "red" }}>*</span>
+
+        <select
+          value={supplierData.Qs23_MainExportMarkets}
+          onChange={(e) => {
+            setSupplierData({
+              ...supplierData,
+              Qs23_MainExportMarkets: e.target.value,
+              Q23Other: e.target.value,
+            });
+          }}
+          className="form-select"
+          aria-label="Default select example"
+          name="Qs23_MainExportMarkets"
+          required
+        >
+          <option disabled selected>
+            Main Export Markets
+          </option>
+          <option value="westernEurope">Western Europe</option>
+          <option value="easternEurope">Eastern Europe</option>
+          <option value="northAmerica">North America</option>
+          <option value="southAmerica">South America</option>
+          <option value="asiaPacific">Asia Pacific</option>
+          <option value="africa">Africa </option>
+          <option value="middleEast">Middle East</option>
+          <option value="worldwide">Worldwide</option>
+          {exports.map((exp) => (
+            <option key={exp} value={exp}>
+              {exp}
+            </option>
+          ))}
+          <option value="other">Other</option>
+        </select>
+        {supplierData.Q23Other === "other" && (
+          <div className="input-group w-25 mt-2">
+            <input
+              onChange={(e) => {
+                setSupplierData({
+                  ...supplierData,
+                  Qs23_MainExportMarkets: e.target.value,
+                });
+              }}
+              type="text"
+              className="form-control w-25 rounded"
+              placeholder="Enter Custom Option"
+              aria-label="Enter text..."
+              aria-describedby="basic-addon2"
+              name="Qs23_MainExportMarkets"
+              required
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-primary ms-2"
+                type="button"
+                onClick={() => {
+                  if (
+                    supplierData.Qs23_MainExportMarkets.toLowerCase() !==
+                    "other"
+                  ) {
+                    setExports([supplierData.Qs23_MainExportMarkets]);
+                  }
+                }}
+              >
+                Add Country
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* Question 24 */}
+      <div className="field-sections">
+        <span>Q.24:&nbsp;&nbsp;</span>
+        <span>Trade Fair</span>
+        <span style={{ color: "red" }}>*</span>
         <br />
         <br />
         <label>
           <input
-            name="Qs85_EmpRequiredByStateYESNO"
+            name="Qs24_TradeFair"
             type="radio"
             value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
+            checked={supplierData.Qs24_TradeFair === "yes"}
             onChange={handleChange}
+            required
           />
           Yes
         </label>
@@ -26,29 +717,46 @@ const Supplier2 = () => {
           <input
             type="radio"
             value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
+            name="Qs24_TradeFair"
+            checked={supplierData.Qs24_TradeFair === "no"}
             onChange={handleChange}
+            required
           />
           No
         </label>
       </div>
-      {/* Question 66 */}
+      {/* Question  25*/}
       <div className="field-sections">
-        <span>Q.66:&nbsp;&nbsp;</span>
+        <span>Q.25:&nbsp;&nbsp;</span>
         <span>
-          Is the age of your workers also verified when the hiring process is
-          conducted by placement agencies?
+          Trade Fair Participation(Please separate by "/" incl. space, e.g.,
+          Trade Fair 1 / Trade Fair 2)
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs25_TradeFairParticipation" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+        />
+      </div>
+      {/* Question  26*/}
+      <div className="field-sections">
+        <span>Q.26:&nbsp;&nbsp;</span>
+        <span>
+          Show Room <span style={{ color: "red" }}>*</span>
         </span>
         <br />
         <br />
         <label>
           <input
-            name="Qs85_EmpRequiredByStateYESNO"
+            name="Qs26_ShowRoom"
             type="radio"
             value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
+            checked={supplierData.Qs26_ShowRoom === "yes"}
             onChange={handleChange}
+            required
           />
           Yes
         </label>
@@ -57,825 +765,373 @@ const Supplier2 = () => {
           <input
             type="radio"
             value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
+            name="Qs26_ShowRoom"
+            checked={supplierData.Qs26_ShowRoom === "no"}
             onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 67 */}
-      <div className="field-sections">
-        <span>Q.67:&nbsp;&nbsp;</span>
-        <span>Do you employ persons under the age of 18?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 68 */}
-      <div className="field-sections">
-        <span>Q.68:&nbsp;&nbsp;</span>
-        <span>Do you employ persons under the age of 15?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 69 */}
-      <div className="field-sections">
-        <span>Q.69:&nbsp;&nbsp;</span>
-        <span>
-          Are there work instructions for which work persons under 18 are not
-          allowed to be employed?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 70 */}
-      <div className="field-sections">
-        <span>Q.70:&nbsp;&nbsp;</span>
-        <span>
-          Do persons under the age of 18 perform work for you under water or
-          underground?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 71 */}
-      <div className="field-sections">
-        <span>Q.71:&nbsp;&nbsp;</span>
-        <span>
-          Do persons under the age of 18 perform work for you at dangerous
-          heights or in confined spaces?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 72 */}
-      <div className="field-sections">
-        <span>Q.72:&nbsp;&nbsp;</span>
-        <span>
-          Do persons under the age of 18 work with dangerous machinery,
-          equipment or tools?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 73 */}
-      <div className="field-sections">
-        <span>Q.73:&nbsp;&nbsp;</span>
-        <span>
-          Do people under 18 handle or transport heavy loads in your business?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 74 */}
-      <div className="field-sections">
-        <span>Q.74:&nbsp;&nbsp;</span>
-        <span>
-          Do persons under the age of 18 work with hazardous substances, agents
-          or processes?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 75 */}
-      <div className="field-sections">
-        <span>Q.75:&nbsp;&nbsp;</span>
-        <span>
-          Do persons under the age of 18 work in areas with harmful
-          temperatures, noise levels or vibrations?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 76 */}
-      <div className="field-sections">
-        <span>Q.76:&nbsp;&nbsp;</span>
-        <span>
-          Do persons under the age of 18 work in your company at night time?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 77 */}
-      <div className="field-sections">
-        <span>Q.77:&nbsp;&nbsp;</span>
-        <span>
-          Is there a predefined procedure if you suspect that one of your
-          suppliers is unlawfully employing children?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 78 */}
-      <div className="field-sections">
-        <span>Q.78:&nbsp;&nbsp;</span>
-        <span>
-          Are persons under the age of 18 in your company in debt bondage,
-          serfdom or forced or compulsory labor?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 79 */}
-      <div className="field-sections">
-        <span>Q.79:&nbsp;&nbsp;</span>
-        <span>
-          Is there any work in your company that is only performed when a
-          penalty is threatened (e.g. withholding wages)?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 80 */}
-      <div className="field-sections">
-        <span>Q.80:&nbsp;&nbsp;</span>
-        <span>
-          Do you retain the identification documents of your employees?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 81 */}
-      <div className="field-sections">
-        <span>Q.81:&nbsp;&nbsp;</span>
-        <span>
-          Do you retain originals or copies of identification documents?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 82 */}
-      <div className="field-sections">
-        <span>Q.82:&nbsp;&nbsp;</span>
-        <span>
-          Do you impose penalties on your employees (e.g. withholding of wages,
-          restriction of movement, withholding of identification documents,
-          special work)?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 83 */}
-      <div className="field-sections">
-        <span>Q.83:&nbsp;&nbsp;</span>
-        <span>
-          Do you have employees who are so deep in debt to you that it takes
-          them several years to pay off with their wages?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 84 */}
-      <div className="field-sections">
-        <span>Q.84:&nbsp;&nbsp;</span>
-        <span>
-          Is the weekly working time (including overtime) more than 60 hours or
-          more than 10 hours per day?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 86 */}
-      <div className="field-sections">
-        <span>Q.86:&nbsp;&nbsp;</span>
-        <span>
-          Is there a predefined procedure if you suspect that forced or slave
-          labor exists at one of your suppliers?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 87 */}
-      <div className="field-sections">
-        <span>Q.87:&nbsp;&nbsp;</span>
-        <span>
-          Does your company document the working hours and wages/remuneration of
-          its employees?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 88 */}
-      <div className="field-sections">
-        <span>Q.88:&nbsp;&nbsp;</span>
-        <span>
-          Does your company have a health and safety policy that is appropriate
-          for your company?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 89 */}
-      <div className="field-sections">
-        <span>Q.89:&nbsp;&nbsp;</span>
-        <span>
-          Does your organization have procedures in place to capture and assess
-          security risks and to correct identified vulnerabilities?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 90 */}
-      <div className="field-sections">
-        <span>Q.90:&nbsp;&nbsp;</span>
-        <span>
-          Does your operation work at high altitudes, in confined spaces, or
-          involve very high or low temperatures?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 91 */}
-      <div className="field-sections">
-        <span>Q.91:&nbsp;&nbsp;</span>
-        <span>
-          Do you work with hazardous chemical and biological substances?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>{" "}
-      {/* Question 92 */}
-      <div className="field-sections">
-        <span>Q.92:&nbsp;&nbsp;</span>
-        <span>
-          Does your company have instructions on the use of special safety
-          equipment (e.g. protective clothing)?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
+            required
           />
           No
         </label>
       </div>
-      {/* Question 93 */}
+      {/* Question  27*/}
       <div className="field-sections">
-        <span>Q.93:&nbsp;&nbsp;</span>
+        <span>Q.27:&nbsp;&nbsp;</span>
         <span>
-          Is there a person responsible in your company for the safe storage,
-          distribution and instruction regarding the safe handling of these
-          substances?
+          Delivery lead time for initial order (in working days){" "}
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="This value must be a number"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs27_DeliveryLeadTimeInitialOrder" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  28*/}
+      <div className="field-sections">
+        <span>Q.28:&nbsp;&nbsp;</span>
+        <span>
+          Delivery lead time for repeat orders (in working days)
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="This value must be a number"
+          type="number"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+          }}
+          pattern="[0-9]*"
+          name="Qs28_DeliveryLeadTimeRepeatOrder" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      <h3 className="supplier-heading">Bank Information</h3>
+      {/* Question  29*/}
+      <div className="field-sections">
+        <span>Q.29:&nbsp;&nbsp;</span>
+        <span>
+          Beneficiary Name<span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs29_BeneficiaryName" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  30*/}
+      <div className="field-sections">
+        <span>Q.30:&nbsp;&nbsp;</span>
+        <span>
+          Bank Name<span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs30_BankName" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  31*/}
+      <div className="field-sections">
+        <span>Q.31:&nbsp;&nbsp;</span>
+        <span>
+          Bank Address<span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs31_BankAddress" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  32*/}
+      <div className="field-sections">
+        <span>Q.32:&nbsp;&nbsp;</span>
+        <span>Country of Bank A/C</span>
+        <span style={{ color: "red" }}>*</span>
+        <select
+          value={supplierData.Qs32_CountryOfBankAC}
+          onChange={(e) => {
+            setSupplierData({
+              ...supplierData,
+              Qs32_CountryOfBankAC: e.target.value,
+              Q32Other: e.target.value,
+            });
+          }}
+          className="form-select"
+          aria-label="Default select example"
+          name="Qs32_CountryOfBankAC"
+          required
+        >
+          <option disabled selected>
+            Country of Bank Account
+          </option>
+          <option value="china">China</option>
+          <option value="germany">Germany</option>
+          <option value="hongkong">Hong Kong</option>
+          <option value="india">India</option>
+          <option value="taiwan">Taiwan</option>
+          <option value="vietnam">Vietnam</option>
+          {options32.map((option32) => (
+            <option key={option32} value={option32}>
+              {option32}
+            </option>
+          ))}
+          <option value="other">Other</option>
+        </select>
+        {supplierData.Q32Other === "other" && (
+          <div className="input-group w-25 mt-2">
+            <input
+              onChange={(e) => {
+                setSupplierData({
+                  ...supplierData,
+                  Qs32_CountryOfBankAC: e.target.value,
+                });
+              }}
+              type="text"
+              className="form-control w-25 rounded"
+              placeholder="Enter Custom Option"
+              aria-label="Enter text..."
+              name="Qs32_CountryOfBankAC"
+              aria-describedby="basic-addon2"
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-primary ms-2"
+                type="button"
+                onClick={() => {
+                  if (
+                    supplierData.Qs32_CountryOfBankAC.toLowerCase() !== "other"
+                  ) {
+                    setOptions32([supplierData.Qs32_CountryOfBankAC]);
+                  }
+                }}
+              >
+                Add Country Bank Account
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      {/* Question  33*/}
+      <div className="field-sections">
+        <span>Q.33:&nbsp;&nbsp;</span>
+        <span>Bank Phone</span>
+        <div className="form-group d-flex">
+          <select
+            className="form-control countryCode me-1"
+            id="countrySelect"
+            name="Qs33_BankPhone"
+          >
+            {countryCode.map((country) => (
+              <option key={country.code} value={country.dial_code}>
+                {country.dial_code + "    " + " "} &nbsp; &nbsp;&nbsp;
+                &nbsp;&nbsp; &nbsp;
+                {" " + country.name}
+              </option>
+            ))}
+          </select>
+          -
+          <input
+            name="Qs33_BankPhone"
+            placeholder="This value must be a number"
+            type="number"
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+            }}
+            pattern="[0-9]*"
+            onChange={handleChange}
+            class="form-control ms-1 phoneNumberInput"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          ></input>
+        </div>
+      </div>
+      {/* Question  34*/}
+      <div className="field-sections">
+        <span>Q.34:&nbsp;&nbsp;</span>
+        <span>Bank Regional Number</span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs34_BankRegionalNumber" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+        />
+      </div>
+      {/* Question  35*/}
+      <div className="field-sections">
+        <span>Q.35:&nbsp;&nbsp;</span>
+        <span>
+          SWIFT<span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs35_SWIFT" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  36*/}
+      <div className="field-sections">
+        <span>Q.36:&nbsp;&nbsp;</span>
+        <span>IBAN</span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs36_IBAN" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+        />
+      </div>
+      {/* Question  37*/}
+      <div className="field-sections">
+        <span>Q.37:&nbsp;&nbsp;</span>
+        <span>
+          Beneficiary Bank A/C Number
+          <span style={{ color: "red" }}>*</span>
+        </span>
+        <input
+          onChange={handleChange}
+          placeholder="Enter your answer"
+          type="text"
+          name="Qs37_BeneficiaryBankACNumber" // Add name attribute
+          className="mt-3 outline-none w-100"
+          id="name-text"
+          required
+        />
+      </div>
+      {/* Question  38*/}
+      <div className="field-sections">
+        <span>Q.38:&nbsp;&nbsp;</span>
+        <span>
+          Select to whom you place orders{" "}
+          <span style={{ color: "red" }}>*</span>
         </span>
         <br />
         <br />
         <label>
           <input
-            name="Qs85_EmpRequiredByStateYESNO"
             type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
+            name="Qs38a_HCompanyPCompany"
+            value="H Company"
+            checked={supplierData.Qs38a_HCompanyPCompany === "H Company"}
             onChange={handleChange}
           />
-          Yes
+          H Company
         </label>
-
         <label style={{ marginLeft: "1rem" }}>
           <input
             type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
+            name="Qs38a_HCompanyPCompany"
+            value="P Company"
+            checked={supplierData.Qs38a_HCompanyPCompany === "P Company"}
             onChange={handleChange}
           />
-          No
+          P Company
         </label>
+        <br />
+        <br />
+
+        <div>
+          {supplierData.Qs38a_HCompanyPCompany === "H Company" && (
+            <div className="field-sections">
+              <span>
+                Code of Conduct Signature and Upload{" "}
+                <span style={{ color: "red" }}>*</span>
+              </span>
+              <br />
+              <br />
+
+              <button onClick={handleDownload} className="downloadFile">
+                <FiDownload
+                  style={{
+                    margin: "0 5px 3px 0",
+                    fontSize: "16px",
+                  }}
+                />
+                DOWNLOAD FILE
+              </button>
+
+              <br />
+              <label className="file-input-button-upload">
+                <input
+                  type="file"
+                  accept="application/pdf,image/jpeg,image/png"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    const MAX_FILE_SIZE_MB = 10;
+                    const fileSizeMB = (
+                      e.target.files[0].size /
+                      1024 /
+                      1024
+                    ).toFixed(2);
+
+                    if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                      setFile(e.target.files[0]);
+                    } else {
+                      toast.error(`File size exceeds ${MAX_FILE_SIZE_MB}MB`, {
+                        position: toast.POSITION.TOP_CENTER,
+                      });
+                    }
+                  }}
+                />
+                <HiOutlineUpload
+                  style={{
+                    margin: "0 5px 3px 0",
+                    fontSize: "16px",
+                    display: file ? "none" : "inline-block",
+                  }}
+                />
+                <span className="file-input-button-label">
+                  {file ? `Uploaded file: ${file.name}` : "UPLOAD SIGNED FILE"}
+                </span>
+              </label>
+            </div>
+          )}
+        </div>
       </div>
-      {/* Question 94 */}
+      {/* Question  39  Choose radio button show 40 question*/}
       <div className="field-sections">
-        <span>Q.94:&nbsp;&nbsp;</span>
+        <span>Q.39:&nbsp;&nbsp;</span>
         <span>
-          Is there technical equipment for emergencies in your company and is it
-          regularly checked and maintained (e.g. fire extinguishing system)?
+          Does the Law on Corporate Due Diligence to Prevent Human Rights
+          Violations in Supply Chains (LkSG) apply to your company according to
+          § 1 LkSG?
         </span>
         <br />
         <br />
         <label>
           <input
-            name="Qs85_EmpRequiredByStateYESNO"
+            name="Qs39a_HumanRightsViolations"
             type="radio"
             value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
+            checked={supplierData.Qs39a_HumanRightsViolations === "yes"}
             onChange={handleChange}
           />
           Yes
@@ -885,899 +1141,95 @@ const Supplier2 = () => {
           <input
             type="radio"
             value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
+            name="Qs39a_HumanRightsViolations"
+            checked={supplierData.Qs39a_HumanRightsViolations === "no"}
             onChange={handleChange}
           />
           No
-        </label>
-      </div>
-      {/* Question 95 */}
-      <div className="field-sections">
-        <span>Q.95:&nbsp;&nbsp;</span>
-        <span>
-          Are there persons in your company who are specially trained to act in
-          emergencies (e.g. first aid training)?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
         </label>
 
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 96 */}
-      <div className="field-sections">
-        <span>Q.96:&nbsp;&nbsp;</span>
-        <span>
-          Does your company offer its employees the opportunity to provide
-          feedback and complaints to management?
-        </span>
         <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
 
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 97 */}
-      <div className="field-sections">
-        <span>Q.97:&nbsp;&nbsp;</span>
-        <span>
-          Are your employees regularly trained on the subject of occupational
-          safety, especially when they are hired?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
+        <div>
+          {supplierData.Qs39a_HumanRightsViolations === "yes" && (
+            <div className="field-sections">
+              <br />
+              <label className="file-input-button-upload">
+                <input
+                  type="file"
+                  accept="application/pdf,image/jpeg,image/png"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    const MAX_FILE_SIZE_MB = 10;
+                    const fileSizeMB = (
+                      e.target.files[0].size /
+                      1024 /
+                      1024
+                    ).toFixed(2);
 
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 98 */}
-      <div className="field-sections">
-        <span>Q.98:&nbsp;&nbsp;</span>
-        <span>Are your employees organized in a union?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
+                    if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                      setDilligenceFile(e.target.files[0]);
+                    } else {
+                      toast.error(`File size exceeds ${MAX_FILE_SIZE_MB}MB`, {
+                        position: toast.POSITION.TOP_CENTER,
+                      });
+                    }
+                  }}
+                />
+                <HiOutlineUpload
+                  style={{
+                    margin: "0 5px 3px 0",
+                    fontSize: "16px",
+                    display: dilligenceFile ? "none" : "inline-block",
+                  }}
+                />
+                <span className="file-input-button-label">
+                  {dilligenceFile
+                    ? `Uploaded file: ${dilligenceFile.name}`
+                    : "UPLOAD DOCUMENT"}
+                </span>
+              </label>
+              <br />
+              {/* Question 40 */}
+              <div className="field-sections">
+                <span>Q.40:&nbsp;&nbsp;</span>
+                <span>
+                  Can you confirm that your company fulfils the due diligence
+                  obligations contained in § 3 paragraph 1 sentence 2 LkSG?
+                </span>
+                <br />
+                <br />
+                <label>
+                  <input
+                    name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
+                    type="radio"
+                    value="yes"
+                    checked={
+                      supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
+                      "yes"
+                    }
+                    onChange={handleChange}
+                  />
+                  Yes
+                </label>
 
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 99 */}
-      <div className="field-sections">
-        <span>Q.99:&nbsp;&nbsp;</span>
-        <span>
-          Are there bonuses or other benefits, if employees are not members of a
-          union or leave a union?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 100 */}
-      <div className="field-sections">
-        <span>Q.100:&nbsp;&nbsp;</span>
-        <span>
-          Are employees hired or assigned to specific tasks based on national or
-          ethnic origin, social origin, health status, disability, sexual
-          orientation, age, gender, political opinion, religion or belief?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 101 */}
-      <div className="field-sections">
-        <span>Q.101:&nbsp;&nbsp;</span>
-        <span>
-          Are workers unfairly paid differently for the same work for the
-          reasons mentioned above?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 102 */}
-      <div className="field-sections">
-        <span>Q.102:&nbsp;&nbsp;</span>
-        <span>
-          Is there a statutory minimum wage in the country/countries where you
-          work?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 103 */}
-      <div className="field-sections">
-        <span>Q.103:&nbsp;&nbsp;</span>
-        <span>Do you pay the respective statutory minimum wage or more?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 104 */}
-      <div className="field-sections">
-        <span>Q.104:&nbsp;&nbsp;</span>
-        <span>
-          Do you pay at least a wage that is in line with the general wage level
-          in your industry?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 105 */}
-      <div className="field-sections">
-        <span>Q.105:&nbsp;&nbsp;</span>
-        <span>
-          Is the wage reduced for benefits provided by your company to the
-          employee (e.g. for work clothing, meals, accommodation)?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 106 */}
-      <div className="field-sections">
-        <span>Q.106:&nbsp;&nbsp;</span>
-        <span>
-          Within the last 20 years, has your company acquired land that was
-          occupied immediately prior to acquisition?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 107 */}
-      <div className="field-sections">
-        <span>Q.107:&nbsp;&nbsp;</span>
-        <span>
-          Can you confirm that the land owned or held by your company has not
-          been misappropriated?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 108 */}
-      <div className="field-sections">
-        <span>Q.108:&nbsp;&nbsp;</span>
-        <span>
-          Have you acquired any forest land or water bodies in the last 20 years
-          that were not previously used for commercial purposes?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 109 */}
-      <div className="field-sections">
-        <span>Q.109:&nbsp;&nbsp;</span>
-        <span>Do you employ security personnel in your company?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 110 */}
-      <div className="field-sections">
-        <span>Q.110:&nbsp;&nbsp;</span>
-        <span>
-          Are security personnel tasked with monitoring their workers beyond
-          entry and exit checks?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 111 */}
-      <div className="field-sections">
-        <span>Q.111:&nbsp;&nbsp;</span>
-        <span>
-          Has your company defined characteristics/criteria against which
-          relevant environmental impacts can be monitored? (e.g. measurement and
-          monitoring of CO₂ emissions; water consumption)
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 112 */}
-      <div className="field-sections">
-        <span>Q.112:&nbsp;&nbsp;</span>
-        <span>
-          Have there been any legal proceedings against your company for
-          environmental pollution or similar in the last 5 years?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 113 */}
-      <div className="field-sections">
-        <span>Q.113:&nbsp;&nbsp;</span>
-        <span>
-          Are there work instructions and organizational precautions to minimize
-          emissions to air, soil and water?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 114 */}
-      <div className="field-sections">
-        <span>Q.114:&nbsp;&nbsp;</span>
-        <span>
-          Does your company have instructions and procedures on how to proceed
-          in case of violation of environmental regulations?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 115 */}
-      <div className="field-sections">
-        <span>Q.115:&nbsp;&nbsp;</span>
-        <span>
-          Does your company publish a report on environmental goals and
-          progress?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 116 */}
-      <div className="field-sections">
-        <span>Q.116:&nbsp;&nbsp;</span>
-        <span>
-          Does your business generate hazardous waste or does your company work
-          with radioactive substances?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 117 */}
-      <div className="field-sections">
-        <span>Q.117:&nbsp;&nbsp;</span>
-        <span>Do you work with an external disposal service provider?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 118 */}
-      <div className="field-sections">
-        <span>Q.118:&nbsp;&nbsp;</span>
-        <span>
-          Is the export of hazardous waste documented in your company?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 119 */}
-      <div className="field-sections">
-        <span>Q.119:&nbsp;&nbsp;</span>
-        <span>
-          Can you confirm that your company acts in accordance with the Basel
-          Convention on the Control of Transboundary Movements of Hazardous
-          Wastes and their Disposal?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 120 */}
-      <div className="field-sections">
-        <span>Q.120:&nbsp;&nbsp;</span>
-        <span>Do you use persistent organic pollutants?</span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 121 */}
-      <div className="field-sections">
-        <span>Q.121:&nbsp;&nbsp;</span>
-        <span>
-          Can you confirm that your company acts in accordance with the
-          Stockholm Convention on Persistent Organic Pollutants (POPs)?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 124 */}
-      <div className="field-sections">
-        <span>Q.124:&nbsp;&nbsp;</span>
-        <span>
-          Do you produce mercury in your company or do you use mercury or
-          products containing mercury or do you treat mercury waste?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
-      </div>
-      {/* Question 125 */}
-      <div className="field-sections">
-        <span>Q.125:&nbsp;&nbsp;</span>
-        <span>
-          Can you assure that your company operates in accordance with the
-          Minamata Convention on the Control of Emissions and Releases of the
-          Heavy Metal Mercury?
-        </span>
-        <br />
-        <br />
-        <label>
-          <input
-            name="Qs85_EmpRequiredByStateYESNO"
-            type="radio"
-            value="yes"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "yes"}
-            onChange={handleChange}
-          />
-          Yes
-        </label>
-
-        <label style={{ marginLeft: "1rem" }}>
-          <input
-            type="radio"
-            value="no"
-            name="Qs85_EmpRequiredByStateYESNO"
-            checked={supplierData.Qs85_EmpRequiredByStateYESNO === "no"}
-            onChange={handleChange}
-          />
-          No
-        </label>
+                <label style={{ marginLeft: "1rem" }}>
+                  <input
+                    type="radio"
+                    value="no"
+                    name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
+                    checked={
+                      supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
+                      "no"
+                    }
+                    onChange={handleChange}
+                  />
+                  No
+                </label>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

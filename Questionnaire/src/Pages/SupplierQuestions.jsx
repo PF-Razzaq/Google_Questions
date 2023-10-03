@@ -12,7 +12,18 @@ let otherCountry;
 let recordId = 0;
 const SupplierQuestions = () => {
   console.log("supplierJson", supplierJson);
-  console.log(process.env.REACT_APP_DOWNLOAD_FILE);
+  //   REACT_APP_FM_URL=https://server.pascalinesoft.com:4443
+  // REACT_APP_BUILD_URL=apiuser
+  // REACT_APP_PUBLIC_URL=apiuser
+  // REACT_APP_USERNAME=apiuser
+  // REACT_APP_PASSWORD=TomJerry88
+  // REACT_APP_DOWNLOAD_FILE=https://images.pascalinesoft.com/pdf/OnlineQuestionnairePhase1.pdf
+  console.log(
+    "process.env.REACT_APP_DOWNLOAD_FILE,process.env.REACT_APP_FM_URL,process.env.REACT_APP_USERNAME",
+    process.env.REACT_APP_DOWNLOAD_FILE,
+    process.env.REACT_APP_FM_URL,
+    process.env.REACT_APP_USERNAME
+  );
   const handleDownload = () => {
     console.log("handleDownload");
     // Replace 'file_url' with the actual URL of the file you want to download.
@@ -63,7 +74,7 @@ const SupplierQuestions = () => {
   const [issuedDINENISO45001Evidence, setIssuedDINENISO45001Evidence] =
     useState();
   const navigate = useNavigate();
-  const [supplierData, setSupplierData] = useState({});
+  const [supplierData, setSupplierData] = useState({ isChecked: false });
 
   const [selectedOption, setSelectedOption] = useState("");
   const [customOption, setCustomOption] = useState("");
@@ -124,7 +135,7 @@ const SupplierQuestions = () => {
     if (localStorage.getItem("filemakerToken")) {
       try {
         const response = await axios.post(
-          "${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records",
+          `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records`,
 
           { fieldData: supplierData },
           {
@@ -151,6 +162,22 @@ const SupplierQuestions = () => {
         );
         uploadSignedDocument();
         uploadDueDilligenceDocument();
+        issuedFairLaborEvidenceUpload();
+        issuedFairStoneEvidenceUpload();
+        issuedGlobalOrganicTextileEvidenceUpload();
+        issuedGrunerKnopfEvidenceUpload();
+        issuedIGEPEvidenceUpload();
+        issuedOEKOTEXGreenEvidenceUpload();
+        issuedSMETASedexEvidenceUpload();
+        issuedSocialAccountabilitySA8000Upload();
+        issuedXertifixStandardEvidenceUpload();
+        issuedXertifixStandardEvidenceUpload();
+        issuedXertifixPlusEvidenceUpload();
+        issuedDINENISO14001EvidenceUpload();
+        issuedGrunerKnopfEvidence1Upload();
+        issuedAMFORIBEPIEvidenceUpload();
+        issuedIGEP2020AuditEvidenceUpload();
+        issuedDINENISO45001EvidenceUpload();
       } catch (error) {
         // Handle errors here
         console.error("Error fetching data:", error);
@@ -161,7 +188,7 @@ const SupplierQuestions = () => {
     const upload = new FormData();
     upload.append("upload", file);
     console.log("formData contents:", upload);
-    if (localStorage.getItem("filemakerToken")) {
+    if (localStorage.getItem("filemakerToken") && file) {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs38b_SignatureUpload/1`,
@@ -186,29 +213,334 @@ const SupplierQuestions = () => {
   const uploadDueDilligenceDocument = async (token) => {
     const upload = new FormData();
     upload.append("upload", dilligenceFile);
-    console.log("uploadDueDilligenceDocument contents:", upload);
-    if (localStorage.getItem("filemakerToken")) {
+    if (localStorage.getItem("filemakerToken") && dilligenceFile) {
       try {
         const response = await axios.post(
           `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs39b_HumanRightsViolations/1`,
           upload,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`, // Add the Bearer token here
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
               "Content-Type": "multipart/form-data",
             },
           }
         );
-
-        // Handle the response data as needed
-        const data = response.data;
-        console.log("postDataWithToken", data);
       } catch (error) {
-        // Handle errors here
         console.error("Error fetching data:", error);
       }
     }
   };
+  const issuedFairLaborEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedFairLaborEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedFairLaborEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs45b_IssuedFairLaborEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedFairStoneEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedFairStoneEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedFairStoneEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs47b_IssuedGlobalOrganicTextileEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedGlobalOrganicTextileEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedGlobalOrganicTextileEvidence);
+    if (
+      localStorage.getItem("filemakerToken") &&
+      issuedGlobalOrganicTextileEvidence
+    ) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs47b_IssuedGlobalOrganicTextileEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedGrunerKnopfEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedGrunerKnopfEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedGrunerKnopfEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs48b_IssuedGrunerKnopfEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedIGEPEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedIGEPEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedIGEPEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs49b_IssuedIGEPEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedOEKOTEXGreenEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedOEKOTEXGreenEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedOEKOTEXGreenEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs50b_IssuedOEKOTEXGreenEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedSMETASedexEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedSMETASedexEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedSMETASedexEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs51b_IssuedSMETASedexEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedSocialAccountabilitySA8000Upload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedSocialAccountabilitySA8000);
+    if (
+      localStorage.getItem("filemakerToken") &&
+      issuedSocialAccountabilitySA8000
+    ) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs52b_IssuedSocialAccountabilitySA8000/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedXertifixStandardEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedXertifixStandardEvidence);
+    if (
+      localStorage.getItem("filemakerToken") &&
+      issuedXertifixStandardEvidence
+    ) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs53b_IssuedXertifixStandardEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedXertifixPlusEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedXertifixPlusEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedXertifixPlusEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs54b_IssuedXertifixPlusEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedDINENISO14001EvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedDINENISO14001Evidence);
+    if (localStorage.getItem("filemakerToken") && issuedDINENISO14001Evidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs56b_IssuedDINENISO14001Evidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedGrunerKnopfEvidence1Upload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedGrunerKnopfEvidence1);
+    if (localStorage.getItem("filemakerToken") && issuedGrunerKnopfEvidence1) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs57b_IssuedGrunerKnopfEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+
+  const issuedAMFORIBEPIEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedAMFORIBEPIEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedAMFORIBEPIEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs55b_IssuedAMFORIBEPIEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedIGEP2020AuditEvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedIGEP2020AuditEvidence);
+    if (localStorage.getItem("filemakerToken") && issuedIGEP2020AuditEvidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs58b_IssuedIGEP2020AuditEvidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  const issuedDINENISO45001EvidenceUpload = async (token) => {
+    const upload = new FormData();
+    upload.append("upload", issuedDINENISO45001Evidence);
+    if (localStorage.getItem("filemakerToken") && issuedDINENISO45001Evidence) {
+      try {
+        const response = await axios.post(
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs59b_IssuedDINENISO45001Evidence/1`,
+          upload,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+
   const handleCustomOptionChange = (event) => {
     setCustomOption(event.target.value);
   };
@@ -221,7 +553,9 @@ const SupplierQuestions = () => {
     });
   };
   console.log("supplierData3", supplierData);
-  const handleSubmitButton = () => {};
+  const handleSubmitButton = () => {
+    connectToDatabase();
+  };
   return (
     <>
       <div className="container">
@@ -5194,13 +5528,30 @@ const SupplierQuestions = () => {
                       />
                       No
                     </label>
+                    <br />
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={supplierData.isChecked}
+                        onChange={(e) => {
+                          setSupplierData({
+                            ...supplierData,
+                            isChecked: e.target.checked,
+                          });
+                        }}
+                      />
+                      I agree to terms and conditions
+                    </label>
                   </div>
                 </div>{" "}
                 <button
                   id="submitBTN"
-                  onClick={handleSubmitButton}
                   type="submit"
+                  disabled={!supplierData.isChecked}
                   className="submit-btn"
+                  style={{
+                    background: supplierData.isChecked ? "#fec106" : "grey",
+                  }}
                 >
                   Submit
                 </button>
