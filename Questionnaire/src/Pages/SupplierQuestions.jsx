@@ -565,9 +565,12 @@ const SupplierQuestions = () => {
               <form onSubmit={connectToDatabase}>
                 {/* Question 1 */}
                 <div className="field-sections">
-                  <span>Q.1:&nbsp;&nbsp;</span>
                   <span>
-                    Supplier Name <span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "1").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "1").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -581,9 +584,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 2 */}
                 <div className="field-sections">
-                  <span>Q.2:&nbsp;&nbsp;</span>
                   <span>
-                    Supplier Business License Number
+                    Q.{supplierJson.find((f) => f.id === "2").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "2").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -602,9 +607,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 3 */}
                 <div className="field-sections">
-                  <span>Q.3:&nbsp;&nbsp;</span>
                   <span>
-                    Supplier Export License Number{" "}
+                    Q.{supplierJson.find((f) => f.id === "3").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "3").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -623,9 +630,12 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 4 */}
                 <div className="field-sections">
-                  <span>Q.4:&nbsp;&nbsp;</span>
                   <span>
-                    Supplier VAT Number <span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "4").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "4").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -646,7 +656,8 @@ const SupplierQuestions = () => {
                 <div className="field-sections">
                   <span>Q.5:&nbsp;&nbsp;</span>
                   <span>
-                    Building <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "5a").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -660,7 +671,8 @@ const SupplierQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    Street <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "5b").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -676,7 +688,8 @@ const SupplierQuestions = () => {
                 <div className="field-sections">
                   <span>Q.6:&nbsp;&nbsp;</span>
                   <span>
-                    Town <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "6a").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -690,7 +703,8 @@ const SupplierQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    City <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "6b").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -704,7 +718,8 @@ const SupplierQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    Province <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "6c").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -718,8 +733,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  7*/}
                 <div className="field-sections">
-                  <span>Q.7:&nbsp;&nbsp;</span>
-                  <span>Post Code</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "7").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "7").q}</span>
 
                   <input
                     onChange={handleChange}
@@ -732,8 +749,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  8*/}
                 <div className="field-sections">
-                  <span>Q.8:&nbsp;&nbsp;</span>
-                  <span>Country</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "8").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "8").q}</span>
                   <select
                     value={supplierData.Qs8_Country}
                     onChange={(e) => {
@@ -786,7 +805,9 @@ const SupplierQuestions = () => {
                             if (
                               supplierData.Qs8_Country.toLowerCase() !== "other"
                             ) {
-                              setOptions([supplierData.Qs8_Country]);
+                              setOptions([
+                                supplierData.Qs8_Country.toUpperCase(),
+                              ]);
                             }
                           }}
                         >
@@ -801,7 +822,8 @@ const SupplierQuestions = () => {
                 <div className="field-sections">
                   <span>Q.9:&nbsp;&nbsp;</span>
                   <span>
-                    Phone <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "9a").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <div className="form-group d-flex">
                     <select
@@ -834,7 +856,8 @@ const SupplierQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    Cell Phone <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "9b").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <div className="form-group d-flex">
                     <select
@@ -867,9 +890,12 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  10*/}
                 <div className="field-sections">
-                  <span>Q.10:&nbsp;&nbsp;</span>
                   <span>
-                    Email <span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "10").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "10").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -883,8 +909,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  11*/}
                 <div className="field-sections">
-                  <span>Q.11:&nbsp;&nbsp;</span>
-                  <span>Website</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "11").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "11").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -897,7 +925,9 @@ const SupplierQuestions = () => {
                 <h3 className="supplier-heading">Contact Person</h3>
                 {/* Question  12*/}
                 <div>
+                  <span>Q.12:&nbsp;&nbsp;</span>
                   <select
+                    style={{ display: "inline-block" }}
                     className="form-select"
                     aria-label="Default select example"
                     onChange={(e) => {
@@ -909,7 +939,7 @@ const SupplierQuestions = () => {
                     name="Qs12a_salutation"
                   >
                     <option disabled selected>
-                      Salutation
+                      {supplierJson.find((f) => f.id === "12a").q}
                     </option>
                     <option value="mr">Mr.</option>
                     <option value="ms">Ms.</option>
@@ -917,7 +947,8 @@ const SupplierQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    First Name <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "12b").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -931,7 +962,8 @@ const SupplierQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    Last Name <span style={{ color: "red" }}>*</span>
+                    {supplierJson.find((f) => f.id === "12c").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -945,9 +977,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  13*/}
                 <div className="field-sections">
-                  <span>Q.13:&nbsp;&nbsp;</span>
                   <span>
-                    Contact Person Position{" "}
+                    Q.{supplierJson.find((f) => f.id === "13").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "13").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -963,9 +997,11 @@ const SupplierQuestions = () => {
                 <h3 className="supplier-heading">Supplier Information</h3>
                 {/* Question  14*/}
                 <div className="field-sections">
-                  <span>Q.14:&nbsp;&nbsp;</span>
                   <span>
-                    Year of Establishment{" "}
+                    Q.{supplierJson.find((f) => f.id === "14").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "14").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -985,9 +1021,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  15*/}
                 <div className="field-sections">
-                  <span>Q.15:&nbsp;&nbsp;</span>
                   <span>
-                    Total Number of Employees{" "}
+                    Q.{supplierJson.find((f) => f.id === "15").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "15").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1005,8 +1043,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  16*/}
                 <div className="field-sections">
-                  <span>Q.16:&nbsp;&nbsp;</span>
-                  <span>Ownership</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "16").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "16").q}</span>
+                  <span style={{ color: "red" }}>*</span>
                   <select
                     value={supplierData.Qs16_Ownership}
                     onChange={(e) => {
@@ -1062,7 +1103,9 @@ const SupplierQuestions = () => {
                               supplierData.Qs16_Ownership.toLowerCase() !==
                               "other"
                             ) {
-                              setOwnerships([supplierData.Qs16_Ownership]);
+                              setOwnerships([
+                                supplierData.Qs16_Ownership.toUpperCase(),
+                              ]);
                             }
                           }}
                         >
@@ -1074,8 +1117,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  17*/}
                 <div className="field-sections">
-                  <span>Q.17:&nbsp;&nbsp;</span>
-                  <span>Business Category</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "17").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "17").q}</span>
                   <select
                     value={supplierData.Qs17_BusinessCategory}
                     onChange={(e) => {
@@ -1099,10 +1144,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  18*/}
                 <div className="field-sections">
-                  <span>Q.18:&nbsp;&nbsp;</span>
                   <span>
-                    Main Products(Please separate by "/" incl. space, e.g.,
-                    product 1 / product 2){" "}
+                    Q.{supplierJson.find((f) => f.id === "18").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "18").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1117,9 +1163,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  19*/}
                 <div className="field-sections">
-                  <span>Q.19:&nbsp;&nbsp;</span>
                   <span>
-                    Sales per Year / Domestic / (Mio USD){" "}
+                    Q.{supplierJson.find((f) => f.id === "19").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "19").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1138,9 +1186,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  20*/}
                 <div className="field-sections">
-                  <span>Q.20:&nbsp;&nbsp;</span>
                   <span>
-                    Sales per Year / Export / (Mio USD)
+                    Q.{supplierJson.find((f) => f.id === "20").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "20").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1159,10 +1209,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  21*/}
                 <div className="field-sections">
-                  <span>Q.21:&nbsp;&nbsp;</span>
                   <span>
-                    Main Customers and Country(Please separate by "/" incl.
-                    space, e.g., Company 1 - Country 1 / Company 2 - Country 2)
+                    Q.{supplierJson.find((f) => f.id === "21").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "21").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1177,10 +1228,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  22*/}
                 <div className="field-sections">
-                  <span>Q.22:&nbsp;&nbsp;</span>
                   <span>
-                    Main Customer Products(Please separate by "/" incl. space,
-                    e.g., product 1 / product 2)
+                    Q.{supplierJson.find((f) => f.id === "22").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "22").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1195,8 +1247,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  23*/}
                 <div className="field-sections">
-                  <span>Q.23:&nbsp;&nbsp;</span>
-                  <span>Main Export Markets</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "23").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "23").q}</span>
                   <span style={{ color: "red" }}>*</span>
 
                   <select
@@ -1257,7 +1311,9 @@ const SupplierQuestions = () => {
                               supplierData.Qs23_MainExportMarkets.toLowerCase() !==
                               "other"
                             ) {
-                              setExports([supplierData.Qs23_MainExportMarkets]);
+                              setExports([
+                                supplierData.Qs23_MainExportMarkets.toUpperCase(),
+                              ]);
                             }
                           }}
                         >
@@ -1269,8 +1325,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 24 */}
                 <div className="field-sections">
-                  <span>Q.24:&nbsp;&nbsp;</span>
-                  <span>Trade Fair</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "24").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "24").q}</span>
                   <span style={{ color: "red" }}>*</span>
                   <br />
                   <br />
@@ -1300,11 +1358,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  25*/}
                 <div className="field-sections">
-                  <span>Q.25:&nbsp;&nbsp;</span>
                   <span>
-                    Trade Fair Participation(Please separate by "/" incl. space,
-                    e.g., Trade Fair 1 / Trade Fair 2)
+                    Q.{supplierJson.find((f) => f.id === "25").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "25").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -1316,9 +1373,12 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  26*/}
                 <div className="field-sections">
-                  <span>Q.26:&nbsp;&nbsp;</span>
                   <span>
-                    Show Room <span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "26").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "26").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
                   <br />
@@ -1348,9 +1408,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  27*/}
                 <div className="field-sections">
-                  <span>Q.27:&nbsp;&nbsp;</span>
                   <span>
-                    Delivery lead time for initial order (in working days){" "}
+                    Q.{supplierJson.find((f) => f.id === "27").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "27").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1369,9 +1431,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  28*/}
                 <div className="field-sections">
-                  <span>Q.28:&nbsp;&nbsp;</span>
                   <span>
-                    Delivery lead time for repeat orders (in working days)
+                    Q.{supplierJson.find((f) => f.id === "28").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "28").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1391,9 +1455,12 @@ const SupplierQuestions = () => {
                 <h3 className="supplier-heading">Bank Information</h3>
                 {/* Question  29*/}
                 <div className="field-sections">
-                  <span>Q.29:&nbsp;&nbsp;</span>
                   <span>
-                    Beneficiary Name<span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "29").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "29").q}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -1407,9 +1474,12 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  30*/}
                 <div className="field-sections">
-                  <span>Q.30:&nbsp;&nbsp;</span>
                   <span>
-                    Bank Name<span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "30").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "30").q}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -1423,9 +1493,12 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  31*/}
                 <div className="field-sections">
-                  <span>Q.31:&nbsp;&nbsp;</span>
                   <span>
-                    Bank Address<span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "31").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "31").q}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -1439,8 +1512,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  32*/}
                 <div className="field-sections">
-                  <span>Q.32:&nbsp;&nbsp;</span>
-                  <span>Country of Bank A/C</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "32").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "32").q}</span>
                   <span style={{ color: "red" }}>*</span>
                   <select
                     value={supplierData.Qs32_CountryOfBankAC}
@@ -1497,7 +1572,9 @@ const SupplierQuestions = () => {
                               supplierData.Qs32_CountryOfBankAC.toLowerCase() !==
                               "other"
                             ) {
-                              setOptions32([supplierData.Qs32_CountryOfBankAC]);
+                              setOptions32([
+                                supplierData.Qs32_CountryOfBankAC.toUpperCase(),
+                              ]);
                             }
                           }}
                         >
@@ -1509,8 +1586,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  33*/}
                 <div className="field-sections">
-                  <span>Q.33:&nbsp;&nbsp;</span>
-                  <span>Bank Phone</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "33").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "33").q}</span>
                   <div className="form-group d-flex">
                     <select
                       className="form-control countryCode me-1"
@@ -1543,8 +1622,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  34*/}
                 <div className="field-sections">
-                  <span>Q.34:&nbsp;&nbsp;</span>
-                  <span>Bank Regional Number</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "34").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "34").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -1556,9 +1637,12 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  35*/}
                 <div className="field-sections">
-                  <span>Q.35:&nbsp;&nbsp;</span>
                   <span>
-                    SWIFT<span style={{ color: "red" }}>*</span>
+                    Q.{supplierJson.find((f) => f.id === "35").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "35").q}
+                    <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
@@ -1572,8 +1656,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  36*/}
                 <div className="field-sections">
-                  <span>Q.36:&nbsp;&nbsp;</span>
-                  <span>IBAN</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "36").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "36").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -1585,9 +1671,11 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  37*/}
                 <div className="field-sections">
-                  <span>Q.37:&nbsp;&nbsp;</span>
                   <span>
-                    Beneficiary Bank A/C Number
+                    Q.{supplierJson.find((f) => f.id === "37").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "37").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1604,7 +1692,7 @@ const SupplierQuestions = () => {
                 <div className="field-sections">
                   <span>Q.38:&nbsp;&nbsp;</span>
                   <span>
-                    Select to whom you place orders{" "}
+                    {supplierJson.find((f) => f.id === "38a").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
@@ -1640,7 +1728,7 @@ const SupplierQuestions = () => {
                     {supplierData.Qs38a_HCompanyPCompany === "H Company" && (
                       <div className="field-sections">
                         <span>
-                          Code of Conduct Signature and Upload{" "}
+                          {supplierJson.find((f) => f.id === "38b").q}{" "}
                           <span style={{ color: "red" }}>*</span>
                         </span>
                         <br />
@@ -1704,12 +1792,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  39  Choose radio button show 40 question*/}
                 <div className="field-sections">
-                  <span>Q.39:&nbsp;&nbsp;</span>
                   <span>
-                    Does the Law on Corporate Due Diligence to Prevent Human
-                    Rights Violations in Supply Chains (LkSG) apply to your
-                    company according to § 1 LkSG?
+                    Q.{supplierJson.find((f) => f.id === "39").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "39").q}</span>
                   <br />
                   <br />
                   <label>
@@ -1747,6 +1833,7 @@ const SupplierQuestions = () => {
                         <label className="file-input-button-upload">
                           <input
                             type="file"
+                            name="Qs39b_HumanRightsViolations"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
@@ -1785,11 +1872,12 @@ const SupplierQuestions = () => {
                         <br />
                         {/* Question 40 */}
                         <div className="field-sections">
-                          <span>Q.40:&nbsp;&nbsp;</span>
                           <span>
-                            Can you confirm that your company fulfils the due
-                            diligence obligations contained in § 3 paragraph 1
-                            sentence 2 LkSG?
+                            Q.{supplierJson.find((f) => f.id === "40").id}
+                            :&nbsp;&nbsp;
+                          </span>
+                          <span>
+                            {supplierJson.find((f) => f.id === "40").q}
                           </span>
                           <br />
                           <br />
@@ -1827,11 +1915,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  45*/}
                 <div className="field-sections">
-                  <span>Q.45:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "Fair Labor Accreditation"
-                    evidence?
+                    Q.{supplierJson.find((f) => f.id === "45").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "45").q}</span>
                   <br />
                   <br />
                   <label>
@@ -1914,8 +2001,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  46*/}
                 <div className="field-sections">
-                  <span>Q.46:&nbsp;&nbsp;</span>
-                  <span>Have you been issued the "Fair Stone" evidence?</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "46").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "46").q}</span>
                   <br />
                   <br />
                   <label>
@@ -1998,11 +2087,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  47*/}
                 <div className="field-sections">
-                  <span>Q.47:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "Global Organic Textile Standard"
-                    evidence?
+                    Q.{supplierJson.find((f) => f.id === "47").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "47").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2090,8 +2178,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  48*/}
                 <div className="field-sections">
-                  <span>Q.48:&nbsp;&nbsp;</span>
-                  <span>Have you been issued the "Grüner Knopf" evidence?</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "48").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "48").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2174,8 +2264,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  49*/}
                 <div className="field-sections">
-                  <span>Q.49:&nbsp;&nbsp;</span>
-                  <span>Have you been issued the "IGEP" evidence?</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "49").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "49").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2254,10 +2346,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  50*/}
                 <div className="field-sections">
-                  <span>Q.50:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "OEKO-TEX® MADE IN GREEN" evidence?
+                    Q.{supplierJson.find((f) => f.id === "50").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "50").q} </span>
                   <br />
                   <br />
                   <label>
@@ -2343,10 +2435,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  51*/}
                 <div className="field-sections">
-                  <span>Q.51:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "SMETA (Sedex)" evidence?
+                    Q.{supplierJson.find((f) => f.id === "51").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "51").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2429,11 +2521,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  52*/}
                 <div className="field-sections">
-                  <span>Q.52:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "Social Accountability
-                    International - SA8000" evidence?
+                    Q.{supplierJson.find((f) => f.id === "52").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "52").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2521,10 +2612,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  53*/}
                 <div className="field-sections">
-                  <span>Q.53:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "XertifiX Standard" evidence?
+                    Q.{supplierJson.find((f) => f.id === "53").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "53").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2612,10 +2703,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  54*/}
                 <div className="field-sections">
-                  <span>Q.54:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "XertifiX PLUS" evidence?
+                    Q.{supplierJson.find((f) => f.id === "54").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "54").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2701,11 +2792,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  55*/}
                 <div className="field-sections">
-                  <span>Q.55:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "AMFORI BEPI (Level 1, 2, 3)"
-                    evidence?
+                    Q.{supplierJson.find((f) => f.id === "55").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "55").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2788,10 +2878,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  56*/}
                 <div className="field-sections">
-                  <span>Q.56:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "DIN EN ISO 14001" evidence?
+                    Q.{supplierJson.find((f) => f.id === "56").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "56").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2877,8 +2967,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  57*/}
                 <div className="field-sections">
-                  <span>Q.57:&nbsp;&nbsp;</span>
-                  <span>Have you been issued the "Grüner Knopf" evidence?</span>
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "57").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "57").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2963,10 +3055,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  58*/}
                 <div className="field-sections">
-                  <span>Q.58:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "IGEP (ISES 2020 Audit)" evidence?
+                    Q.{supplierJson.find((f) => f.id === "58").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "58").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3052,10 +3144,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question  59*/}
                 <div className="field-sections">
-                  <span>Q.59:&nbsp;&nbsp;</span>
                   <span>
-                    Have you been issued the "DIN EN ISO 45001" evidence?
+                    Q.{supplierJson.find((f) => f.id === "59").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "59").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3141,11 +3233,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 60 */}
                 <div className="field-sections">
-                  <span>Q.60:&nbsp;&nbsp;</span>
                   <span>
-                    Do you contractually obligate your direct suppliers to
-                    comply with national environmental laws?
+                    Q.{supplierJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "60").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3178,11 +3269,10 @@ const SupplierQuestions = () => {
                 </div>{" "}
                 {/* Question 61 */}
                 <div className="field-sections">
-                  <span>Q.61:&nbsp;&nbsp;</span>
                   <span>
-                    Do you require your direct suppliers to respect human
-                    rights?
+                    Q.{supplierJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "61").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3215,11 +3305,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 62 */}
                 <div className="field-sections">
-                  <span>Q.62:&nbsp;&nbsp;</span>
                   <span>
-                    Do you carry out an annual or event-related risk analysis in
-                    your company?
+                    Q.{supplierJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "62").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3252,11 +3341,10 @@ const SupplierQuestions = () => {
                 </div>
                 {/* Question 63 */}
                 <div className="field-sections">
-                  <span>Q.63:&nbsp;&nbsp;</span>
                   <span>
-                    Do you conduct standard on-site inspections/audits of direct
-                    suppliers?
+                    Q.{supplierJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "63").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3292,10 +3380,12 @@ const SupplierQuestions = () => {
                       "yes" && (
                       <div className="field-sections">
                         <br />
-                        <span>Q.64:&nbsp;&nbsp;</span>
                         <span>
-                          Do you check the age of your workers as part of the
-                          hiring process?{" "}
+                          Q.{supplierJson.find((f) => f.id === "64").id}
+                          :&nbsp;&nbsp;
+                        </span>
+                        <span>
+                          {supplierJson.find((f) => f.id === "64").q}{" "}
                           <span style={{ color: "red" }}>*</span>
                         </span>
                         <br />
@@ -3312,13 +3402,720 @@ const SupplierQuestions = () => {
                     )}
                   </div>
                 </div>
+                {/* Question 65 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "65").id} :&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "65").q} </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs65_CheckAgeWorkerAtHiring"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs65_CheckAgeWorkerAtHiring === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs65_CheckAgeWorkerAtHiring"
+                      checked={
+                        supplierData.Qs65_CheckAgeWorkerAtHiring === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 66 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "66").id} :&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "66").q} </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs66_AgeWorkersVerifiedHiringConducted"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs66_AgeWorkersVerifiedHiringConducted"
+                      checked={
+                        supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 67 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "67").id} :&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "67").q} </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs67_EmployPersonUnderAge18"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs67_EmployPersonUnderAge18 === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs67_EmployPersonUnderAge18"
+                      checked={
+                        supplierData.Qs67_EmployPersonUnderAge18 === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 68 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "68").id} :&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "68").q} </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs68_EmployPersonUnderAge15"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs68_EmployPersonUnderAge15 === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs68_EmployPersonUnderAge15"
+                      checked={
+                        supplierData.Qs68_EmployPersonUnderAge15 === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 69 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "69").id} :&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "69").q} </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs69_WorkInstructionsUnder18NotAllowed"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs69_WorkInstructionsUnder18NotAllowed"
+                      checked={
+                        supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 70 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "70").id} :&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "70").q} </span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs70_PersonAge18performUnderWaterUnderGround"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs70_PersonAge18performUnderWaterUnderGround"
+                      checked={
+                        supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 71 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "71").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "71").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs71_PersonAge18performDangerousHeights"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs71_PersonAge18performDangerousHeights ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs71_PersonAge18performDangerousHeights"
+                      checked={
+                        supplierData.Qs71_PersonAge18performDangerousHeights ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 72 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "72").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "72").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
+                      checked={
+                        supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 73 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "73").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "73").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs73_PersonAge18HandleHeavyLoads"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs73_PersonAge18HandleHeavyLoads === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs73_PersonAge18HandleHeavyLoads"
+                      checked={
+                        supplierData.Qs73_PersonAge18HandleHeavyLoads === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 74 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "74").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "74").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
+                      checked={
+                        supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 75 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "75").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "75").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
+                      checked={
+                        supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 76 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "76").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "76").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs76_PersonAge18WorkInNight"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs76_PersonAge18WorkInNight === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs76_PersonAge18WorkInNight"
+                      checked={
+                        supplierData.Qs76_PersonAge18WorkInNight === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 77 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "77").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "77").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
+                      checked={
+                        supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 78 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "78").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "78").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
+                      checked={
+                        supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 79 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "79").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "79").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs79_AnyWorkPerformedPenaltyThreatened"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs79_AnyWorkPerformedPenaltyThreatened"
+                      checked={
+                        supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 80 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "80").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "80").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="QsS80_RetainIdentificationDocuments"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.QsS80_RetainIdentificationDocuments ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="QsS80_RetainIdentificationDocuments"
+                      checked={
+                        supplierData.QsS80_RetainIdentificationDocuments ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 81 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "81").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "81").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs81_RetainOriginalsCopiesDocuments"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs81_RetainOriginalsCopiesDocuments ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs81_RetainOriginalsCopiesDocuments"
+                      checked={
+                        supplierData.Qs81_RetainOriginalsCopiesDocuments ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 82 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "82").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "82").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs82_ImposePenaltiesEmployees"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs82_ImposePenaltiesEmployees === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs82_ImposePenaltiesEmployees"
+                      checked={
+                        supplierData.Qs82_ImposePenaltiesEmployees === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 83 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "83").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "83").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
+                      checked={
+                        supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 84 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "84").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "84").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
+                      checked={
+                        supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
                 {/* Question 85 */}
                 <div className="field-sections">
-                  <span>Q.85:&nbsp;&nbsp;</span>
                   <span>
-                    Does your company employ people who have been required to
-                    work by the state (e.g. prisoners, military conscripts)?
+                    Q.{supplierJson.find((f) => f.id === "85").id}:&nbsp;&nbsp;
                   </span>
+                  <span>{supplierJson.find((f) => f.id === "85").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3347,12 +4144,1291 @@ const SupplierQuestions = () => {
                     No
                   </label>
                 </div>
+                {/* Question 86 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "86").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "86").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
+                      checked={
+                        supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 87 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "87").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "87").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs87_CompanyDocumentWorkingHourseWages"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs87_CompanyDocumentWorkingHourseWages"
+                      checked={
+                        supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 88 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "88").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "88").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs88_CompanyHaveHealthAndSafety"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs88_CompanyHaveHealthAndSafety === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs88_CompanyHaveHealthAndSafety"
+                      checked={
+                        supplierData.Qs88_CompanyHaveHealthAndSafety === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 89 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "89").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "89").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs89_OrganizationHaveProceduresSecurityRisks"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs89_OrganizationHaveProceduresSecurityRisks"
+                      checked={
+                        supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 90 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "90").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "90").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs90_OperationHighAltitudesConfinedSpaces"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs90_OperationHighAltitudesConfinedSpaces"
+                      checked={
+                        supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 91 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "91").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "91").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs91_WorkHazardousChemicalBiologicalSubstances"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs91_WorkHazardousChemicalBiologicalSubstances"
+                      checked={
+                        supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 92 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "92").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "92").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs92_InstructionUseSafetyEquipments"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs92_InstructionUseSafetyEquipments ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs92_InstructionUseSafetyEquipments"
+                      checked={
+                        supplierData.Qs92_InstructionUseSafetyEquipments ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 93 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "93").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "93").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs93_PersonalResponsibleSafeStorageDistribution"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs93_PersonalResponsibleSafeStorageDistribution"
+                      checked={
+                        supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 94 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "94").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "94").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
+                      checked={
+                        supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 95 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "95").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "95").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs95_PersonsSpeciallyTrainedActEmergencies"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs95_PersonsSpeciallyTrainedActEmergencies"
+                      checked={
+                        supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 96 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "96").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "96").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs96_OfferOpportunityProvideFeedbackComplaints"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs96_OfferOpportunityProvideFeedbackComplaints"
+                      checked={
+                        supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 97 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "97").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "97").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
+                      checked={
+                        supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 98 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "98").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "98").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs98_EmpOrganizedAUnion"
+                      type="radio"
+                      value="yes"
+                      checked={supplierData.Qs98_EmpOrganizedAUnion === "yes"}
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs98_EmpOrganizedAUnion"
+                      checked={supplierData.Qs98_EmpOrganizedAUnion === "no"}
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 99 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "99").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "99").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs99_BonusesBenefitsNotMembersUnion"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs99_BonusesBenefitsNotMembersUnion"
+                      checked={
+                        supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 100 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "100").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "100").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
+                      checked={
+                        supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 101 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "101").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "101").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs101_WorkersUnfairlyPaidSameWork"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs101_WorkersUnfairlyPaidSameWork === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs101_WorkersUnfairlyPaidSameWork"
+                      checked={
+                        supplierData.Qs101_WorkersUnfairlyPaidSameWork === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 102 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "102").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "102").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs102_StatutoryMinimumWageInCountry"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs102_StatutoryMinimumWageInCountry ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs102_StatutoryMinimumWageInCountry"
+                      checked={
+                        supplierData.Qs102_StatutoryMinimumWageInCountry ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 103 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "103").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "103").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs103_PayRespectiveStatutory"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs103_PayRespectiveStatutory === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs103_PayRespectiveStatutory"
+                      checked={
+                        supplierData.Qs103_PayRespectiveStatutory === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 104 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "104").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "104").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs104_PayAtleastWageInLineGeneralWage"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs104_PayAtleastWageInLineGeneralWage"
+                      checked={
+                        supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 105 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "105").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "105").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs105_WageReducedBenefitsProvidedCompany"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs105_WageReducedBenefitsProvidedCompany"
+                      checked={
+                        supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 106 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "106").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "106").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs106_Last20YearsCompanyAcquiredLand"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs106_Last20YearsCompanyAcquiredLand"
+                      checked={
+                        supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 107 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "107").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "107").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs107_ConfirmLandOwnedOrHeld"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs107_ConfirmLandOwnedOrHeld === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs107_ConfirmLandOwnedOrHeld"
+                      checked={
+                        supplierData.Qs107_ConfirmLandOwnedOrHeld === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 108 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "108").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "108").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
+                      checked={
+                        supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 109 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "109").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "109").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs109_EmpSecurityPersonnel"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs109_EmpSecurityPersonnel === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs109_EmpSecurityPersonnel"
+                      checked={supplierData.Qs109_EmpSecurityPersonnel === "no"}
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 110 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "110").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "110").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
+                      checked={
+                        supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>{" "}
+                {/* Question 111 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "111").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "111").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
+                      checked={
+                        supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 112 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "112").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "112").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs112_LegalProceedingsAgainstEnvPollution"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs112_LegalProceedingsAgainstEnvPollution"
+                      checked={
+                        supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 113 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "113").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "113").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
+                      checked={
+                        supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 114 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "114").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "114").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs114_CompanyHowProceedCaseViolation"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs114_CompanyHowProceedCaseViolation ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs114_CompanyHowProceedCaseViolation"
+                      checked={
+                        supplierData.Qs114_CompanyHowProceedCaseViolation ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 115 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "115").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "115").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs115_CompanyPublishReportOnGoalsProgress"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs115_CompanyPublishReportOnGoalsProgress"
+                      checked={
+                        supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 116 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "116").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "116").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
+                      checked={
+                        supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 117 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "117").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "117").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs117_WorkWithExternalDisposalServiceProvider"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs117_WorkWithExternalDisposalServiceProvider"
+                      checked={
+                        supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 118 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "118").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "118").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs118_ExportHazardousWasteDocumented"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs118_ExportHazardousWasteDocumented ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs118_ExportHazardousWasteDocumented"
+                      checked={
+                        supplierData.Qs118_ExportHazardousWasteDocumented ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 119 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "119").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "119").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs119_ConfirmCompActsWithBaselConvention"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs119_ConfirmCompActsWithBaselConvention"
+                      checked={
+                        supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 120 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "120").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "120").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs120_UsePersistentOrganicPollutants"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs120_UsePersistentOrganicPollutants ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs120_UsePersistentOrganicPollutants"
+                      checked={
+                        supplierData.Qs120_UsePersistentOrganicPollutants ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question 121 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{supplierJson.find((f) => f.id === "121").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{supplierJson.find((f) => f.id === "121").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qs121_ConfirmCompActsWithStockholmConvention"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qs121_ConfirmCompActsWithStockholmConvention"
+                      checked={
+                        supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
                 {/* Question 123 */}
                 <div className="field-sections">
-                  <span>Q.122:&nbsp;&nbsp;</span>
                   <span>
-                    Can you confirm that you do not use or manufacture
-                    substances listed in Annex I of Regulation (EU) 2019/1021?{" "}
+                    Q.{supplierJson.find((f) => f.id === "122").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {supplierJson.find((f) => f.id === "122").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
@@ -3390,11 +5466,12 @@ const SupplierQuestions = () => {
                     {supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
                       "no" && (
                       <div className="field-sections">
-                        <span>Q.123:&nbsp;&nbsp;</span>
                         <span>
-                          Which of the substances listed in Annex I of
-                          Regulation (EU) 2019/1021 or in Annex A of the
-                          Stockholm POP Convention do you use?
+                          Q.{supplierJson.find((f) => f.id === "123").id}
+                          :&nbsp;&nbsp;
+                        </span>
+                        <span>
+                          {supplierJson.find((f) => f.id === "123").q}
                         </span>
                         <input
                           onChange={handleChange}
@@ -3406,2052 +5483,6 @@ const SupplierQuestions = () => {
                         />
                       </div>
                     )}
-                  </div>
-                  {/* Question 65 */}
-                  <div className="field-sections">
-                    <span>Q.65:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you check the age of your workers as part of the hiring
-                      process?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs65_CheckAgeWorkerAtHiring"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs65_CheckAgeWorkerAtHiring === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs65_CheckAgeWorkerAtHiring"
-                        checked={
-                          supplierData.Qs65_CheckAgeWorkerAtHiring === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 66 */}
-                  <div className="field-sections">
-                    <span>Q.66:&nbsp;&nbsp;</span>
-                    <span>
-                      Is the age of your workers also verified when the hiring
-                      process is conducted by placement agencies?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs66_AgeWorkersVerifiedHiringConducted"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs66_AgeWorkersVerifiedHiringConducted"
-                        checked={
-                          supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 67 */}
-                  <div className="field-sections">
-                    <span>Q.67:&nbsp;&nbsp;</span>
-                    <span>Do you employ persons under the age of 18?</span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs67_EmployPersonUnderAge18"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs67_EmployPersonUnderAge18 === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs67_EmployPersonUnderAge18"
-                        checked={
-                          supplierData.Qs67_EmployPersonUnderAge18 === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 68 */}
-                  <div className="field-sections">
-                    <span>Q.68:&nbsp;&nbsp;</span>
-                    <span>Do you employ persons under the age of 15?</span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs68_EmployPersonUnderAge15"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs68_EmployPersonUnderAge15 === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs68_EmployPersonUnderAge15"
-                        checked={
-                          supplierData.Qs68_EmployPersonUnderAge15 === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 69 */}
-                  <div className="field-sections">
-                    <span>Q.69:&nbsp;&nbsp;</span>
-                    <span>
-                      Are there work instructions for which work persons under
-                      18 are not allowed to be employed?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs69_WorkInstructionsUnder18NotAllowed"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs69_WorkInstructionsUnder18NotAllowed"
-                        checked={
-                          supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 70 */}
-                  <div className="field-sections">
-                    <span>Q.70:&nbsp;&nbsp;</span>
-                    <span>
-                      Do persons under the age of 18 perform work for you under
-                      water or underground?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs70_PersonAge18performUnderWaterUnderGround"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs70_PersonAge18performUnderWaterUnderGround"
-                        checked={
-                          supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 71 */}
-                  <div className="field-sections">
-                    <span>Q.71:&nbsp;&nbsp;</span>
-                    <span>
-                      Do persons under the age of 18 perform work for you at
-                      dangerous heights or in confined spaces?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs71_PersonAge18performDangerousHeights"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs71_PersonAge18performDangerousHeights ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs71_PersonAge18performDangerousHeights"
-                        checked={
-                          supplierData.Qs71_PersonAge18performDangerousHeights ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 72 */}
-                  <div className="field-sections">
-                    <span>Q.72:&nbsp;&nbsp;</span>
-                    <span>
-                      Do persons under the age of 18 work with dangerous
-                      machinery, equipment or tools?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
-                        checked={
-                          supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 73 */}
-                  <div className="field-sections">
-                    <span>Q.73:&nbsp;&nbsp;</span>
-                    <span>
-                      Do people under 18 handle or transport heavy loads in your
-                      business?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs73_PersonAge18HandleHeavyLoads"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs73_PersonAge18HandleHeavyLoads ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs73_PersonAge18HandleHeavyLoads"
-                        checked={
-                          supplierData.Qs73_PersonAge18HandleHeavyLoads === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 74 */}
-                  <div className="field-sections">
-                    <span>Q.74:&nbsp;&nbsp;</span>
-                    <span>
-                      Do persons under the age of 18 work with hazardous
-                      substances, agents or processes?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
-                        checked={
-                          supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 75 */}
-                  <div className="field-sections">
-                    <span>Q.75:&nbsp;&nbsp;</span>
-                    <span>
-                      Do persons under the age of 18 work in areas with harmful
-                      temperatures, noise levels or vibrations?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
-                        checked={
-                          supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 76 */}
-                  <div className="field-sections">
-                    <span>Q.76:&nbsp;&nbsp;</span>
-                    <span>
-                      Do persons under the age of 18 work in your company at
-                      night time?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs76_PersonAge18WorkInNight"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs76_PersonAge18WorkInNight === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs76_PersonAge18WorkInNight"
-                        checked={
-                          supplierData.Qs76_PersonAge18WorkInNight === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 77 */}
-                  <div className="field-sections">
-                    <span>Q.77:&nbsp;&nbsp;</span>
-                    <span>
-                      Is there a predefined procedure if you suspect that one of
-                      your suppliers is unlawfully employing children?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
-                        checked={
-                          supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 78 */}
-                  <div className="field-sections">
-                    <span>Q.78:&nbsp;&nbsp;</span>
-                    <span>
-                      Are persons under the age of 18 in your company in debt
-                      bondage, serfdom or forced or compulsory labor?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
-                        checked={
-                          supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 79 */}
-                  <div className="field-sections">
-                    <span>Q.79:&nbsp;&nbsp;</span>
-                    <span>
-                      Is there any work in your company that is only performed
-                      when a penalty is threatened (e.g. withholding wages)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs79_AnyWorkPerformedPenaltyThreatened"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs79_AnyWorkPerformedPenaltyThreatened"
-                        checked={
-                          supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 80 */}
-                  <div className="field-sections">
-                    <span>Q.80:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you retain the identification documents of your
-                      employees?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="QsS80_RetainIdentificationDocuments"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.QsS80_RetainIdentificationDocuments ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="QsS80_RetainIdentificationDocuments"
-                        checked={
-                          supplierData.QsS80_RetainIdentificationDocuments ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 81 */}
-                  <div className="field-sections">
-                    <span>Q.81:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you retain originals or copies of identification
-                      documents?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs81_RetainOriginalsCopiesDocuments"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs81_RetainOriginalsCopiesDocuments ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs81_RetainOriginalsCopiesDocuments"
-                        checked={
-                          supplierData.Qs81_RetainOriginalsCopiesDocuments ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 82 */}
-                  <div className="field-sections">
-                    <span>Q.82:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you impose penalties on your employees (e.g.
-                      withholding of wages, restriction of movement, withholding
-                      of identification documents, special work)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs82_ImposePenaltiesEmployees"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs82_ImposePenaltiesEmployees === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs82_ImposePenaltiesEmployees"
-                        checked={
-                          supplierData.Qs82_ImposePenaltiesEmployees === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 83 */}
-                  <div className="field-sections">
-                    <span>Q.83:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you have employees who are so deep in debt to you that
-                      it takes them several years to pay off with their wages?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
-                        checked={
-                          supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 84 */}
-                  <div className="field-sections">
-                    <span>Q.84:&nbsp;&nbsp;</span>
-                    <span>
-                      Is the weekly working time (including overtime) more than
-                      60 hours or more than 10 hours per day?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
-                        checked={
-                          supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 86 */}
-                  <div className="field-sections">
-                    <span>Q.86:&nbsp;&nbsp;</span>
-                    <span>
-                      Is there a predefined procedure if you suspect that forced
-                      or slave labor exists at one of your suppliers?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
-                        checked={
-                          supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 87 */}
-                  <div className="field-sections">
-                    <span>Q.87:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your company document the working hours and
-                      wages/remuneration of its employees?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs87_CompanyDocumentWorkingHourseWages"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs87_CompanyDocumentWorkingHourseWages"
-                        checked={
-                          supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 88 */}
-                  <div className="field-sections">
-                    <span>Q.88:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your company have a health and safety policy that is
-                      appropriate for your company?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs88_CompanyHaveHealthAndSafety"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs88_CompanyHaveHealthAndSafety === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs88_CompanyHaveHealthAndSafety"
-                        checked={
-                          supplierData.Qs88_CompanyHaveHealthAndSafety === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 89 */}
-                  <div className="field-sections">
-                    <span>Q.89:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your organization have procedures in place to capture
-                      and assess security risks and to correct identified
-                      vulnerabilities?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs89_OrganizationHaveProceduresSecurityRisks"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs89_OrganizationHaveProceduresSecurityRisks"
-                        checked={
-                          supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 90 */}
-                  <div className="field-sections">
-                    <span>Q.90:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your operation work at high altitudes, in confined
-                      spaces, or involve very high or low temperatures?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs90_OperationHighAltitudesConfinedSpaces"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs90_OperationHighAltitudesConfinedSpaces"
-                        checked={
-                          supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 91 */}
-                  <div className="field-sections">
-                    <span>Q.91:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you work with hazardous chemical and biological
-                      substances?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs91_WorkHazardousChemicalBiologicalSubstances"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs91_WorkHazardousChemicalBiologicalSubstances"
-                        checked={
-                          supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 92 */}
-                  <div className="field-sections">
-                    <span>Q.92:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your company have instructions on the use of special
-                      safety equipment (e.g. protective clothing)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs92_InstructionUseSafetyEquipments"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs92_InstructionUseSafetyEquipments ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs92_InstructionUseSafetyEquipments"
-                        checked={
-                          supplierData.Qs92_InstructionUseSafetyEquipments ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 93 */}
-                  <div className="field-sections">
-                    <span>Q.93:&nbsp;&nbsp;</span>
-                    <span>
-                      Is there a person responsible in your company for the safe
-                      storage, distribution and instruction regarding the safe
-                      handling of these substances?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs93_PersonalResponsibleSafeStorageDistribution"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs93_PersonalResponsibleSafeStorageDistribution"
-                        checked={
-                          supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 94 */}
-                  <div className="field-sections">
-                    <span>Q.94:&nbsp;&nbsp;</span>
-                    <span>
-                      Is there technical equipment for emergencies in your
-                      company and is it regularly checked and maintained (e.g.
-                      fire extinguishing system)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
-                        checked={
-                          supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 95 */}
-                  <div className="field-sections">
-                    <span>Q.95:&nbsp;&nbsp;</span>
-                    <span>
-                      Are there persons in your company who are specially
-                      trained to act in emergencies (e.g. first aid training)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs95_PersonsSpeciallyTrainedActEmergencies"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs95_PersonsSpeciallyTrainedActEmergencies"
-                        checked={
-                          supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 96 */}
-                  <div className="field-sections">
-                    <span>Q.96:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your company offer its employees the opportunity to
-                      provide feedback and complaints to management?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs96_OfferOpportunityProvideFeedbackComplaints"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs96_OfferOpportunityProvideFeedbackComplaints"
-                        checked={
-                          supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 97 */}
-                  <div className="field-sections">
-                    <span>Q.97:&nbsp;&nbsp;</span>
-                    <span>
-                      Are your employees regularly trained on the subject of
-                      occupational safety, especially when they are hired?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
-                        checked={
-                          supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 98 */}
-                  <div className="field-sections">
-                    <span>Q.98:&nbsp;&nbsp;</span>
-                    <span>Are your employees organized in a union?</span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs98_EmpOrganizedAUnion"
-                        type="radio"
-                        value="yes"
-                        checked={supplierData.Qs98_EmpOrganizedAUnion === "yes"}
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs98_EmpOrganizedAUnion"
-                        checked={supplierData.Qs98_EmpOrganizedAUnion === "no"}
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 99 */}
-                  <div className="field-sections">
-                    <span>Q.99:&nbsp;&nbsp;</span>
-                    <span>
-                      Are there bonuses or other benefits, if employees are not
-                      members of a union or leave a union?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs99_BonusesBenefitsNotMembersUnion"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs99_BonusesBenefitsNotMembersUnion"
-                        checked={
-                          supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 100 */}
-                  <div className="field-sections">
-                    <span>Q.100:&nbsp;&nbsp;</span>
-                    <span>
-                      Are employees hired or assigned to specific tasks based on
-                      national or ethnic origin, social origin, health status,
-                      disability, sexual orientation, age, gender, political
-                      opinion, religion or belief?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
-                        checked={
-                          supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 101 */}
-                  <div className="field-sections">
-                    <span>Q.101:&nbsp;&nbsp;</span>
-                    <span>
-                      Are workers unfairly paid differently for the same work
-                      for the reasons mentioned above?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs101_WorkersUnfairlyPaidSameWork"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs101_WorkersUnfairlyPaidSameWork ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs101_WorkersUnfairlyPaidSameWork"
-                        checked={
-                          supplierData.Qs101_WorkersUnfairlyPaidSameWork ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 102 */}
-                  <div className="field-sections">
-                    <span>Q.102:&nbsp;&nbsp;</span>
-                    <span>
-                      Is there a statutory minimum wage in the country/countries
-                      where you work?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs102_StatutoryMinimumWageInCountry"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs102_StatutoryMinimumWageInCountry ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs102_StatutoryMinimumWageInCountry"
-                        checked={
-                          supplierData.Qs102_StatutoryMinimumWageInCountry ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 103 */}
-                  <div className="field-sections">
-                    <span>Q.103:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you pay the respective statutory minimum wage or more?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs103_PayRespectiveStatutory"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs103_PayRespectiveStatutory === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs103_PayRespectiveStatutory"
-                        checked={
-                          supplierData.Qs103_PayRespectiveStatutory === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 104 */}
-                  <div className="field-sections">
-                    <span>Q.104:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you pay at least a wage that is in line with the
-                      general wage level in your industry?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs104_PayAtleastWageInLineGeneralWage"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs104_PayAtleastWageInLineGeneralWage"
-                        checked={
-                          supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 105 */}
-                  <div className="field-sections">
-                    <span>Q.105:&nbsp;&nbsp;</span>
-                    <span>
-                      Is the wage reduced for benefits provided by your company
-                      to the employee (e.g. for work clothing, meals,
-                      accommodation)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs105_WageReducedBenefitsProvidedCompany"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs105_WageReducedBenefitsProvidedCompany"
-                        checked={
-                          supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 106 */}
-                  <div className="field-sections">
-                    <span>Q.106:&nbsp;&nbsp;</span>
-                    <span>
-                      Within the last 20 years, has your company acquired land
-                      that was occupied immediately prior to acquisition?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs106_Last20YearsCompanyAcquiredLand"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs106_Last20YearsCompanyAcquiredLand"
-                        checked={
-                          supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 107 */}
-                  <div className="field-sections">
-                    <span>Q.107:&nbsp;&nbsp;</span>
-                    <span>
-                      Can you confirm that the land owned or held by your
-                      company has not been misappropriated?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs107_ConfirmLandOwnedOrHeld"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs107_ConfirmLandOwnedOrHeld === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs107_ConfirmLandOwnedOrHeld"
-                        checked={
-                          supplierData.Qs107_ConfirmLandOwnedOrHeld === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 108 */}
-                  <div className="field-sections">
-                    <span>Q.108:&nbsp;&nbsp;</span>
-                    <span>
-                      Have you acquired any forest land or water bodies in the
-                      last 20 years that were not previously used for commercial
-                      purposes?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
-                        checked={
-                          supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 109 */}
-                  <div className="field-sections">
-                    <span>Q.109:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you employ security personnel in your company?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs109_EmpSecurityPersonnel"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs109_EmpSecurityPersonnel === "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs109_EmpSecurityPersonnel"
-                        checked={
-                          supplierData.Qs109_EmpSecurityPersonnel === "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 110 */}
-                  <div className="field-sections">
-                    <span>Q.110:&nbsp;&nbsp;</span>
-                    <span>
-                      Are security personnel tasked with monitoring their
-                      workers beyond entry and exit checks?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
-                        checked={
-                          supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>{" "}
-                  {/* Question 111 */}
-                  <div className="field-sections">
-                    <span>Q.111:&nbsp;&nbsp;</span>
-                    <span>
-                      Has your company defined characteristics/criteria against
-                      which relevant environmental impacts can be monitored?
-                      (e.g. measurement and monitoring of CO₂ emissions; water
-                      consumption)
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
-                        checked={
-                          supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 112 */}
-                  <div className="field-sections">
-                    <span>Q.112:&nbsp;&nbsp;</span>
-                    <span>
-                      Have there been any legal proceedings against your company
-                      for environmental pollution or similar in the last 5
-                      years?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs112_LegalProceedingsAgainstEnvPollution"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs112_LegalProceedingsAgainstEnvPollution"
-                        checked={
-                          supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 113 */}
-                  <div className="field-sections">
-                    <span>Q.113:&nbsp;&nbsp;</span>
-                    <span>
-                      Are there work instructions and organizational precautions
-                      to minimize emissions to air, soil and water?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
-                        checked={
-                          supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 114 */}
-                  <div className="field-sections">
-                    <span>Q.114:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your company have instructions and procedures on how
-                      to proceed in case of violation of environmental
-                      regulations?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs114_CompanyHowProceedCaseViolation"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs114_CompanyHowProceedCaseViolation ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs114_CompanyHowProceedCaseViolation"
-                        checked={
-                          supplierData.Qs114_CompanyHowProceedCaseViolation ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 115 */}
-                  <div className="field-sections">
-                    <span>Q.115:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your company publish a report on environmental goals
-                      and progress?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs115_CompanyPublishReportOnGoalsProgress"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs115_CompanyPublishReportOnGoalsProgress"
-                        checked={
-                          supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 116 */}
-                  <div className="field-sections">
-                    <span>Q.116:&nbsp;&nbsp;</span>
-                    <span>
-                      Does your business generate hazardous waste or does your
-                      company work with radioactive substances?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
-                        checked={
-                          supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 117 */}
-                  <div className="field-sections">
-                    <span>Q.117:&nbsp;&nbsp;</span>
-                    <span>
-                      Do you work with an external disposal service provider?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs117_WorkWithExternalDisposalServiceProvider"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs117_WorkWithExternalDisposalServiceProvider"
-                        checked={
-                          supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 118 */}
-                  <div className="field-sections">
-                    <span>Q.118:&nbsp;&nbsp;</span>
-                    <span>
-                      Is the export of hazardous waste documented in your
-                      company?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs118_ExportHazardousWasteDocumented"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs118_ExportHazardousWasteDocumented ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs118_ExportHazardousWasteDocumented"
-                        checked={
-                          supplierData.Qs118_ExportHazardousWasteDocumented ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 119 */}
-                  <div className="field-sections">
-                    <span>Q.119:&nbsp;&nbsp;</span>
-                    <span>
-                      Can you confirm that your company acts in accordance with
-                      the Basel Convention on the Control of Transboundary
-                      Movements of Hazardous Wastes and their Disposal?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs119_ConfirmCompActsWithBaselConvention"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs119_ConfirmCompActsWithBaselConvention"
-                        checked={
-                          supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 120 */}
-                  <div className="field-sections">
-                    <span>Q.120:&nbsp;&nbsp;</span>
-                    <span>Do you use persistent organic pollutants?</span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs120_UsePersistentOrganicPollutants"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs120_UsePersistentOrganicPollutants ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs120_UsePersistentOrganicPollutants"
-                        checked={
-                          supplierData.Qs120_UsePersistentOrganicPollutants ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 121 */}
-                  <div className="field-sections">
-                    <span>Q.121:&nbsp;&nbsp;</span>
-                    <span>
-                      Can you confirm that your company acts in accordance with
-                      the Stockholm Convention on Persistent Organic Pollutants
-                      (POPs)?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs121_ConfirmCompActsWithStockholmConvention"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs121_ConfirmCompActsWithStockholmConvention"
-                        checked={
-                          supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
                   </div>
                   {/* Question 124 */}
                   <div className="field-sections">
@@ -5493,12 +5524,11 @@ const SupplierQuestions = () => {
                   </div>
                   {/* Question 125 */}
                   <div className="field-sections">
-                    <span>Q.125:&nbsp;&nbsp;</span>
                     <span>
-                      Can you assure that your company operates in accordance
-                      with the Minamata Convention on the Control of Emissions
-                      and Releases of the Heavy Metal Mercury?
+                      Q.{supplierJson.find((f) => f.id === "125").id}
+                      :&nbsp;&nbsp;
                     </span>
+                    <span>{supplierJson.find((f) => f.id === "125").q}</span>
                     <br />
                     <br />
                     <label>

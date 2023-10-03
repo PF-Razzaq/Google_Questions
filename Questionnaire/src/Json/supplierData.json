@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "q": "Supplier Name6"
+    "q": "Supplier Name"
   },
   {
     "id": "2",
@@ -180,11 +180,11 @@
     "q": "Code of Conduct Signature and Upload (for H Company orders only)"
   },
   {
-    "id": "40",
+    "id": "39",
     "q": "Does the Law on Corporate Due Diligence to Prevent Human Rights Violations in Supply Chains (LkSG) apply to your company according to § 1 LkSG?"
   },
   {
-    "id": "45",
+    "id": "40",
     "q": "Can you confirm that your company fulfils the due diligence obligations contained in § 3 paragraph 1 sentence 2 LkSG?"
   },
   {
