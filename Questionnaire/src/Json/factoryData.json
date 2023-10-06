@@ -519,5 +519,9 @@
   {
     "id": "124",
     "q": "Can you assure that your company operates in accordance with the Minamata Convention on the Control of Emissions and Releases of the Heavy Metal Mercury?"
+  },
+  {
+    "id": "m1",
+    "q": "The submission was successful!"
   }
 ]

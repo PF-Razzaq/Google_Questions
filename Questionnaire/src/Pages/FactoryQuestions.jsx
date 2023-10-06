@@ -11,7 +11,7 @@ import factoryJson from "../Json/factoryData.json";
 let otherCountry;
 let recordId = 0;
 const FactoryQuestions = () => {
-  console.log("supplierJson", supplierJson);
+  console.log("factoryJson", factoryJson);
   //   REACT_APP_FM_URL=https://server.pascalinesoft.com:4443
   // REACT_APP_BUILD_URL=apiuser
   // REACT_APP_PUBLIC_URL=apiuser
@@ -160,7 +160,7 @@ const FactoryQuestions = () => {
         console.log("postDataWithToken", data.response.recordId);
         // alert("record inserted.files(if any) will also upload shortly");
         document.getElementById("supplierForm").reset();
-        toast.success(`${supplierJson.find((f) => f.id === "m1").q}`, {
+        toast.success(`${factoryJson.find((f) => f.id === "m1").q}`, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
@@ -290,7 +290,7 @@ const FactoryQuestions = () => {
     ) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs47b_IssuedGlobalOrganicTextileEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs51b_IssuedGlobalOrganicTextileEvidence/1`,
           upload,
           {
             headers: {
@@ -587,7 +587,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs1_SupplierName" // Add name attribute
+                    name="Qs1_FactoryName" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -596,10 +596,10 @@ const FactoryQuestions = () => {
                 {/* Question 2 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "2").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "2").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "2").q}
+                    {factoryJson.find((f) => f.id === "2").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -607,9 +607,9 @@ const FactoryQuestions = () => {
                     placeholder="Enter your answer"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    // pattern="[0-9]*"
+                    // pattern="[0-]*"
                     name="Qs2_SuppBusinessLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -619,10 +619,10 @@ const FactoryQuestions = () => {
                 {/* Question 3 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "3").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "3").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "3").q}{" "}
+                    {factoryJson.find((f) => f.id === "3").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -630,9 +630,9 @@ const FactoryQuestions = () => {
                     placeholder="Enter your answer"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-9]*"
+                    pattern="[0-]*"
                     name="Qs3_SuppExportLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -640,12 +640,12 @@ const FactoryQuestions = () => {
                   />
                 </div>
                 {/* Question 4 */}
-                <div className="field-sections">
+                {/* <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "4").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "4").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "4").q}{" "}
+                    {factoryJson.find((f) => f.id === "4").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -653,21 +653,21 @@ const FactoryQuestions = () => {
                     placeholder="Enter your answer"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-9]*"
+                    pattern="[0-]*"
                     name="Qs4_SuppVATNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
                   />
-                </div>
-                <h4 className="supplier-heading">Supplier Address</h4>
-                {/* Question  5*/}
+                </div> */}
+                <h4 className="supplier-heading">Factory Address</h4>
+                {/* Question  4*/}
                 <div className="field-sections">
-                  <span>Q.5:&nbsp;&nbsp;</span>
+                  <span>Q.4:&nbsp;&nbsp;</span>
                   <span>
-                    {supplierJson.find((f) => f.id === "5a").q}{" "}
+                    {factoryJson.find((f) => f.id === "4a").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -682,7 +682,7 @@ const FactoryQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    {supplierJson.find((f) => f.id === "5b").q}{" "}
+                    {factoryJson.find((f) => f.id === "4b").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -695,11 +695,11 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  6*/}
+                {/* Question  5*/}
                 <div className="field-sections">
-                  <span>Q.6:&nbsp;&nbsp;</span>
+                  <span>Q.5:&nbsp;&nbsp;</span>
                   <span>
-                    {supplierJson.find((f) => f.id === "6a").q}{" "}
+                    {factoryJson.find((f) => f.id === "5a").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -714,7 +714,7 @@ const FactoryQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    {supplierJson.find((f) => f.id === "6b").q}{" "}
+                    {factoryJson.find((f) => f.id === "5b").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -729,7 +729,7 @@ const FactoryQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    {supplierJson.find((f) => f.id === "6c").q}{" "}
+                    {factoryJson.find((f) => f.id === "5c").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -742,12 +742,13 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  7*/}
+                {/* Question  6*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "7").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "6").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "7").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "6").q}</span>
+                  <span style={{ color: "red" }}>*</span>
 
                   <input
                     onChange={handleChange}
@@ -756,14 +757,16 @@ const FactoryQuestions = () => {
                     name="Qs7_PostCode" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
+                    required
                   />
                 </div>
-                {/* Question  8*/}
+                {/* Question  7*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "8").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "7").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "8").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "7").q}</span>
+                  <span style={{ color: "red" }}>*</span>
                   <select
                     value={supplierData.Qs8_Country}
                     onChange={(e) => {
@@ -808,6 +811,7 @@ const FactoryQuestions = () => {
                         placeholder="Enter Custom Option"
                         aria-label="Enter text..."
                         aria-describedby="basic-addon2"
+                        required
                       />
                       <div className="input-group-append">
                         <button
@@ -829,12 +833,96 @@ const FactoryQuestions = () => {
                     </div>
                   )}
                 </div>
-                <h4 className="supplier-heading">Supplier Contact Details</h4>
+                {/* Question  8*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "8").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "8").q}</span>
+
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs7_PostCode" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                  />
+                </div>
+                <h4 className="supplier-heading">Factory Contact Details</h4>
+                {/* Question  8*/}
                 {/* Question  9*/}
                 <div className="field-sections">
                   <span>Q.9:&nbsp;&nbsp;</span>
+                  <select
+                    style={{ display: "inline-block" }}
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={(e) => {
+                      setSupplierData({
+                        ...supplierData,
+                        Qs12a_salutation: e.target.value,
+                      });
+                    }}
+                    name="Qs12a_salutation"
+                  >
+                    <option disabled selected>
+                      {factoryJson.find((f) => f.id === "9a").q}
+                    </option>
+                    <option value="mr">Mr.</option>
+                    <option value="ms">Ms.</option>
+                  </select>
+                </div>
+                <div className="field-sections">
                   <span>
-                    {supplierJson.find((f) => f.id === "9a").q}{" "}
+                    {factoryJson.find((f) => f.id === "9b").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs12b_FirstName" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                <div className="field-sections">
+                  <span>
+                    {factoryJson.find((f) => f.id === "9c").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs12c_LastName" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  10*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "10").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "10").q}</span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs11_Website" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                  />
+                </div>
+                {/* Question  11*/}
+                <div className="field-sections">
+                  <span>Q.11:&nbsp;&nbsp;</span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "11a").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <div className="form-group d-flex">
@@ -855,9 +943,9 @@ const FactoryQuestions = () => {
                       name="Qs9a_Phone"
                       type="number"
                       onInput={(e) => {
-                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                        e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                       }}
-                      pattern="[0-9]*"
+                      pattern="[0-]*"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
                       id="exampleInputEmail1"
@@ -868,7 +956,7 @@ const FactoryQuestions = () => {
                 </div>
                 <div className="field-sections">
                   <span>
-                    {supplierJson.find((f) => f.id === "9b").q}{" "}
+                    {factoryJson.find((f) => f.id === "11b").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <div className="form-group d-flex">
@@ -888,9 +976,9 @@ const FactoryQuestions = () => {
                     <input
                       type="number"
                       onInput={(e) => {
-                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                        e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                       }}
-                      pattern="[0-9]*"
+                      pattern="[0-]*"
                       name="Qs9b_Cellphone"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
@@ -900,100 +988,13 @@ const FactoryQuestions = () => {
                     ></input>
                   </div>
                 </div>
-                {/* Question  10*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "10").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>
-                    {supplierJson.find((f) => f.id === "10").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="email"
-                    name="Qs10_Email" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  11*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "11").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "11").q}</span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs11_Website" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                  />
-                </div>
-                <h3 className="supplier-heading">Contact Person</h3>
                 {/* Question  12*/}
-                <div>
-                  <span>Q.12:&nbsp;&nbsp;</span>
-                  <select
-                    style={{ display: "inline-block" }}
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs12a_salutation: e.target.value,
-                      });
-                    }}
-                    name="Qs12a_salutation"
-                  >
-                    <option disabled selected>
-                      {supplierJson.find((f) => f.id === "12a").q}
-                    </option>
-                    <option value="mr">Mr.</option>
-                    <option value="ms">Ms.</option>
-                  </select>
-                </div>
                 <div className="field-sections">
                   <span>
-                    {supplierJson.find((f) => f.id === "12b").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs12b_FirstName" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                <div className="field-sections">
-                  <span>
-                    {supplierJson.find((f) => f.id === "12c").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs12c_LastName" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  13*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "13").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "12").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "13").q}{" "}
+                    {factoryJson.find((f) => f.id === "12").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1006,14 +1007,13 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                <h3 className="supplier-heading">Supplier Information</h3>
-                {/* Question  14*/}
+                {/* Question  13*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "14").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "13").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "14").q}{" "}
+                    {factoryJson.find((f) => f.id === "13").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1027,38 +1027,39 @@ const FactoryQuestions = () => {
                     minLength={4}
                     required
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
                   />
                 </div>
-                {/* Question  15*/}
+                <h3 className="supplier-heading">Factory Location</h3>
+                {/* Question  14*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "15").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "14").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "15").q}{" "}
+                    {factoryJson.find((f) => f.id === "14").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-9]*"
+                    pattern="[0-]*"
                     name="Qs15_TotalNoOfEmployees" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
                   />
                 </div>
-                {/* Question  16*/}
+                {/* Question  15*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "16").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "15").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "16").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "15").q}</span>
                   <span style={{ color: "red" }}>*</span>
                   <select
                     value={supplierData.Qs16_Ownership}
@@ -1130,12 +1131,12 @@ const FactoryQuestions = () => {
                     </div>
                   )}
                 </div>
-                {/* Question  17*/}
+                {/* Question  16*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "17").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "16").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "17").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "16").q}</span>
                   <select
                     value={supplierData.Qs17_BusinessCategory}
                     onChange={(e) => {
@@ -1157,13 +1158,13 @@ const FactoryQuestions = () => {
                     </option>
                   </select>
                 </div>
-                {/* Question  18*/}
+                {/* Question  17*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "18").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "17").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "18").q}{" "}
+                    {factoryJson.find((f) => f.id === "17").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1176,13 +1177,13 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  19*/}
+                {/* Question  18*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "19").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "18").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "19").q}{" "}
+                    {factoryJson.find((f) => f.id === "18").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1190,10 +1191,33 @@ const FactoryQuestions = () => {
                     placeholder="This value must be a number"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-9]*"
+                    pattern="[0-]*"
                     name="Qs19_SalesPerYearDomestic" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  19*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "19").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "19").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-]*"
+                    name="Qs20_SalesPerYearExport" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -1202,33 +1226,10 @@ const FactoryQuestions = () => {
                 {/* Question  20*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "20").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "20").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "20").q}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="This value must be a number"
-                    type="number"
-                    onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
-                    }}
-                    pattern="[0-9]*"
-                    name="Qs20_SalesPerYearExport" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  21*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "21").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>
-                    {supplierJson.find((f) => f.id === "21").q}
+                    {factoryJson.find((f) => f.id === "20").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1241,13 +1242,13 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  22*/}
+                {/* Question  21*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "22").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "21").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "22").q}
+                    {factoryJson.find((f) => f.id === "21").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1260,29 +1261,29 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  23*/}
+                {/* Question  22*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "23").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "22").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "23").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "22").q}</span>
                   <span style={{ color: "red" }}>*</span>
 
                   <select
-                    value={supplierData.Qs23_MainExportMarkets}
+                    value={supplierData.Qs22_MainExportMarkets}
                     onChange={(e) => {
                       setSupplierData({
                         ...supplierData,
-                        Qs23_MainExportMarkets: e.target.value,
+                        Qs22_MainExportMarkets: e.target.value,
                       });
                       setOtherFields({
                         ...otherFields,
-                        Q23Other: e.target.value,
+                        Q22Other: e.target.value,
                       });
                     }}
                     className="form-select"
                     aria-label="Default select example"
-                    name="Qs23_MainExportMarkets"
+                    name="Qs22_MainExportMarkets"
                     required
                   >
                     <option disabled selected>
@@ -1304,13 +1305,13 @@ const FactoryQuestions = () => {
                     <option value="other">Other</option>
                   </select>
 
-                  {setOtherFields.Q23Other === "other" && (
+                  {setOtherFields.Q22Other === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
                         onChange={(e) => {
                           setSupplierData({
                             ...supplierData,
-                            Qs23_MainExportMarkets: e.target.value,
+                            Qs22_MainExportMarkets: e.target.value,
                           });
                         }}
                         type="text"
@@ -1318,7 +1319,7 @@ const FactoryQuestions = () => {
                         placeholder="Enter Custom Option"
                         aria-label="Enter text..."
                         aria-describedby="basic-addon2"
-                        name="Qs23_MainExportMarkets"
+                        name="Qs22_MainExportMarkets"
                         required
                       />
                       <div className="input-group-append">
@@ -1327,10 +1328,10 @@ const FactoryQuestions = () => {
                           type="button"
                           onClick={() => {
                             if (
-                              supplierData.Qs23_MainExportMarkets.toLowerCase() !==
+                              supplierData.Qs22_MainExportMarkets.toLowerCase() !==
                               "other"
                             ) {
-                              setExports([supplierData.Qs23_MainExportMarkets]);
+                              setExports([supplierData.Qs22_MainExportMarkets]);
                               setSupplierData({ ...supplierData });
                             }
                           }}
@@ -1341,12 +1342,12 @@ const FactoryQuestions = () => {
                     </div>
                   )}
                 </div>
-                {/* Question 24 */}
+                {/* Question 23 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "24").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "23").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "24").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "23").q}</span>
                   <span style={{ color: "red" }}>*</span>
                   <br />
                   <br />
@@ -1374,12 +1375,12 @@ const FactoryQuestions = () => {
                     No
                   </label>
                 </div>
-                {/* Question  25*/}
+                {/* Question  24*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "25").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "24").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "25").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "24").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -1389,13 +1390,13 @@ const FactoryQuestions = () => {
                     id="name-text"
                   />
                 </div>
-                {/* Question  26*/}
+                {/* Question  25*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "26").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "25").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "26").q}{" "}
+                    {factoryJson.find((f) => f.id === "25").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
@@ -1424,13 +1425,13 @@ const FactoryQuestions = () => {
                     No
                   </label>
                 </div>
-                {/* Question  27*/}
+                {/* Question  26*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "27").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "26").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "27").q}{" "}
+                    {factoryJson.find((f) => f.id === "26").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1438,22 +1439,22 @@ const FactoryQuestions = () => {
                     placeholder="This value must be a number"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-9]*"
+                    pattern="[0-]*"
                     name="Qs27_DeliveryLeadTimeInitialOrder" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
                   />
                 </div>
-                {/* Question  28*/}
+                {/* Question  27*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "28").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "27").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "28").q}
+                    {factoryJson.find((f) => f.id === "27").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1461,9 +1462,9 @@ const FactoryQuestions = () => {
                     placeholder="This value must be a number"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-9]*"
+                    pattern="[0-]*"
                     name="Qs28_DeliveryLeadTimeRepeatOrder" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
@@ -1471,13 +1472,13 @@ const FactoryQuestions = () => {
                   />
                 </div>
                 <h3 className="supplier-heading">Bank Information</h3>
-                {/* Question  29*/}
+                {/* Question  28*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "29").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "28").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "29").q}
+                    {factoryJson.find((f) => f.id === "28").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1490,13 +1491,13 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  30*/}
+                {/* Question  29*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "30").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "29").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "30").q}
+                    {factoryJson.find((f) => f.id === "29").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1509,13 +1510,13 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  31*/}
+                {/* Question  30*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "31").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "30").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "31").q}
+                    {factoryJson.find((f) => f.id === "30").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -1528,12 +1529,12 @@ const FactoryQuestions = () => {
                     required
                   />
                 </div>
-                {/* Question  32*/}
+                {/* Question  31*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "32").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "31").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "32").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "31").q}</span>
                   <span style={{ color: "red" }}>*</span>
                   <select
                     value={supplierData.Qs32_CountryOfBankAC}
@@ -1604,12 +1605,12 @@ const FactoryQuestions = () => {
                     </div>
                   )}
                 </div>
-                {/* Question  33*/}
+                {/* Question  32*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "33").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "32").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "33").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "32").q}</span>
                   <div className="form-group d-flex">
                     <select
                       className="form-control countryCode me-1"
@@ -1630,9 +1631,9 @@ const FactoryQuestions = () => {
                       placeholder="This value must be a number"
                       type="number"
                       onInput={(e) => {
-                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                        e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
                       }}
-                      pattern="[0-9]*"
+                      pattern="[0-]*"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
                       id="exampleInputEmail1"
@@ -1640,12 +1641,12 @@ const FactoryQuestions = () => {
                     ></input>
                   </div>
                 </div>
-                {/* Question  34*/}
+                {/* Question  33*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "34").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "33").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "34").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "33").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -1655,31 +1656,31 @@ const FactoryQuestions = () => {
                     id="name-text"
                   />
                 </div>
-                {/* Question  35*/}
+                {/* Question  34*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "35").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "34").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "35").q}
+                    {factoryJson.find((f) => f.id === "34").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs35_SWIFT" // Add name attribute
+                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
                   />
                 </div>
-                {/* Question  36*/}
+                {/* Question  35*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "36").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "35").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "36").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "35").q}</span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
@@ -1689,30 +1690,30 @@ const FactoryQuestions = () => {
                     id="name-text"
                   />
                 </div>
-                {/* Question  37*/}
+                {/* Question  36*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "37").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "36").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "37").q}
+                    {factoryJson.find((f) => f.id === "36").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs37_BeneficiaryBankACNumber" // Add name attribute
+                    name="Qs36_BeneficiaryBankACNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
                   />
                 </div>
-                {/* Question  38*/}
+                {/* Question  37*/}
                 <div className="field-sections">
-                  <span>Q.38:&nbsp;&nbsp;</span>
+                  <span>Q.37:&nbsp;&nbsp;</span>
                   <span>
-                    {supplierJson.find((f) => f.id === "38a").q}{" "}
+                    {factoryJson.find((f) => f.id === "37").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
@@ -1748,7 +1749,7 @@ const FactoryQuestions = () => {
                     {supplierData.Qs38a_HCompanyPCompany === "H Company" && (
                       <div className="field-sections">
                         <span>
-                          {supplierJson.find((f) => f.id === "38b").q}{" "}
+                          {factoryJson.find((f) => f.id === "37").q}{" "}
                           <span style={{ color: "red" }}>*</span>
                         </span>
                         <br />
@@ -1810,12 +1811,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  39  Choose radio button show 40 question*/}
+                {/* Question  38  Choose radio button show 40 question*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "39").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "38").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "39").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "38").q}</span>
                   <br />
                   <br />
                   <label>
@@ -1890,14 +1891,14 @@ const FactoryQuestions = () => {
                           </span>
                         </label>
                         <br />
-                        {/* Question 40 */}
+                        {/* Question 39 */}
                         <div className="field-sections">
                           <span>
-                            Q.{supplierJson.find((f) => f.id === "43").id}
+                            Q.{factoryJson.find((f) => f.id === "39").id}
                             :&nbsp;&nbsp;
                           </span>
                           <span>
-                            {supplierJson.find((f) => f.id === "43").q}
+                            {factoryJson.find((f) => f.id === "39").q}
                           </span>
                           <br />
                           <br />
@@ -1933,13 +1934,146 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  45*/}
+                {/* Question  41*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "40").id}
+                    Q.{factoryJson.find((f) => f.id === "41").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "41").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  42*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "42").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "42").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  43*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "43").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "43").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  44*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "44").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "44").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  61*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "61").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  62*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "62").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  60*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "60").q}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qs34_SWIFT" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
+                </div>
+                {/* Question  61*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "61").id}
                     :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "40").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
                   <br />
                   <br />
                   <label>
@@ -1970,43 +2104,12 @@ const FactoryQuestions = () => {
                     No
                   </label>
                 </div>
-                <div className="field-sections" style={{ color: "grey" }}>
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "41").id}
-                    :&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "41").q}</span>
-                  <br />
-                </div>
-                <div className="field-sections" style={{ color: "grey" }}>
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "42").id}
-                    :&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "42").q}</span>
-                  <br />
-                </div>
-                <div className="field-sections" style={{ color: "grey" }}>
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "43").id}
-                    :&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "43").q}</span>
-                  <br />
-                </div>
-                <div className="field-sections" style={{ color: "grey" }}>
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "44").id}
-                    :&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "44").q}</span>
-                  <br />
-                </div>
+                {/* Question 61 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "45").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "45").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2087,12 +2190,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  46*/}
+                {/* Question  62*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "46").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "46").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "62").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2173,21 +2276,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  47*/}
+                {/* Question  63*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "47").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "47").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs47a_IssuedGlobalOrganicTextileEvidence"
+                      name="Qs51a_IssuedGlobalOrganicTextileEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs47a_IssuedGlobalOrganicTextileEvidence ===
+                        supplierData.Qs51a_IssuedGlobalOrganicTextileEvidence ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -2199,9 +2302,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs47a_IssuedGlobalOrganicTextileEvidence"
+                      name="Qs51a_IssuedGlobalOrganicTextileEvidence"
                       checked={
-                        supplierData.Qs47a_IssuedGlobalOrganicTextileEvidence ===
+                        supplierData.Qs51a_IssuedGlobalOrganicTextileEvidence ===
                         "no"
                       }
                       onChange={handleChange}
@@ -2212,13 +2315,13 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs47a_IssuedGlobalOrganicTextileEvidence ===
+                    {supplierData.Qs51a_IssuedGlobalOrganicTextileEvidence ===
                       "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs47b_IssuedGlobalOrganicTextileEvidence"
+                            name="Qs51b_IssuedGlobalOrganicTextileEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2264,12 +2367,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  48*/}
+                {/* Question  60*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "48").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "48").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "60").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2350,12 +2453,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  49*/}
+                {/* Question  61*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "49").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "49").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2432,12 +2535,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  50*/}
+                {/* Question  62*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "50").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "50").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "62").q} </span>
                   <br />
                   <br />
                   <label>
@@ -2521,12 +2624,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  51*/}
+                {/* Question  63*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "51").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "51").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2607,12 +2710,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  52*/}
+                {/* Question  60*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "52").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "52").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "60").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2698,12 +2801,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  53*/}
+                {/* Question  61*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "53").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "53").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2789,12 +2892,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  54*/}
+                {/* Question  62*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "54").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "54").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "62").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2878,12 +2981,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  55*/}
+                {/* Question  63*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "55").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "55").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
                   <br />
                   <br />
                   <label>
@@ -2964,12 +3067,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  56*/}
+                {/* Question  60*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "56").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "56").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "60").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3053,12 +3156,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  57*/}
+                {/* Question  61*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "57").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "57").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3142,12 +3245,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  58*/}
+                {/* Question  62*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "58").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "58").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "62").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3231,12 +3334,12 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  59*/}
+                {/* Question  63*/}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "59").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "59").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3320,22 +3423,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question 60 */}
+                {/* Question 64 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "64").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "60").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "64").q} </span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs60_ContractuallyObligateDirectSuppliersNational"
+                      name="Qs65_CheckAgeWorkerAtHiring"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs60_ContractuallyObligateDirectSuppliersNational ===
-                        "yes"
+                        supplierData.Qs65_CheckAgeWorkerAtHiring === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3346,157 +3448,21 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs60_ContractuallyObligateDirectSuppliersNational"
+                      name="Qs65_CheckAgeWorkerAtHiring"
                       checked={
-                        supplierData.Qs60_ContractuallyObligateDirectSuppliersNational ===
-                        "no"
+                        supplierData.Qs65_CheckAgeWorkerAtHiring === "no"
                       }
                       onChange={handleChange}
                     />
                     No
                   </label>
-                </div>{" "}
-                {/* Question 61 */}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "61").q}</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs61_RequireDirectSuppliersHumanRights"
-                      type="radio"
-                      value="yes"
-                      checked={
-                        supplierData.Qs61_RequireDirectSuppliersHumanRights ===
-                        "yes"
-                      }
-                      onChange={handleChange}
-                    />
-                    Yes
-                  </label>
-
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs61_RequireDirectSuppliersHumanRights"
-                      checked={
-                        supplierData.Qs61_RequireDirectSuppliersHumanRights ===
-                        "no"
-                      }
-                      onChange={handleChange}
-                    />
-                    No
-                  </label>
-                </div>
-                {/* Question 62 */}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "62").q}</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs62_CarryOutAnnualEventRiskAnalysis"
-                      type="radio"
-                      value="yes"
-                      checked={
-                        supplierData.Qs62_CarryOutAnnualEventRiskAnalysis ===
-                        "yes"
-                      }
-                      onChange={handleChange}
-                    />
-                    Yes
-                  </label>
-
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs62_CarryOutAnnualEventRiskAnalysis"
-                      checked={
-                        supplierData.Qs62_CarryOutAnnualEventRiskAnalysis ===
-                        "no"
-                      }
-                      onChange={handleChange}
-                    />
-                    No
-                  </label>
-                </div>
-                {/* Question 63 */}
-                <div className="field-sections">
-                  <span>
-                    Q.{supplierJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{supplierJson.find((f) => f.id === "63").q}</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs63_ConductStandardOnSiteInspections"
-                      type="radio"
-                      value="yes"
-                      checked={
-                        supplierData.Qs63_ConductStandardOnSiteInspections ===
-                        "yes"
-                      }
-                      onChange={handleChange}
-                    />
-                    Yes
-                  </label>
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs63_ConductStandardOnSiteInspections"
-                      checked={
-                        supplierData.Qs63_ConductStandardOnSiteInspections ===
-                        "no"
-                      }
-                      onChange={handleChange}
-                    />
-                    No
-                  </label>
-                  {/* This Question is Dependent on Question 26. */}
-                  {/* Question 64 */}
-                  <div>
-                    {supplierData.Qs63_ConductStandardOnSiteInspections ===
-                      "yes" && (
-                      <div className="field-sections">
-                        <br />
-                        <span>
-                          Q.{supplierJson.find((f) => f.id === "64").id}
-                          :&nbsp;&nbsp;
-                        </span>
-                        <span>
-                          {supplierJson.find((f) => f.id === "64").q}{" "}
-                          <span style={{ color: "red" }}>*</span>
-                        </span>
-                        <br />
-                        <input
-                          onChange={handleChange}
-                          placeholder="Enter your answer"
-                          type="text"
-                          name="Qs64_TopicControlAudits" // Add name attribute
-                          className="mt-3 outline-none w-100"
-                          id="name-text"
-                          required
-                        />
-                      </div>
-                    )}
-                  </div>
                 </div>
                 {/* Question 65 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "65").id} :&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "65").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "65").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "65").q} </span>
                   <br />
                   <br />
                   <label>
@@ -3528,9 +3494,9 @@ const FactoryQuestions = () => {
                 {/* Question 66 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "66").id} :&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "66").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "66").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "66").q} </span>
                   <br />
                   <br />
                   <label>
@@ -3564,9 +3530,9 @@ const FactoryQuestions = () => {
                 {/* Question 67 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "67").id} :&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "67").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "67").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "67").q} </span>
                   <br />
                   <br />
                   <label>
@@ -3598,9 +3564,9 @@ const FactoryQuestions = () => {
                 {/* Question 68 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "68").id} :&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "68").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "68").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "68").q} </span>
                   <br />
                   <br />
                   <label>
@@ -3632,9 +3598,9 @@ const FactoryQuestions = () => {
                 {/* Question 69 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "69").id} :&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "69").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "69").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "69").q} </span>
                   <br />
                   <br />
                   <label>
@@ -3668,9 +3634,9 @@ const FactoryQuestions = () => {
                 {/* Question 70 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "70").id} :&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "70").id} :&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "70").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "70").q} </span>
                   <br />
                   <br />
                   <label>
@@ -3704,9 +3670,9 @@ const FactoryQuestions = () => {
                 {/* Question 71 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "71").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "71").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "71").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "71").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3740,9 +3706,9 @@ const FactoryQuestions = () => {
                 {/* Question 72 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "72").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "72").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "72").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "72").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3776,9 +3742,9 @@ const FactoryQuestions = () => {
                 {/* Question 73 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "73").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "73").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "73").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "73").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3810,9 +3776,9 @@ const FactoryQuestions = () => {
                 {/* Question 74 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "74").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "74").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "74").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "74").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3846,9 +3812,9 @@ const FactoryQuestions = () => {
                 {/* Question 75 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "75").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "75").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "75").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "75").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3882,9 +3848,9 @@ const FactoryQuestions = () => {
                 {/* Question 76 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "76").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "76").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "76").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "76").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3916,9 +3882,9 @@ const FactoryQuestions = () => {
                 {/* Question 77 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "77").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "77").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "77").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "77").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3952,9 +3918,9 @@ const FactoryQuestions = () => {
                 {/* Question 78 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "78").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "78").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "78").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "78").q}</span>
                   <br />
                   <br />
                   <label>
@@ -3988,9 +3954,9 @@ const FactoryQuestions = () => {
                 {/* Question 79 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "79").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "79").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "79").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "79").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4024,9 +3990,9 @@ const FactoryQuestions = () => {
                 {/* Question 80 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "80").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "80").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "80").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "80").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4060,9 +4026,9 @@ const FactoryQuestions = () => {
                 {/* Question 81 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "81").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "81").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "81").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "81").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4096,9 +4062,9 @@ const FactoryQuestions = () => {
                 {/* Question 82 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "82").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "82").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "82").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "82").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4130,9 +4096,9 @@ const FactoryQuestions = () => {
                 {/* Question 83 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "83").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "83").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "83").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "83").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4166,9 +4132,9 @@ const FactoryQuestions = () => {
                 {/* Question 84 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "84").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "84").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "84").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "84").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4202,9 +4168,9 @@ const FactoryQuestions = () => {
                 {/* Question 85 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "85").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "85").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "85").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "85").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4236,9 +4202,9 @@ const FactoryQuestions = () => {
                 {/* Question 86 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "86").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "86").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "86").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "86").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4272,9 +4238,9 @@ const FactoryQuestions = () => {
                 {/* Question 87 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "87").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "87").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "87").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "87").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4308,9 +4274,9 @@ const FactoryQuestions = () => {
                 {/* Question 88 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "88").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "88").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "88").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "88").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4342,9 +4308,9 @@ const FactoryQuestions = () => {
                 {/* Question 89 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "89").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "89").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "89").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "89").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4378,9 +4344,9 @@ const FactoryQuestions = () => {
                 {/* Question 90 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "90").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "90").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "90").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "90").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4414,9 +4380,9 @@ const FactoryQuestions = () => {
                 {/* Question 91 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "91").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "91").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "91").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "91").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4450,9 +4416,9 @@ const FactoryQuestions = () => {
                 {/* Question 92 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "92").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "92").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "92").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "92").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4486,9 +4452,9 @@ const FactoryQuestions = () => {
                 {/* Question 93 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "93").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "93").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "93").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "93").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4522,9 +4488,9 @@ const FactoryQuestions = () => {
                 {/* Question 94 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "94").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "94").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "94").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "94").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4558,9 +4524,9 @@ const FactoryQuestions = () => {
                 {/* Question 95 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "95").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "95").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "95").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "95").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4594,9 +4560,9 @@ const FactoryQuestions = () => {
                 {/* Question 96 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "96").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "96").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "96").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "96").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4630,9 +4596,9 @@ const FactoryQuestions = () => {
                 {/* Question 97 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "97").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "97").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "97").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "97").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4666,9 +4632,9 @@ const FactoryQuestions = () => {
                 {/* Question 98 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "98").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "98").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "98").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "98").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4696,9 +4662,9 @@ const FactoryQuestions = () => {
                 {/* Question 99 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "99").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "99").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "99").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "99").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4732,9 +4698,9 @@ const FactoryQuestions = () => {
                 {/* Question 100 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "100").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "100").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "100").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "100").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4768,9 +4734,9 @@ const FactoryQuestions = () => {
                 {/* Question 101 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "101").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "101").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "101").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "101").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4802,9 +4768,9 @@ const FactoryQuestions = () => {
                 {/* Question 102 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "102").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "102").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "102").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "102").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4838,9 +4804,9 @@ const FactoryQuestions = () => {
                 {/* Question 103 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "103").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "103").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "103").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "103").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4872,9 +4838,9 @@ const FactoryQuestions = () => {
                 {/* Question 104 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "104").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "104").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "104").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "104").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4908,9 +4874,9 @@ const FactoryQuestions = () => {
                 {/* Question 105 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "105").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "105").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "105").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "105").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4944,9 +4910,9 @@ const FactoryQuestions = () => {
                 {/* Question 106 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "106").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "106").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "106").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "106").q}</span>
                   <br />
                   <br />
                   <label>
@@ -4980,9 +4946,9 @@ const FactoryQuestions = () => {
                 {/* Question 107 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "107").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "107").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "107").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "107").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5014,9 +4980,9 @@ const FactoryQuestions = () => {
                 {/* Question 108 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "108").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "108").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "108").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "108").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5050,9 +5016,9 @@ const FactoryQuestions = () => {
                 {/* Question 109 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "109").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "109").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "109").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "109").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5082,9 +5048,9 @@ const FactoryQuestions = () => {
                 {/* Question 110 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "110").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "110").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "110").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "110").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5118,9 +5084,9 @@ const FactoryQuestions = () => {
                 {/* Question 111 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "111").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "111").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "111").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "111").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5154,9 +5120,9 @@ const FactoryQuestions = () => {
                 {/* Question 112 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "112").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "112").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "112").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "112").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5190,9 +5156,9 @@ const FactoryQuestions = () => {
                 {/* Question 113 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "113").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "113").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "113").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "113").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5226,9 +5192,9 @@ const FactoryQuestions = () => {
                 {/* Question 114 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "114").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "114").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "114").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "114").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5262,9 +5228,9 @@ const FactoryQuestions = () => {
                 {/* Question 115 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "115").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "115").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "115").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "115").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5298,9 +5264,9 @@ const FactoryQuestions = () => {
                 {/* Question 116 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "116").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "116").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "116").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "116").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5334,9 +5300,9 @@ const FactoryQuestions = () => {
                 {/* Question 117 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "117").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "117").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "117").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "117").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5370,9 +5336,9 @@ const FactoryQuestions = () => {
                 {/* Question 118 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "118").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "118").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "118").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "118").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5406,9 +5372,9 @@ const FactoryQuestions = () => {
                 {/* Question 119 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "119").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "119").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "119").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "119").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5442,9 +5408,9 @@ const FactoryQuestions = () => {
                 {/* Question 120 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "120").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "120").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "120").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "120").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5478,9 +5444,9 @@ const FactoryQuestions = () => {
                 {/* Question 121 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "121").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "121").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{supplierJson.find((f) => f.id === "121").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "121").q}</span>
                   <br />
                   <br />
                   <label>
@@ -5511,13 +5477,13 @@ const FactoryQuestions = () => {
                     No
                   </label>
                 </div>
-                {/* Question 123 */}
+                {/* Question 122 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "122").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "122").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "122").q}{" "}
+                    {factoryJson.find((f) => f.id === "122").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
@@ -5550,74 +5516,35 @@ const FactoryQuestions = () => {
                   </label>
                   <br />
                   <br />
-                  {/* This Question is Dependent on Question 123. */}
+                  {/* This Question is Dependent on Question 122. */}
                   <div>
                     {supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
                       "no" && (
                       <div className="field-sections">
                         <span>
-                          Q.{supplierJson.find((f) => f.id === "123").id}
+                          Q.{factoryJson.find((f) => f.id === "123").id}
                           :&nbsp;&nbsp;
                         </span>
-                        <span>
-                          {supplierJson.find((f) => f.id === "123").q}
-                        </span>
+                        <span>{factoryJson.find((f) => f.id === "123").q}</span>
                         <input
                           onChange={handleChange}
                           placeholder="Enter your answer"
                           type="text"
-                          name="Qs123_SubstancesListedYESNO" // Add name attribute
+                          name="Qs122_SubstancesListedYESNO" // Add name attribute
                           className="mt-3 outline-none w-100"
                           id="name-text"
                         />
                       </div>
                     )}
                   </div>
+
                   {/* Question 124 */}
                   <div className="field-sections">
-                    <span>Q.124:&nbsp;&nbsp;</span>
                     <span>
-                      Do you produce mercury in your company or do you use
-                      mercury or products containing mercury or do you treat
-                      mercury waste?
-                    </span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs124_ProduceMercuryUseMercuryContainingMercury"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs124_ProduceMercuryUseMercuryContainingMercury ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs124_ProduceMercuryUseMercuryContainingMercury"
-                        checked={
-                          supplierData.Qs124_ProduceMercuryUseMercuryContainingMercury ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                  </div>
-                  {/* Question 125 */}
-                  <div className="field-sections">
-                    <span>
-                      Q.{supplierJson.find((f) => f.id === "125").id}
+                      Q.{factoryJson.find((f) => f.id === "124").id}
                       :&nbsp;&nbsp;
                     </span>
-                    <span>{supplierJson.find((f) => f.id === "125").q}</span>
+                    <span>{factoryJson.find((f) => f.id === "124").q}</span>
                     <br />
                     <br />
                     <label>
