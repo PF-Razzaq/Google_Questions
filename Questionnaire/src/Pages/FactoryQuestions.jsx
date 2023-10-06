@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import supplierJson from "../Json/supplierData.json";
+import factoryJson from "../Json/factoryData.json";
 let otherCountry;
 let recordId = 0;
-const SupplierQuestions = () => {
+const FactoryQuestions = () => {
   console.log("supplierJson", supplierJson);
   //   REACT_APP_FM_URL=https://server.pascalinesoft.com:4443
   // REACT_APP_BUILD_URL=apiuser
@@ -577,10 +577,10 @@ const SupplierQuestions = () => {
                 {/* Question 1 */}
                 <div className="field-sections">
                   <span>
-                    Q.{supplierJson.find((f) => f.id === "1").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "1").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {supplierJson.find((f) => f.id === "1").q}{" "}
+                    {factoryJson.find((f) => f.id === "1").q}{" "}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
@@ -5733,4 +5733,4 @@ const SupplierQuestions = () => {
   );
 };
 
-export default SupplierQuestions;
+export default FactoryQuestions;

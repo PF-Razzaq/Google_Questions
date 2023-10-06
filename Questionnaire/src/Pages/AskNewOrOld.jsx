@@ -75,8 +75,25 @@ const AskNewOrOld = () => {
 
           <div
             className="col-12 col-md-6 bg-white mt-1"
-            style={{ width: "770px", borderRadius: "8px" }}
+            style={{ width: "95%", borderRadius: "8px" }}
           >
+            <br />
+            <p>
+              Dear Valued Supplier, XXX is committed to responsible business
+              conduct. Our Social Compliance Commitment (incl. the Act on
+              Corporate Due Diligence Obligations in Supply Chains –
+              (Lieferkettensorgfaltspflichtengesetz (LkSG)) requires our
+              suppliers to submit questionnaires incl. required supporting
+              documents. Please take a few minutes to provide your latest / up
+              to date information. Please fill in when you are a Trader or
+              Manufacturer / Trader, additionally please fill in our Factory
+              Profile for each of your producing factory. Every factory
+              producing products for XXX must be covered. Important All
+              information collected in this questionnaire will only be used for
+              internal supplier mapping and management and will be treated as
+              strictly confidential. Thank you, XXX
+            </p>
+            <br />
             <h2 className="mt-2">Are you new or Existing User:</h2>
             <div className="form-check " style={{ width: "100px" }}>
               <input
@@ -111,7 +128,7 @@ const AskNewOrOld = () => {
             <button
               onClick={() => {
                 localStorage.setItem("userCheck", selectedOption);
-                navigate("/CompanyInformation");
+                navigate("/supplierquestions");
               }}
               className="submit-btn"
             >

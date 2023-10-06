@@ -1,534 +1,523 @@
 [
   {
     "id": "1",
-    "q": "Supplier Name"
+    "q": "Factory Name"
   },
   {
     "id": "2",
-    "q": "Supplier Business License Number"
+    "q": "Factory Business License Number"
   },
   {
     "id": "3",
-    "q": "Supplier Export License Number(Please provide information as in business license and only enter in ENGLISH)"
+    "q": "Factory VAT Number"
   },
   {
-    "id": "4",
-    "q": "Supplier VAT Number"
+    "id": "4a",
+    "q": "Building"
+  },
+  {
+    "id": "4b",
+    "q": "Street"
   },
   {
     "id": "5a",
-    "q": "Building (Example : Block 1, Qingxi Industrial Park)"
+    "q": "Town"
   },
   {
     "id": "5b",
-    "q": "Street (Example : 8, Yinsong Road)"
+    "q": "City"
   },
   {
-    "id": "6a",
-    "q": "Town (Example : Qingxizhen)"
+    "id": "5c",
+    "q": "Province"
   },
+
   {
-    "id": "6b",
-    "q": "City (Example : Dongguan)"
-  },
-  {
-    "id": "6c",
-    "q": "Province (Example : Guangdong)"
-  },
-  {
-    "id": "7",
+    "id": "6",
     "q": "Post Code"
   },
   {
-    "id": "8",
+    "id": "7",
     "q": "Country"
+  },
+  {
+    "id": "8",
+    "q": "Recommended Hotels"
   },
   {
     "id": "9a",
-    "q": "Phone"
-  },
-  {
-    "id": "9b",
-    "q": "Cell Phone"
-  },
-  {
-    "id": "10",
-    "q": "E-Mail"
-  },
-  {
-    "id": "11",
-    "q": "Website"
-  },
-  {
-    "id": "12a",
     "q": "Salutation"
   },
   {
-    "id": "12b",
+    "id": "9b",
     "q": "First Name"
   },
   {
-    "id": "12c",
+    "id": "9c",
     "q": "Last Name"
   },
   {
-    "id": "13",
+    "id": "10",
     "q": "Contact Person Position"
   },
   {
+    "id": "11a",
+    "q": "Phone"
+  },
+  {
+    "id": "11b",
+    "q": "Cell Phone"
+  },
+  {
+    "id": "12",
+    "q": "E-Mail"
+  },
+  {
+    "id": "13",
+    "q": "Website"
+  },
+  {
     "id": "14",
-    "q": "Year of Establishment"
+    "q": "Current Location Since"
   },
   {
     "id": "15",
-    "q": "Total Number of Employees"
+    "q": "Number of Factory Buildings and / or Levels (Please separate by \"/\" incl. space, e.g., x building(s) times x level(s) / building(s) times x level(s))"
   },
   {
     "id": "16",
-    "q": "Ownership"
+    "q": "Other Factories / Warehouses located in the same Building(s)"
   },
   {
     "id": "17",
-    "q": "Business Category"
+    "q": "Do they belong to the same Management"
   },
   {
     "id": "18",
-    "q": "Main Products"
+    "q": "Dormitory provided"
   },
   {
     "id": "19",
-    "q": "Sales per Year / Domestic / (Mio USD)"
+    "q": "Dormitory total Size (in sqm)"
   },
   {
     "id": "20",
-    "q": "Sales per Year / Export / (Mio USD)"
+    "q": "Property total Size (in sqm)"
   },
   {
     "id": "21",
-    "q": "Main Customers and Country "
+    "q": "Warehouse total Size (in sqm) and levels occupied"
   },
   {
     "id": "22",
-    "q": "Main Customer Products"
+    "q": "Production Site total Size (in sqm) and levels occupied"
   },
   {
     "id": "23",
-    "q": "Main Export Markets"
+    "q": "Year of Establishment"
   },
   {
     "id": "24",
-    "q": "Trade Fair"
+    "q": "Factory Main Product Category (Please separate by \"/\" incl. space, e.g., product 1 / product 2)"
   },
   {
     "id": "25",
-    "q": "Trade Fair Participation"
+    "q": "Factory Annual Capacity"
   },
   {
     "id": "26",
-    "q": "Show Room"
+    "q": "Factory Annual Turnover (USD)"
   },
   {
     "id": "27",
-    "q": "Delivery lead time for initial order (in working days)"
+    "q": "Ownership"
   },
   {
     "id": "28",
-    "q": "Delivery lead time for repeat orders (in working days)"
+    "q": "Subcontracting"
   },
   {
     "id": "29",
-    "q": "Beneficiary Name"
+    "q": "Quality Management System"
   },
   {
     "id": "30",
-    "q": "Bank Name"
+    "q": "Social Compliance Audits"
   },
   {
     "id": "31",
-    "q": "Bank Address"
+    "q": "Audit Type"
   },
   {
     "id": "32",
-    "q": "Country of Bank A/C"
+    "q": "Audit Result"
   },
   {
     "id": "33",
-    "q": "Bank Phone"
+    "q": "Audit Date"
   },
   {
     "id": "34",
-    "q": "Bank Regional Number"
+    "q": "Audit Validity"
   },
   {
     "id": "35",
-    "q": "SWIFT"
+    "q": "Audit Company"
   },
   {
     "id": "36",
-    "q": "IBAN"
+    "q": "Social Audit Report Upload (File naming: Supplier Name_Auditing Company_Audit Date (ddmmyyyy)"
   },
   {
     "id": "37",
-    "q": "Beneficiary Bank A/C Number"
+    "q": "Total Number of Employees"
   },
   {
-    "id": "38a",
-    "q": "Select to whom you place orders"
-  },
-  {
-    "id": "38b",
-    "q": "Code of Conduct Signature and Upload (for H Company orders only)"
+    "id": "38",
+    "q": "Personnel Structure (Admin in Percentage)"
   },
   {
     "id": "39",
-    "q": "Does the Law on Corporate Due Diligence to Prevent Human Rights Violations in Supply Chains (LkSG) apply to your company according to § 1 LkSG?"
+    "q": "Personnel Structure (Production in Percentage)"
   },
   {
     "id": "40",
-    "q": "Can you confirm that your company fulfils the due diligence obligations contained in § 3 paragraph 1 sentence 2 LkSG?"
+    "q": "Personnel Structure (R&D in Percentage)"
   },
   {
     "id": "41",
-    "q": "Please choose the lead factory and fill in the rest of the questionnaire: Name"
+    "q": "Personnel Structure (QA in Percentage)"
   },
   {
     "id": "42",
-    "q": "Address"
+    "q": "Personnel Structure (Management in Percentage)"
   },
   {
     "id": "43",
-    "q": "Country"
+    "q": "Workers Statistic (Male in Percentage)"
   },
   {
     "id": "44",
-    "q": "Industry"
+    "q": "Workers Statistic (Female in Percentage)"
   },
   {
     "id": "45",
-    "q": "Have you been issued the \"Fair Labor Accreditation\" evidence?"
+    "q": "Workers Statistic (Local in Percentage)"
   },
   {
     "id": "46",
-    "q": "Have you been issued the \"Fair Stone\" evidence?"
+    "q": "Workers Statistic (Migrant in Percentage)"
   },
   {
     "id": "47",
-    "q": "Have you been issued the \"Global Organic Textile Standard\" evidence?"
+    "q": "Work in Shifts"
   },
   {
     "id": "48",
-    "q": "Have you been issued the 'Fair Trade' evidence?"
+    "q": "Max. Number of Shift(s)"
   },
   {
     "id": "49",
-    "q": "Have you been issued the \"IGEP\" evidence?"
+    "q": "Have you been issued the \"Fair Labor Accreditation\" evidence?"
   },
   {
     "id": "50",
-    "q": "Have you been issued the \"OEKO-TEX® MADE IN GREEN\" evidence?"
+    "q": "Have you been issued the \"Fair Stone\" evidence?"
   },
   {
     "id": "51",
-    "q": "Have you been issued the \"SMETA (Sedex)\" evidence?"
+    "q": "Have you been issued the \"Global Organic Textile Standard\" evidence?"
   },
   {
     "id": "52",
-    "q": "Have you been issued the \"Social Accountability International - SA8000\" evidence?"
-  },
-  {
-    "id": "53",
-    "q": "Have you been issued the \"XertifiX Standard\" evidence?"
-  },
-  {
-    "id": "54",
-    "q": "Have you been issued the \"XertifiX PLUS\" evidence?"
-  },
-  {
-    "id": "55",
-    "q": "Have you been issued the \"AMFORI BEPI (Level 1, 2, 3)\" evidence?"
-  },
-  {
-    "id": "56",
-    "q": "Have you been issued the \"DIN EN ISO 14001\" evidence?"
-  },
-  {
-    "id": "57",
     "q": "Have you been issued the \"Grüner Knopf\" evidence?"
   },
   {
+    "id": "53",
+    "q": "Have you been issued the \"IGEP\" evidence?"
+  },
+  {
+    "id": "54",
+    "q": "Have you been issued the \"OEKO-TEX® MADE IN GREEN\" evidence?"
+  },
+  {
+    "id": "55",
+    "q": "Have you been issued the \"SMETA (Sedex)\" evidence?"
+  },
+  {
+    "id": "56",
+    "q": "Have you been issued the \"Social Accountability International - SA8000\" evidence?"
+  },
+  {
+    "id": "57",
+    "q": "Have you been issued the \"XertifiX Standard\" evidence?"
+  },
+  {
     "id": "58",
-    "q": "Have you been issued the \"IGEP (ISES 2020 Audit)\" evidence?"
+    "q": "Have you been issued the \"XertifiX PLUS\" evidence?"
   },
   {
     "id": "59",
-    "q": "Have you been issued the \"DIN EN ISO 45001\" evidence?"
+    "q": "Have you been issued the \"AMFORI BEPI (Level 1, 2, 3)\" evidence?"
   },
   {
     "id": "60",
-    "q": "Do you contractually obligate your direct suppliers to comply with national environmental laws?"
+    "q": "Have you been issued the \"DIN EN ISO 14001\" evidence?"
   },
   {
     "id": "61",
-    "q": "Do you require your direct suppliers to respect human rights?"
+    "q": "Have you been issued the \"Grüner Knopf\" evidence?"
   },
   {
     "id": "62",
-    "q": "Do you carry out an annual or event-related risk analysis in your company?"
+    "q": "Have you been issued the \"IGEP (ISES 2020 Audit)\" evidence?"
   },
   {
     "id": "63",
-    "q": "Do you conduct standard on-site inspections/audits of direct suppliers?"
+    "q": "Have you been issued the \"DIN EN ISO 45001\" evidence?"
   },
   {
     "id": "64",
-    "q": "Which topics are subject to controls/audits?"
-  },
-  {
-    "id": "65",
     "q": "Do you check the age of your workers as part of the hiring process?"
   },
   {
-    "id": "66",
+    "id": "65",
     "q": "Is the age of your workers also verified when the hiring process is conducted by placement agencies?"
   },
   {
-    "id": "67",
+    "id": "66",
     "q": "Do you employ persons under the age of 18?"
   },
   {
-    "id": "68",
+    "id": "67",
     "q": "Do you employ persons under the age of 15?"
   },
   {
-    "id": "69",
+    "id": "68",
     "q": "Are there work instructions for which work persons under 18 are not allowed to be employed?"
   },
   {
-    "id": "70",
+    "id": "69",
     "q": "Do persons under the age of 18 perform work for you under water or underground?"
   },
   {
-    "id": "71",
+    "id": "70",
     "q": "Do persons under the age of 18 perform work for you at dangerous heights or in confined spaces?"
   },
   {
-    "id": "72",
+    "id": "71",
     "q": "Do persons under the age of 18 work with dangerous machinery, equipment or tools?"
   },
   {
-    "id": "73",
+    "id": "72",
     "q": "Do people under 18 handle or transport heavy loads in your business?"
   },
   {
-    "id": "74",
+    "id": "73",
     "q": "Do persons under the age of 18 work with hazardous substances, agents or processes?"
   },
   {
-    "id": "75",
+    "id": "74",
     "q": "Do persons under the age of 18 work in areas with harmful temperatures, noise levels or vibrations?"
   },
   {
-    "id": "76",
+    "id": "75",
     "q": "Do persons under the age of 18 work in your company at night time?"
   },
   {
-    "id": "77",
+    "id": "76",
     "q": "Is there a predefined procedure if you suspect that one of your suppliers is unlawfully employing children?"
   },
   {
-    "id": "78",
+    "id": "77",
     "q": "Are persons under the age of 18 in your company in debt bondage, serfdom or forced or compulsory labor?"
   },
   {
-    "id": "79",
+    "id": "78",
     "q": "Is there any work in your company that is only performed when a penalty is threatened (e.g. withholding wages)?"
   },
   {
-    "id": "80",
+    "id": "79",
     "q": "Do you retain the identification documents of your employees?"
   },
   {
-    "id": "81",
+    "id": "80",
     "q": "Do you retain originals or copies of identification documents?"
   },
   {
-    "id": "82",
+    "id": "81",
     "q": "Do you impose penalties on your employees (e.g. withholding of wages, restriction of movement, withholding of identification documents, special work)?"
   },
   {
-    "id": "83",
+    "id": "82",
     "q": "Do you have employees who are so deep in debt to you that it takes them several years to pay off with their wages?"
   },
   {
-    "id": "84",
+    "id": "83",
     "q": "Is the weekly working time (including overtime) more than 60 hours or more than 10 hours per day?"
   },
   {
-    "id": "85",
+    "id": "84",
     "q": "Does your company employ people who have been required to work by the state (e.g. prisoners, military conscripts)?"
   },
   {
-    "id": "86",
+    "id": "85",
     "q": "Is there a predefined procedure if you suspect that forced or slave labor exists at one of your suppliers?"
   },
   {
-    "id": "87",
+    "id": "86",
     "q": "Does your company document the working hours and wages/remuneration of its employees?"
   },
   {
-    "id": "88",
+    "id": "87",
     "q": "Does your company have a health and safety policy that is appropriate for your company?"
   },
   {
-    "id": "89",
+    "id": "88",
     "q": "Does your organization have procedures in place to capture and assess security risks and to correct identified vulnerabilities?"
   },
   {
-    "id": "90",
+    "id": "89",
     "q": "Does your operation work at high altitudes, in confined spaces, or involve very high or low temperatures?"
   },
   {
-    "id": "91",
+    "id": "90",
     "q": "Do you work with hazardous chemical and biological substances?"
   },
   {
-    "id": "92",
+    "id": "91",
     "q": "Does your company have instructions on the use of special safety equipment (e.g. protective clothing)?"
   },
   {
-    "id": "93",
+    "id": "92",
     "q": "Is there a person responsible in your company for the safe storage, distribution and instruction regarding the safe handling of these substances?"
   },
   {
-    "id": "94",
+    "id": "93",
     "q": "Is there technical equipment for emergencies in your company and is it regularly checked and maintained (e.g. fire extinguishing system)?"
   },
   {
-    "id": "95",
+    "id": "94",
     "q": "Are there persons in your company who are specially trained to act in emergencies (e.g. first aid training)?"
   },
   {
-    "id": "96",
+    "id": "95",
     "q": "Does your company offer its employees the opportunity to provide feedback and complaints to management?"
   },
   {
-    "id": "97",
+    "id": "96",
     "q": "Are your employees regularly trained on the subject of occupational safety, especially when they are hired?"
   },
   {
-    "id": "98",
+    "id": "97",
     "q": "Are your employees organized in a union?"
   },
   {
-    "id": "99",
+    "id": "98",
     "q": "Are there bonuses or other benefits, if employees are not members of a union or leave a union?"
   },
   {
-    "id": "100",
+    "id": "99",
     "q": "Are employees hired or assigned to specific tasks based on national or ethnic origin, social origin, health status, disability, sexual orientation, age, gender, political opinion, religion, or belief?"
   },
   {
-    "id": "101",
+    "id": "100",
     "q": "Are workers unfairly paid differently for the same work for the reasons mentioned above?"
   },
   {
-    "id": "102",
+    "id": "101",
     "q": "Is there a statutory minimum wage in the country/countries where you work?"
   },
   {
-    "id": "103",
+    "id": "102",
     "q": "Do you pay the respective statutory minimum wage or more?"
   },
   {
-    "id": "104",
+    "id": "103",
     "q": "Do you pay at least a wage that is in line with the general wage level in your industry?"
   },
   {
-    "id": "105",
+    "id": "104",
     "q": "Is the wage reduced for benefits provided by your company to the employee (e.g., for work clothing, meals, accommodation)?"
   },
   {
-    "id": "106",
+    "id": "105",
     "q": "Within the last 20 years, has your company acquired land that was occupied immediately prior to acquisition?"
   },
   {
-    "id": "107",
+    "id": "106",
     "q": "Can you confirm that the land owned or held by your company has not been misappropriated?"
   },
   {
-    "id": "108",
+    "id": "107",
     "q": "Have you acquired any forest land or water bodies in the last 20 years that were not previously used for commercial purposes?"
   },
   {
-    "id": "109",
+    "id": "108",
     "q": "Do you employ security personnel in your company?"
   },
   {
-    "id": "110",
+    "id": "109",
     "q": "Are security personnel tasked with monitoring their workers beyond entry and exit checks?"
   },
   {
-    "id": "111",
+    "id": "110",
     "q": "Has your company defined characteristics/criteria against which relevant environmental impacts can be monitored? (e.g., measurement and monitoring of CO₂ emissions; water consumption)"
   },
   {
-    "id": "112",
+    "id": "111",
     "q": "Have there been any legal proceedings against your company for environmental pollution or similar in the last 5 years?"
   },
   {
-    "id": "113",
+    "id": "112",
     "q": "Are there work instructions and organizational precautions to minimize emissions to air, soil, and water?"
   },
   {
-    "id": "114",
+    "id": "113",
     "q": "Does your company have instructions and procedures on how to proceed in case of violation of environmental regulations?"
   },
   {
-    "id": "115",
+    "id": "114",
     "q": "Does your company publish a report on environmental goals and progress?"
   },
   {
-    "id": "116",
+    "id": "115",
     "q": "Does your business generate hazardous waste or does your company work with radioactive substances?"
   },
   {
-    "id": "117",
+    "id": "116",
     "q": "Do you work with an external disposal service provider?"
   },
   {
-    "id": "118",
+    "id": "117",
     "q": "Is the export of hazardous waste documented in your company?"
   },
   {
-    "id": "119",
+    "id": "118",
     "q": "Can you confirm that your company acts in accordance with the Basel Convention on the Control of Transboundary Movements of Hazardous Wastes and their Disposal?"
   },
   {
-    "id": "120",
+    "id": "119",
     "q": "Do you use persistent organic pollutants?"
   },
   {
-    "id": "121",
+    "id": "120",
     "q": "Can you confirm that your company acts in accordance with the Stockholm Convention on Persistent Organic Pollutants (POPs)?"
   },
   {
-    "id": "122",
+    "id": "121",
     "q": "Can you confirm that you do not use or manufacture substances listed in Annex I of Regulation (EU) 2019/1021?"
   },
   {
-    "id": "123",
+    "id": "122",
     "q": "Which of the substances listed in Annex I of Regulation (EU) 2019/1021 or in Annex A of the Stockholm POP Convention do you use?"
   },
   {
-    "id": "124",
+    "id": "123",
     "q": "Do you produce mercury in your company or do you use mercury or products containing mercury or do you treat mercury waste?"
   },
   {
-    "id": "125",
+    "id": "124",
     "q": "Can you assure that your company operates in accordance with the Minamata Convention on the Control of Emissions and Releases of the Heavy Metal Mercury?"
-  },
-  {
-    "id": "m1",
-    "q": "The submission was successful!"
   }
 ]
