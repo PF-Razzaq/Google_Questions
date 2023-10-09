@@ -11,13 +11,8 @@ import factoryJson from "../Json/factoryData.json";
 let otherCountry;
 let recordId = 0;
 const FactoryQuestions = () => {
-  console.log("factoryJson", factoryJson);
-  //   REACT_APP_FM_URL=https://server.pascalinesoft.com:4443
-  // REACT_APP_BUILD_URL=apiuser
-  // REACT_APP_PUBLIC_URL=apiuser
-  // REACT_APP_USERNAME=apiuser
-  // REACT_APP_PASSWORD=TomJerry88
-  // REACT_APP_DOWNLOAD_FILE=https://images.pascalinesoft.com/pdf/OnlineQuestionnairePhase1.pdf
+  const [otherFields, setOtherFields] = useState({});
+
   console.log(
     "process.env.REACT_APP_DOWNLOAD_FILE,process.env.REACT_APP_FM_URL,process.env.REACT_APP_USERNAME",
     process.env.REACT_APP_DOWNLOAD_FILE,
@@ -42,40 +37,35 @@ const FactoryQuestions = () => {
     // document.body.removeChild(link);
   };
   console.log("countryCode4", countryCode);
-  const [file, setFile] = useState();
-  const [otherFields, setOtherFields] = useState({});
-  const [dilligenceFile, setDilligenceFile] = useState();
-  const [issuedFairLaborEvidence, setIssuedFairLaborEvidence] = useState();
-  const [issuedFairStoneEvidence, setIssuedFairStoneEvidence] = useState();
   const [
-    issuedGlobalOrganicTextileEvidence,
-    setIssuedGlobalOrganicTextileEvidence,
+    IssuedFairLaborAccreditationEvidence,
+    setIssuedFairLaborAccreditationEvidence,
   ] = useState();
-  const [issuedGrunerKnopfEvidence, setIssuedGrunerKnopfEvidence] = useState();
-
-  const [issuedIGEPEvidence, setIssuedIGEPEvidence] = useState();
-  const [issuedOEKOTEXGreenEvidence, setIssuedOEKOTEXGreenEvidence] =
+  const [IssuedFairStoneEvidence, setIssuedFairStoneEvidence] = useState();
+  const [IssuedGlobalOrganicEvidence, setIssuedGlobalOrganicEvidence] =
     useState();
-  const [issuedSMETASedexEvidence, setIssuedSMETASedexEvidence] = useState();
+  const [IssuedGrunerKnopfEvidence, setIssuedGrunerKnopfEvidence] = useState();
+  const [IssuedIGEPEvidence, setIssuedIGEPEvidence] = useState();
+  const [IssuedOEKOTEXEvidence, setIssuedOEKOTEXEvidence] = useState();
+  const [IssuedSMETAEvidence, setIssuedSMETAEvidence] = useState();
   const [
-    issuedSocialAccountabilitySA8000,
-    setIssuedSocialAccountabilitySA8000,
+    IssuedSocialAccountabilityEvidence,
+    setIssuedSocialAccountabilityEvidence,
   ] = useState();
-  const [issuedXertifixStandardEvidence, setIssuedXertifixStandardEvidence] =
+  const [IssuedXertifexStandardEvidence, setIssuedXertifexStandardEvidence] =
     useState();
-  const [issuedXertifixPlusEvidence, setIssuedXertifixPlusEvidence] =
+  const [IssuedXertifexPLUSEvidence, setIssuedXertifexPLUSEvidence] =
     useState();
-  const [issuedAMFORIBEPIEvidence, setIssuedAMFORIBEPIEvidence] = useState();
-  const [issuedDINENISO14001Evidence, setIssuedDINENISO14001Evidence] =
+  const [IssuedAMFORIBEPIEvidence, setIssuedAMFORIBEPIEvidence] = useState();
+  const [IssuedDINENISOEvidence, setIssuedDINENISOEvidence] = useState();
+  const [IssuedGrunerKnopfEvidence2, setIssuedGrunerKnopfEvidence2] =
     useState();
-  const [issuedGrunerKnopfEvidence1, setIssuedGrunerKnopfEvidence1] =
+  const [IssuedIGEP2020Evidence, setIssuedIGEP2020Evidence] = useState();
+  const [IssuedDINENISO45001Evidence, setIssuedDINENISO45001Evidence] =
     useState();
-  const [issuedIGEP2020AuditEvidence, setIssuedIGEP2020AuditEvidence] =
-    useState();
-  const [issuedDINENISO45001Evidence, setIssuedDINENISO45001Evidence] =
-    useState();
+  const [If33YesSocialAuditReport, setIf33YesSocialAuditReport] = useState();
   const navigate = useNavigate();
-  const [supplierData, setSupplierData] = useState({});
+  const [factoryData, setFactoryData] = useState({});
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedReview, setIsCheckedReview] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -90,8 +80,8 @@ const FactoryQuestions = () => {
       setOptions([...options, customOption]);
       setSelectedOption(customOption);
       setCustomOption("");
-      setSupplierData({
-        ...supplierData,
+      setFactoryData({
+        ...factoryData,
         Qs8_Country: customOption,
       });
     }
@@ -109,7 +99,7 @@ const FactoryQuestions = () => {
 
   const connectToDatabase = async (e) => {
     e.preventDefault();
-    const form = document.getElementById("supplierForm");
+    const form = document.getElementById("factoryForm");
     // const submitButtonValue = form.querySelector(
     //   '[name="submitBTN"]:checked'
     // ).value;
@@ -145,9 +135,9 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken")) {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records`,
+          `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Factory/records`,
 
-          { fieldData: supplierData },
+          { fieldData: factoryData },
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`, // Add the Bearer token here
@@ -202,7 +192,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && file) {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs38b_SignatureUpload/1`,
+          `${process.env.REACT_APP_FM_URL}/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs38b_SignatureUpload/1`,
           upload,
           {
             headers: {
@@ -227,7 +217,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && dilligenceFile) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs39b_HumanRightsViolations/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs39b_HumanRightsViolations/1`,
           upload,
           {
             headers: {
@@ -247,7 +237,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedFairLaborEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs45b_IssuedFairLaborEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs45b_IssuedFairLaborEvidence/1`,
           upload,
           {
             headers: {
@@ -267,7 +257,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedFairStoneEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs46b_IssuedFairStoneEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs46b_IssuedFairStoneEvidence/1`,
           upload,
           {
             headers: {
@@ -290,7 +280,7 @@ const FactoryQuestions = () => {
     ) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs51b_IssuedGlobalOrganicTextileEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs51b_IssuedGlobalOrganicTextileEvidence/1`,
           upload,
           {
             headers: {
@@ -310,7 +300,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedGrunerKnopfEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs48b_IssuedGrunerKnopfEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs48b_IssuedGrunerKnopfEvidence/1`,
           upload,
           {
             headers: {
@@ -330,7 +320,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedIGEPEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs49b_IssuedIGEPEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs49b_IssuedIGEPEvidence/1`,
           upload,
           {
             headers: {
@@ -350,7 +340,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedOEKOTEXGreenEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs50b_IssuedOEKOTEXGreenEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs50b_IssuedOEKOTEXGreenEvidence/1`,
           upload,
           {
             headers: {
@@ -370,7 +360,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedSMETASedexEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs51b_IssuedSMETASedexEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs51b_IssuedSMETASedexEvidence/1`,
           upload,
           {
             headers: {
@@ -393,7 +383,7 @@ const FactoryQuestions = () => {
     ) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs52b_IssuedSocialAccountabilitySA8000/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs52b_IssuedSocialAccountabilitySA8000/1`,
           upload,
           {
             headers: {
@@ -416,7 +406,7 @@ const FactoryQuestions = () => {
     ) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs53b_IssuedXertifixStandardEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs53b_IssuedXertifixStandardEvidence/1`,
           upload,
           {
             headers: {
@@ -436,7 +426,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedXertifixPlusEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs54b_IssuedXertifixPlusEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs54b_IssuedXertifixPlusEvidence/1`,
           upload,
           {
             headers: {
@@ -456,7 +446,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedDINENISO14001Evidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs56b_IssuedDINENISO14001Evidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs56b_IssuedDINENISO14001Evidence/1`,
           upload,
           {
             headers: {
@@ -476,7 +466,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedGrunerKnopfEvidence1) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs57b_IssuedGrunerKnopfEvidence_2/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs57b_IssuedGrunerKnopfEvidence_2/1`,
           upload,
           {
             headers: {
@@ -497,7 +487,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedAMFORIBEPIEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs55b_IssuedAMFORIBEPIEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs55b_IssuedAMFORIBEPIEvidence/1`,
           upload,
           {
             headers: {
@@ -517,7 +507,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedIGEP2020AuditEvidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs58b_IssuedIGEP2020AuditEvidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs58b_IssuedIGEP2020AuditEvidence/1`,
           upload,
           {
             headers: {
@@ -537,7 +527,7 @@ const FactoryQuestions = () => {
     if (localStorage.getItem("filemakerToken") && issuedDINENISO45001Evidence) {
       try {
         const response = await axios.post(
-          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Supplier Records/records/${recordId}/containers/Qs59b_IssuedDINENISO45001Evidence/1`,
+          `https://server.pascalinesoft.com:4443/fmi/data/v2/databases/Registration/layouts/Factory/records/${recordId}/containers/Qs59b_IssuedDINENISO45001Evidence/1`,
           upload,
           {
             headers: {
@@ -558,12 +548,12 @@ const FactoryQuestions = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSupplierData({
-      ...supplierData,
+    setFactoryData({
+      ...factoryData,
       [name]: value,
     });
   };
-  console.log("supplierData3", supplierData, options);
+  console.log("factoryData4", factoryData, options);
   const handleSubmitButton = () => {
     connectToDatabase();
   };
@@ -574,7 +564,6 @@ const FactoryQuestions = () => {
           <div className="form-sections p-5">
             <div className="form-field">
               <form id="supplierForm" onSubmit={connectToDatabase}>
-                {/* Question 1 */}
                 <div className="field-sections">
                   <span>
                     Q.{factoryJson.find((f) => f.id === "1").id}:&nbsp;&nbsp;
@@ -587,7 +576,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs1_FactoryName" // Add name attribute
+                    name="Qf1_FactoryName" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -607,10 +596,10 @@ const FactoryQuestions = () => {
                     placeholder="Enter your answer"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                     }}
                     // pattern="[0-]*"
-                    name="Qs2_SuppBusinessLicenseNumber" // Add name attribute
+                    name="Qf2_FactoryBusinessLicenseNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -630,10 +619,10 @@ const FactoryQuestions = () => {
                     placeholder="Enter your answer"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                     }}
                     pattern="[0-]*"
-                    name="Qs3_SuppExportLicenseNumber" // Add name attribute
+                    name="Qf3_FactoryVATNumber" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -674,7 +663,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs5a_Building" // Add name attribute
+                    name="Qf4a_Building" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -689,7 +678,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs5b_Street" // Add name attribute
+                    name="Qf4b_Street" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -706,7 +695,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs6a_Town" // Add name attribute
+                    name="Qf5a_Town" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -721,7 +710,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs6b_City" // Add name attribute
+                    name="Qf5b_City" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -736,7 +725,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs6c_Province" // Add name attribute
+                    name="Qf5c_Province" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -754,7 +743,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs7_PostCode" // Add name attribute
+                    name="Qf6_PostCode" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -768,20 +757,20 @@ const FactoryQuestions = () => {
                   <span>{factoryJson.find((f) => f.id === "7").q}</span>
                   <span style={{ color: "red" }}>*</span>
                   <select
-                    value={supplierData.Qs8_Country}
+                    value={factoryData.Qf7_Country}
                     onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs8_Country: e.target.value,
+                      setFactoryData({
+                        ...factoryData,
+                        Qf7_Country: e.target.value,
                       });
                       setOtherFields({
                         ...otherFields,
-                        q8Other: e.target.value,
+                        q7Other: e.target.value,
                       });
                     }}
                     className="form-select"
                     aria-label="Default select example"
-                    name="Qs8_Country"
+                    name="Qf7_Country"
                   >
                     <option disabled selected>
                       Choose Country
@@ -797,13 +786,13 @@ const FactoryQuestions = () => {
                     ))}
                     <option value="other">Other</option>
                   </select>
-                  {otherFields.q8Other === "other" && (
+                  {otherFields.q7Other === "other" && (
                     <div className="input-group w-25 mt-2">
                       <input
                         onChange={(e) => {
-                          setSupplierData({
-                            ...supplierData,
-                            Qs8_Country: e.target.value,
+                          setFactoryData({
+                            ...factoryData,
+                            Qf7_Country: e.target.value,
                           });
                         }}
                         type="text"
@@ -819,11 +808,11 @@ const FactoryQuestions = () => {
                           type="button"
                           onClick={() => {
                             if (
-                              supplierData.Qs8_Country.toLowerCase() !== "other"
+                              factoryData.Qf7_Country.toLowerCase() !== "other"
                             ) {
-                              options.push(supplierData.Qs8_Country);
+                              options.push(factoryData.Qf7_Country);
                               setOptions(options);
-                              setSupplierData({ ...supplierData });
+                              setFactoryData({ ...factoryData });
                             }
                           }}
                         >
@@ -844,13 +833,12 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs7_PostCode" // Add name attribute
+                    name="Qf8_RecommendedHotel" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                   />
                 </div>
                 <h4 className="supplier-heading">Factory Contact Details</h4>
-                {/* Question  8*/}
                 {/* Question  9*/}
                 <div className="field-sections">
                   <span>Q.9:&nbsp;&nbsp;</span>
@@ -859,12 +847,12 @@ const FactoryQuestions = () => {
                     className="form-select"
                     aria-label="Default select example"
                     onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs12a_salutation: e.target.value,
+                      setFactoryData({
+                        ...factoryData,
+                        Qf9a_ContactPersonSalary: e.target.value,
                       });
                     }}
-                    name="Qs12a_salutation"
+                    name="Qf9a_ContactPersonSalary"
                   >
                     <option disabled selected>
                       {factoryJson.find((f) => f.id === "9a").q}
@@ -882,7 +870,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs12b_FirstName" // Add name attribute
+                    name="Qf9b_ContactPersonFirstName" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -897,7 +885,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs12c_LastName" // Add name attribute
+                    name="Qf9c_ContactPersonLastName" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -913,7 +901,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs11_Website" // Add name attribute
+                    name="Qf10_ContactPersonPosition" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                   />
@@ -940,12 +928,12 @@ const FactoryQuestions = () => {
                     </select>
                     -
                     <input
-                      name="Qs9a_Phone"
+                      name="Qf11a_Phone"
                       type="number"
                       onInput={(e) => {
-                        e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                       }}
-                      pattern="[0-]*"
+                      pattern="[0-9]*"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
                       id="exampleInputEmail1"
@@ -976,10 +964,10 @@ const FactoryQuestions = () => {
                     <input
                       type="number"
                       onInput={(e) => {
-                        e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                       }}
-                      pattern="[0-]*"
-                      name="Qs9b_Cellphone"
+                      pattern="[0-9]*"
+                      name="Qf11b_CellPhone"
                       onChange={handleChange}
                       class="form-control ms-1 phoneNumberInput"
                       id="exampleInputEmail2"
@@ -1001,7 +989,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs13_ContactPersonPosition" // Add name attribute
+                    name="Qf12_Email" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -1020,14 +1008,14 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     type="text"
-                    name="Qs14_YearOfEstablishment" // Add name attribute
+                    name="Qf13_Website" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     maxLength={4}
                     minLength={4}
                     required
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                     }}
                   />
                 </div>
@@ -1045,10 +1033,10 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                     }}
                     pattern="[0-]*"
-                    name="Qs15_TotalNoOfEmployees" // Add name attribute
+                    name="Qf14_CurrentLocationSince" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -1059,77 +1047,19 @@ const FactoryQuestions = () => {
                   <span>
                     Q.{factoryJson.find((f) => f.id === "15").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "15").q}</span>
-                  <span style={{ color: "red" }}>*</span>
-                  <select
-                    value={supplierData.Qs16_Ownership}
-                    onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs16_Ownership: e.target.value,
-                      });
-                      setOtherFields({
-                        ...otherFields,
-                        Q16Other: e.target.value,
-                      });
-                    }}
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="Qs16_Ownership"
+                  <span>
+                    {factoryJson.find((f) => f.id === "15").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qf15_NumberFactoryBuildingLevel" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
                     required
-                  >
-                    <option disabled selected>
-                      Ownership
-                    </option>
-                    <option value="private">Private</option>
-                    <option value="public">Public</option>
-                    <option value="state">State</option>
-                    <option value="jointVenture">Joint Venture</option>
-                    <option value="belongsToGroup">Belongs to Group </option>
-                    {ownerships.map((ownership) => (
-                      <option key={ownership} value={ownership}>
-                        {ownership}
-                      </option>
-                    ))}
-                    <option value="other">Other</option>
-                  </select>
-
-                  {otherFields.Q16Other === "other" && (
-                    <div className="input-group w-25 mt-2">
-                      <input
-                        onChange={(e) => {
-                          setSupplierData({
-                            ...supplierData,
-                            Qs16_Ownership: e.target.value,
-                          });
-                        }}
-                        type="text"
-                        className="form-control w-25 rounded"
-                        placeholder="Enter Custom Option"
-                        aria-label="Enter text..."
-                        aria-describedby="basic-addon2"
-                        name="Qs16_Ownership"
-                        required
-                      />
-                      <div className="input-group-append">
-                        <button
-                          className="btn btn-primary ms-2"
-                          type="button"
-                          onClick={() => {
-                            if (
-                              supplierData.Qs16_Ownership.toLowerCase() !==
-                              "other"
-                            ) {
-                              setOwnerships([supplierData.Qs16_Ownership]);
-                              setSupplierData({ ...supplierData });
-                            }
-                          }}
-                        >
-                          Add Country
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                  />
                 </div>
                 {/* Question  16*/}
                 <div className="field-sections">
@@ -1137,92 +1067,130 @@ const FactoryQuestions = () => {
                     Q.{factoryJson.find((f) => f.id === "16").id}:&nbsp;&nbsp;
                   </span>
                   <span>{factoryJson.find((f) => f.id === "16").q}</span>
-                  <select
-                    value={supplierData.Qs17_BusinessCategory}
-                    onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs17_BusinessCategory: e.target.value,
-                      });
-                    }}
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="Qs17_BusinessCategory"
-                  >
-                    <option disabled selected>
-                      Business Category
-                    </option>
-                    <option value="trader">Trader</option>
-                    <option value="manufacturerTrader">
-                      Manufacturer / Trader
-                    </option>
-                  </select>
+                  <span style={{ color: "red" }}>*</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qf16_FactoryWarehouseLocated"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        factoryData.Qf16_FactoryWarehouseLocated === "yes"
+                      }
+                      onChange={handleChange}
+                      required
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qf16_FactoryWarehouseLocated"
+                      checked={
+                        factoryData.Qf16_FactoryWarehouseLocated === "no"
+                      }
+                      onChange={handleChange}
+                      required
+                    />
+                    No
+                  </label>
                 </div>
                 {/* Question  17*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "17").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "17").q}{" "}
+                {factoryData.Qf16_FactoryWarehouseLocated === "yes" && (
+                  <div className="field-sections">
+                    <span>
+                      Q.{factoryJson.find((f) => f.id === "17").id}:&nbsp;&nbsp;
+                    </span>
+                    <span>{factoryJson.find((f) => f.id === "17").q}</span>
                     <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs18_MainProducts" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
+                    <br />
+                    <br />
+                    <label>
+                      <input
+                        name="Qf17_If19YES"
+                        type="radio"
+                        value="yes"
+                        checked={factoryData.Qf17_If19YES === "yes"}
+                        onChange={handleChange}
+                        required
+                      />
+                      Yes
+                    </label>
+
+                    <label style={{ marginLeft: "1rem" }}>
+                      <input
+                        type="radio"
+                        value="no"
+                        name="Qf17_If19YES"
+                        checked={factoryData.Qf17_If19YES === "no"}
+                        onChange={handleChange}
+                        required
+                      />
+                      No
+                    </label>
+                  </div>
+                )}
                 {/* Question  18*/}
                 <div className="field-sections">
                   <span>
                     Q.{factoryJson.find((f) => f.id === "18").id}:&nbsp;&nbsp;
                   </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "18").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="This value must be a number"
-                    type="number"
-                    onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
-                    }}
-                    pattern="[0-]*"
-                    name="Qs19_SalesPerYearDomestic" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
+                  <span>{factoryJson.find((f) => f.id === "18").q}</span>
+                  <span style={{ color: "red" }}>*</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qf18_DormitoryProvided"
+                      type="radio"
+                      value="yes"
+                      checked={factoryData.Qf18_DormitoryProvided === "yes"}
+                      onChange={handleChange}
+                      required
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qf18_DormitoryProvided"
+                      checked={factoryData.Qf18_DormitoryProvided === "no"}
+                      onChange={handleChange}
+                      required
+                    />
+                    No
+                  </label>
                 </div>
                 {/* Question  19*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "19").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "19").q}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="This value must be a number"
-                    type="number"
-                    onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
-                    }}
-                    pattern="[0-]*"
-                    name="Qs20_SalesPerYearExport" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
+                {factoryData.Qf18_DormitoryProvided === "yes" && (
+                  <div className="field-sections">
+                    <span>
+                      Q.{factoryJson.find((f) => f.id === "19").id}:&nbsp;&nbsp;
+                    </span>
+                    <span>
+                      {factoryJson.find((f) => f.id === "19").q}
+                      <span style={{ color: "red" }}>*</span>
+                    </span>
+                    <input
+                      onChange={handleChange}
+                      placeholder="This value must be a number"
+                      type="number"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      }}
+                      pattern="[0-9]*"
+                      name="Qf19_If21YES" // Add name attribute
+                      className="mt-3 outline-none w-100"
+                      id="name-text"
+                      required
+                    />
+                  </div>
+                )}
                 {/* Question  20*/}
                 <div className="field-sections">
                   <span>
@@ -1234,9 +1202,13 @@ const FactoryQuestions = () => {
                   </span>
                   <input
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs21_MainCustomerAndCountry" // Add name attribute
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
+                    name="Qf20_PropertyTotalSize" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -1255,7 +1227,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs22_MainCustomerProducts" // Add name attribute
+                    name="Qf21_WarehouseTotalSize" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                     required
@@ -1269,79 +1241,17 @@ const FactoryQuestions = () => {
                   <span>{factoryJson.find((f) => f.id === "22").q}</span>
                   <span style={{ color: "red" }}>*</span>
 
-                  <select
-                    value={supplierData.Qs22_MainExportMarkets}
-                    onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs22_MainExportMarkets: e.target.value,
-                      });
-                      setOtherFields({
-                        ...otherFields,
-                        Q22Other: e.target.value,
-                      });
-                    }}
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="Qs22_MainExportMarkets"
+                  <input
+                    onChange={handleChange}
+                    placeholder="Enter your answer"
+                    type="text"
+                    name="Qf22_ProductionSiteTotalSize" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
                     required
-                  >
-                    <option disabled selected>
-                      Main Export Markets
-                    </option>
-                    <option value="westernEurope">Western Europe</option>
-                    <option value="easternEurope">Eastern Europe</option>
-                    <option value="northAmerica">North America</option>
-                    <option value="southAmerica">South America</option>
-                    <option value="asiaPacific">Asia Pacific</option>
-                    <option value="africa">Africa </option>
-                    <option value="middleEast">Middle East</option>
-                    <option value="worldwide">Worldwide</option>
-                    {exports.map((exp) => (
-                      <option key={exp} value={exp}>
-                        {exp}
-                      </option>
-                    ))}
-                    <option value="other">Other</option>
-                  </select>
-
-                  {setOtherFields.Q22Other === "other" && (
-                    <div className="input-group w-25 mt-2">
-                      <input
-                        onChange={(e) => {
-                          setSupplierData({
-                            ...supplierData,
-                            Qs22_MainExportMarkets: e.target.value,
-                          });
-                        }}
-                        type="text"
-                        className="form-control w-25 rounded"
-                        placeholder="Enter Custom Option"
-                        aria-label="Enter text..."
-                        aria-describedby="basic-addon2"
-                        name="Qs22_MainExportMarkets"
-                        required
-                      />
-                      <div className="input-group-append">
-                        <button
-                          className="btn btn-primary ms-2"
-                          type="button"
-                          onClick={() => {
-                            if (
-                              supplierData.Qs22_MainExportMarkets.toLowerCase() !==
-                              "other"
-                            ) {
-                              setExports([supplierData.Qs22_MainExportMarkets]);
-                              setSupplierData({ ...supplierData });
-                            }
-                          }}
-                        >
-                          Add Country
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                  />
                 </div>
+                <h3 className="supplier-heading">Factory Information</h3>
                 {/* Question 23 */}
                 <div className="field-sections">
                   <span>
@@ -1349,31 +1259,20 @@ const FactoryQuestions = () => {
                   </span>
                   <span>{factoryJson.find((f) => f.id === "23").q}</span>
                   <span style={{ color: "red" }}>*</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs24_TradeFair"
-                      type="radio"
-                      value="yes"
-                      checked={supplierData.Qs24_TradeFair === "yes"}
-                      onChange={handleChange}
-                      required
-                    />
-                    Yes
-                  </label>
-
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs24_TradeFair"
-                      checked={supplierData.Qs24_TradeFair === "no"}
-                      onChange={handleChange}
-                      required
-                    />
-                    No
-                  </label>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    type="text"
+                    name="Qf23_YearOfEstablishment" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    maxLength={4}
+                    minLength={4}
+                    required
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                  />
                 </div>
                 {/* Question  24*/}
                 <div className="field-sections">
@@ -1385,7 +1284,7 @@ const FactoryQuestions = () => {
                     onChange={handleChange}
                     placeholder="Enter your answer"
                     type="text"
-                    name="Qs25_TradeFairParticipation" // Add name attribute
+                    name="Qf24_FactoryMainProduct" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
                   />
@@ -1400,52 +1299,36 @@ const FactoryQuestions = () => {
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs26_ShowRoom"
-                      type="radio"
-                      value="yes"
-                      checked={supplierData.Qs26_ShowRoom === "yes"}
-                      onChange={handleChange}
-                      required
-                    />
-                    Yes
-                  </label>
-
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs26_ShowRoom"
-                      checked={supplierData.Qs26_ShowRoom === "no"}
-                      onChange={handleChange}
-                      required
-                    />
-                    No
-                  </label>
+                  <input
+                    onChange={handleChange}
+                    placeholder="This value must be a number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
+                    name="Qf25_FactoryAnualCapacity" // Add name attribute
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    required
+                  />
                 </div>
                 {/* Question  26*/}
                 <div className="field-sections">
                   <span>
                     Q.{factoryJson.find((f) => f.id === "26").id}:&nbsp;&nbsp;
                   </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "26").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
+                  <span>{factoryJson.find((f) => f.id === "26").q} </span>
                   <input
                     onChange={handleChange}
                     placeholder="This value must be a number"
                     type="number"
                     onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
                     }}
-                    pattern="[0-]*"
-                    name="Qs27_DeliveryLeadTimeInitialOrder" // Add name attribute
+                    pattern="[0-9]*"
+                    name="Qf26_FactoryAnualTurnOver" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
                   />
                 </div>
                 {/* Question  27*/}
@@ -1457,19 +1340,75 @@ const FactoryQuestions = () => {
                     {factoryJson.find((f) => f.id === "27").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="This value must be a number"
-                    type="number"
-                    onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
+                  <select
+                    value={factoryData.Qf27_Ownership}
+                    onChange={(e) => {
+                      setFactoryData({
+                        ...factoryData,
+                        Qf27_Ownership: e.target.value,
+                      });
+                      setOtherFields({
+                        ...otherFields,
+                        Q27Other: e.target.value,
+                      });
                     }}
-                    pattern="[0-]*"
-                    name="Qs28_DeliveryLeadTimeRepeatOrder" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qf27_Ownership"
                     required
-                  />
+                  >
+                    <option disabled selected>
+                      Ownership
+                    </option>
+                    <option value="private">Private</option>
+                    <option value="public">Public</option>
+                    <option value="state">State</option>
+                    <option value="jointVenture">Joint Venture</option>
+                    <option value="belongsToGroup">Belongs to Group </option>
+                    {ownerships.map((ownership) => (
+                      <option key={ownership} value={ownership}>
+                        {ownership}
+                      </option>
+                    ))}
+                    <option value="other">Other</option>
+                  </select>
+
+                  {otherFields.Q27Other === "other" && (
+                    <div className="input-group w-25 mt-2">
+                      <input
+                        onChange={(e) => {
+                          setFactoryData({
+                            ...factoryData,
+                            Qf27_Ownership: e.target.value,
+                          });
+                        }}
+                        type="text"
+                        className="form-control w-25 rounded"
+                        placeholder="Enter Custom Option"
+                        aria-label="Enter text..."
+                        aria-describedby="basic-addon2"
+                        name="Qf27_Ownership"
+                        required
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-primary ms-2"
+                          type="button"
+                          onClick={() => {
+                            if (
+                              factoryData.Qf27_Ownership.toLowerCase() !==
+                              "other"
+                            ) {
+                              setOwnerships([factoryData.Qf27_Ownership]);
+                              setFactoryData({ ...factoryData });
+                            }
+                          }}
+                        >
+                          Add Country
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <h3 className="supplier-heading">Bank Information</h3>
                 {/* Question  28*/}
@@ -1481,15 +1420,28 @@ const FactoryQuestions = () => {
                     {factoryJson.find((f) => f.id === "28").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs29_BeneficiaryName" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
+                  <select
+                    value={factoryData.Qf28_Subcontracting}
+                    onChange={(e) => {
+                      setFactoryData({
+                        ...factoryData,
+                        Qf28_Subcontracting: e.target.value,
+                      });
+                    }}
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qf28_Subcontracting"
                     required
-                  />
+                  >
+                    <option disabled selected>
+                      Subcontracting{" "}
+                    </option>
+                    <option value="yes-finish">Yes - Finished Products</option>
+                    <option value="yes-component">
+                      Yes - Components/Parts of Products
+                    </option>
+                    <option value="no">No</option>
+                  </select>
                 </div>
                 {/* Question  29*/}
                 <div className="field-sections">
@@ -1500,15 +1452,27 @@ const FactoryQuestions = () => {
                     {factoryJson.find((f) => f.id === "29").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs30_BankName" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
+                  <select
+                    value={factoryData.Qf29_QualityManagementSystem}
+                    onChange={(e) => {
+                      setFactoryData({
+                        ...factoryData,
+                        Qf29_QualityManagementSystem: e.target.value,
+                      });
+                    }}
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="Qf29_QualityManagementSystem"
                     required
-                  />
+                  >
+                    <option disabled selected>
+                      Quality Management System{" "}
+                    </option>
+                    <option value="yes">Yes</option>
+                    <option value="certified">Certified</option>
+                    <option value="no">No</option>
+                    <option value="planned">Planned</option>
+                  </select>
                 </div>
                 {/* Question  30*/}
                 <div className="field-sections">
@@ -1519,314 +1483,14 @@ const FactoryQuestions = () => {
                     {factoryJson.find((f) => f.id === "30").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs31_BankAddress" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  31*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "31").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "31").q}</span>
-                  <span style={{ color: "red" }}>*</span>
-                  <select
-                    value={supplierData.Qs32_CountryOfBankAC}
-                    onChange={(e) => {
-                      setSupplierData({
-                        ...supplierData,
-                        Qs32_CountryOfBankAC: e.target.value,
-                      });
-                      setOtherFields({
-                        ...otherFields,
-                        Q32Other: e.target.value,
-                      });
-                    }}
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="Qs32_CountryOfBankAC"
-                    required
-                  >
-                    <option disabled selected>
-                      Country of Bank Account
-                    </option>
-                    <option value="china">China</option>
-                    <option value="germany">Germany</option>
-                    <option value="hongkong">Hong Kong</option>
-                    <option value="india">India</option>
-                    <option value="taiwan">Taiwan</option>
-                    <option value="vietnam">Vietnam</option>
-                    {options32.map((option32) => (
-                      <option key={option32} value={option32}>
-                        {option32}
-                      </option>
-                    ))}
-                    <option value="other">Other</option>
-                  </select>
-
-                  {otherFields.Q32Other === "other" && (
-                    <div className="input-group w-25 mt-2">
-                      <input
-                        onChange={(e) => {
-                          setSupplierData({
-                            ...supplierData,
-                            Qs32_CountryOfBankAC: e.target.value,
-                          });
-                        }}
-                        type="text"
-                        className="form-control w-25 rounded"
-                        placeholder="Enter Custom Option"
-                        aria-label="Enter text..."
-                        name="Qs32_CountryOfBankAC"
-                        aria-describedby="basic-addon2"
-                      />
-
-                      <button
-                        className="btn btn-primary ms-1"
-                        type="button"
-                        onClick={() => {
-                          if (
-                            supplierData.Qs32_CountryOfBankAC.toLowerCase() !==
-                            "other"
-                          ) {
-                            setOptions32([supplierData.Qs32_CountryOfBankAC]);
-                            setSupplierData({ ...supplierData });
-                          }
-                        }}
-                      >
-                        Add Country Bank Account
-                      </button>
-                    </div>
-                  )}
-                </div>
-                {/* Question  32*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "32").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "32").q}</span>
-                  <div className="form-group d-flex">
-                    <select
-                      className="form-control countryCode me-1"
-                      id="countrySelect"
-                      name="Qs33_BankPhone"
-                    >
-                      {countryCode.map((country) => (
-                        <option key={country.code} value={country.dial_code}>
-                          {country.dial_code + "    " + " "} &nbsp; &nbsp;&nbsp;
-                          &nbsp;&nbsp; &nbsp;
-                          {" " + country.name}
-                        </option>
-                      ))}
-                    </select>
-                    -
-                    <input
-                      name="Qs33_BankPhone"
-                      placeholder="This value must be a number"
-                      type="number"
-                      onInput={(e) => {
-                        e.target.value = e.target.value.replace(/[^0-]/g, ""); // Remove non-digit characters
-                      }}
-                      pattern="[0-]*"
-                      onChange={handleChange}
-                      class="form-control ms-1 phoneNumberInput"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    ></input>
-                  </div>
-                </div>
-                {/* Question  33*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "33").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "33").q}</span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_BankRegionalNumber" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                  />
-                </div>
-                {/* Question  34*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "34").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "34").q}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  35*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "35").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "35").q}</span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs36_IBAN" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                  />
-                </div>
-                {/* Question  36*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "36").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "36").q}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs36_BeneficiaryBankACNumber" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  37*/}
-                <div className="field-sections">
-                  <span>Q.37:&nbsp;&nbsp;</span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "37").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
                   <br />
                   <br />
                   <label>
                     <input
-                      type="radio"
-                      name="Qs38a_HCompanyPCompany"
-                      value="H Company"
-                      checked={
-                        supplierData.Qs38a_HCompanyPCompany === "H Company"
-                      }
-                      onChange={handleChange}
-                    />
-                    H Company
-                  </label>
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      name="Qs38a_HCompanyPCompany"
-                      value="P Company"
-                      checked={
-                        supplierData.Qs38a_HCompanyPCompany === "P Company"
-                      }
-                      onChange={handleChange}
-                    />
-                    P Company
-                  </label>
-                  <br />
-                  <br />
-
-                  <div>
-                    {supplierData.Qs38a_HCompanyPCompany === "H Company" && (
-                      <div className="field-sections">
-                        <span>
-                          {factoryJson.find((f) => f.id === "37").q}{" "}
-                          <span style={{ color: "red" }}>*</span>
-                        </span>
-                        <br />
-                        <br />
-
-                        <button
-                          onClick={handleDownload}
-                          className="downloadFile"
-                        >
-                          <FiDownload
-                            style={{
-                              margin: "0 5px 3px 0",
-                              fontSize: "16px",
-                            }}
-                          />
-                          DOWNLOAD FILE
-                        </button>
-
-                        <br />
-                        <label className="file-input-button-upload">
-                          <input
-                            type="file"
-                            accept="application/pdf,image/jpeg,image/png"
-                            style={{ display: "none" }}
-                            onChange={(e) => {
-                              const MAX_FILE_SIZE_MB = 10;
-                              const fileSizeMB = (
-                                e.target.files[0].size /
-                                1024 /
-                                1024
-                              ).toFixed(2);
-
-                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setFile(e.target.files[0]);
-                              } else {
-                                toast.error(
-                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
-                                  {
-                                    position: toast.POSITION.TOP_CENTER,
-                                  }
-                                );
-                              }
-                            }}
-                          />
-                          <HiOutlineUpload
-                            style={{
-                              margin: "0 5px 3px 0",
-                              fontSize: "16px",
-                              display: file ? "none" : "inline-block",
-                            }}
-                          />
-                          <span className="file-input-button-label">
-                            {file
-                              ? `Uploaded file: ${file.name}`
-                              : "UPLOAD SIGNED FILE"}
-                          </span>
-                        </label>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {/* Question  38  Choose radio button show 40 question*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "38").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "38").q}</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs39a_HumanRightsViolations"
+                      name="Qf30_SocialComplainsAudit"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs39a_HumanRightsViolations === "yes"
-                      }
+                      checked={factoryData.Qf30_SocialComplainsAudit === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -1836,25 +1500,185 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs39a_HumanRightsViolations"
-                      checked={
-                        supplierData.Qs39a_HumanRightsViolations === "no"
-                      }
+                      name="Qf30_SocialComplainsAudit"
+                      checked={factoryData.Qf30_SocialComplainsAudit === "no"}
                       onChange={handleChange}
                     />
                     No
                   </label>
+                </div>
+                {factoryData.Qf30_SocialComplainsAudit === "yes" && (
+                  <>
+                    {/* Question 31 */}
+                    <div className="field-sections">
+                      <span>
+                        Q.{factoryJson.find((f) => f.id === "31").id}
+                        :&nbsp;&nbsp;
+                      </span>
+                      <span>{factoryJson.find((f) => f.id === "31").q}</span>
+                      <span style={{ color: "red" }}>*</span>
+                      <select
+                        value={factoryData.Qf31_If33YESAuditType}
+                        onChange={(e) => {
+                          setFactoryData({
+                            ...factoryData,
+                            Qf31_If33YESAuditType: e.target.value,
+                          });
+                          setOtherFields({
+                            ...otherFields,
+                            Q31Other: e.target.value,
+                          });
+                        }}
+                        className="form-select"
+                        aria-label="Default select example"
+                        name="Qf31_If33YESAuditType"
+                        required
+                      >
+                        <option disabled selected>
+                          Audit Type
+                        </option>
+                        <option value="private">Western Europe</option>
+                        <option value="public">SA8000</option>
+                        <option value="state">BSCI / amfori</option>
+                        <option value="jointVenture">WRAP</option>
+                        <option value="belongsToGroup">FLA </option>
+                        <option value="belongsToGroup">ICIT </option>
+                        <option value="belongsToGroup">SMETA / SEDEX </option>
+                        {ownerships.map((ownership) => (
+                          <option key={ownership} value={ownership}>
+                            {ownership}
+                          </option>
+                        ))}
+                        <option value="other">Other</option>
+                      </select>
 
-                  <br />
-
-                  <div>
-                    {supplierData.Qs39a_HumanRightsViolations === "yes" && (
+                      {otherFields.Q31Other === "other" && (
+                        <div className="input-group w-25 mt-2">
+                          <input
+                            onChange={(e) => {
+                              setFactoryData({
+                                ...factoryData,
+                                Qf31_If33YESAuditType: e.target.value,
+                              });
+                            }}
+                            type="text"
+                            className="form-control w-25 rounded"
+                            placeholder="Enter Custom Option"
+                            aria-label="Enter text..."
+                            aria-describedby="basic-addon2"
+                            name="Qf31_If33YESAuditType"
+                            required
+                          />
+                          <div className="input-group-append">
+                            <button
+                              className="btn btn-primary ms-2"
+                              type="button"
+                              onClick={() => {
+                                if (
+                                  factoryData.Qf31_If33YESAuditType.toLowerCase() !==
+                                  "other"
+                                ) {
+                                  setOwnerships([
+                                    factoryData.Qf31_If33YESAuditType.toUpperCase(),
+                                  ]);
+                                  setFactoryData({ ...factoryData });
+                                }
+                              }}
+                            >
+                              Add Country
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* Question 32 */}
+                    <div className="field-sections">
+                      <span>
+                        Q.{factoryJson.find((f) => f.id === "32").id}
+                        :&nbsp;&nbsp;
+                      </span>
+                      <span>{factoryJson.find((f) => f.id === "32").q}</span>
+                      <input
+                        name="Qf32_If33YESAuditResult"
+                        placeholder="This value must be a number"
+                        type="number"
+                        onInput={(e) => {
+                          e.target.value = e.target.value.replace(
+                            /[^0-9]/g,
+                            ""
+                          ); // Remove non-digit characters
+                        }}
+                        pattern="[0-9]*"
+                        onChange={handleChange}
+                        className="mt-3 outline-none w-100"
+                        id="name-text"
+                        aria-describedby="emailHelp"
+                      ></input>
+                    </div>
+                    {/* Question  33*/}
+                    <div className="field-sections">
+                      <span>
+                        Q.{factoryJson.find((f) => f.id === "33").id}
+                        :&nbsp;&nbsp;
+                      </span>
+                      <span>{factoryJson.find((f) => f.id === "33").q}</span>
+                      <input
+                        onChange={handleChange}
+                        placeholder="Enter your answer"
+                        type="text"
+                        name="Qf33_If33YESAuditDate" // Add name attribute
+                        className="mt-3 outline-none w-100"
+                        id="name-text"
+                      />
+                    </div>
+                    {/* Question  34*/}
+                    <div className="field-sections">
+                      <span>
+                        Q.{factoryJson.find((f) => f.id === "34").id}
+                        :&nbsp;&nbsp;
+                      </span>
+                      <span>{factoryJson.find((f) => f.id === "34").q}</span>
+                      <input
+                        onChange={handleChange}
+                        placeholder="Enter your answer"
+                        type="text"
+                        name="Qf34_If33YESAuditValidity" // Add name attribute
+                        className="mt-3 outline-none w-100"
+                        id="name-text"
+                      />
+                    </div>
+                    {/* Question  35*/}
+                    <div className="field-sections">
+                      <span>
+                        Q.{factoryJson.find((f) => f.id === "35").id}
+                        :&nbsp;&nbsp;
+                      </span>
+                      <span>{factoryJson.find((f) => f.id === "35").q}</span>
+                      <input
+                        onChange={handleChange}
+                        placeholder="Enter your answer"
+                        type="text"
+                        name="Qf35_If33YESAuditingCompany" // Add name attribute
+                        className="mt-3 outline-none w-100"
+                        id="name-text"
+                      />
+                    </div>
+                    {/* Question  36*/}
+                    <div className="field-sections">
+                      <span>
+                        Q.{factoryJson.find((f) => f.id === "36").id}
+                        :&nbsp;&nbsp;
+                      </span>
+                      <span>
+                        {factoryJson.find((f) => f.id === "36").q}
+                        <span style={{ color: "red" }}>*</span>
+                      </span>
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
+                            name="Qf36_If33YesSocialAuditReportUpload"
                             type="file"
-                            name="Qs39b_HumanRightsViolations"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
                             onChange={(e) => {
@@ -1866,7 +1690,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setDilligenceFile(e.target.files[0]);
+                                setIf33YesSocialAuditReport(e.target.files[0]);
                               } else {
                                 toast.error(
                                   `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
@@ -1881,58 +1705,109 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: dilligenceFile ? "none" : "inline-block",
+                              display: If33YesSocialAuditReport
+                                ? "none"
+                                : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {dilligenceFile
-                              ? `Uploaded file: ${dilligenceFile.name}`
+                            {If33YesSocialAuditReport
+                              ? `Uploaded file: ${If33YesSocialAuditReport.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
                         <br />
-                        {/* Question 39 */}
-                        <div className="field-sections">
-                          <span>
-                            Q.{factoryJson.find((f) => f.id === "39").id}
-                            :&nbsp;&nbsp;
-                          </span>
-                          <span>
-                            {factoryJson.find((f) => f.id === "39").q}
-                          </span>
-                          <br />
-                          <br />
-                          <label>
-                            <input
-                              name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
-                              type="radio"
-                              value="yes"
-                              checked={
-                                supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
-                                "yes"
-                              }
-                              onChange={handleChange}
-                            />
-                            Yes
-                          </label>
-
-                          <label style={{ marginLeft: "1rem" }}>
-                            <input
-                              type="radio"
-                              value="no"
-                              name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
-                              checked={
-                                supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
-                                "no"
-                              }
-                              onChange={handleChange}
-                            />
-                            No
-                          </label>
-                        </div>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  </>
+                )}
+                {/* Question  37*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "37").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "37").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    name="Qf37_TotalNumberOfEmployees"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
+                    onChange={handleChange}
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    aria-describedby="emailHelp"
+                  ></input>
+                </div>
+                {/* Question  38*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "38").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>
+                    {factoryJson.find((f) => f.id === "38").q}{" "}
+                    <span style={{ color: "red" }}>*</span>
+                  </span>
+                  <input
+                    name="Qf38_PersonalStructureAdmin"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
+                    onChange={handleChange}
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    aria-describedby="emailHelp"
+                  ></input>
+                </div>
+                {/* Question 39 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "39").id}
+                    :&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "39").q}</span>
+                  <input
+                    name="Qf39_PersonalStructureProduction"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
+                    onChange={handleChange}
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    aria-describedby="emailHelp"
+                  ></input>
+                </div>
+                {/* Question 40 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "40").id}
+                    :&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "40").q}</span>
+                  <input
+                    name="Qf40_PersonalStructureRandD"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
+                    onChange={handleChange}
+                    className="mt-3 outline-none w-100"
+                    id="name-text"
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
                 {/* Question  41*/}
                 <div className="field-sections">
@@ -1944,14 +1819,18 @@ const FactoryQuestions = () => {
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
+                    name="Qf41_PersonalStructureQA"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
-                  />
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
                 {/* Question  42*/}
                 <div className="field-sections">
@@ -1963,14 +1842,18 @@ const FactoryQuestions = () => {
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
+                    name="Qf42_PersonalStructureManagement"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
-                  />
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
                 {/* Question  43*/}
                 <div className="field-sections">
@@ -1982,14 +1865,18 @@ const FactoryQuestions = () => {
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
+                    name="Qf43_WorkerStatisticMale"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
-                  />
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
                 {/* Question  44*/}
                 <div className="field-sections">
@@ -2001,88 +1888,138 @@ const FactoryQuestions = () => {
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
+                    name="Qf44_WorkerStatisticFemale"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
-                  />
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
-                {/* Question  61*/}
+                {/* Question  45*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "45").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {factoryJson.find((f) => f.id === "61").q}
+                    {factoryJson.find((f) => f.id === "45").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
+                    name="Qf45_WorkerStatisticLocal"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
-                  />
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
-                {/* Question  62*/}
+                {/* Question  46*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "46").id}:&nbsp;&nbsp;
                   </span>
                   <span>
-                    {factoryJson.find((f) => f.id === "62").q}
+                    {factoryJson.find((f) => f.id === "46").q}
                     <span style={{ color: "red" }}>*</span>
                   </span>
                   <input
+                    name="Qf46_WorkerStatisticMigrant"
+                    placeholder="This value must be a number"
+                    type="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                    }}
+                    pattern="[0-9]*"
                     onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
                     className="mt-3 outline-none w-100"
                     id="name-text"
-                    required
-                  />
+                    aria-describedby="emailHelp"
+                  ></input>
                 </div>
-                {/* Question  60*/}
+                {/* Question  47*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "47").id}:&nbsp;&nbsp;
                   </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "60").q}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    placeholder="Enter your answer"
-                    type="text"
-                    name="Qs34_SWIFT" // Add name attribute
-                    className="mt-3 outline-none w-100"
-                    id="name-text"
-                    required
-                  />
-                </div>
-                {/* Question  61*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "61").id}
-                    :&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "47").q}</span>
+                  <span style={{ color: "red" }}>*</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
+                      name="Qf47_WorkInShift"
+                      type="radio"
+                      value="yes"
+                      checked={factoryData.Qf47_WorkInShift === "yes"}
+                      onChange={handleChange}
+                      required
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qf47_WorkInShift"
+                      checked={factoryData.Qf47_WorkInShift === "no"}
+                      onChange={handleChange}
+                      required
+                    />
+                    No
+                  </label>
+                </div>
+                {/* Question  48*/}
+                {factoryData.Qf47_WorkInShift === "yes" && (
+                  <div className="field-sections">
+                    <span>
+                      Q.{factoryJson.find((f) => f.id === "48").id}:&nbsp;&nbsp;
+                    </span>
+                    <span>
+                      {factoryJson.find((f) => f.id === "48").q}
+                      <span style={{ color: "red" }}>*</span>
+                    </span>
+                    <input
+                      onChange={handleChange}
+                      placeholder="This value must be a number"
+                      type="number"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-digit characters
+                      }}
+                      pattern="[0-9]*"
+                      name="Qf48_If50YESMax" // Add name attribute
+                      className="mt-3 outline-none w-100"
+                      id="name-text"
+                      required
+                    />
+                  </div>
+                )}
+                {/* Question 49 */}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "49").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "49").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qf49a_IssuedFairLaborAccreditationEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
+                        factoryData.Qf49a_IssuedFairLaborAccreditationEvidence ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -2094,44 +2031,10 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs40_ConfirmCompanyFulfilsDueDiligenceObligations"
+                      name="Qf49a_IssuedFairLaborAccreditationEvidence"
                       checked={
-                        supplierData.Qs40_ConfirmCompanyFulfilsDueDiligenceObligations ===
+                        factoryData.Qf49a_IssuedFairLaborAccreditationEvidence ===
                         "no"
-                      }
-                      onChange={handleChange}
-                    />
-                    No
-                  </label>
-                </div>
-                {/* Question 61 */}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs45a_IssuedFairLaborEvidence"
-                      type="radio"
-                      value="yes"
-                      checked={
-                        supplierData.Qs45a_IssuedFairLaborEvidence === "yes"
-                      }
-                      onChange={handleChange}
-                    />
-                    Yes
-                  </label>
-
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs45a_IssuedFairLaborEvidence"
-                      checked={
-                        supplierData.Qs45a_IssuedFairLaborEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -2141,12 +2044,13 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs45a_IssuedFairLaborEvidence === "yes" && (
+                    {factoryData.Qf49a_IssuedFairLaborAccreditationEvidence ===
+                      "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs45b_IssuedFairLaborEvidence"
+                            name="Qf49b_IssuedFairLaborAccreditationEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2159,7 +2063,9 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedFairLaborEvidence(e.target.files[0]);
+                                setIssuedFairLaborAccreditationEvidence(
+                                  e.target.files[0]
+                                );
                               } else {
                                 toast.error(
                                   `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
@@ -2174,14 +2080,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedFairLaborEvidence
+                              display: IssuedFairLaborAccreditationEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedFairLaborEvidence
-                              ? `Uploaded file: ${issuedFairLaborEvidence.name}`
+                            {IssuedFairLaborAccreditationEvidence
+                              ? `Uploaded file: ${IssuedFairLaborAccreditationEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2190,21 +2096,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  62*/}
+                {/* Question  50*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "50").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "62").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "50").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs46a_IssuedFairStoneEvidence"
+                      name="Qf50a_IssuedFairStoneEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs46a_IssuedFairStoneEvidence === "yes"
+                        factoryData.Qf50a_IssuedFairStoneEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -2215,9 +2121,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs46a_IssuedFairStoneEvidence"
+                      name="Qf50a_IssuedFairStoneEvidence"
                       checked={
-                        supplierData.Qs46a_IssuedFairStoneEvidence === "no"
+                        factoryData.Qf50a_IssuedFairStoneEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -2227,12 +2133,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs46a_IssuedFairStoneEvidence === "yes" && (
+                    {factoryData.Qf50a_IssuedFairStoneEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs46b_IssuedFairStoneEvidence"
+                            name="Qf50b_IssuedFairStoneEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2260,14 +2166,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedFairStoneEvidence
+                              display: IssuedFairStoneEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedFairStoneEvidence
-                              ? `Uploaded file: ${issuedFairStoneEvidence.name}`
+                            {IssuedFairStoneEvidence
+                              ? `Uploaded file: ${IssuedFairStoneEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2276,22 +2182,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  63*/}
+                {/* Question  51*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "51").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "51").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs51a_IssuedGlobalOrganicTextileEvidence"
+                      name="Qf51a_IssuedGlobalOrganicEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs51a_IssuedGlobalOrganicTextileEvidence ===
-                        "yes"
+                        factoryData.Qf51a_IssuedGlobalOrganicEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -2302,10 +2207,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs51a_IssuedGlobalOrganicTextileEvidence"
+                      name="Qf51a_IssuedGlobalOrganicEvidence"
                       checked={
-                        supplierData.Qs51a_IssuedGlobalOrganicTextileEvidence ===
-                        "no"
+                        factoryData.Qf51a_IssuedGlobalOrganicEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -2315,13 +2219,13 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs51a_IssuedGlobalOrganicTextileEvidence ===
+                    {factoryData.Qf51a_IssuedGlobalOrganicEvidence ===
                       "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs51b_IssuedGlobalOrganicTextileEvidence"
+                            name="Qf51b_IssuedGlobalOrganicEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2334,7 +2238,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedGlobalOrganicTextileEvidence(
+                                setIssuedGlobalOrganicEvidence(
                                   e.target.files[0]
                                 );
                               } else {
@@ -2351,14 +2255,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedGlobalOrganicTextileEvidence
+                              display: IssuedGlobalOrganicEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedGlobalOrganicTextileEvidence
-                              ? `Uploaded file: ${issuedGlobalOrganicTextileEvidence.name}`
+                            {IssuedGlobalOrganicEvidence
+                              ? `Uploaded file: ${IssuedGlobalOrganicEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2367,21 +2271,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  60*/}
+                {/* Question  52*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "52").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "60").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "52").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs48a_IssuedGrunerKnopfEvidence"
+                      name="Qf52a_IssuedGrunerKnopfEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs48a_IssuedGrunerKnopfEvidence === "yes"
+                        factoryData.Qf52a_IssuedGrunerKnopfEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -2392,9 +2296,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs48a_IssuedGrunerKnopfEvidence"
+                      name="Qf52a_IssuedGrunerKnopfEvidence"
                       checked={
-                        supplierData.Qs48a_IssuedGrunerKnopfEvidence === "no"
+                        factoryData.Qf52a_IssuedGrunerKnopfEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -2404,12 +2308,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs48a_IssuedGrunerKnopfEvidence === "yes" && (
+                    {factoryData.Qf52a_IssuedGrunerKnopfEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs48b_IssuedGrunerKnopfEvidence"
+                            name="Qf52b_IssuedGrunerKnopfEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2437,14 +2341,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedGrunerKnopfEvidence
+                              display: IssuedGrunerKnopfEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedGrunerKnopfEvidence
-                              ? `Uploaded file: ${issuedGrunerKnopfEvidence.name}`
+                            {IssuedGrunerKnopfEvidence
+                              ? `Uploaded file: ${IssuedGrunerKnopfEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2453,20 +2357,20 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  61*/}
+                {/* Question  53*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "53").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "53").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs49a_IssuedIGEPEvidence"
+                      name="Qf53a_IssuedIGEPEvidence"
                       type="radio"
                       value="yes"
-                      checked={supplierData.Qs49a_IssuedIGEPEvidence === "yes"}
+                      checked={factoryData.Qf53a_IssuedIGEPEvidence === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -2476,8 +2380,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs49a_IssuedIGEPEvidence"
-                      checked={supplierData.Qs49a_IssuedIGEPEvidence === "no"}
+                      name="Qf53a_IssuedIGEPEvidence"
+                      checked={factoryData.Qf53a_IssuedIGEPEvidence === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -2486,12 +2390,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs49a_IssuedIGEPEvidence === "yes" && (
+                    {factoryData.Qf53a_IssuedIGEPEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs49b_IssuedIGEPEvidence"
+                            name="Qf53b_IssuedIGEPEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2519,14 +2423,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedIGEPEvidence
+                              display: IssuedIGEPEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedIGEPEvidence
-                              ? `Uploaded file: ${issuedIGEPEvidence.name}`
+                            {IssuedIGEPEvidence
+                              ? `Uploaded file: ${IssuedIGEPEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2535,21 +2439,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  62*/}
+                {/* Question  54*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "54").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "62").q} </span>
+                  <span>{factoryJson.find((f) => f.id === "54").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs50a_IssuedOEKOTEXGreenEvidence"
+                      name="Qf54a_IssuedOEKOTEXEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs50a_IssuedOEKOTEXGreenEvidence === "yes"
+                        factoryData.Qf54a_IssuedOEKOTEXEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -2560,10 +2464,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs50a_IssuedOEKOTEXGreenEvidence"
-                      checked={
-                        supplierData.Qs50a_IssuedOEKOTEXGreenEvidence === "no"
-                      }
+                      name="Qf54a_IssuedOEKOTEXEvidence"
+                      checked={factoryData.Qf54a_IssuedOEKOTEXEvidence === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -2572,13 +2474,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs50a_IssuedOEKOTEXGreenEvidence ===
-                      "yes" && (
+                    {factoryData.Qf54a_IssuedOEKOTEXEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs50b_IssuedOEKOTEXGreenEvidence"
+                            name="Qf54b_IssuedOEKOTEXEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2591,9 +2492,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedOEKOTEXGreenEvidence(
-                                  e.target.files[0]
-                                );
+                                setIssuedOEKOTEXEvidence(e.target.files[0]);
                               } else {
                                 toast.error(
                                   `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
@@ -2608,14 +2507,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedOEKOTEXGreenEvidence
+                              display: IssuedOEKOTEXEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedOEKOTEXGreenEvidence
-                              ? `Uploaded file: ${issuedOEKOTEXGreenEvidence.name}`
+                            {IssuedOEKOTEXEvidence
+                              ? `Uploaded file: ${IssuedOEKOTEXEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2624,22 +2523,20 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  63*/}
+                {/* Question  55*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "55").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "55").q} </span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs51a_IssuedSMETASedexEvidence"
+                      name="Qf55a_IssuedSMETAEvidence"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs51a_IssuedSMETASedexEvidence === "yes"
-                      }
+                      checked={factoryData.Qf55a_IssuedSMETAEvidence === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -2649,10 +2546,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs51a_IssuedSMETASedexEvidence"
-                      checked={
-                        supplierData.Qs51a_IssuedSMETASedexEvidence === "no"
-                      }
+                      name="Qf55a_IssuedSMETAEvidence"
+                      checked={factoryData.Qf55a_IssuedSMETAEvidence === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -2661,12 +2556,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs51a_IssuedSMETASedexEvidence === "yes" && (
+                    {factoryData.Qf55a_IssuedSMETAEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs51b_IssuedSMETASedexEvidence"
+                            name="Qf55b_IssuedSMETAEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2679,7 +2574,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedSMETASedexEvidence(e.target.files[0]);
+                                setIssuedSMETAEvidence(e.target.files[0]);
                               } else {
                                 toast.error(
                                   `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
@@ -2694,14 +2589,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedSMETASedexEvidence
+                              display: IssuedSMETAEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedSMETASedexEvidence
-                              ? `Uploaded file: ${issuedSMETASedexEvidence.name}`
+                            {IssuedSMETAEvidence
+                              ? `Uploaded file: ${IssuedSMETAEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2710,21 +2605,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  60*/}
+                {/* Question  56*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "60").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "56").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "60").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "56").q} </span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs52a_IssuedSocialAccountabilitySA8000"
+                      name="Qf56a_IssuedSocialAccountabilityEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs52a_IssuedSocialAccountabilitySA8000 ===
+                        factoryData.Qf56a_IssuedSocialAccountabilityEvidence ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -2736,9 +2631,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs52a_IssuedSocialAccountabilitySA8000"
+                      name="Qf56a_IssuedSocialAccountabilityEvidence"
                       checked={
-                        supplierData.Qs52a_IssuedSocialAccountabilitySA8000 ===
+                        factoryData.Qf56a_IssuedSocialAccountabilityEvidence ===
                         "no"
                       }
                       onChange={handleChange}
@@ -2749,13 +2644,13 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs52a_IssuedSocialAccountabilitySA8000 ===
+                    {factoryData.Qf56a_IssuedSocialAccountabilityEvidence ===
                       "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs52b_IssuedSocialAccountabilitySA8000"
+                            name="Qf56b_IssuedSocialAccountabilityEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2768,7 +2663,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedSocialAccountabilitySA8000(
+                                setIssuedSocialAccountabilityEvidence(
                                   e.target.files[0]
                                 );
                               } else {
@@ -2785,14 +2680,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedSocialAccountabilitySA8000
+                              display: IssuedSocialAccountabilityEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedSocialAccountabilitySA8000
-                              ? `Uploaded file: ${issuedSocialAccountabilitySA8000.name}`
+                            {IssuedSocialAccountabilityEvidence
+                              ? `Uploaded file: ${IssuedSocialAccountabilityEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2801,21 +2696,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  61*/}
+                {/* Question  57*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "61").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "57").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "61").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "57").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs53a_IssuedXertifixStandardEvidence"
+                      name="Qf57a_IssuedXertifexStandardEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs53a_IssuedXertifixStandardEvidence ===
+                        factoryData.Qf57a_IssuedXertifexStandardEvidence ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -2827,9 +2722,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs53a_IssuedXertifixStandardEvidence"
+                      name="Qf57a_IssuedXertifexStandardEvidence"
                       checked={
-                        supplierData.Qs53a_IssuedXertifixStandardEvidence ===
+                        factoryData.Qf57a_IssuedXertifexStandardEvidence ===
                         "no"
                       }
                       onChange={handleChange}
@@ -2840,13 +2735,13 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs53a_IssuedXertifixStandardEvidence ===
+                    {factoryData.Qf57a_IssuedXertifexStandardEvidence ===
                       "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs53b_IssuedXertifixStandardEvidence"
+                            name="Qf57b_IssuedXertifexStandardEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -2859,7 +2754,93 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedXertifixStandardEvidence(
+                                setIssuedDINENISOEvidence(e.target.files[0]);
+                              } else {
+                                toast.error(
+                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
+                                  {
+                                    position: toast.POSITION.TOP_CENTER,
+                                  }
+                                );
+                              }
+                            }}
+                          />
+                          <HiOutlineUpload
+                            style={{
+                              margin: "0 5px 3px 0",
+                              fontSize: "16px",
+                              display: IssuedDINENISOEvidence
+                                ? "none"
+                                : "inline-block",
+                            }}
+                          />
+                          <span className="file-input-button-label">
+                            {IssuedDINENISOEvidence
+                              ? `Uploaded file: ${IssuedDINENISOEvidence.name}`
+                              : "UPLOAD DOCUMENT"}
+                          </span>
+                        </label>
+                        <br />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* Question  58*/}
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "58").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "58").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qf58a_IssuedXertifexPLUSEvidence"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        factoryData.Qf58a_IssuedXertifexPLUSEvidence === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qf58a_IssuedXertifexPLUSEvidence"
+                      checked={
+                        factoryData.Qf58a_IssuedXertifexPLUSEvidence === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+
+                  <br />
+
+                  <div>
+                    {factoryData.Qf58a_IssuedXertifexPLUSEvidence === "yes" && (
+                      <div className="field-sections">
+                        <br />
+                        <label className="file-input-button-upload">
+                          <input
+                            name="Qf58b_IssuedXertifexPLUSEvidence"
+                            type="file"
+                            accept="application/pdf,image/jpeg,image/png"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              const MAX_FILE_SIZE_MB = 10;
+                              const fileSizeMB = (
+                                e.target.files[0].size /
+                                1024 /
+                                1024
+                              ).toFixed(2);
+
+                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
+                                setIssuedXertifexPLUSEvidence(
                                   e.target.files[0]
                                 );
                               } else {
@@ -2876,14 +2857,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedXertifixStandardEvidence
+                              display: IssuedXertifexPLUSEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedXertifixStandardEvidence
-                              ? `Uploaded file: ${issuedXertifixStandardEvidence.name}`
+                            {IssuedXertifexPLUSEvidence
+                              ? `Uploaded file: ${IssuedXertifexPLUSEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -2892,21 +2873,21 @@ const FactoryQuestions = () => {
                     )}
                   </div>
                 </div>
-                {/* Question  62*/}
+                {/* Question  59*/}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "62").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "59").id}:&nbsp;&nbsp;
                   </span>
-                  <span>{factoryJson.find((f) => f.id === "62").q}</span>
+                  <span>{factoryJson.find((f) => f.id === "59").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs54a_IssuedXertifixPlusEvidence"
+                      name="Qf59a_IssuedAMFORIBEPIEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs54a_IssuedXertifixPlusEvidence === "yes"
+                        factoryData.Qf59a_IssuedAMFORIBEPIEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -2917,9 +2898,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs54a_IssuedXertifixPlusEvidence"
+                      name="Qf59a_IssuedAMFORIBEPIEvidence"
                       checked={
-                        supplierData.Qs54a_IssuedXertifixPlusEvidence === "no"
+                        factoryData.Qf59a_IssuedAMFORIBEPIEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -2929,101 +2910,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs54a_IssuedXertifixPlusEvidence ===
-                      "yes" && (
+                    {factoryData.Qf59a_IssuedAMFORIBEPIEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs54b_IssuedXertifixPlusEvidence"
-                            type="file"
-                            accept="application/pdf,image/jpeg,image/png"
-                            style={{ display: "none" }}
-                            onChange={(e) => {
-                              const MAX_FILE_SIZE_MB = 10;
-                              const fileSizeMB = (
-                                e.target.files[0].size /
-                                1024 /
-                                1024
-                              ).toFixed(2);
-
-                              if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedXertifixPlusEvidence(
-                                  e.target.files[0]
-                                );
-                              } else {
-                                toast.error(
-                                  `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
-                                  {
-                                    position: toast.POSITION.TOP_CENTER,
-                                  }
-                                );
-                              }
-                            }}
-                          />
-                          <HiOutlineUpload
-                            style={{
-                              margin: "0 5px 3px 0",
-                              fontSize: "16px",
-                              display: issuedXertifixPlusEvidence
-                                ? "none"
-                                : "inline-block",
-                            }}
-                          />
-                          <span className="file-input-button-label">
-                            {issuedXertifixPlusEvidence
-                              ? `Uploaded file: ${issuedXertifixPlusEvidence.name}`
-                              : "UPLOAD DOCUMENT"}
-                          </span>
-                        </label>
-                        <br />
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {/* Question  63*/}
-                <div className="field-sections">
-                  <span>
-                    Q.{factoryJson.find((f) => f.id === "63").id}:&nbsp;&nbsp;
-                  </span>
-                  <span>{factoryJson.find((f) => f.id === "63").q}</span>
-                  <br />
-                  <br />
-                  <label>
-                    <input
-                      name="Qs55a_IssuedAMFORIBEPIEvidence"
-                      type="radio"
-                      value="yes"
-                      checked={
-                        supplierData.Qs55a_IssuedAMFORIBEPIEvidence === "yes"
-                      }
-                      onChange={handleChange}
-                    />
-                    Yes
-                  </label>
-
-                  <label style={{ marginLeft: "1rem" }}>
-                    <input
-                      type="radio"
-                      value="no"
-                      name="Qs55a_IssuedAMFORIBEPIEvidence"
-                      checked={
-                        supplierData.Qs55a_IssuedAMFORIBEPIEvidence === "no"
-                      }
-                      onChange={handleChange}
-                    />
-                    No
-                  </label>
-
-                  <br />
-
-                  <div>
-                    {supplierData.Qs55a_IssuedAMFORIBEPIEvidence === "yes" && (
-                      <div className="field-sections">
-                        <br />
-                        <label className="file-input-button-upload">
-                          <input
-                            name="Qs55b_IssuedAMFORIBEPIEvidence"
+                            name="Qf59b_IssuedAMFORIBEPIEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -3051,14 +2943,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedAMFORIBEPIEvidence
+                              display: IssuedAMFORIBEPIEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedAMFORIBEPIEvidence
-                              ? `Uploaded file: ${issuedAMFORIBEPIEvidence.name}`
+                            {IssuedAMFORIBEPIEvidence
+                              ? `Uploaded file: ${IssuedAMFORIBEPIEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -3077,11 +2969,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs56a_IssuedDINENISO14001Evidence"
+                      name="Qf60a_IssuedDINENISOEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs56a_IssuedDINENISO14001Evidence === "yes"
+                        factoryData.Qf60a_IssuedDINENISOEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3092,9 +2984,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs56a_IssuedDINENISO14001Evidence"
+                      name="Qf60a_IssuedDINENISOEvidence"
                       checked={
-                        supplierData.Qs56a_IssuedDINENISO14001Evidence === "no"
+                        factoryData.Qf60a_IssuedDINENISOEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3104,13 +2996,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs56a_IssuedDINENISO14001Evidence ===
-                      "yes" && (
+                    {factoryData.Qf60a_IssuedDINENISOEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs56b_IssuedDINENISO14001Evidence"
+                            name="Qf60b_IssuedDINENISOEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -3123,9 +3014,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedDINENISO14001Evidence(
-                                  e.target.files[0]
-                                );
+                                setIssuedDINENISOEvidence(e.target.files[0]);
                               } else {
                                 toast.error(
                                   `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
@@ -3140,14 +3029,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedDINENISO14001Evidence
+                              display: IssuedDINENISOEvidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedDINENISO14001Evidence
-                              ? `Uploaded file: ${issuedDINENISO14001Evidence.name}`
+                            {IssuedDINENISOEvidence
+                              ? `Uploaded file: ${IssuedDINENISOEvidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -3166,11 +3055,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs57a_IssuedGrunerKnopfEvidence_2"
+                      name="Qf61a_IssuedGrunerKnopfEvidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs57a_IssuedGrunerKnopfEvidence_2 === "yes"
+                        factoryData.Qf61a_IssuedGrunerKnopfEvidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3181,9 +3070,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs57a_IssuedGrunerKnopfEvidence_2"
+                      name="Qf61a_IssuedGrunerKnopfEvidence"
                       checked={
-                        supplierData.Qs57a_IssuedGrunerKnopfEvidence_2 === "no"
+                        factoryData.Qf61a_IssuedGrunerKnopfEvidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3193,13 +3082,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs57a_IssuedGrunerKnopfEvidence_2 ===
-                      "yes" && (
+                    {factoryData.Qf61a_IssuedGrunerKnopfEvidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs57b_IssuedGrunerKnopfEvidence_2"
+                            name="Qf61b_IssuedGrunerKnopfEvidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -3212,7 +3100,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedGrunerKnopfEvidence1(
+                                setIssuedGrunerKnopfEvidence2(
                                   e.target.files[0]
                                 );
                               } else {
@@ -3229,14 +3117,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedGrunerKnopfEvidence1
+                              display: IssuedGrunerKnopfEvidence2
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedGrunerKnopfEvidence1
-                              ? `Uploaded file: ${issuedGrunerKnopfEvidence1.name}`
+                            {IssuedGrunerKnopfEvidence2
+                              ? `Uploaded file: ${IssuedGrunerKnopfEvidence2.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -3255,11 +3143,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs58a_IssuedIGEP2020AuditEvidence"
+                      name="Qf62a_IssuedIGEP2020Evidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs58a_IssuedIGEP2020AuditEvidence === "yes"
+                        factoryData.Qf62a_IssuedIGEP2020Evidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3270,9 +3158,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs58a_IssuedIGEP2020AuditEvidence"
+                      name="Qf62a_IssuedIGEP2020Evidence"
                       checked={
-                        supplierData.Qs58a_IssuedIGEP2020AuditEvidence === "no"
+                        factoryData.Qf62a_IssuedIGEP2020Evidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3282,13 +3170,12 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs58a_IssuedIGEP2020AuditEvidence ===
-                      "yes" && (
+                    {factoryData.Qf62a_IssuedIGEP2020Evidence === "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs58b_IssuedIGEP2020AuditEvidence"
+                            name="Qf62b_IssuedIGEP2020Evidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -3301,9 +3188,7 @@ const FactoryQuestions = () => {
                               ).toFixed(2);
 
                               if (fileSizeMB <= MAX_FILE_SIZE_MB) {
-                                setIssuedIGEP2020AuditEvidence(
-                                  e.target.files[0]
-                                );
+                                setIssuedIGEP2020Evidence(e.target.files[0]);
                               } else {
                                 toast.error(
                                   `File size exceeds ${MAX_FILE_SIZE_MB}MB`,
@@ -3318,14 +3203,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedIGEP2020AuditEvidence
+                              display: IssuedIGEP2020Evidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedIGEP2020AuditEvidence
-                              ? `Uploaded file: ${issuedIGEP2020AuditEvidence.name}`
+                            {IssuedIGEP2020Evidence
+                              ? `Uploaded file: ${IssuedIGEP2020Evidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -3344,11 +3229,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs59a_IssuedDINENISO45001Evidence"
+                      name="Qf63a_IssuedDINENISO45001Evidence"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs59a_IssuedDINENISO45001Evidence === "yes"
+                        factoryData.Qf63a_IssuedDINENISO45001Evidence === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3359,9 +3244,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs59a_IssuedDINENISO45001Evidence"
+                      name="Qf63a_IssuedDINENISO45001Evidence"
                       checked={
-                        supplierData.Qs59a_IssuedDINENISO45001Evidence === "no"
+                        factoryData.Qf63a_IssuedDINENISO45001Evidence === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3371,13 +3256,13 @@ const FactoryQuestions = () => {
                   <br />
 
                   <div>
-                    {supplierData.Qs59a_IssuedDINENISO45001Evidence ===
+                    {factoryData.Qf63a_IssuedDINENISO45001Evidence ===
                       "yes" && (
                       <div className="field-sections">
                         <br />
                         <label className="file-input-button-upload">
                           <input
-                            name="Qs59b_IssuedDINENISO45001Evidence"
+                            name="Qf63b_IssuedDINENISO45001Evidence"
                             type="file"
                             accept="application/pdf,image/jpeg,image/png"
                             style={{ display: "none" }}
@@ -3407,14 +3292,14 @@ const FactoryQuestions = () => {
                             style={{
                               margin: "0 5px 3px 0",
                               fontSize: "16px",
-                              display: issuedDINENISO45001Evidence
+                              display: IssuedDINENISO45001Evidence
                                 ? "none"
                                 : "inline-block",
                             }}
                           />
                           <span className="file-input-button-label">
-                            {issuedDINENISO45001Evidence
-                              ? `Uploaded file: ${issuedDINENISO45001Evidence.name}`
+                            {IssuedDINENISO45001Evidence
+                              ? `Uploaded file: ${IssuedDINENISO45001Evidence.name}`
                               : "UPLOAD DOCUMENT"}
                           </span>
                         </label>
@@ -3433,11 +3318,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs65_CheckAgeWorkerAtHiring"
+                      name="Qf64_AgeOfYourWorkerAtHiring"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs65_CheckAgeWorkerAtHiring === "yes"
+                        factoryData.Qf64_AgeOfYourWorkerAtHiring === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3448,9 +3333,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs65_CheckAgeWorkerAtHiring"
+                      name="Qf64_AgeOfYourWorkerAtHiring"
                       checked={
-                        supplierData.Qs65_CheckAgeWorkerAtHiring === "no"
+                        factoryData.Qf64_AgeOfYourWorkerAtHiring === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3467,11 +3352,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs65_CheckAgeWorkerAtHiring"
+                      name="Qf65_AgeOfYourWorkerAtConducting"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs65_CheckAgeWorkerAtHiring === "yes"
+                        factoryData.Qf65_AgeOfYourWorkerAtConducting === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3482,9 +3367,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs65_CheckAgeWorkerAtHiring"
+                      name="Qf65_AgeOfYourWorkerAtConducting"
                       checked={
-                        supplierData.Qs65_CheckAgeWorkerAtHiring === "no"
+                        factoryData.Qf65_AgeOfYourWorkerAtConducting === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3501,12 +3386,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs66_AgeWorkersVerifiedHiringConducted"
+                      name="Qf66_EmployeePersonsUnderAge18"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
-                        "yes"
+                        factoryData.Qf66_EmployeePersonsUnderAge18 === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3517,10 +3401,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs66_AgeWorkersVerifiedHiringConducted"
+                      name="Qf66_EmployeePersonsUnderAge18"
                       checked={
-                        supplierData.Qs66_AgeWorkersVerifiedHiringConducted ===
-                        "no"
+                        factoryData.Qf66_EmployeePersonsUnderAge18 === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3537,11 +3420,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs67_EmployPersonUnderAge18"
+                      name="Qf67_EmployeePersonsUnderAge15"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs67_EmployPersonUnderAge18 === "yes"
+                        factoryData.Qf67_EmployeePersonsUnderAge15 === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3552,9 +3435,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs67_EmployPersonUnderAge18"
+                      name="Qf67_EmployeePersonsUnderAge15"
                       checked={
-                        supplierData.Qs67_EmployPersonUnderAge18 === "no"
+                        factoryData.Qf67_EmployeePersonsUnderAge15 === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3571,12 +3454,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs68_EmployPersonUnderAge15"
+                      name="Qf68_Under18Employed"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs68_EmployPersonUnderAge15 === "yes"
-                      }
+                      checked={factoryData.Qf68_Under18Employed === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -3586,10 +3467,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs68_EmployPersonUnderAge15"
-                      checked={
-                        supplierData.Qs68_EmployPersonUnderAge15 === "no"
-                      }
+                      name="Qf68_Under18Employed"
+                      checked={factoryData.Qf68_Under18Employed === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -3605,12 +3484,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs69_WorkInstructionsUnder18NotAllowed"
+                      name="Qf69_Under18PerformWorkUnderWater"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
-                        "yes"
+                        factoryData.Qf69_Under18PerformWorkUnderWater === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3621,10 +3499,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs69_WorkInstructionsUnder18NotAllowed"
+                      name="Qf69_Under18PerformWorkUnderWater"
                       checked={
-                        supplierData.Qs69_WorkInstructionsUnder18NotAllowed ===
-                        "no"
+                        factoryData.Qf69_Under18PerformWorkUnderWater === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3641,11 +3518,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs70_PersonAge18performUnderWaterUnderGround"
+                      name="Qf70_Under18PerformWorkAtDengerousHeight"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
+                        factoryData.Qf70_Under18PerformWorkAtDengerousHeight ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -3657,9 +3534,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs70_PersonAge18performUnderWaterUnderGround"
+                      name="Qf70_Under18PerformWorkAtDengerousHeight"
                       checked={
-                        supplierData.Qs70_PersonAge18performUnderWaterUnderGround ===
+                        factoryData.Qf70_Under18PerformWorkAtDengerousHeight ===
                         "no"
                       }
                       onChange={handleChange}
@@ -3677,11 +3554,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs71_PersonAge18performDangerousHeights"
+                      name="Qf71_Under18PerformWorkAtDengerousHeight"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs71_PersonAge18performDangerousHeights ===
+                        factoryData.Qf71_Under18PerformWorkAtDengerousHeight ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -3693,9 +3570,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs71_PersonAge18performDangerousHeights"
+                      name="Qf71_Under18PerformWorkAtDengerousHeight"
                       checked={
-                        supplierData.Qs71_PersonAge18performDangerousHeights ===
+                        factoryData.Qf71_Under18PerformWorkAtDengerousHeight ===
                         "no"
                       }
                       onChange={handleChange}
@@ -3713,12 +3590,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
+                      name="Qf72_Under18HandleHeavyLoad"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
-                        "yes"
+                        factoryData.Qf72_Under18HandleHeavyLoad === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3729,11 +3605,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs72_PersonAge18WorkDangerousMachineryEquipment"
-                      checked={
-                        supplierData.Qs72_PersonAge18WorkDangerousMachineryEquipment ===
-                        "no"
-                      }
+                      name="Qf72_Under18HandleHeavyLoad"
+                      checked={factoryData.Qf72_Under18HandleHeavyLoad === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -3749,11 +3622,12 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs73_PersonAge18HandleHeavyLoads"
+                      name="Qf73_Under18WorkWithHazardousSubstances"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs73_PersonAge18HandleHeavyLoads === "yes"
+                        factoryData.Qf73_Under18WorkWithHazardousSubstances ===
+                        "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3764,9 +3638,10 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs73_PersonAge18HandleHeavyLoads"
+                      name="Qf73_Under18WorkWithHazardousSubstances"
                       checked={
-                        supplierData.Qs73_PersonAge18HandleHeavyLoads === "no"
+                        factoryData.Qf73_Under18WorkWithHazardousSubstances ===
+                        "no"
                       }
                       onChange={handleChange}
                     />
@@ -3783,12 +3658,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
+                      name="Qf74_Under18WorkAreasHighTemp"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
-                        "yes"
+                        factoryData.Qf74_Under18WorkAreasHighTemp === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3799,10 +3673,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs74_PersonAge18WorkHazardousSubstancesAgents"
+                      name="Qf74_Under18WorkAreasHighTemp"
                       checked={
-                        supplierData.Qs74_PersonAge18WorkHazardousSubstancesAgents ===
-                        "no"
+                        factoryData.Qf74_Under18WorkAreasHighTemp === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3819,12 +3692,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
+                      name="Qf75_Under18WorkCompanyNightTime"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
-                        "yes"
+                        factoryData.Qf75_Under18WorkCompanyNightTime === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3835,10 +3707,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs75_PersonAge18WorkAreaHarmfulTempNoise"
+                      name="Qf75_Under18WorkCompanyNightTime"
                       checked={
-                        supplierData.Qs75_PersonAge18WorkAreaHarmfulTempNoise ===
-                        "no"
+                        factoryData.Qf75_Under18WorkCompanyNightTime === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3855,12 +3726,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs76_PersonAge18WorkInNight"
+                      name="Qf76_PredefinedProcedure"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs76_PersonAge18WorkInNight === "yes"
-                      }
+                      checked={factoryData.Qf76_PredefinedProcedure === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -3870,10 +3739,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs76_PersonAge18WorkInNight"
-                      checked={
-                        supplierData.Qs76_PersonAge18WorkInNight === "no"
-                      }
+                      name="Qf76_PredefinedProcedure"
+                      checked={factoryData.Qf76_PredefinedProcedure === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -3889,12 +3756,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
+                      name="Qf77_UnderTheAge18InDebtBondage"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
-                        "yes"
+                        factoryData.Qf77_UnderTheAge18InDebtBondage === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -3905,10 +3771,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying"
+                      name="Qf77_UnderTheAge18InDebtBondage"
                       checked={
-                        supplierData.Qs77_PredefinedProcedureSuppliersUnlawfullyEmploying ===
-                        "no"
+                        factoryData.Qf77_UnderTheAge18InDebtBondage === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3925,11 +3790,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
+                      name="Qf78_WorkPerformedPenaltyTheratened"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
+                        factoryData.Qf78_WorkPerformedPenaltyTheratened ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -3941,10 +3806,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs78_PersonUnderAge18InDeptBondageSerfdomForced"
+                      name="Qf78_WorkPerformedPenaltyTheratened"
                       checked={
-                        supplierData.Qs78_PersonUnderAge18InDeptBondageSerfdomForced ===
-                        "no"
+                        factoryData.Qf78_WorkPerformedPenaltyTheratened === "no"
                       }
                       onChange={handleChange}
                     />
@@ -3961,11 +3825,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs79_AnyWorkPerformedPenaltyThreatened"
+                      name="Qf79_RetainTheDocumentsIdentification"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
+                        factoryData.Qf79_RetainTheDocumentsIdentification ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -3977,9 +3841,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs79_AnyWorkPerformedPenaltyThreatened"
+                      name="Qf79_RetainTheDocumentsIdentification"
                       checked={
-                        supplierData.Qs79_AnyWorkPerformedPenaltyThreatened ===
+                        factoryData.Qf79_RetainTheDocumentsIdentification ===
                         "no"
                       }
                       onChange={handleChange}
@@ -3997,13 +3861,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="QsS80_RetainIdentificationDocuments"
+                      name="Qf80_RetainOrignalORCopy                 "
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.QsS80_RetainIdentificationDocuments ===
-                        "yes"
-                      }
+                      checked={factoryData.Qf80_RetainOrignalORCopy === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -4013,11 +3874,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="QsS80_RetainIdentificationDocuments"
-                      checked={
-                        supplierData.QsS80_RetainIdentificationDocuments ===
-                        "no"
-                      }
+                      name="Qf80_RetainOrignalORCopy"
+                      checked={factoryData.Qf80_RetainOrignalORCopy === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -4033,11 +3891,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs81_RetainOriginalsCopiesDocuments"
+                      name="Qf81_ImposePenaltiesOnYourEmployees"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs81_RetainOriginalsCopiesDocuments ===
+                        factoryData.Qf81_ImposePenaltiesOnYourEmployees ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4049,10 +3907,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs81_RetainOriginalsCopiesDocuments"
+                      name="Qf81_ImposePenaltiesOnYourEmployees"
                       checked={
-                        supplierData.Qs81_RetainOriginalsCopiesDocuments ===
-                        "no"
+                        factoryData.Qf81_ImposePenaltiesOnYourEmployees === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4069,12 +3926,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs82_ImposePenaltiesEmployees"
+                      name="Qf82_EmployeesSoDeepInDept"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs82_ImposePenaltiesEmployees === "yes"
-                      }
+                      checked={factoryData.Qf82_EmployeesSoDeepInDept === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -4084,10 +3939,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs82_ImposePenaltiesEmployees"
-                      checked={
-                        supplierData.Qs82_ImposePenaltiesEmployees === "no"
-                      }
+                      name="Qf82_EmployeesSoDeepInDept"
+                      checked={factoryData.Qf82_EmployeesSoDeepInDept === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -4103,12 +3956,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
+                      name="Qf83_WeeklyWorkingTime60Hour"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
-                        "yes"
+                        factoryData.Qf83_WeeklyWorkingTime60Hour === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4119,10 +3971,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs83_HaveEmpSoDeepInDeptSeveralYearsPay"
+                      name="Qf83_WeeklyWorkingTime60Hour"
                       checked={
-                        supplierData.Qs83_HaveEmpSoDeepInDeptSeveralYearsPay ===
-                        "no"
+                        factoryData.Qf83_WeeklyWorkingTime60Hour === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4139,12 +3990,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
+                      name="Qf84_EmployeeRequirWorkByState"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
-                        "yes"
+                        factoryData.Qf84_EmployeeRequirWorkByState === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4155,10 +4005,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours"
+                      name="Qf84_EmployeeRequirWorkByState"
                       checked={
-                        supplierData.Qs84_WeeklyWorkingTimeOvertimeMorethan60Hours ===
-                        "no"
+                        factoryData.Qf84_EmployeeRequirWorkByState === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4175,11 +4024,12 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs85_EmpRequiredByStateYESNO"
+                      name="Qf85_PredefinedProcedureSlavelaborexists"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs85_EmpRequiredByStateYESNO === "yes"
+                        factoryData.Qf85_PredefinedProcedureSlavelaborexists ===
+                        "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4190,9 +4040,10 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs85_EmpRequiredByStateYESNO"
+                      name="Qf85_PredefinedProcedureSlavelaborexists"
                       checked={
-                        supplierData.Qs85_EmpRequiredByStateYESNO === "no"
+                        factoryData.Qf85_PredefinedProcedureSlavelaborexists ===
+                        "no"
                       }
                       onChange={handleChange}
                     />
@@ -4209,12 +4060,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
+                      name="Qf86_DocumentsTheWorkingHours"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
-                        "yes"
+                        factoryData.Qf86_DocumentsTheWorkingHours === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4225,10 +4075,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs86_PredefinedProcedureForcedSlaveLaborExists"
+                      name="Qf86_DocumentsTheWorkingHours"
                       checked={
-                        supplierData.Qs86_PredefinedProcedureForcedSlaveLaborExists ===
-                        "no"
+                        factoryData.Qf86_DocumentsTheWorkingHours === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4245,13 +4094,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs87_CompanyDocumentWorkingHourseWages"
+                      name="Qf87_HealthAndSafetyPolicy"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
-                        "yes"
-                      }
+                      checked={factoryData.Qf87_HealthAndSafetyPolicy === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -4261,11 +4107,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs87_CompanyDocumentWorkingHourseWages"
-                      checked={
-                        supplierData.Qs87_CompanyDocumentWorkingHourseWages ===
-                        "no"
-                      }
+                      name="Qf87_HealthAndSafetyPolicy"
+                      checked={factoryData.Qf87_HealthAndSafetyPolicy === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -4281,11 +4124,12 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs88_CompanyHaveHealthAndSafety"
+                      name="Qf88_ProcedureCaptureAndAccessSecurityRisks"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs88_CompanyHaveHealthAndSafety === "yes"
+                        factoryData.Qf88_ProcedureCaptureAndAccessSecurityRisks ===
+                        "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4296,9 +4140,10 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs88_CompanyHaveHealthAndSafety"
+                      name="Qf88_ProcedureCaptureAndAccessSecurityRisks"
                       checked={
-                        supplierData.Qs88_CompanyHaveHealthAndSafety === "no"
+                        factoryData.Qf88_ProcedureCaptureAndAccessSecurityRisks ===
+                        "no"
                       }
                       onChange={handleChange}
                     />
@@ -4315,11 +4160,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs89_OrganizationHaveProceduresSecurityRisks"
+                      name="Qf89_HighAltitudesConfinedSpaces"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
+                        factoryData.Qs89_OrganizationHaveProceduresSecurityRisks ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4331,10 +4176,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs89_OrganizationHaveProceduresSecurityRisks"
+                      name="Qf89_HighAltitudesConfinedSpaces"
                       checked={
-                        supplierData.Qs89_OrganizationHaveProceduresSecurityRisks ===
-                        "no"
+                        factoryData.Qf89_HighAltitudesConfinedSpaces === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4351,11 +4195,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs90_OperationHighAltitudesConfinedSpaces"
+                      name="Qf90_HazardousAndBiologicalSubstances"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
+                        factoryData.Qf90_HazardousAndBiologicalSubstances ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4369,7 +4213,7 @@ const FactoryQuestions = () => {
                       value="no"
                       name="Qs90_OperationHighAltitudesConfinedSpaces"
                       checked={
-                        supplierData.Qs90_OperationHighAltitudesConfinedSpaces ===
+                        factoryData.Qs90_OperationHighAltitudesConfinedSpaces ===
                         "no"
                       }
                       onChange={handleChange}
@@ -4387,11 +4231,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs91_WorkHazardousChemicalBiologicalSubstances"
+                      name="Qf91_InstructionsUseSpecialEquipments"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
+                        factoryData.Qf91_InstructionsUseSpecialEquipments ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4403,9 +4247,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs91_WorkHazardousChemicalBiologicalSubstances"
+                      name="Qf91_InstructionsUseSpecialEquipments"
                       checked={
-                        supplierData.Qs91_WorkHazardousChemicalBiologicalSubstances ===
+                        factoryData.Qf91_InstructionsUseSpecialEquipments ===
                         "no"
                       }
                       onChange={handleChange}
@@ -4423,11 +4267,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs92_InstructionUseSafetyEquipments"
+                      name="Qf92_PersonResponsibleSafteStorageDistribution"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs92_InstructionUseSafetyEquipments ===
+                        factoryData.Qf92_PersonResponsibleSafteStorageDistribution ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4439,9 +4283,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs92_InstructionUseSafetyEquipments"
+                      name="Qf92_PersonResponsibleSafteStorageDistribution"
                       checked={
-                        supplierData.Qs92_InstructionUseSafetyEquipments ===
+                        factoryData.Qf92_PersonResponsibleSafteStorageDistribution ===
                         "no"
                       }
                       onChange={handleChange}
@@ -4459,12 +4303,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs93_PersonalResponsibleSafeStorageDistribution"
+                      name="Qf93_EquipmentsEmergenciesChecked"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
-                        "yes"
+                        factoryData.Qf93_EquipmentsEmergenciesChecked === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4475,10 +4318,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs93_PersonalResponsibleSafeStorageDistribution"
+                      name="Qf93_EquipmentsEmergenciesChecked"
                       checked={
-                        supplierData.Qs93_PersonalResponsibleSafeStorageDistribution ===
-                        "no"
+                        factoryData.Qf93_EquipmentsEmergenciesChecked === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4495,11 +4337,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
+                      name="Qf94_PersonsSpeciallyTrainedEmergencies"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
+                        factoryData.Qf94_PersonsSpeciallyTrainedEmergencies ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4511,9 +4353,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs94_TechnicalEquipmentEmergenciesRegularlyChecked"
+                      name="Qf94_PersonsSpeciallyTrainedEmergencies"
                       checked={
-                        supplierData.Qs94_TechnicalEquipmentEmergenciesRegularlyChecked ===
+                        factoryData.Qf94_PersonsSpeciallyTrainedEmergencies ===
                         "no"
                       }
                       onChange={handleChange}
@@ -4531,12 +4373,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs95_PersonsSpeciallyTrainedActEmergencies"
+                      name="Qf95_CompanyOffersProvideFeedBack"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
-                        "yes"
+                        factoryData.Qf95_CompanyOffersProvideFeedBack === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4547,10 +4388,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs95_PersonsSpeciallyTrainedActEmergencies"
+                      name="Qf95_CompanyOffersProvideFeedBack"
                       checked={
-                        supplierData.Qs95_PersonsSpeciallyTrainedActEmergencies ===
-                        "no"
+                        factoryData.Qf95_CompanyOffersProvideFeedBack === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4567,11 +4407,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs96_OfferOpportunityProvideFeedbackComplaints"
+                      name="Qf96_EmployeesTrainedSafetyWhenHired"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
+                        factoryData.Qf96_EmployeesTrainedSafetyWhenHired ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4583,9 +4423,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs96_OfferOpportunityProvideFeedbackComplaints"
+                      name="Qf96_EmployeesTrainedSafetyWhenHired"
                       checked={
-                        supplierData.Qs96_OfferOpportunityProvideFeedbackComplaints ===
+                        factoryData.Qf96_EmployeesTrainedSafetyWhenHired ===
                         "no"
                       }
                       onChange={handleChange}
@@ -4603,12 +4443,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
+                      name="Qf97_EmployeesOrganizedAUnion"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
-                        "yes"
+                        factoryData.Qf97_EmployeesOrganizedAUnion === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4619,10 +4458,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs97_EmpRegularlyTrainedOccupationalSafetyHired"
+                      name="Qf97_EmployeesOrganizedAUnion"
                       checked={
-                        supplierData.Qs97_EmpRegularlyTrainedOccupationalSafetyHired ===
-                        "no"
+                        factoryData.Qf97_EmployeesOrganizedAUnion === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4639,10 +4477,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs98_EmpOrganizedAUnion"
+                      name="Qf98_BonusesNotMemberUnion"
                       type="radio"
                       value="yes"
-                      checked={supplierData.Qs98_EmpOrganizedAUnion === "yes"}
+                      checked={factoryData.Qf98_BonusesNotMemberUnion === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -4652,8 +4490,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs98_EmpOrganizedAUnion"
-                      checked={supplierData.Qs98_EmpOrganizedAUnion === "no"}
+                      name="Qf98_BonusesNotMemberUnion"
+                      checked={factoryData.Qf98_BonusesNotMemberUnion === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -4669,12 +4507,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs99_BonusesBenefitsNotMembersUnion"
+                      name="Qf99_HiredSpecificTaskBasedOn"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
-                        "yes"
+                        factoryData.Qf99_HiredSpecificTaskBasedOn === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4685,10 +4522,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs99_BonusesBenefitsNotMembersUnion"
+                      name="Qf99_HiredSpecificTaskBasedOn"
                       checked={
-                        supplierData.Qs99_BonusesBenefitsNotMembersUnion ===
-                        "no"
+                        factoryData.Qf99_HiredSpecificTaskBasedOn === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4705,13 +4541,10 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
+                      name="Qf100_UnFairlyPaid"
                       type="radio"
                       value="yes"
-                      checked={
-                        supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
-                        "yes"
-                      }
+                      checked={factoryData.Qf100_UnFairlyPaid === "yes"}
                       onChange={handleChange}
                     />
                     Yes
@@ -4721,11 +4554,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs100_EmpHiredBasedOnEthnicSocialHealthETC"
-                      checked={
-                        supplierData.Qs100_EmpHiredBasedOnEthnicSocialHealthETC ===
-                        "no"
-                      }
+                      name="Qf100_UnFairlyPaid"
+                      checked={factoryData.Qf100_UnFairlyPaid === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -4745,7 +4575,7 @@ const FactoryQuestions = () => {
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs101_WorkersUnfairlyPaidSameWork === "yes"
+                        factoryData.Qs101_WorkersUnfairlyPaidSameWork === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4758,7 +4588,7 @@ const FactoryQuestions = () => {
                       value="no"
                       name="Qs101_WorkersUnfairlyPaidSameWork"
                       checked={
-                        supplierData.Qs101_WorkersUnfairlyPaidSameWork === "no"
+                        factoryData.Qs101_WorkersUnfairlyPaidSameWork === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4775,12 +4605,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs102_StatutoryMinimumWageInCountry"
+                      name="Qf102_PayStatutoryMinimumWage"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs102_StatutoryMinimumWageInCountry ===
-                        "yes"
+                        factoryData.Qf102_PayStatutoryMinimumWage === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4791,10 +4620,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs102_StatutoryMinimumWageInCountry"
+                      name="Qf102_PayStatutoryMinimumWage"
                       checked={
-                        supplierData.Qs102_StatutoryMinimumWageInCountry ===
-                        "no"
+                        factoryData.Qf102_PayStatutoryMinimumWage === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4811,11 +4639,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs103_PayRespectiveStatutory"
+                      name="Qf103_PayWageInLineGeneralLevel"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs103_PayRespectiveStatutory === "yes"
+                        factoryData.Qf103_PayWageInLineGeneralLevel === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4826,9 +4654,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs103_PayRespectiveStatutory"
+                      name="Qf103_PayWageInLineGeneralLevel"
                       checked={
-                        supplierData.Qs103_PayRespectiveStatutory === "no"
+                        factoryData.Qf103_PayWageInLineGeneralLevel === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4845,12 +4673,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs104_PayAtleastWageInLineGeneralWage"
+                      name="Qf104_WageReduceBenefitsEmployee"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
-                        "yes"
+                        factoryData.Qf104_WageReduceBenefitsEmployee === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4861,10 +4688,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs104_PayAtleastWageInLineGeneralWage"
+                      name="Qf104_WageReduceBenefitsEmployee"
                       checked={
-                        supplierData.Qs104_PayAtleastWageInLineGeneralWage ===
-                        "no"
+                        factoryData.Qf104_WageReduceBenefitsEmployee === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4881,11 +4707,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs105_WageReducedBenefitsProvidedCompany"
+                      name="Qf105_Last20YearsAcquiredLandPriorAcquisition"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
+                        factoryData.Qf105_Last20YearsAcquiredLandPriorAcquisition ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -4897,9 +4723,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs105_WageReducedBenefitsProvidedCompany"
+                      name="Qf105_Last20YearsAcquiredLandPriorAcquisition"
                       checked={
-                        supplierData.Qs105_WageReducedBenefitsProvidedCompany ===
+                        factoryData.Qf105_Last20YearsAcquiredLandPriorAcquisition ===
                         "no"
                       }
                       onChange={handleChange}
@@ -4917,12 +4743,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs106_Last20YearsCompanyAcquiredLand"
+                      name="Qf106_ConfirmLandOwnedORHeld"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
-                        "yes"
+                        factoryData.Qf106_ConfirmLandOwnedORHeld === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4933,10 +4758,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs106_Last20YearsCompanyAcquiredLand"
+                      name="Qf106_ConfirmLandOwnedORHeld"
                       checked={
-                        supplierData.Qs106_Last20YearsCompanyAcquiredLand ===
-                        "no"
+                        factoryData.Qf106_ConfirmLandOwnedORHeld === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4953,11 +4777,12 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs107_ConfirmLandOwnedOrHeld"
+                      name="Qf107_AcquiredForestLandWaterBodies"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs107_ConfirmLandOwnedOrHeld === "yes"
+                        factoryData.Qf107_AcquiredForestLandWaterBodies ===
+                        "yes"
                       }
                       onChange={handleChange}
                     />
@@ -4968,9 +4793,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs107_ConfirmLandOwnedOrHeld"
+                      name="Qf107_AcquiredForestLandWaterBodies"
                       checked={
-                        supplierData.Qs107_ConfirmLandOwnedOrHeld === "no"
+                        factoryData.Qf107_AcquiredForestLandWaterBodies === "no"
                       }
                       onChange={handleChange}
                     />
@@ -4987,12 +4812,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
+                      name="Qf108_EmploySecurityPersonnel"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
-                        "yes"
+                        factoryData.Qf108_EmploySecurityPersonnel === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -5003,10 +4827,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs108_AcquiredForestLandWaterBodiesLast20Years"
+                      name="Qf108_EmploySecurityPersonnel"
                       checked={
-                        supplierData.Qs108_AcquiredForestLandWaterBodiesLast20Years ===
-                        "no"
+                        factoryData.Qf108_EmploySecurityPersonnel === "no"
                       }
                       onChange={handleChange}
                     />
@@ -5023,11 +4846,12 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs109_EmpSecurityPersonnel"
+                      name="Qf109_SecurityMonitoringEntryAndExitChecks"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs109_EmpSecurityPersonnel === "yes"
+                        factoryData.Qf109_SecurityMonitoringEntryAndExitChecks ===
+                        "yes"
                       }
                       onChange={handleChange}
                     />
@@ -5038,8 +4862,11 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs109_EmpSecurityPersonnel"
-                      checked={supplierData.Qs109_EmpSecurityPersonnel === "no"}
+                      name="Qf109_SecurityMonitoringEntryAndExitChecks"
+                      checked={
+                        factoryData.Qf109_SecurityMonitoringEntryAndExitChecks ===
+                        "no"
+                      }
                       onChange={handleChange}
                     />
                     No
@@ -5055,12 +4882,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
+                      name="Qf110_CompanyDefineCriteriaQf110_CompanyDefineCriteria"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
-                        "yes"
+                        factoryData.Qf110_CompanyDefineCriteria === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -5071,11 +4897,8 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks"
-                      checked={
-                        supplierData.Qs110_SecurityPersonnelTaskedBeyondEntryExitChecks ===
-                        "no"
-                      }
+                      name="Qf110_CompanyDefineCriteria"
+                      checked={factoryData.Qf110_CompanyDefineCriteria === "no"}
                       onChange={handleChange}
                     />
                     No
@@ -5091,11 +4914,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
+                      name="Qf111_LegalProceedingsAgainstCompanyLast5Years"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
+                        factoryData.Qf111_LegalProceedingsAgainstCompanyLast5Years ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5107,9 +4930,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts"
+                      name="Qf111_LegalProceedingsAgainstCompanyLast5Years"
                       checked={
-                        supplierData.Qs111_CompanyDefinedCriteriaAgaintRelevantImpacts ===
+                        factoryData.Qf111_LegalProceedingsAgainstCompanyLast5Years ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5131,7 +4954,7 @@ const FactoryQuestions = () => {
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
+                        factoryData.Qs112_LegalProceedingsAgainstEnvPollution ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5145,7 +4968,7 @@ const FactoryQuestions = () => {
                       value="no"
                       name="Qs112_LegalProceedingsAgainstEnvPollution"
                       checked={
-                        supplierData.Qs112_LegalProceedingsAgainstEnvPollution ===
+                        factoryData.Qs112_LegalProceedingsAgainstEnvPollution ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5163,11 +4986,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
+                      name="Qf113_InstructionsProceedCaseOfViolations"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
+                        factoryData.Qf113_InstructionsProceedCaseOfViolations ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5179,9 +5002,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater"
+                      name="Qf113_InstructionsProceedCaseOfViolations"
                       checked={
-                        supplierData.Qs113_WorkInstOrgPrecautionsMinimizeEmissionsAirSoilWater ===
+                        factoryData.Qf113_InstructionsProceedCaseOfViolations ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5199,11 +5022,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs114_CompanyHowProceedCaseViolation"
+                      name="Qf114_PublishReportGoalsAndProgress"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs114_CompanyHowProceedCaseViolation ===
+                        factoryData.Qf114_PublishReportGoalsAndProgress ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5215,10 +5038,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs114_CompanyHowProceedCaseViolation"
+                      name="Qf114_PublishReportGoalsAndProgress"
                       checked={
-                        supplierData.Qs114_CompanyHowProceedCaseViolation ===
-                        "no"
+                        factoryData.Qf114_PublishReportGoalsAndProgress === "no"
                       }
                       onChange={handleChange}
                     />
@@ -5235,11 +5057,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs115_CompanyPublishReportOnGoalsProgress"
+                      name="Qf115_BusinessGeneratesHazardousWithRadioactiveSubstances"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
+                        factoryData.Qf115_BusinessGeneratesHazardousWithRadioactiveSubstances ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5251,9 +5073,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs115_CompanyPublishReportOnGoalsProgress"
+                      name="Qs115_CompanyPubQf115_BusinessGeneratesHazardousWithRadioactiveSubstanceslishReportOnGoalsProgress"
                       checked={
-                        supplierData.Qs115_CompanyPublishReportOnGoalsProgress ===
+                        factoryData.Qf115_BusinessGeneratesHazardousWithRadioactiveSubstances ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5271,11 +5093,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
+                      name="Qf116_WorkExternalDisposalServiceProvider"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
+                        factoryData.Qf116_WorkExternalDisposalServiceProvider ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5287,9 +5109,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs116_BusinessGenerateHazardWasteWorkRadioactive"
+                      name="Qf116_WorkExternalDisposalServiceProvider"
                       checked={
-                        supplierData.Qs116_BusinessGenerateHazardWasteWorkRadioactive ===
+                        factoryData.Qf116_WorkExternalDisposalServiceProvider ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5307,11 +5129,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs117_WorkWithExternalDisposalServiceProvider"
+                      name="Qf117_ExportHazardousWasteDocumented"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
+                        factoryData.Qf117_ExportHazardousWasteDocumented ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5323,9 +5145,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs117_WorkWithExternalDisposalServiceProvider"
+                      name="Qf117_ExportHazardousWasteDocumented"
                       checked={
-                        supplierData.Qs117_WorkWithExternalDisposalServiceProvider ===
+                        factoryData.Qf117_ExportHazardousWasteDocumented ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5343,11 +5165,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs118_ExportHazardousWasteDocumented"
+                      name="Qf118_ConfirmAccordanceBaselConvention"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs118_ExportHazardousWasteDocumented ===
+                        factoryData.Qf118_ConfirmAccordanceBaselConvention ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5359,9 +5181,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs118_ExportHazardousWasteDocumented"
+                      name="Qf118_ConfirmAccordanceBaselConvention"
                       checked={
-                        supplierData.Qs118_ExportHazardousWasteDocumented ===
+                        factoryData.Qf118_ConfirmAccordanceBaselConvention ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5379,12 +5201,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs119_ConfirmCompActsWithBaselConvention"
+                      name="Qf119_PersistentOrganicPollutants"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
-                        "yes"
+                        factoryData.Qf119_PersistentOrganicPollutants === "yes"
                       }
                       onChange={handleChange}
                     />
@@ -5395,10 +5216,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs119_ConfirmCompActsWithBaselConvention"
+                      name="Qf119_PersistentOrganicPollutants"
                       checked={
-                        supplierData.Qs119_ConfirmCompActsWithBaselConvention ===
-                        "no"
+                        factoryData.Qf119_PersistentOrganicPollutants === "no"
                       }
                       onChange={handleChange}
                     />
@@ -5415,11 +5235,11 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs120_UsePersistentOrganicPollutants"
+                      name="Qf120_ActsAccordanceStockholmConvention"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs120_UsePersistentOrganicPollutants ===
+                        factoryData.Qf120_ActsAccordanceStockholmConvention ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5431,9 +5251,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs120_UsePersistentOrganicPollutants"
+                      name="Qf120_ActsAccordanceStockholmConvention"
                       checked={
-                        supplierData.Qs120_UsePersistentOrganicPollutants ===
+                        factoryData.Qf120_ActsAccordanceStockholmConvention ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5451,11 +5271,44 @@ const FactoryQuestions = () => {
                   <br />
                   <label>
                     <input
-                      name="Qs121_ConfirmCompActsWithStockholmConvention"
+                      name="Qf121_ConfirmNotUseSubstanceListed"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
+                        factoryData.Qf121_ConfirmNotUseSubstanceListed === "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qf121_ConfirmNotUseSubstanceListed"
+                      checked={
+                        factoryData.Qf121_ConfirmNotUseSubstanceListed === "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "122").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "122").q}</span>
+                  <br />
+                  <br />
+                  <label>
+                    <input
+                      name="Qf122_ListedAnnexIRegulationDoYouUse"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        factoryData.Qf122_ListedAnnexIRegulationDoYouUse ===
                         "yes"
                       }
                       onChange={handleChange}
@@ -5467,9 +5320,9 @@ const FactoryQuestions = () => {
                     <input
                       type="radio"
                       value="no"
-                      name="Qs121_ConfirmCompActsWithStockholmConvention"
+                      name="Qf122_ListedAnnexIRegulationDoYouUse"
                       checked={
-                        supplierData.Qs121_ConfirmCompActsWithStockholmConvention ===
+                        factoryData.Qf122_ListedAnnexIRegulationDoYouUse ===
                         "no"
                       }
                       onChange={handleChange}
@@ -5477,139 +5330,126 @@ const FactoryQuestions = () => {
                     No
                   </label>
                 </div>
-                {/* Question 122 */}
                 <div className="field-sections">
                   <span>
-                    Q.{factoryJson.find((f) => f.id === "122").id}:&nbsp;&nbsp;
+                    Q.{factoryJson.find((f) => f.id === "123").id}:&nbsp;&nbsp;
                   </span>
-                  <span>
-                    {factoryJson.find((f) => f.id === "122").q}{" "}
-                    <span style={{ color: "red" }}>*</span>
-                  </span>
+                  <span>{factoryJson.find((f) => f.id === "123").q}</span>
                   <br />
                   <br />
                   <label>
                     <input
-                      name="Qs122_NotUseManufactureSubstancesListedAnnexI"
+                      name="Qf123_ProduceMercuryUseMercuryTreatMercuryWaste"
                       type="radio"
                       value="yes"
                       checked={
-                        supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
+                        factoryData.Qf123_ProduceMercuryUseMercuryTreatMercuryWaste ===
                         "yes"
                       }
                       onChange={handleChange}
                     />
                     Yes
                   </label>
+
                   <label style={{ marginLeft: "1rem" }}>
                     <input
                       type="radio"
                       value="no"
-                      name="Qs122_NotUseManufactureSubstancesListedAnnexI"
+                      name="Qf123_ProduceMercuryUseMercuryTreatMercuryWaste"
                       checked={
-                        supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
+                        factoryData.Qf123_ProduceMercuryUseMercuryTreatMercuryWaste ===
                         "no"
                       }
                       onChange={handleChange}
                     />
                     No
                   </label>
+                </div>
+                <div className="field-sections">
+                  <span>
+                    Q.{factoryJson.find((f) => f.id === "124").id}:&nbsp;&nbsp;
+                  </span>
+                  <span>{factoryJson.find((f) => f.id === "124").q}</span>
                   <br />
                   <br />
-                  {/* This Question is Dependent on Question 122. */}
-                  <div>
-                    {supplierData.Qs122_NotUseManufactureSubstancesListedAnnexI ===
-                      "no" && (
-                      <div className="field-sections">
-                        <span>
-                          Q.{factoryJson.find((f) => f.id === "123").id}
-                          :&nbsp;&nbsp;
-                        </span>
-                        <span>{factoryJson.find((f) => f.id === "123").q}</span>
-                        <input
-                          onChange={handleChange}
-                          placeholder="Enter your answer"
-                          type="text"
-                          name="Qs122_SubstancesListedYESNO" // Add name attribute
-                          className="mt-3 outline-none w-100"
-                          id="name-text"
-                        />
+                  <label>
+                    <input
+                      name="Qf124_CompanyAccordanceMinimataConventions"
+                      type="radio"
+                      value="yes"
+                      checked={
+                        factoryData.Qf124_CompanyAccordanceMinimataConventions ===
+                        "yes"
+                      }
+                      onChange={handleChange}
+                    />
+                    Yes
+                  </label>
+
+                  <label style={{ marginLeft: "1rem" }}>
+                    <input
+                      type="radio"
+                      value="no"
+                      name="Qf124_CompanyAccordanceMinimataConventions"
+                      checked={
+                        factoryData.Qf124_CompanyAccordanceMinimataConventions ===
+                        "no"
+                      }
+                      onChange={handleChange}
+                    />
+                    No
+                  </label>
+                </div>
+                <br />
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={(e) => {
+                      setIsChecked(e.target.checked);
+                    }}
+                  />
+                  We hereby declare that the information provided is accurate,
+                  up to date and correct and that the documents submitted along
+                  with these forms are genuine. We also understand that in the
+                  event of our information being found false or incorrect at any
+                  stage. We reserve the right to conduct 3rd party audits to
+                  access and verify our provided information.
+                </label>
+                <label>
+                  <div className="container">
+                    <div className="row" style={{ marginLeft: "-2%" }}>
+                      <div className="col-sm">
+                        <p>
+                          {" "}
+                          <input
+                            type="checkbox"
+                            checked={isCheckedReview}
+                            onChange={(e) => {
+                              setIsCheckedReview(e.target.checked);
+                            }}
+                          />{" "}
+                          We review all the pre-filled data and confirm there is
+                          no change.
+                        </p>
                       </div>
-                    )}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {/*{" "} */}
+                      <div className="col-sm" style={{ marginLeft: "-5%" }}>
+                        <p>
+                          Signature (To sign, please type your full name here){" "}
+                          <input
+                            type="text"
+                            style={{ width: "150px" }}
+                            required
+                          />
+                        </p>
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Question 124 */}
-                  <div className="field-sections">
-                    <span>
-                      Q.{factoryJson.find((f) => f.id === "124").id}
-                      :&nbsp;&nbsp;
-                    </span>
-                    <span>{factoryJson.find((f) => f.id === "124").q}</span>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        name="Qs125_AssureCompOperatesWithMinamataConvention"
-                        type="radio"
-                        value="yes"
-                        checked={
-                          supplierData.Qs125_AssureCompOperatesWithMinamataConvention ===
-                          "yes"
-                        }
-                        onChange={handleChange}
-                      />
-                      Yes
-                    </label>
-
-                    <label style={{ marginLeft: "1rem" }}>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="Qs125_AssureCompOperatesWithMinamataConvention"
-                        checked={
-                          supplierData.Qs125_AssureCompOperatesWithMinamataConvention ===
-                          "no"
-                        }
-                        onChange={handleChange}
-                      />
-                      No
-                    </label>
-                    <br />
-                    <br />
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={(e) => {
-                          setIsChecked(e.target.checked);
-                        }}
-                      />
-                      We hereby declare that the information provided is
-                      accurate, up to date and correct and that the documents
-                      submitted along with these forms are genuine. We also
-                      understand that in the event of our information being
-                      found false or incorrect at any stage. We reserve the
-                      right to conduct 3rd party audits to access and verify our
-                      provided information.
-                    </label>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={isCheckedReview}
-                        onChange={(e) => {
-                          setIsCheckedReview(e.target.checked);
-                        }}
-                      />
-                      We review all the pre-filled data and confirm there is no
-                      change.
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                      <span>
-                        Signature (To sign, please type your full name here)
-                        <input type="text" style={{ width: "200px" }} />
-                      </span>
-                    </label>
-                  </div>
-                </div>{" "}
+                </label>
                 <div className="container">
                   <div className="row">
                     <div className="col-sm">
