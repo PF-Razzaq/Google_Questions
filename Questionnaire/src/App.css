@@ -15,6 +15,13 @@
   padding-top: 30px; /* Adjust this value to match the header's height */
   /* Add other styles as needed */
 }
+p,
+input {
+  text-align: left;
+}
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
 .App {
   text-align: center;
 }

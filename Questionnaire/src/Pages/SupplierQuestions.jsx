@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 let otherCountry;
 let recordId = 0;
+
 let submitValue = "";
 const SupplierQuestions = () => {
   let [loading, setLoading] = useState(false);
@@ -72,6 +73,7 @@ const SupplierQuestions = () => {
     fetchSupplierJson();
     fetchCpontryCode();
     fetchFactoryJson();
+    localStorage.setItem("isLeadFactory", false);
   }, []);
   // window.onload = new (function () {
   //   fetchSupplierJson();
@@ -127,14 +129,15 @@ const SupplierQuestions = () => {
     e.preventDefault();
     setLoading(true);
     document.documentElement.scrollTop = 0;
-    const form = document.getElementById("supplierForm");
+
+    submitValue = e.nativeEvent.submitter.attributes.value.value;
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_NODE_MIDDLEWARE}/fmi/data/v2/databases/Registration/sessions`
+        `${process.env.REACT_APP_NODE_MIDDLEWARE}`
       );
       localStorage.setItem("filemakerToken", response.data);
-      submitValue = e.nativeEvent.submitter.attributes.value.value;
+
       postDataWithToken();
     } catch (error) {
       console.error("Error occurred while connecting", error);
@@ -162,7 +165,6 @@ const SupplierQuestions = () => {
         localStorage.setItem("supplierId", Number(data.response.recordId));
 
         recordId = Number(data.response.recordId);
-
         await uploadSignedDocument();
         await uploadDueDilligenceDocument();
         await issuedFairLaborEvidenceUpload();
@@ -187,18 +189,22 @@ const SupplierQuestions = () => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
+
         setTimeout(() => {
           if (submitValue !== "finish") {
             window.location = `${process.env.REACT_APP_PUBLIC_URL}/factoryquestions`;
           } else {
-            window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
+            window.location = `${process.env.REACT_APP_PUBLIC_URL}/`;
           }
         }, 3000);
       } catch (error) {
-        toast.error(`submission failed : ${error}`, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-        });
+        toast.error(
+          "databse connected but data not submitted.check console for error",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          }
+        );
         console.error("Error fetching data:", error);
       }
     }
@@ -601,7 +607,7 @@ const SupplierQuestions = () => {
           <div className="row justify-content-center">
             <div className="form-sections p-5">
               <div className="form-field">
-                <form id="supplierForm" onSubmit={connectToDatabase}>
+                <form id="supplierForm2" onSubmit={connectToDatabase}>
                   <div>
                     <div
                       style={{
@@ -840,8 +846,6 @@ const SupplierQuestions = () => {
                       style={{ width: "190px" }}
                       value={supplierData.Qs8_Country}
                       onChange={(e) => {
-                        console.log(e.target.value, e);
-
                         setSupplierData({
                           ...supplierData,
                           Qs8_Country: e.target.value,
@@ -928,6 +932,7 @@ const SupplierQuestions = () => {
                     <div className="form-group d-flex">
                       <select
                         name="Qs9a_Phone"
+                        required
                         onChange={(e) => {
                           setCountrycodePhone(e.target.value);
                         }}
@@ -949,6 +954,7 @@ const SupplierQuestions = () => {
                       <input
                         name="Qs9a_Phone"
                         type="text"
+                        required
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^0-9-]/g,
@@ -978,6 +984,7 @@ const SupplierQuestions = () => {
                       <select
                         className="form-control countryCode me-1"
                         id="countrySelect"
+                        required
                         onChange={(e) => {
                           setCountrycodeCell(e.target.value);
                         }}
@@ -996,6 +1003,7 @@ const SupplierQuestions = () => {
 
                       <input
                         type="text"
+                        required
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^0-9-]/g,
@@ -1715,7 +1723,7 @@ const SupplierQuestions = () => {
                       <option value="Other">Other</option>
                     </select>
 
-                    {otherFields.Q32Other === "other" && (
+                    {otherFields.Q32Other === "Other" && (
                       <div className="otherWidth input-group w-25 mt-2 otherF">
                         <input
                           style={{ width: "220px" }}
@@ -1780,6 +1788,7 @@ const SupplierQuestions = () => {
                         style={{ width: "380px" }}
                         className="form-control countryCode me-1"
                         id="countrySelect"
+                        required
                         name="Qs33_BankPhone"
                       >
                         <option value="" disabled selected>
@@ -1797,6 +1806,7 @@ const SupplierQuestions = () => {
                       <input
                         style={{ width: "280px" }}
                         name="Qs33_BankPhone"
+                        required
                         placeholder="This value must be a number"
                         type="text"
                         onInput={(e) => {
@@ -2064,7 +2074,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               type="file"
                               name="Qs39b_HumanRightsViolations"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2293,7 +2302,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs45b_IssuedFairLaborEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2398,7 +2406,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs46b_IssuedFairStoneEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2506,7 +2513,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs47b_IssuedGlobalOrganicTextileEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2614,7 +2620,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs48b_IssuedGrunerKnopfEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2719,7 +2724,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs49b_IssuedIGEPEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2825,7 +2829,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs50b_IssuedOEKOTEXGreenEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2933,7 +2936,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs51b_IssuedSMETASedexEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3043,7 +3045,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs52b_IssuedSocialAccountabilitySA8000"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3153,7 +3154,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs53b_IssuedXertifixStandardEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3262,7 +3262,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs54b_IssuedXertifixPlusEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3370,7 +3369,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs55b_IssuedAMFORIBEPIEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3480,7 +3478,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs56b_IssuedDINENISO14001Evidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3590,7 +3587,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs57b_IssuedGrunerKnopfEvidence_2"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3700,7 +3696,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs58b_IssuedIGEP2020AuditEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3810,7 +3805,6 @@ const SupplierQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qs59b_IssuedDINENISO45001Evidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"

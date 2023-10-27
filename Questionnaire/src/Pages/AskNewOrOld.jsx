@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const AskNewOrOld = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("New");
-  console.log("env4", process.env.REACT_APP_BACKEND_URL);
 
   return (
     <>
@@ -58,9 +57,9 @@ const AskNewOrOld = () => {
                 window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
               }}
               type="button"
-              class="btn btn-warning w-100  fw-bold"
+              class="btn btn-warning w-100  "
             >
-              New Supplier Profile
+              NEW SUPPLER CLICK HERE (FIRST TIME SUBMISSION)
             </button>
             <br />
             <br />
@@ -71,9 +70,9 @@ const AskNewOrOld = () => {
                 window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
               }}
               type="button"
-              class="btn btn-warning w-100  fw-bold mb-5"
+              class="btn btn-warning w-100   mb-5"
             >
-              Existing Supplier Profile
+              EXISTING SUPPLIER CLICK HERE (RESUBMISSION)
             </button>
           </div>
         </div>

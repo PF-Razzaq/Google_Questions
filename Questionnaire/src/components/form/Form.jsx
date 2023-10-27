@@ -58,7 +58,6 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Access the form data from formData for further processing
-    console.log("Form data submitted:", formData);
   };
 
   // For Destructuring all input Values

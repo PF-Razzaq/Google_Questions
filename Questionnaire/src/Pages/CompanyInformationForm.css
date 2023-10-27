@@ -36,15 +36,20 @@
   border-bottom: 1px dotted;
   outline: none;
 }
-
+label.file-input-button-upload {
+  background-color: rgb(254, 193, 6);
+}
 .submit-btn {
-  background: #fec106;
-  outline: none;
-  border: none;
-  padding: 7px 19px;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
+  background: rgb(254, 193, 6);
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 15px 5px 11px;
+  color: black;
+  border-radius: 6px;
+  text-transform: uppercase;
 }
 .submit-btn:hover {
   background: #d1a112;
@@ -62,7 +67,7 @@ label.file-input-button-upload {
   letter-spacing: 0.25px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 5px 15px 5px 11px;
-  color: rgba(0, 0, 0, 0.38);
+  color: black;
   border-radius: 6px;
 }
 
@@ -91,9 +96,8 @@ input.form-description {
   letter-spacing: 0.25px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 5px 15px 5px 11px;
-  color: rgba(0, 0, 0, 0.38);
+  color: black;
   border-radius: 6px;
-  background: white;
 }
 
 .phoneNumberInput {
@@ -153,4 +157,10 @@ input.form-description {
 }
 .otherWidth {
   width: 190px !important;
+}
+
+.reviewCheckbox {
+  transform: scale(1.4);
+  margin-top: -20px;
+  margin-right: 10px;
 }

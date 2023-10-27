@@ -44,7 +44,13 @@ const FactoryQuestions = () => {
 
     setSupplierJson(response.data);
   };
+  const isLeadFactory = async () => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_NODE_MIDDLEWARE}/isLeadFactory/`
+    );
 
+    setSupplierJson(response.data);
+  };
   const fetchCpontryCode = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_PUBLIC_URL}/countryCode.json`
@@ -110,6 +116,7 @@ const FactoryQuestions = () => {
     id_supplier: localStorage.getItem("supplierId")
       ? localStorage.getItem("supplierId")
       : 0,
+    is_lead_factory: "no",
   });
 
   const [isChecked, setIsChecked] = useState(false);
@@ -183,10 +190,9 @@ const FactoryQuestions = () => {
     }
     setLoading(true);
 
-    //
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_NODE_MIDDLEWARE}/fmi/data/v2/databases/Registration/sessions`
+        `${process.env.REACT_APP_NODE_MIDDLEWARE}`
       );
       submitValue = e.nativeEvent.submitter.attributes.value.value;
       localStorage.setItem("filemakerToken", response.data);
@@ -218,7 +224,12 @@ const FactoryQuestions = () => {
         const data = response.data;
 
         recordId = Number(data.response.recordId);
-
+        if (factoryData.is_lead_factory === "no") {
+          localStorage.setItem("isLeadFactory", false);
+        }
+        if (factoryData.is_lead_factory === "yes") {
+          localStorage.setItem("isLeadFactory", true);
+        }
         await issuedFairLaborEvidenceUpload();
         await issuedFairStoneEvidenceUpload();
         await issuedGlobalOrganicTextileEvidenceUpload();
@@ -258,10 +269,13 @@ const FactoryQuestions = () => {
         }, 3000);
       } catch (error) {
         setLoading(false);
-        toast.error("Databased connected but failed to save data", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-        });
+        toast.error(
+          "databse connected but data not submitted.check console for error",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          }
+        );
         console.error("Error fetching data:", error);
       }
     }
@@ -624,6 +638,7 @@ const FactoryQuestions = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFactoryData({
       ...factoryData,
       [name]: value,
@@ -639,7 +654,6 @@ const FactoryQuestions = () => {
   const closeModal = () => {
     setShowModal(false);
   };
-
   return (
     <>
       <ClipLoader
@@ -735,7 +749,15 @@ const FactoryQuestions = () => {
                     />
                   </div>
                   {/* Question 1b */}
-                  <div className="field-sections">
+                  <div
+                    className="field-sections"
+                    style={{
+                      color:
+                        localStorage.getItem("isLeadFactory") === "true"
+                          ? "lightgrey"
+                          : "black",
+                    }}
+                  >
                     <span>{factoryJson.find((f) => f.id === "1b").q} </span>
                     <span style={{ color: "red" }}>*</span>
 
@@ -743,8 +765,10 @@ const FactoryQuestions = () => {
                     <br />
                     <label>
                       <input
-                        required
                         name="is_lead_factory"
+                        disabled={
+                          localStorage.getItem("isLeadFactory") === "true"
+                        }
                         type="radio"
                         value="yes"
                         checked={factoryData.is_lead_factory === "yes"}
@@ -755,9 +779,11 @@ const FactoryQuestions = () => {
 
                     <label style={{ marginLeft: "1rem" }}>
                       <input
-                        required
                         type="radio"
                         value="no"
+                        disabled={
+                          localStorage.getItem("isLeadFactory") === "true"
+                        }
                         name="is_lead_factory"
                         checked={factoryData.is_lead_factory === "no"}
                         onChange={handleChange}
@@ -784,7 +810,6 @@ const FactoryQuestions = () => {
                       name="Qf2_FactoryBusinessLicenseNumber"
                       className="mt-3 outline-none w-100"
                       id="name-text"
-                      required
                     />
                   </div>
                   {/* Question 3 */}
@@ -1089,6 +1114,7 @@ const FactoryQuestions = () => {
                           setCountrycodePhone(e.target.value);
                         }}
                         style={{ width: "280px" }}
+                        required
                         className="form-control countryCode me-1"
                         id="countrySelect"
                       >
@@ -1108,6 +1134,7 @@ const FactoryQuestions = () => {
                         style={{ width: "280px" }}
                         name="Qf11a_Phone"
                         type="text"
+                        required
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^0-9-]/g,
@@ -1141,6 +1168,7 @@ const FactoryQuestions = () => {
                         }}
                         className="form-control countryCode me-1"
                         id="countrySelect"
+                        required
                       >
                         <option value="" selected disabled>
                           Choose Options
@@ -1156,6 +1184,7 @@ const FactoryQuestions = () => {
                       -
                       <input
                         type="text"
+                        required
                         style={{ width: "280px" }}
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
@@ -1856,7 +1885,14 @@ const FactoryQuestions = () => {
                         <DatePicker
                           className="date-style1"
                           selected={dateFields.Qf33_If33YESAuditDate}
+                          dateFormat="dd/MM/yyyy"
                           onChange={(date) => {
+                            let parts = date
+                              .toLocaleDateString(date)
+                              .replace(/"/g, "")
+                              .split("/");
+                            let newDateString =
+                              parts[1] + "/" + parts[0] + "/" + parts[2];
                             setFactoryData({
                               ...factoryData,
                               Qf33_If33YESAuditDate: date
@@ -1880,8 +1916,16 @@ const FactoryQuestions = () => {
                         <span>{factoryJson.find((f) => f.id === "34").q}</span>
                         <DatePicker
                           className="date-style2"
+                          dateFormat="dd/MM/yyyy"
                           selected={dateFields.Qf34_If33YESAuditValidity}
                           onChange={(date) => {
+                            let parts = date
+                              .toLocaleDateString(date)
+                              .replace(/"/g, "")
+                              .split("/");
+                            let newDateString =
+                              parts[1] + "/" + parts[0] + "/" + parts[2];
+
                             setFactoryData({
                               ...factoryData,
                               Qf34_If33YESAuditValidity: date
@@ -2543,7 +2587,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf49b_issuedFairLaborAccreditationEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2650,7 +2693,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf50b_issuedFairStoneEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2757,7 +2799,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf51b_issuedGlobalOrganicEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2865,7 +2906,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf52b_issuedGrunerKnopfEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -2968,7 +3008,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf53b_issuedIGEPEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3073,7 +3112,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf54b_issuedOEKOTEXEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3175,7 +3213,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf55b_issuedSMETAEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3282,7 +3319,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf56b_issuedSocialAccountabilityEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3392,7 +3428,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf57b_issuedXertifexStandardEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3500,7 +3535,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf58b_issuedXertifexPLUSEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3607,7 +3641,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf59b_issuedAMFORIBEPIEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3714,7 +3747,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf60b_issuedDINENISOEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3820,7 +3852,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf61b_issuedGrunerKnopfEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -3927,7 +3958,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf62b_issuedIGEP2020Evidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
@@ -4034,7 +4064,6 @@ const FactoryQuestions = () => {
                           <br />
                           <label className="file-input-button-upload">
                             <input
-                              required
                               name="Qf63b_issuedDINENISO45001Evidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
