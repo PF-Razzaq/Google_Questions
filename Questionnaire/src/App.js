@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import AskNewOrOld from "./Pages/AskNewOrOld";
 import SupplierQuestions from "./Pages/SupplierQuestions";
 import FactoryQuestions from "./Pages/FactoryQuestions";
+import EnterSupplierId from "./Pages/EnterSupplierId";
+import CheckOTP from "./Pages/CheckOTP";
+import ExistingUserNavigation from "./Pages/ExistingUserNavigation";
 
 function App() {
   localStorage.setItem("fromHome", false);
@@ -17,6 +20,12 @@ function App() {
           <Route path="/" element={<AskNewOrOld />} />
           <Route path="/SupplierQuestions" element={<SupplierQuestions />} />
           <Route path="/factoryquestions" element={<FactoryQuestions />} />
+          <Route path="/EnterSupplierId" element={<EnterSupplierId />} />
+          <Route path="/CheckOTP" element={<CheckOTP />} />
+          <Route
+            path="/ExistingUserNavigation"
+            element={<ExistingUserNavigation />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
