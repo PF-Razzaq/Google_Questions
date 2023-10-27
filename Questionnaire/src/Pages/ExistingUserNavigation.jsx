@@ -77,7 +77,7 @@ const ExistingUserNavigation = () => {
                 // window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
               }}
               type="button"
-              class="btn btn-warning mb-5 fw-bold w-100 "
+              class="btn btn-warning mb-4 fw-bold w-100 "
               style={{ width: "150px" }}
             >
               UPDATE SUPPLIER PROFILE

@@ -9,6 +9,7 @@ import FactoryQuestions from "./Pages/FactoryQuestions";
 import EnterSupplierId from "./Pages/EnterSupplierId";
 import CheckOTP from "./Pages/CheckOTP";
 import ExistingUserNavigation from "./Pages/ExistingUserNavigation";
+import ChooseFactory from "./Pages/ChooseFactory";
 
 function App() {
   localStorage.setItem("fromHome", false);
@@ -22,6 +23,7 @@ function App() {
           <Route path="/factoryquestions" element={<FactoryQuestions />} />
           <Route path="/EnterSupplierId" element={<EnterSupplierId />} />
           <Route path="/CheckOTP" element={<CheckOTP />} />
+          <Route path="/ChooseFactory" element={<ChooseFactory />} />
           <Route
             path="/ExistingUserNavigation"
             element={<ExistingUserNavigation />}

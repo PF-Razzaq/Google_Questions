@@ -75,7 +75,15 @@ const EnterSupplierId = () => {
             >
               Please enter your Supplier ID
             </p>
-            <hr />
+            <input
+              //   onChange={handleChange}
+              placeholder="Enter your answer"
+              type="text"
+              name=""
+              className="mt-1 outline-none w-100 mb-3"
+              id="name-text"
+              required
+            />
             <button
               onClick={() => {
                 console.log("Checked");

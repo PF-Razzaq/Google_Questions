@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineUpload } from "react-icons/hi";
+import logoPicture from "../assets/img/logoPicture.png";
+
 import axios from "axios";
 import "../components/form/form.css";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +14,26 @@ const AskNewOrOld = () => {
     <>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="dYYAhb M0FGwd KHCwJ mt-5"></div>
+          <div className="container text-center " style={{ width: "95%" }}>
+            <div
+              className="row"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <div className="col-5">
+                <hr className="line" />
+              </div>
+              <div className="col-2">
+                <img
+                  src={logoPicture}
+                  alt="logo"
+                  style={{ width: "130px", height: "130px" }}
+                />
+              </div>
+              <div className="col-5">
+                <hr className="line" />
+              </div>
+            </div>
+          </div>
 
           <div
             className="col-12 col-md-6 bg-white mt-1"
