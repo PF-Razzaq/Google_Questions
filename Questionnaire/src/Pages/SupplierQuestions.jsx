@@ -74,6 +74,7 @@ const SupplierQuestions = () => {
     fetchCpontryCode();
     fetchFactoryJson();
     localStorage.setItem("isLeadFactory", false);
+    sessionStorage.setItem("visitedSupplierQuestions", true);
   }, []);
   // window.onload = new (function () {
   //   fetchSupplierJson();
@@ -879,7 +880,7 @@ const SupplierQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newCountry = e.target.value.trim();
+                              const newCountry = e.target.value;
                               if (newCountry) {
                                 options.unshift();
                                 const selectElement = document.querySelector(
@@ -897,7 +898,7 @@ const SupplierQuestions = () => {
                           }}
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newCountry = e.target.value.trim();
+                            const newCountry = e.target.value;
                             if (newCountry) {
                               options.unshift(newCountry);
                               const selectElement = document.querySelector(
@@ -1230,7 +1231,7 @@ const SupplierQuestions = () => {
                         <input
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newOwnership = e.target.value.trim();
+                            const newOwnership = e.target.value;
                             if (newOwnership) {
                               ownerships.unshift(newOwnership);
                               const selectElement = document.querySelector(
@@ -1251,7 +1252,7 @@ const SupplierQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newOwnership = e.target.value.trim();
+                              const newOwnership = e.target.value;
                               if (newOwnership) {
                                 ownerships.unshift(newOwnership);
                                 const selectElement = document.querySelector(
@@ -1424,7 +1425,7 @@ const SupplierQuestions = () => {
                         Choose Options
                       </option>
                       <option value="Western Europe">Western Europe</option>
-                      <option value="easternEurope">Eastern Europe</option>
+                      <option value="Eastern Europe">Eastern Europe</option>
                       <option value="North America">North America</option>
                       <option value="South America">South America</option>
                       <option value="Asia Pacific">Asia Pacific</option>
@@ -1444,7 +1445,7 @@ const SupplierQuestions = () => {
                         <input
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newExport = e.target.value.trim();
+                            const newExport = e.target.value;
                             if (newExport) {
                               exports.unshift(newExport);
 
@@ -1466,7 +1467,7 @@ const SupplierQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newExport = e.target.value.trim();
+                              const newExport = e.target.value;
                               if (newExport) {
                                 exports.unshift(newExport);
                                 const selectElement = document.querySelector(
@@ -1729,7 +1730,7 @@ const SupplierQuestions = () => {
                           style={{ width: "220px" }}
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newCountryOfBankAC = e.target.value.trim();
+                            const newCountryOfBankAC = e.target.value;
                             if (newCountryOfBankAC) {
                               options32.unshift(newCountryOfBankAC);
                               const selectElement = document.querySelector(
@@ -1749,7 +1750,7 @@ const SupplierQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newCountryOfBankAC = e.target.value.trim();
+                              const newCountryOfBankAC = e.target.value;
                               if (newCountryOfBankAC) {
                                 options32.unshift(newCountryOfBankAC);
                                 const selectElement = document.querySelector(

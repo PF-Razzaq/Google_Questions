@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import moment from "moment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 let otherCountry;
@@ -116,7 +116,8 @@ const FactoryQuestions = () => {
     id_supplier: localStorage.getItem("supplierId")
       ? localStorage.getItem("supplierId")
       : 0,
-    is_lead_factory: "no",
+    is_lead_factory:
+      localStorage.getItem("isLeadFactory") === "false" ? "yes" : "",
   });
 
   const [isChecked, setIsChecked] = useState(false);
@@ -197,6 +198,11 @@ const FactoryQuestions = () => {
       submitValue = e.nativeEvent.submitter.attributes.value.value;
       localStorage.setItem("filemakerToken", response.data);
 
+      if (factoryData.is_lead_factory === "yes") {
+        // console.log("updateIsLeadFactory5");
+        updateIsLeadFactory();
+      }
+      localStorage.setItem("isLeadFactory", true);
       postDataWithToken();
     } catch (error) {
       setLoading(false);
@@ -205,6 +211,27 @@ const FactoryQuestions = () => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
+    }
+  };
+  const updateIsLeadFactory = async (token) => {
+    if (localStorage.getItem("filemakerToken")) {
+      try {
+        const response = await axios.get(
+          `${
+            process.env.REACT_APP_FM_URL
+          }/fmi/data/v2/databases/Registration/layouts/Factory/script/UpdateNoToLeadFactory?script.param=${localStorage.getItem(
+            "supplierId"
+          )}`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("filemakerToken")}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
   };
   const postDataWithToken = async (token) => {
@@ -224,12 +251,7 @@ const FactoryQuestions = () => {
         const data = response.data;
 
         recordId = Number(data.response.recordId);
-        if (factoryData.is_lead_factory === "no") {
-          localStorage.setItem("isLeadFactory", false);
-        }
-        if (factoryData.is_lead_factory === "yes") {
-          localStorage.setItem("isLeadFactory", true);
-        }
+
         await issuedFairLaborEvidenceUpload();
         await issuedFairStoneEvidenceUpload();
         await issuedGlobalOrganicTextileEvidenceUpload();
@@ -654,6 +676,7 @@ const FactoryQuestions = () => {
   const closeModal = () => {
     setShowModal(false);
   };
+  console.log(factoryData);
   return (
     <>
       <ClipLoader
@@ -753,7 +776,7 @@ const FactoryQuestions = () => {
                     className="field-sections"
                     style={{
                       color:
-                        localStorage.getItem("isLeadFactory") === "true"
+                        localStorage.getItem("isLeadFactory") === "false"
                           ? "lightgrey"
                           : "black",
                     }}
@@ -767,7 +790,7 @@ const FactoryQuestions = () => {
                       <input
                         name="is_lead_factory"
                         disabled={
-                          localStorage.getItem("isLeadFactory") === "true"
+                          localStorage.getItem("isLeadFactory") === "false"
                         }
                         type="radio"
                         value="yes"
@@ -782,7 +805,7 @@ const FactoryQuestions = () => {
                         type="radio"
                         value="no"
                         disabled={
-                          localStorage.getItem("isLeadFactory") === "true"
+                          localStorage.getItem("isLeadFactory") === "false"
                         }
                         name="is_lead_factory"
                         checked={factoryData.is_lead_factory === "no"}
@@ -941,10 +964,12 @@ const FactoryQuestions = () => {
                       style={{ width: "190px" }}
                       value={factoryData.Qf7_Country}
                       onChange={(e) => {
-                        setFactoryData({
-                          ...factoryData,
-                          Qf7_Country: e.target.value,
-                        });
+                        if (e.target.value.toLowerCase() !== "other") {
+                          setFactoryData({
+                            ...factoryData,
+                            Qf7_Country: e.target.value,
+                          });
+                        }
                         setOtherFields({
                           ...otherFields,
                           q7Other: e.target.value,
@@ -973,7 +998,8 @@ const FactoryQuestions = () => {
                         <input
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newCountry = e.target.value.trim();
+                            const newCountry =
+                              e.target.value.toLocaleLowerCase() !== "other";
                             if (newCountry) {
                               options.unshift(newCountry);
                               setOptions(options);
@@ -991,7 +1017,8 @@ const FactoryQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newCountry = e.target.value.trim();
+                              const newCountry =
+                                e.target.value.toLocaleLowerCase() !== "other";
                               if (newCountry) {
                                 options.unshift(newCountry);
                                 setOptions(options);
@@ -1152,7 +1179,6 @@ const FactoryQuestions = () => {
                         class="form-control ms-1 phoneNumberInput"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        required
                       ></input>
                     </div>
                   </div>
@@ -1600,7 +1626,7 @@ const FactoryQuestions = () => {
                         <input
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newOwnership = e.target.value.trim();
+                            const newOwnership = e.target.value;
                             if (newOwnership) {
                               ownerships.unshift(newOwnership);
                               setOwnerships(ownerships);
@@ -1621,7 +1647,7 @@ const FactoryQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newOwnership = e.target.value.trim();
+                              const newOwnership = e.target.value;
                               if (newOwnership) {
                                 ownerships.unshift(newOwnership);
                                 setOwnerships([ownerships]);
@@ -1778,27 +1804,27 @@ const FactoryQuestions = () => {
                           <option value="" disabled selected>
                             Choose Options
                           </option>
-                          <option value="westernEurope">Western Europe</option>
+                          <option value="Western Europe">Western Europe</option>
                           <option value="SA8000">SA8000</option>
                           <option value="BSCI">BSCI / amfori</option>
                           <option value="WRAP">WRAP</option>
                           <option value="FLA">FLA</option>
                           <option value="ICIT">ICIT</option>
-                          <option value="SMETA">SMETA / SEDEX</option>
+                          <option value="SMETA/SEDEX">SMETA / SEDEX</option>
                           {audits.map((audit) => (
                             <option key={audit} value={audit}>
                               {audit}
                             </option>
                           ))}
-                          <option value="other">Other</option>
+                          <option value="Other">Other</option>
                         </select>
 
-                        {otherFields.Q31Other === "other" && (
+                        {otherFields.Q31Other === "Other" && (
                           <div className="input-group w-25 mt-2 otherWidth">
                             <input
                               onBlur={(e) => {
                                 e.preventDefault();
-                                const newAudit = e.target.value.trim();
+                                const newAudit = e.target.value;
                                 if (newAudit) {
                                   audits.unshift(newAudit);
                                   setAudits(audits);
@@ -1819,7 +1845,7 @@ const FactoryQuestions = () => {
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
                                   e.preventDefault();
-                                  const newAudit = e.target.value.trim();
+                                  const newAudit = e.target.value;
                                   if (newAudit) {
                                     audits.unshift(newAudit);
                                     setAudits(audits);
@@ -1887,23 +1913,33 @@ const FactoryQuestions = () => {
                           selected={dateFields.Qf33_If33YESAuditDate}
                           dateFormat="dd/MM/yyyy"
                           onChange={(date) => {
-                            let parts = date
-                              .toLocaleDateString(date)
-                              .replace(/"/g, "")
-                              .split("/");
-                            let newDateString =
-                              parts[1] + "/" + parts[0] + "/" + parts[2];
+                            const formattedDate =
+                              moment(date).format("MM/DD/YYYY"); // Adjust the format as needed
                             setFactoryData({
                               ...factoryData,
-                              Qf33_If33YESAuditDate: date
-                                .toLocaleDateString(date)
-                                .replace(/"/g, ""),
+                              Qf33_If33YESAuditDate: formattedDate,
                             });
                             setDatefields({
                               ...dateFields,
                               Qf33_If33YESAuditDate: date,
                             });
                           }}
+                          // onChange={(date) => {
+                          //   let parts = date
+                          //     .toLocaleDateString(date)
+                          //     .replace(/"/g, "")
+                          //     .split("/");
+                          //   let newDateString =
+                          //     parts[1] + "/" + parts[0] + "/" + parts[2];
+                          //   setFactoryData({
+                          //     ...factoryData,
+                          //     Qf33_If33YESAuditDate: newDateString,
+                          //   });
+                          //   setDatefields({
+                          //     ...dateFields,
+                          //     Qf33_If33YESAuditDate: date,
+                          //   });
+                          // }}
                         />
                       </div>
 
@@ -1918,19 +1954,29 @@ const FactoryQuestions = () => {
                           className="date-style2"
                           dateFormat="dd/MM/yyyy"
                           selected={dateFields.Qf34_If33YESAuditValidity}
-                          onChange={(date) => {
-                            let parts = date
-                              .toLocaleDateString(date)
-                              .replace(/"/g, "")
-                              .split("/");
-                            let newDateString =
-                              parts[1] + "/" + parts[0] + "/" + parts[2];
+                          // onChange={(date) => {
+                          //   let parts = date
+                          //     .toLocaleDateString(date)
+                          //     .replace(/"/g, "")
+                          //     .split("/");
+                          //   let newDateString =
+                          //     parts[1] + "/" + parts[0] + "/" + parts[2];
 
+                          //   setFactoryData({
+                          //     ...factoryData,
+                          //     Qf34_If33YESAuditValidity: newDateString,
+                          //   });
+                          //   setDatefields({
+                          //     ...dateFields,
+                          //     Qf34_If33YESAuditValidity: date,
+                          //   });
+                          // }}
+                          onChange={(date) => {
+                            const formattedDate =
+                              moment(date).format("MM/DD/YYYY"); // Adjust the format as needed
                             setFactoryData({
                               ...factoryData,
-                              Qf34_If33YESAuditValidity: date
-                                .toLocaleDateString(date)
-                                .replace(/"/g, ""),
+                              Qf34_If33YESAuditValidity: formattedDate,
                             });
                             setDatefields({
                               ...dateFields,
@@ -6492,6 +6538,9 @@ const FactoryQuestions = () => {
                     <div className="row">
                       <div className="col-sm">
                         <button
+                          // onClick={(e) => {
+                          //   connectToDatabase(e);
+                          // }}
                           id="submitBTN"
                           type="submit"
                           disabled={!isChecked && !isCheckedReview}

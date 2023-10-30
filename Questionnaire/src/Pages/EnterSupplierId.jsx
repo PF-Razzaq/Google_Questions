@@ -8,6 +8,21 @@ import { useNavigate } from "react-router-dom";
 const EnterSupplierId = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("New");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSubmit = () => {
+    if (inputValue.trim() === "") {
+      setIsModalOpen(true);
+    } else {
+      console.log("Checked");
+      // Perform other actions when the input is not empty
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -85,18 +100,45 @@ const EnterSupplierId = () => {
               required
             />
             <button
-              onClick={() => {
-                console.log("Checked");
-                // localStorage.setItem("fromHome", true);
-                // localStorage.setItem("userCheck", "Existing");
-                // window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
-              }}
+              onClick={handleSubmit}
               type="button"
-              class="btn btn-warning mb-5 fw-bold "
+              className="btn btn-warning mb-5 fw-bold"
               style={{ width: "150px" }}
             >
               SUBMIT
             </button>
+            {isModalOpen && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
+                  color: "white",
+                  padding: "20px",
+                  borderRadius: "5px",
+                }}
+              >
+                <p>
+                  Supplier ID cannot be found, please ensure you have entered
+                  the Supplier ID correctly
+                </p>
+                <button
+                  onClick={closeModal}
+                  className="btn btn-primary fw-bold"
+                  style={{
+                    marginTop: "50px",
+                    padding: "5px 40px",
+                    fontSize: "14px",
+                    border: "5px solid #007ACC",
+                    marginLeft: "38rem",
+                  }}
+                >
+                  OK
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

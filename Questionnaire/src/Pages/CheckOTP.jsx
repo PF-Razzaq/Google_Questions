@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { HiOutlineUpload } from "react-icons/hi";
-import axios from "axios";
 import logoPicture from "../assets/img/logoPicture.png";
 import "../components/form/form.css";
 import { useNavigate } from "react-router-dom";
 
 const CheckOTP = () => {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState("New");
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [countdown, setCountdown] = useState(300);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const startCountdown = () => {
     setButtonDisabled(true);
@@ -32,6 +30,19 @@ const CheckOTP = () => {
     }
   }, [isButtonDisabled]);
 
+  const handleResendOTP = () => {
+    setButtonDisabled(true);
+    setCountdown(300);
+  };
+
+  const handleButtonClick = () => {
+    const isOtpIncorrectOrEmpty = true; // Your condition to check OTP
+
+    if (isOtpIncorrectOrEmpty) {
+      setShowErrorMessage(true);
+    } else {
+    }
+  };
   return (
     <>
       <div className="container">
@@ -132,14 +143,13 @@ const CheckOTP = () => {
               id="name-text"
               required
             />
+            {showErrorMessage && (
+              <span style={{ color: "red" }}>OTP is incorrect or empty</span>
+            )}
             <div style={{ display: "flex", alignItems: "center" }}>
               <button
-                onClick={() => {
-                  console.log("Checked");
-                  setButtonDisabled(true);
-                  // Additional logic here, e.g., localStorage
-                }}
                 type="button"
+                onClick={handleButtonClick}
                 className={`btn mb-5 mt-4 fw-bold ${
                   isButtonDisabled ? "disabled" : ""
                 }`}
@@ -152,11 +162,26 @@ const CheckOTP = () => {
                 {isButtonDisabled ? `SUBMIT (${countdown}s)` : "SUBMIT"}
               </button>
               <p
+                onClick={handleResendOTP}
                 style={{
                   marginLeft: "20px",
                   color: "rgb(66, 144, 254)",
                   fontSize: "14px",
                   fontWeight: "bold",
+                  textDecoration: isButtonDisabled ? "none" : "underline",
+                  cursor: isButtonDisabled ? "not-allowed" : "pointer",
+                  opacity: 1,
+                  transition: "opacity 0.3s ease",
+                }}
+                onMouseOver={(e) => {
+                  if (!isButtonDisabled) {
+                    e.currentTarget.style.opacity = 0.8;
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!isButtonDisabled) {
+                    e.currentTarget.style.opacity = 1;
+                  }
                 }}
               >
                 <u>Resend OTP</u>
