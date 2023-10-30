@@ -114,13 +114,24 @@ const EnterSupplierId = () => {
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  backgroundColor: "rgba(0, 0, 0, 0.7)",
+                  backgroundColor: "rgba(0, 0, 0, 0.8)",
                   color: "white",
-                  padding: "20px",
                   borderRadius: "5px",
                 }}
               >
-                <p>
+                <div
+                  style={{
+                    textAlign: "center",
+                    border: "1px solid black",
+                    zIndex: "999",
+                    borderRadius: "5px",
+                    color: "#a89f9f",
+                    padding: "2px",
+                  }}
+                >
+                  Error
+                </div>
+                <p style={{ margin: "27px 135px 10px 20px" }}>
                   Supplier ID cannot be found, please ensure you have entered
                   the Supplier ID correctly
                 </p>
@@ -132,7 +143,8 @@ const EnterSupplierId = () => {
                     padding: "5px 40px",
                     fontSize: "14px",
                     border: "5px solid #007ACC",
-                    marginLeft: "38rem",
+                    marginLeft: "40rem",
+                    marginBottom: "20px",
                   }}
                 >
                   OK
