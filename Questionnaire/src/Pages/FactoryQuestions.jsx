@@ -22,10 +22,7 @@ const FactoryQuestions = () => {
   const [supplierJson, setSupplierJson] = useState();
   const [factoryJson, setFactoryJson] = useState();
   const [countryCode, setCountryCode] = useState();
-  const [dateFields, setDatefields] = useState({});
-
-  //
-
+  const [dateFields, setDateFields] = useState({});
   const fetchFactoryJson = async () => {
     try {
       const response = await axios.get(
@@ -41,7 +38,7 @@ const FactoryQuestions = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_PUBLIC_URL}/supplierData.json`
     );
-
+    setFactoryData;
     setSupplierJson(response.data);
   };
   const isLeadFactory = async () => {
@@ -113,6 +110,8 @@ const FactoryQuestions = () => {
   const [If33YesSocialAuditReport, setIf33YesSocialAuditReport] = useState();
   const navigate = useNavigate();
   const [factoryData, setFactoryData] = useState({
+    Qf11a_Phone: "+358 13322",
+    Qf11b_CellPhone: "+1 13882",
     id_supplier: localStorage.getItem("supplierId")
       ? localStorage.getItem("supplierId")
       : 0,
@@ -128,27 +127,6 @@ const FactoryQuestions = () => {
   const [ownerships, setOwnerships] = useState([]);
   const [exports, setExports] = useState([]);
   const [options32, setOptions32] = useState([]);
-
-  const handleSaveCustomOption = () => {
-    if (customOption.trim() !== "") {
-      setOptions([...options, customOption]);
-      setSelectedOption(customOption);
-      setCustomOption("");
-      setFactoryData({
-        ...factoryData,
-        Qs8_Country: customOption,
-      });
-    }
-  };
-  const handleOptionChange = (e) => {
-    const value = e.target.value;
-
-    setSelectedOption(value);
-
-    if (value === "other") {
-      setCustomOption("");
-    }
-  };
 
   const connectToDatabase = async (e) => {
     e.preventDefault();
@@ -199,7 +177,6 @@ const FactoryQuestions = () => {
       localStorage.setItem("filemakerToken", response.data);
 
       if (factoryData.is_lead_factory === "yes") {
-        // console.log("updateIsLeadFactory5");
         updateIsLeadFactory();
       }
       localStorage.setItem("isLeadFactory", true);
@@ -676,7 +653,7 @@ const FactoryQuestions = () => {
   const closeModal = () => {
     setShowModal(false);
   };
-  console.log(factoryData);
+
   return (
     <>
       <ClipLoader
@@ -765,6 +742,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf1_FactoryName}
                       name="Qf1_FactoryName"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -827,6 +805,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf2_FactoryBusinessLicenseNumber}
                       onInput={(e) => {
                         e.target.value = e.target.value.replace(/[^0-9-]/g, "");
                       }}
@@ -848,6 +827,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf3_FactoryVATNumber}
                       onInput={(e) => {
                         e.target.value = e.target.value.replace(/[^0-9-]/g, "");
                       }}
@@ -870,6 +850,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf4a_Building}
                       name="Qf4a_Building"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -885,6 +866,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf4b_Street}
                       name="Qf4b_Street"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -902,6 +884,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf5a_Town}
                       name="Qf5a_Town"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -917,6 +900,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf5b_City}
                       name="Qf5b_City"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -932,6 +916,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf5c_Province}
                       name="Qf5c_Province"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -948,6 +933,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf6_PostCode}
                       name="Qf6_PostCode"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -964,12 +950,10 @@ const FactoryQuestions = () => {
                       style={{ width: "190px" }}
                       value={factoryData.Qf7_Country}
                       onChange={(e) => {
-                        if (e.target.value.toLowerCase() !== "other") {
-                          setFactoryData({
-                            ...factoryData,
-                            Qf7_Country: e.target.value,
-                          });
-                        }
+                        setFactoryData({
+                          ...factoryData,
+                          Qf7_Country: e.target.value,
+                        });
                         setOtherFields({
                           ...otherFields,
                           q7Other: e.target.value,
@@ -998,8 +982,7 @@ const FactoryQuestions = () => {
                         <input
                           onBlur={(e) => {
                             e.preventDefault();
-                            const newCountry =
-                              e.target.value.toLocaleLowerCase() !== "other";
+                            const newCountry = e.target.value;
                             if (newCountry) {
                               options.unshift(newCountry);
                               setOptions(options);
@@ -1017,8 +1000,7 @@ const FactoryQuestions = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               e.preventDefault();
-                              const newCountry =
-                                e.target.value.toLocaleLowerCase() !== "other";
+                              const newCountry = e.target.value;
                               if (newCountry) {
                                 options.unshift(newCountry);
                                 setOptions(options);
@@ -1050,6 +1032,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf8_RecommendedHotel}
                       name="Qf8_RecommendedHotel"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1063,6 +1046,7 @@ const FactoryQuestions = () => {
                       style={{ display: "inline-block", width: "18%" }}
                       className="form-select"
                       aria-label="Default select example"
+                      value={factoryData.Qf9a_ContactPersonSalary}
                       onChange={(e) => {
                         setFactoryData({
                           ...factoryData,
@@ -1090,6 +1074,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf9b_ContactPersonFirstName}
                       name="Qf9b_ContactPersonFirstName"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1105,6 +1090,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf9c_ContactPersonLastName}
                       name="Qf9c_ContactPersonLastName"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1122,6 +1108,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf10_ContactPersonPosition}
                       name="Qf10_ContactPersonPosition"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1144,6 +1131,10 @@ const FactoryQuestions = () => {
                         required
                         className="form-control countryCode me-1"
                         id="countrySelect"
+                        value={factoryData.Qf11a_Phone.substring(
+                          0,
+                          factoryData.Qf11a_Phone.indexOf(" ")
+                        )}
                       >
                         <option value="" selected disabled>
                           Choose Options
@@ -1161,6 +1152,9 @@ const FactoryQuestions = () => {
                         style={{ width: "280px" }}
                         name="Qf11a_Phone"
                         type="text"
+                        value={factoryData.Qf11a_Phone.substring(
+                          factoryData.Qf11a_Phone.indexOf(" ") + 1
+                        )}
                         required
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
@@ -1192,6 +1186,10 @@ const FactoryQuestions = () => {
                         onChange={(e) => {
                           setCountrycodeCell(e.target.value);
                         }}
+                        value={factoryData.Qf11b_CellPhone.substring(
+                          0,
+                          factoryData.Qf11b_CellPhone.indexOf(" ")
+                        )}
                         className="form-control countryCode me-1"
                         id="countrySelect"
                         required
@@ -1209,8 +1207,10 @@ const FactoryQuestions = () => {
                       </select>
                       -
                       <input
+                        value={factoryData.Qf11b_CellPhone.substring(
+                          factoryData.Qf11b_CellPhone.indexOf(" ") + 1
+                        )}
                         type="text"
-                        required
                         style={{ width: "280px" }}
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
@@ -1246,6 +1246,7 @@ const FactoryQuestions = () => {
                     <input
                       onChange={handleChange}
                       placeholder="Enter your answer"
+                      value={factoryData.Qf12_Email}
                       type="email"
                       name="Qf12_Email"
                       className="mt-3 outline-none w-100"
@@ -1263,6 +1264,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf13_Website}
                       name="Qf13_Website"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1286,6 +1288,7 @@ const FactoryQuestions = () => {
                       }}
                       name="Qf14_CurrentLocationSince"
                       className="mt-3 outline-none w-100"
+                      value={factoryData.Qf14_CurrentLocationSince}
                       id="name-text"
                       minLength={4}
                       maxLength={4}
@@ -1305,6 +1308,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf15_NumberFactoryBuildingLevel}
                       name="Qf15_NumberFactoryBuildingLevel"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1425,6 +1429,7 @@ const FactoryQuestions = () => {
                         onChange={handleChange}
                         placeholder="This value must be a number"
                         type="text"
+                        value={factoryData.Qf19_If21YES}
                         onInput={(e) => {
                           e.target.value = e.target.value.replace(
                             /[^0-9-]/g,
@@ -1450,6 +1455,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="This value must be a number"
                       type="text"
+                      value={factoryData.Qf20_PropertyTotalSize}
                       onInput={(e) => {
                         e.target.value = e.target.value.replace(/[^0-9-]/g, "");
                       }}
@@ -1473,6 +1479,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf21_WarehouseTotalSize}
                       name="Qf21_WarehouseTotalSize"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1491,6 +1498,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf22_ProductionSiteTotalSize}
                       name="Qf22_ProductionSiteTotalSize"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1509,6 +1517,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="This value must be a number"
                       type="text"
+                      value={factoryData.Qf23_YearOfEstablishment}
                       name="Qf23_YearOfEstablishment"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1530,6 +1539,7 @@ const FactoryQuestions = () => {
                       onChange={handleChange}
                       placeholder="Enter your answer"
                       type="text"
+                      value={factoryData.Qf24_FactoryMainProduct}
                       name="Qf24_FactoryMainProduct"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1552,6 +1562,7 @@ const FactoryQuestions = () => {
                         e.target.value = e.target.value.replace(/[^0-9-]/g, "");
                       }}
                       pattern="[0-9]*"
+                      value={factoryData.Qf25_FactoryAnualCapacity}
                       name="Qf25_FactoryAnualCapacity"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1572,6 +1583,7 @@ const FactoryQuestions = () => {
                         e.target.value = e.target.value.replace(/[^0-9-]/g, "");
                       }}
                       pattern="[0-9]*"
+                      value={factoryData.Qf26_FactoryAnualTurnOver}
                       name="Qf26_FactoryAnualTurnOver"
                       className="mt-3 outline-none w-100"
                       id="name-text"
@@ -1887,6 +1899,7 @@ const FactoryQuestions = () => {
                         <input
                           name="Qf32_If33YESAuditResult"
                           placeholder="This value must be a number"
+                          value={factoryData.Qf32_If33YESAuditResult}
                           type="text"
                           onInput={(e) => {
                             e.target.value = e.target.value.replace(
@@ -1910,39 +1923,23 @@ const FactoryQuestions = () => {
                         <span>{factoryJson.find((f) => f.id === "33").q}</span>
                         <DatePicker
                           className="date-style1"
+                          // value="Qf33_If33YESAuditDate.moment(dateInString, 'DD/MM/YYYY').format('MM/DD/YYYY')"
                           selected={dateFields.Qf33_If33YESAuditDate}
                           dateFormat="dd/MM/yyyy"
                           onChange={(date) => {
                             const formattedDate =
-                              moment(date).format("MM/DD/YYYY"); // Adjust the format as needed
+                              moment(date).format("MM/DD/YYYY");
                             setFactoryData({
                               ...factoryData,
                               Qf33_If33YESAuditDate: formattedDate,
                             });
-                            setDatefields({
+                            setDateFields({
                               ...dateFields,
                               Qf33_If33YESAuditDate: date,
                             });
                           }}
-                          // onChange={(date) => {
-                          //   let parts = date
-                          //     .toLocaleDateString(date)
-                          //     .replace(/"/g, "")
-                          //     .split("/");
-                          //   let newDateString =
-                          //     parts[1] + "/" + parts[0] + "/" + parts[2];
-                          //   setFactoryData({
-                          //     ...factoryData,
-                          //     Qf33_If33YESAuditDate: newDateString,
-                          //   });
-                          //   setDatefields({
-                          //     ...dateFields,
-                          //     Qf33_If33YESAuditDate: date,
-                          //   });
-                          // }}
                         />
                       </div>
-
                       {/* Question 34 */}
                       <div className="field-sections">
                         <span>
@@ -1953,38 +1950,23 @@ const FactoryQuestions = () => {
                         <DatePicker
                           className="date-style2"
                           dateFormat="dd/MM/yyyy"
+                          // value="Qf34_If33YESAuditValidity.moment(dateInString, 'DD/MM/YYYY').format('MM/DD/YYYY')"
                           selected={dateFields.Qf34_If33YESAuditValidity}
-                          // onChange={(date) => {
-                          //   let parts = date
-                          //     .toLocaleDateString(date)
-                          //     .replace(/"/g, "")
-                          //     .split("/");
-                          //   let newDateString =
-                          //     parts[1] + "/" + parts[0] + "/" + parts[2];
-
-                          //   setFactoryData({
-                          //     ...factoryData,
-                          //     Qf34_If33YESAuditValidity: newDateString,
-                          //   });
-                          //   setDatefields({
-                          //     ...dateFields,
-                          //     Qf34_If33YESAuditValidity: date,
-                          //   });
-                          // }}
                           onChange={(date) => {
                             const formattedDate =
-                              moment(date).format("MM/DD/YYYY"); // Adjust the format as needed
+                              moment(date).format("MM/DD/YYYY");
                             setFactoryData({
                               ...factoryData,
                               Qf34_If33YESAuditValidity: formattedDate,
                             });
-                            setDatefields({
+                            setDateFields({
                               ...dateFields,
                               Qf34_If33YESAuditValidity: date,
                             });
                           }}
                         />
                       </div>
+
                       {/* Question  35*/}
                       <div className="field-sections">
                         <span>
@@ -1996,6 +1978,7 @@ const FactoryQuestions = () => {
                           onChange={handleChange}
                           placeholder="Enter your answer"
                           type="text"
+                          value={factoryData.Qf35_If33YESAuditingCompany}
                           name="Qf35_If33YESAuditingCompany"
                           className="mt-3 outline-none w-100"
                           id="name-text"
@@ -2017,7 +2000,11 @@ const FactoryQuestions = () => {
                             <input
                               name="Qf36_If33YesSocialAuditReportUpload"
                               type="file"
+                              value={
+                                factoryData.Qf36_If33YesSocialAuditReportUpload
+                              }
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf48_If50YESMax}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -2086,6 +2073,7 @@ const FactoryQuestions = () => {
                       <span style={{ color: "red" }}>*</span>
                     </span>
                     <input
+                      value={factoryData.Qf37_TotalNumberOfEmployees}
                       name="Qf37_TotalNumberOfEmployees"
                       placeholder="This value must be a number"
                       type="text"
@@ -2112,6 +2100,7 @@ const FactoryQuestions = () => {
                       name="Qf38_PersonalStructureAdmin"
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
+                      value={factoryData.Qf38_PersonalStructureAdmin}
                       onBlur={() => {
                         if (
                           factoryData.Qf38_PersonalStructureAdmin &&
@@ -2189,6 +2178,7 @@ const FactoryQuestions = () => {
                           return;
                         }
                       }}
+                      value={factoryData.Qf39_PersonalStructureProduction}
                       name="Qf39_PersonalStructureProduction"
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
@@ -2213,6 +2203,7 @@ const FactoryQuestions = () => {
                     </span>
                     <span>{factoryJson.find((f) => f.id === "40").q}</span>
                     <input
+                      value={factoryData.Qf40_PersonalStructureRandD}
                       name="Qf40_PersonalStructureRandD"
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
@@ -2265,6 +2256,7 @@ const FactoryQuestions = () => {
                     </span>
                     <input
                       name="Qf41_PersonalStructureQA"
+                      value={factoryData.Qf41_PersonalStructureQA}
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
                       onInput={(e) => {
@@ -2318,6 +2310,7 @@ const FactoryQuestions = () => {
                       name="Qf42_PersonalStructureManagement"
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
+                      value={factoryData.Qf42_PersonalStructureManagement}
                       onBlur={() => {
                         if (
                           factoryData.Qf38_PersonalStructureAdmin &&
@@ -2369,6 +2362,7 @@ const FactoryQuestions = () => {
                       name="Qf43_WorkerStatisticMale"
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
+                      value={factoryData.Qf43_WorkerStatisticMale}
                       onBlur={() => {
                         if (
                           factoryData.Qf43_WorkerStatisticMale &&
@@ -2409,6 +2403,7 @@ const FactoryQuestions = () => {
                     </span>
                     <input
                       name="Qf44_WorkerStatisticFemale"
+                      value={factoryData.Qf44_WorkerStatisticFemale}
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
                       onBlur={() => {
@@ -2451,6 +2446,7 @@ const FactoryQuestions = () => {
                     </span>
                     <input
                       name="Qf45_WorkerStatisticLocal"
+                      value={factoryData.Qf45_WorkerStatisticLocal}
                       onBlur={() => {
                         if (
                           factoryData.Qf45_WorkerStatisticLocal &&
@@ -2508,6 +2504,7 @@ const FactoryQuestions = () => {
                           return;
                         }
                       }}
+                      value={factoryData.Qf46_WorkerStatisticMigrant}
                       name="Qf46_WorkerStatisticMigrant"
                       placeholder="This value must be a number from 0 to 100"
                       type="text"
@@ -2578,6 +2575,7 @@ const FactoryQuestions = () => {
                           );
                         }}
                         pattern="[0-9]*"
+                        value={factoryData.Qf48_If50YESMax}
                         name="Qf48_If50YESMax"
                         className="mt-3 outline-none w-100"
                         id="name-text"
@@ -2636,6 +2634,9 @@ const FactoryQuestions = () => {
                               name="Qf49b_issuedFairLaborAccreditationEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf49b_issuedFairLaborAccreditationEvidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -2742,6 +2743,7 @@ const FactoryQuestions = () => {
                               name="Qf50b_issuedFairStoneEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf50b_issuedFairStoneEvidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -2848,6 +2850,9 @@ const FactoryQuestions = () => {
                               name="Qf51b_issuedGlobalOrganicEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf51b_issuedGlobalOrganicEvidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -2955,6 +2960,9 @@ const FactoryQuestions = () => {
                               name="Qf52b_issuedGrunerKnopfEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf52b_issuedGrunerKnopfEvidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3057,6 +3065,7 @@ const FactoryQuestions = () => {
                               name="Qf53b_issuedIGEPEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf53b_issuedIGEPEvidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3161,6 +3170,7 @@ const FactoryQuestions = () => {
                               name="Qf54b_issuedOEKOTEXEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf54b_issuedOEKOTEXEvidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3262,6 +3272,7 @@ const FactoryQuestions = () => {
                               name="Qf55b_issuedSMETAEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf55b_issuedSMETAEvidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3368,6 +3379,9 @@ const FactoryQuestions = () => {
                               name="Qf56b_issuedSocialAccountabilityEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf56b_issuedSocialAccountabilityEvidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3477,6 +3491,9 @@ const FactoryQuestions = () => {
                               name="Qf57b_issuedXertifexStandardEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf57b_issuedXertifexStandardEvidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3584,6 +3601,10 @@ const FactoryQuestions = () => {
                               name="Qf58b_issuedXertifexPLUSEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                (factoryData.name =
+                                  "Qf58b_issuedXertifexPLUSEvidence")
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3690,6 +3711,7 @@ const FactoryQuestions = () => {
                               name="Qf59b_issuedAMFORIBEPIEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf59b_issuedAMFORIBEPIEvidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3796,6 +3818,7 @@ const FactoryQuestions = () => {
                               name="Qf60b_issuedDINENISOEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf60b_issuedDINENISOEvidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -3901,6 +3924,9 @@ const FactoryQuestions = () => {
                               name="Qf61b_issuedGrunerKnopfEvidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf61b_issuedGrunerKnopfEvidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -4007,6 +4033,7 @@ const FactoryQuestions = () => {
                               name="Qf62b_issuedIGEP2020Evidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={factoryData.Qf62b_issuedIGEP2020Evidence}
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -4113,6 +4140,9 @@ const FactoryQuestions = () => {
                               name="Qf63b_issuedDINENISO45001Evidence"
                               type="file"
                               accept="application/pdf,image/jpeg,image/png"
+                              value={
+                                factoryData.Qf63b_issuedDINENISO45001Evidence
+                              }
                               style={{ display: "none" }}
                               onChange={(e) => {
                                 if (
@@ -6377,6 +6407,7 @@ const FactoryQuestions = () => {
                         onChange={handleChange}
                         placeholder="Enter your answer"
                         type="text"
+                        value={factoryData.Qf122_ListedAnnexIRegulationDoYouUse}
                         name="Qf122_ListedAnnexIRegulationDoYouUse"
                         className="mt-3 outline-none w-100"
                         id="name-text"
