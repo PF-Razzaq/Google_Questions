@@ -28,7 +28,6 @@ const FactoryQuestions = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_PUBLIC_URL}/factoryData.json`
       );
-
       setFactoryJson(response.data);
     } catch (error) {
       console.error("Error occurred while connecting", error);
@@ -110,6 +109,8 @@ const FactoryQuestions = () => {
   const [If33YesSocialAuditReport, setIf33YesSocialAuditReport] = useState();
   const navigate = useNavigate();
   const [factoryData, setFactoryData] = useState({
+    Qf33_If33YESAuditDate: "01/28/2023",
+    Qf34_If33YESAuditValidity: "12/25/2023",
     Qf11a_Phone: "+358 13322",
     Qf11b_CellPhone: "+1 13882",
     id_supplier: localStorage.getItem("supplierId")
@@ -1923,7 +1924,10 @@ const FactoryQuestions = () => {
                         <span>{factoryJson.find((f) => f.id === "33").q}</span>
                         <DatePicker
                           className="date-style1"
-                          // value="Qf33_If33YESAuditDate.moment(dateInString, 'DD/MM/YYYY').format('MM/DD/YYYY')"
+                          value={moment(
+                            factoryData.Qf33_If33YESAuditDate,
+                            "MM/DD/YYYY"
+                          ).format("DD/MM/yyyy")}
                           selected={dateFields.Qf33_If33YESAuditDate}
                           dateFormat="dd/MM/yyyy"
                           onChange={(date) => {
@@ -1950,7 +1954,10 @@ const FactoryQuestions = () => {
                         <DatePicker
                           className="date-style2"
                           dateFormat="dd/MM/yyyy"
-                          // value="Qf34_If33YESAuditValidity.moment(dateInString, 'DD/MM/YYYY').format('MM/DD/YYYY')"
+                          value={moment(
+                            factoryData.Qf34_If33YESAuditValidity,
+                            "MM/DD/YYYY"
+                          ).format("DD/MM/yyyy")}
                           selected={dateFields.Qf34_If33YESAuditValidity}
                           onChange={(date) => {
                             const formattedDate =
