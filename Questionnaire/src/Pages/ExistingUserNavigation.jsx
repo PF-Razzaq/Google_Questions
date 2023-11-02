@@ -21,11 +21,7 @@ const ExistingUserNavigation = () => {
                 <hr className="line" />
               </div>
               <div className="col-2">
-                <img
-                  src={logoPicture}
-                  alt="logo"
-                  style={{ width: "130px", height: "130px" }}
-                />
+                <img className="img-fluid" src={logoPicture} alt="logo" />
               </div>
               <div className="col-5">
                 <hr className="line" />
@@ -74,10 +70,10 @@ const ExistingUserNavigation = () => {
                 console.log("Checked");
                 // localStorage.setItem("fromHome", true);
                 // localStorage.setItem("userCheck", "Existing");
-                // window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
+                // window.location = `/supplierquestions`;
               }}
               type="button"
-              class="btn btn-warning mb-4 fw-bold w-100 "
+              class="btn btn-warning mb-4 w-100 "
               style={{ width: "150px" }}
             >
               UPDATE SUPPLIER PROFILE
@@ -88,10 +84,10 @@ const ExistingUserNavigation = () => {
                   console.log("Checked");
                   // localStorage.setItem("fromHome", true);
                   // localStorage.setItem("userCheck", "Existing");
-                  // window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
+                  // window.location = `/supplierquestions`;
                 }}
                 type="button"
-                class="btn btn-warning mb-5 fw-bold w-50 "
+                class="btn btn-warning mb-5 w-50 "
                 style={{ width: "150px" }}
               >
                 UPDATE FACTORY PROFILE
@@ -101,10 +97,10 @@ const ExistingUserNavigation = () => {
                   console.log("Checked");
                   // localStorage.setItem("fromHome", true);
                   // localStorage.setItem("userCheck", "Existing");
-                  // window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
+                  // window.location = `/supplierquestions`;
                 }}
                 type="button"
-                class="btn btn-warning mb-5 fw-bold w-50  "
+                class="btn btn-warning mb-5 w-50"
                 style={{ width: "150px", marginLeft: "10px" }}
               >
                 ENTER NEW FACTORY PROFILE

@@ -25,6 +25,7 @@ const ChooseFactory = () => {
           >
             <div>
               <div
+                className="factory-profile-name-container"
                 style={{
                   display: "flex",
                   flexDirection: "column",
@@ -35,9 +36,9 @@ const ChooseFactory = () => {
                 }}
               >
                 <span
-                  className="text-center"
+                  className="text-center factory-profile-name"
                   style={{
-                    marginBottom: "-2.50%",
+                    marginBottom: "-30px",
                     fontSize: "20px",
                     fontWeight: "bold",
                   }}
@@ -62,8 +63,11 @@ const ChooseFactory = () => {
               <p>
                 <span style={{ color: "red" }}>*</span> Required
               </p>
-              <h2>Factory Business Information</h2>
-              <p style={{ marginBottom: "25px", fontSize: "18px" }}>
+              <h2 className="factory-business">Factory Business Information</h2>
+              <p
+                style={{ marginBottom: "25px", fontSize: "18px" }}
+                className="paragraph-ChooseFactory"
+              >
                 Please provide information as in official documents
               </p>
               <div className="field-sections">

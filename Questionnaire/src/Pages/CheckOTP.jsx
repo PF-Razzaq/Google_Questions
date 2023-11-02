@@ -2,13 +2,34 @@ import React, { useState, useEffect } from "react";
 import logoPicture from "../assets/img/logoPicture.png";
 import "../components/form/form.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { isBefore } from "date-fns";
 
 const CheckOTP = () => {
   const navigate = useNavigate();
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [countdown, setCountdown] = useState(300);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [OTP, setOTP] = useState("");
+  const [supplierId, setSupplierId] = useState(
+    localStorage.getItem("optSupplierId") || ""
+  );
+  const [phase2Json, setPhase2Json] = useState();
 
+  const fetchPhase2Json = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_PUBLIC_URL}/phase2.json`
+      );
+      setPhase2Json(response.data);
+    } catch (error) {
+      console.error("Error occurred while connecting", error);
+    }
+  };
+  useEffect(() => {
+    fetchPhase2Json();
+  }, []);
   const startCountdown = () => {
     setButtonDisabled(true);
 
@@ -21,26 +42,71 @@ const CheckOTP = () => {
         }
         return prevCountdown - 1;
       });
+      if (countdown === 0) {
+        setButtonDisabled(true);
+      }
     }, 1000);
   };
-
+  useEffect(() => {
+    setButtonDisabled(true);
+  }, []);
   useEffect(() => {
     if (isButtonDisabled) {
       startCountdown();
     }
   }, [isButtonDisabled]);
 
-  const handleResendOTP = () => {
+  const handleResendOTP = async () => {
     setButtonDisabled(true);
     setCountdown(300);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_NODE_MIDDLEWARE}/supplier/sentotp/`,
+        { supplierId: supplierId.trim() }
+      );
+      if (response.data === "OK") {
+        toast.info(`${phase2Json.find((f) => f.id === "m1").text}`);
+      }
+    } catch (error) {
+      console.error("Error occurred while connecting", error);
+      toast.error(`${phase2Json.find((f) => f.id === "m4").text}: ${error}`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+    }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     const isOtpIncorrectOrEmpty = true; // Your condition to check OTP
-
+    setButtonDisabled(false);
     if (isOtpIncorrectOrEmpty) {
       setShowErrorMessage(true);
     } else {
+    }
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_NODE_MIDDLEWARE}/supplier/checkotp/`,
+        { OTP: OTP, supplierId: supplierId.trim() }
+      );
+      console.log(response);
+      if (response.data === "no") {
+        toast.error(`${phase2Json.find((f) => f.id === "m2").text}`, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 500000,
+          hideProgressBar: true,
+        });
+      } else {
+        setTimeout(() => {
+          localStorage.removeItem("optSupplierId");
+          navigate(`/existingusernavigation`);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error("Error occurred while connecting", error);
+      toast.error(`OTP sent to email failed : ${error}`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000000,
+      });
     }
   };
   return (
@@ -56,11 +122,7 @@ const CheckOTP = () => {
                 <hr className="line" />
               </div>
               <div className="col-2">
-                <img
-                  src={logoPicture}
-                  alt="logo"
-                  style={{ width: "130px", height: "130px" }}
-                />
+                <img className="img-fluid" src={logoPicture} alt="logo" />
               </div>
               <div className="col-5">
                 <hr className="line" />
@@ -114,9 +176,10 @@ const CheckOTP = () => {
               Supplier ID
             </p>
             <input
-              //   onChange={handleChange}
+              value={localStorage.getItem("optSupplierId")}
               placeholder="Enter your answer"
               type="text"
+              disabled
               name=""
               className="mt-1 outline-none w-100"
               id="name-text"
@@ -135,7 +198,9 @@ const CheckOTP = () => {
               Enter OTP here
             </p>
             <input
-              //   onChange={handleChange}
+              onChange={(e) => {
+                setOTP(e.target.value);
+              }}
               placeholder="Enter your answer"
               type="text"
               name=""
@@ -143,16 +208,15 @@ const CheckOTP = () => {
               id="name-text"
               required
             />
-            {showErrorMessage && (
+            {/* {showErrorMessage && (
               <span style={{ color: "red" }}>OTP is incorrect or empty</span>
-            )}
+            )} */}
             <div style={{ display: "flex", alignItems: "center" }}>
               <button
                 type="button"
+                disabled={OTP === "" || !isButtonDisabled}
                 onClick={handleButtonClick}
-                className={`btn mb-5 mt-4 fw-bold ${
-                  isButtonDisabled ? "disabled" : ""
-                }`}
+                className={`btn mb-5 mt-4 ${isButtonDisabled ? "" : ""}`}
                 style={{
                   width: "150px",
                   background: "#E83C50",
@@ -161,31 +225,24 @@ const CheckOTP = () => {
               >
                 {isButtonDisabled ? `SUBMIT (${countdown}s)` : "SUBMIT"}
               </button>
-              <p
+              <button
                 onClick={handleResendOTP}
+                disabled={isButtonDisabled}
                 style={{
                   marginLeft: "20px",
                   color: "rgb(66, 144, 254)",
                   fontSize: "14px",
                   fontWeight: "bold",
+                  background: "transparent",
+                  border: "none",
                   textDecoration: isButtonDisabled ? "none" : "underline",
-                  cursor: isButtonDisabled ? "not-allowed" : "pointer",
                   opacity: 1,
+                  marginTop: "-15px",
                   transition: "opacity 0.3s ease",
-                }}
-                onMouseOver={(e) => {
-                  if (!isButtonDisabled) {
-                    e.currentTarget.style.opacity = 0.8;
-                  }
-                }}
-                onMouseOut={(e) => {
-                  if (!isButtonDisabled) {
-                    e.currentTarget.style.opacity = 1;
-                  }
                 }}
               >
                 <u>Resend OTP</u>
-              </p>
+              </button>
             </div>
           </div>
         </div>

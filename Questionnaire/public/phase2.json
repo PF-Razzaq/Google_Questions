@@ -1,0 +1,18 @@
+[
+  {
+    "id": "m1",
+    "text": "One-Time Passcode has been sent to your registered email address, please check your email and enter in this page."
+  },
+  {
+    "id": "m2",
+    "text": "The OTP (One-Time Passcode) does not match our record, please check and try again. If OTP is expired, please click RESEND OTP button."
+  },
+  {
+    "id": "m3",
+    "text": "Supplier ID cannot be found, please ensure you have entered the Supplier ID correctly"
+  },
+  {
+    "id": "m4",
+    "text": "Email sending failed"
+  }
+]

@@ -17,7 +17,7 @@
   },
   {
     "id": "1b",
-    "q": "Is this the lead factory amongst all factories entered / to be entered under your supplier profile? (Only 1 factory among all factories entered / to be entered can be chosen as lead factory)"
+    "q": "Is this the lead factory amongst all factories entered / to be entered under your supplier profile? (If you choose this factory as lead factory, all other factories (if any) under your supplier profile will be changed to non-lead factory)"
   },
   {
     "id": "2",

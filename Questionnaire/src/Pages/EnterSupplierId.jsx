@@ -4,24 +4,49 @@ import axios from "axios";
 import logoPicture from "../assets/img/logoPicture.png";
 import "../components/form/form.css";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const EnterSupplierId = () => {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState("New");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
-  const handleSubmit = () => {
-    if (inputValue.trim() === "") {
-      setIsModalOpen(true);
-    } else {
-      console.log("Checked");
-      // Perform other actions when the input is not empty
+  const [inputValue, setInputValue] = useState("");
+  const [phase2Json, setPhase2Json] = useState();
+
+  const fetchPhase2Json = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_PUBLIC_URL}/phase2.json`
+      );
+      setPhase2Json(response.data);
+    } catch (error) {
+      console.error("Error occurred while connecting", error);
     }
   };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  useEffect(() => {
+    fetchPhase2Json();
+  }, []);
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_NODE_MIDDLEWARE}/supplier/sentotp/`,
+        { supplierId: inputValue.trim() }
+      );
+      if (response.data === "OK") {
+        toast.info(`${phase2Json.find((f) => f.id === "m1").text}`);
+        localStorage.setItem("optSupplierId", inputValue.trim());
+        setTimeout(() => {
+          navigate(`/checkotp`);
+        }, 3000);
+      } else {
+        toast.error(`${phase2Json.find((f) => f.id === "m3").text}`);
+      }
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error occurred while connecting", error);
+      toast.error(`${phase2Json.find((f) => f.id === "m4").text} : ${error}`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+    }
   };
 
   return (
@@ -37,11 +62,7 @@ const EnterSupplierId = () => {
                 <hr className="line" />
               </div>
               <div className="col-2">
-                <img
-                  src={logoPicture}
-                  alt="logo"
-                  style={{ width: "130px", height: "130px" }}
-                />
+                <img className="img-fluid" src={logoPicture} alt="logo" />
               </div>
               <div className="col-5">
                 <hr className="line" />
@@ -95,62 +116,22 @@ const EnterSupplierId = () => {
               placeholder="Enter your answer"
               type="text"
               name=""
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}
               className="mt-1 outline-none w-100 mb-3"
               id="name-text"
               required
             />
             <button
+              disabled={inputValue === ""}
               onClick={handleSubmit}
               type="button"
-              className="btn btn-warning mb-5 fw-bold"
+              className="btn btn-warning mb-5"
               style={{ width: "150px" }}
             >
               SUBMIT
             </button>
-            {isModalOpen && (
-              <div
-                style={{
-                  position: "fixed",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                  color: "white",
-                  borderRadius: "5px",
-                }}
-              >
-                <div
-                  style={{
-                    textAlign: "center",
-                    border: "1px solid black",
-                    zIndex: "999",
-                    borderRadius: "5px",
-                    color: "#a89f9f",
-                    padding: "2px",
-                  }}
-                >
-                  Error
-                </div>
-                <p style={{ margin: "27px 135px 10px 20px" }}>
-                  Supplier ID cannot be found, please ensure you have entered
-                  the Supplier ID correctly
-                </p>
-                <button
-                  onClick={closeModal}
-                  className="btn btn-primary fw-bold"
-                  style={{
-                    marginTop: "50px",
-                    padding: "5px 40px",
-                    fontSize: "14px",
-                    border: "5px solid #007ACC",
-                    marginLeft: "40rem",
-                    marginBottom: "20px",
-                  }}
-                >
-                  OK
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>

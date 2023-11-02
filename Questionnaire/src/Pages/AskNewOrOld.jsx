@@ -23,11 +23,7 @@ const AskNewOrOld = () => {
                 <hr className="line" />
               </div>
               <div className="col-2">
-                <img
-                  src={logoPicture}
-                  alt="logo"
-                  style={{ width: "130px", height: "130px" }}
-                />
+                <img className="img-fluid" src={logoPicture} alt="logo" />
               </div>
               <div className="col-5">
                 <hr className="line" />
@@ -75,7 +71,8 @@ const AskNewOrOld = () => {
               onClick={() => {
                 localStorage.setItem("userCheck", "New");
                 localStorage.setItem("fromHome", true);
-                window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
+                sessionStorage.setItem("visitedHomepage", true);
+                navigate(`/supplierquestions`);
               }}
               type="button"
               class="btn btn-warning w-100  "
@@ -88,7 +85,8 @@ const AskNewOrOld = () => {
               onClick={() => {
                 localStorage.setItem("fromHome", true);
                 localStorage.setItem("userCheck", "Existing");
-                window.location = `${process.env.REACT_APP_PUBLIC_URL}/supplierquestions`;
+                sessionStorage.setItem("visitedHomepage", true);
+                navigate(`/entersupplierid`);
               }}
               type="button"
               class="btn btn-warning w-100   mb-5"
