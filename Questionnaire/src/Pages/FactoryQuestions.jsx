@@ -23,6 +23,20 @@ const FactoryQuestions = () => {
   const [factoryJson, setFactoryJson] = useState();
   const [countryCode, setCountryCode] = useState();
   const [dateFields, setDatefields] = useState({});
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showSpan, setShowSpan] = useState(true);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   //
 
@@ -182,7 +196,7 @@ const FactoryQuestions = () => {
           },
         }
       );
-   
+
       submitValue = e.nativeEvent.submitter.attributes.value.value;
       localStorage.setItem("filemakerToken", response.data.response.token);
       postDataWithToken();
@@ -681,6 +695,7 @@ const FactoryQuestions = () => {
                 <form id="factoryForm" onSubmit={connectToDatabase}>
                   <div>
                     <div
+                      className="factory-profile-name-container"
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -691,9 +706,9 @@ const FactoryQuestions = () => {
                       }}
                     >
                       <span
-                        className="text-center"
+                        className="text-center factory-profile-name"
                         style={{
-                          marginBottom: "-3.50%",
+                          marginBottom: "-30px",
                           fontSize: "20px",
                           fontWeight: "bold",
                         }}
@@ -1046,7 +1061,7 @@ const FactoryQuestions = () => {
                   <div className="field-sections">
                     <span>9:&nbsp;&nbsp;</span>
                     <select
-                      style={{ display: "inline-block", width: "18%" }}
+                      style={{ display: "inline-block", width: "190px" }}
                       className="form-select"
                       aria-label="Default select example"
                       onChange={(e) => {
@@ -1216,7 +1231,6 @@ const FactoryQuestions = () => {
                         class="form-control ms-1 phoneNumberInput"
                         id="exampleInputEmail2"
                         aria-describedby="emailHelp"
-                        required
                       ></input>
                     </div>
                   </div>
@@ -1678,7 +1692,7 @@ const FactoryQuestions = () => {
                           Qf28_Subcontracting: e.target.value,
                         });
                       }}
-                      style={{ width: "37%" }}
+                      style={{ width: "310px" }}
                       className="form-select"
                       aria-label="Default select example"
                       name="Qf28_Subcontracting"
@@ -1712,7 +1726,7 @@ const FactoryQuestions = () => {
                           Qf29_QualityManagementSystem: e.target.value,
                         });
                       }}
-                      style={{ width: "31%" }}
+                      style={{ width: "190px" }}
                       className="form-select"
                       aria-label="Default select example"
                       name="Qf29_QualityManagementSystem"
@@ -6428,7 +6442,13 @@ const FactoryQuestions = () => {
                         setIsChecked(e.target.checked);
                       }}
                     />
-                    <p>
+                    <p
+                      className="text-justify"
+                      style={{
+                        textAlign: "justify",
+                        textJustify: "inter-word",
+                      }}
+                    >
                       We hereby declare that the information provided is
                       accurate, up to date and correct and that the documents
                       submitted along with these forms are genuine. We also
@@ -6442,21 +6462,39 @@ const FactoryQuestions = () => {
                     <span>
                       <div className="container">
                         <div className="row" style={{ marginLeft: "-2%" }}>
-                          <div className="col-sm">
+                          <div
+                            className="col-sm"
+                            // style={{
+                            //   display: windowWidth < 988 ? "block" : "flex",
+                            //   width: windowWidth < 988 && "100%",
+                            // }}
+                          >
                             <p
                               style={{ display: "flex" }}
                               className="review-checkbox"
                             >
                               {" "}
                               <input
-                                className="reviewCheckbox"
+                                style={{
+                                  marginLeft: "-5px",
+                                  height: "29px",
+                                  marginRight: "10px",
+                                  marginTop: "-2px",
+                                }}
+                                // className="reviewCheckbox"
                                 type="checkbox"
                                 checked={isCheckedReview}
                                 onChange={(e) => {
                                   setIsCheckedReview(e.target.checked);
                                 }}
                               />{" "}
-                              <p>
+                              <p
+                                className="text-justify"
+                                style={{
+                                  textAlign: "justify",
+                                  textJustify: "inter-word",
+                                }}
+                              >
                                 We review all the pre-filled data and confirm
                                 there is no change.
                               </p>
@@ -6470,18 +6508,37 @@ const FactoryQuestions = () => {
                     </span>
                     <div className="col-sm" style={{ marginLeft: "-5%" }}>
                       <p
-                        style={{ display: "flex" }}
+                        style={{
+                          display: windowWidth < 988 ? "block" : "flex",
+                        }}
                         className="paragraph-signature"
                       >
-                        <p>
-                          Signature (To sign, please type your full name here){" "}
-                          <span style={{ color: "red" }}>*</span>
+                        <p style={{}}>
+                          Signature<span style={{ color: "red" }}>*</span>{" "}
+                          &nbsp;
+                          {windowWidth < 1200 ? (
+                            <span style={{ display: "none" }}>
+                              (To sign, please type your full name here)
+                            </span>
+                          ) : (
+                            <span>
+                              (To sign, please type your full name here)
+                            </span>
+                          )}{" "}
                         </p>
                         <input
                           type="text"
                           name="Fectory_Signature"
                           onChange={handleChange}
-                          style={{ width: "150px", height: "24px" }}
+                          style={{
+                            height: "24px",
+                            width: windowWidth < 1200 ? "300px" : "150px",
+                          }}
+                          placeholder={
+                            windowWidth < 1200
+                              ? "To sign, please type your full name here"
+                              : ""
+                          }
                           required
                         />
                       </p>
@@ -6517,11 +6574,11 @@ const FactoryQuestions = () => {
                           disabled={!isChecked && !isCheckedReview}
                           className="submit-btn"
                           style={{
+                            marginLeft: windowWidth < 988 ? "-43px" : "21px",
                             background:
                               isChecked && isCheckedReview
                                 ? "rgb(254, 193, 6)"
                                 : "lightgrey",
-                            marginLeft: "21px",
                           }}
                         >
                           Submit & Enter New Factory Profile

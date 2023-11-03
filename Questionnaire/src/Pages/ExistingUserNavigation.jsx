@@ -78,7 +78,10 @@ const ExistingUserNavigation = () => {
             >
               UPDATE SUPPLIER PROFILE
             </button>
-            <div style={{ display: "flex" }}>
+            <div
+              style={{ display: "flex" }}
+              className="btns-existingUserNavigation"
+            >
               <button
                 onClick={() => {
                   console.log("Checked");
@@ -87,7 +90,7 @@ const ExistingUserNavigation = () => {
                   // window.location = `/supplierquestions`;
                 }}
                 type="button"
-                class="btn btn-warning mb-5 w-50 "
+                class="btn btn-warning mb-5 w-50 update-factory-profile"
                 style={{ width: "150px" }}
               >
                 UPDATE FACTORY PROFILE
@@ -100,7 +103,7 @@ const ExistingUserNavigation = () => {
                   // window.location = `/supplierquestions`;
                 }}
                 type="button"
-                class="btn btn-warning mb-5 w-50"
+                class="btn btn-warning mb-5 w-50 d-sm-inline-block new-factory-profile"
                 style={{ width: "150px", marginLeft: "10px" }}
               >
                 ENTER NEW FACTORY PROFILE

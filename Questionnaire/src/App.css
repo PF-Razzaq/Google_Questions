@@ -113,3 +113,37 @@ input {
     font-size: 16px;
   }
 }
+
+@media (max-width: 550px) {
+  .btns-existingUserNavigation {
+    display: block !important;
+  }
+  .update-factory-profile {
+    width: 100% !important;
+  }
+  .new-factory-profile {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: -1.5rem;
+  }
+}
+
+@media (max-width: 770px) {
+  #countrySelect {
+    width: 92px !important;
+  }
+}
+@media (max-width: 390px) {
+  .phoneNumberInput {
+    width: 120px !important;
+  }
+}
+
+@media (max-width: 810px) {
+  .reviewCheckbox {
+    transform: scale(1.4) !important;
+    margin-top: -67px !important;
+    margin-right: 10px !important;
+    margin-left: -5px !important;
+  }
+}
